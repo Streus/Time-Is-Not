@@ -107,7 +107,51 @@ public partial class Ability
 
 		persistentData = null;
 	}
-	public Ability(Ability a) : this(a.name, a.desc, a.
+	public Ability (Ability a) : this (a.name, a.desc, a.icon, a.cooldownMax, a.chargesMax, a.effect);
+
+	public bool isReady()
+	{
+		return _cooldownCurrent <= 0 || _charges > 0) && active && available;
+	}
+
+	public float cooldownPercentage()
+	{
+		return _cooldownCurrent / cooldownMax;
+	}
+
+	public void updateCooldown(float time)
+	{
+		if (!active)
+			return;
+
+		_cooldownCurrent -= time;
+		if (_cooldownCurrent <= 0f)
+		{
+			_cooldownCurrent = 0f;
+			if (_charges < chargesMax)
+			{
+				_charges++;
+				if (_charges != chargesMax)
+					_cooldownCurrent = cooldownMax;
+			}
+		}
+	}
+
+	public bool use(Entity sub, Vector2 targetPosition)
+	{
+		if (!isReady ())
+			return false;
+
+		if (effect (sub, targetPosition))
+		{
+			if (_charges > 0)
+				_charges--;
+			if (_charges < chargesMax || chargesMax == 0)
+				_cooldownCurrent = cooldownMax;
+			return true;
+		}
+		return false;
+	}
 	#endregion
 
 	#region INSTANCE_METHODS
