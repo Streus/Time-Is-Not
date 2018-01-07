@@ -88,6 +88,9 @@ public partial class Ability
 		a._id = latestID++;
 		return a;
 	}
+	#endregion
+
+	#region INSTANCE_METHODS
 
 	public Ability(string name, string desc, Sprite icon, float cooldownMax, int chargesMax, UseEffect effect)
 	{
@@ -111,7 +114,7 @@ public partial class Ability
 
 	public bool isReady()
 	{
-		return _cooldownCurrent <= 0 || _charges > 0) && active && available;
+		return (_cooldownCurrent <= 0 || _charges > 0) && active && available;
 	}
 
 	public float cooldownPercentage()
@@ -152,10 +155,6 @@ public partial class Ability
 		}
 		return false;
 	}
-	#endregion
-
-	#region INSTANCE_METHODS
-
 	#endregion
 
 	#region INTERNAL_TYPES
