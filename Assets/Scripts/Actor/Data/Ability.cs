@@ -110,7 +110,7 @@ public partial class Ability
 
 		persistentData = null;
 	}
-	public Ability (Ability a) : this (a.name, a.desc, a.icon, a.cooldownMax, a.chargesMax, a.effect);
+	public Ability (Ability a) : this (a.name, a.desc, a.icon, a.cooldownMax, a.chargesMax, a.effect) { }
 
 	public bool isReady()
 	{
@@ -158,6 +158,6 @@ public partial class Ability
 	#endregion
 
 	#region INTERNAL_TYPES
-	private delegate bool UseEffect(Entity sub, Vector2 targetPosition);
+	public delegate bool UseEffect(Entity sub, Vector2 targetPosition);
 	#endregion
 }
