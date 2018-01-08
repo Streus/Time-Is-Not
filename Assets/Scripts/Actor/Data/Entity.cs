@@ -84,7 +84,7 @@ public class Entity : MonoBehaviour
 	{
 		for (int i = 0; i < abilities.Capacity; i++)
 		{
-			if (abilities [i].id == a)
+			if (abilities [i].id == a.id)
 			{
 				removeAbility (i);
 				return true;
@@ -111,6 +111,8 @@ public class Entity : MonoBehaviour
 
 		if (abilityRemoved != null)
 			abilityRemoved (removed, index);
+
+		return true;
 	}
 
 	/// <summary>
