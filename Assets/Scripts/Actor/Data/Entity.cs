@@ -6,7 +6,7 @@ using UnityEngine;
 /// A repository class used by Controllers to manage and update Abilities, Statuses,
 /// and other data.
 /// </summary>
-public class Entity : MonoBehaviour
+public sealed class Entity : MonoBehaviour
 {
 	#region STATIC_VARS
 
@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour
 	private int movespeed = 10;
 
 	private List<Ability> abilities;
+	private List<Status> statuses;
 
 	public int abilityCount { get { return abilities.Count; } }
 	public int abilityCap { get { return abilities.Capacity; } }
@@ -41,12 +42,31 @@ public class Entity : MonoBehaviour
 
 	public void Awake()
 	{
-
+		abilities = new List<Ability> ();
+		statuses = new List<Status> ();
 	}
 
 	public void Update()
 	{
+		int i;
 
+		//update all statuses
+		for (i = 0; i < statuses.Count; i++)
+		{
+			if (statuses [i].updateDuration (this, Time.deltaTime))
+			{
+				//if a status ended and was removed from the list, then backtrack
+				//to ensure a status is not skipped
+				i--;
+			}
+		}
+
+		//update abilities
+		for (i = 0; i < abilities.Capacity; i++)
+		{
+			if (abilities [i] != null)
+				abilities [i].updateCooldown (Time.deltaTime);
+		}
 	}
 
 	public Faction getFaction()
@@ -153,12 +173,37 @@ public class Entity : MonoBehaviour
 
 	public void addStatus(Status s)
 	{
+		Status existing = statuses.Find (delegate(Status obj)
+		{
+			return obj.Equals (s);
+		});
 
+		if (existing != null)
+		{
+			//a status of the given type is already applied to this entity
+			existing.stack (this, 1);
+			return;
+		}
+
+		//add this new status to this entity
+		statuses.Add (s);
+		s.durationCompleted += removeStatus;
+		s.onApply (this);
+
+		//notify listeners
+		if (statusAdded != null)
+			statusAdded (s);
 	}
 
 	public void removeStatus(Status s)
 	{
+		s.onRevert (this);
+		s.durationCompleted -= removeStatus;
+		statuses.Remove (s);
 
+		//notify listeners
+		if (statusRemoved != null)
+			statusRemoved (s);
 	}
 
 	/* TODO Entity needs SeedBase
@@ -175,6 +220,10 @@ public class Entity : MonoBehaviour
 
 	public void onDeath()
 	{
+		//invoke statuses
+		for (int i = 0; i < statuses.Count; i++)
+			statuses [i].onDeath (this);
+
 		if (died != null)
 			died ();
 
