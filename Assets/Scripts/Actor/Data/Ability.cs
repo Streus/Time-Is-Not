@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 /// <summary>
 /// An entry point for invokable behaviors used by Controllers.
 /// </summary>
-public partial class Ability
+public sealed partial class Ability
 {
 	#region STATIC_VARS
 

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Applied to an Entity to change its default behavior
 /// </summary>
-public class Status
+public sealed partial class Status
 {
 	#region STATIC_VARS
 
@@ -50,6 +50,8 @@ public class Status
 
 	// The individual components that make up this status
 	private StatusComponent[] components;
+
+	public event StatusEnded durationCompleted;
 	#endregion
 
 	#region STATIC_METHODS
@@ -93,6 +95,8 @@ public class Status
 		_stacks = 1;
 
 		this.components = components;
+		for (int i = 0; i < components.Length; i++)
+			this.components [i].setParent (this).stacks = stacks;
 	}
 	public Status(Status s) : this(s.name, s.desc, s.icon, s.decayType, s.stacksMax, s.initDuration, s.components) { }
 	public Status(Status s, float duration) : this(s)
@@ -106,6 +110,104 @@ public class Status
 		return _duration / initDuration;
 	}
 
+	/// <summary>
+	/// Modify the stacks of this status and its components by dStacks.
+	/// </summary>
+	public void stack(Entity subject, int dStacks)
+	{
+		_duration = initDuration;
+		dStacks = Mathf.Clamp (dStacks, 0, stacksMax - _stacks);
+		if (dStacks == 0)
+			return;
+		for (int i = 0; i < components.Length; i++)
+		{
+			components [i].onRevert (subject);
+			components [i].stacks += dStacks;
+			if (this._stacks > 0)
+				components [i].onApply (subject);
+		}
+		this._stacks += dStacks;
+	}
+
+	public bool updateDuration(Entity subject, float time)
+	{
+		onUpdate (subject);
+
+		_duration -= time;
+		if (_duration <= 0f)
+		{
+			switch (decayType)
+			{
+			case DecayType.communal:
+				onStatusEnded ();
+				return true;
+			case DecayType.serial:
+				stack (subject, -1);
+				if (stacks <= 0)
+				{
+					onStatusEnded ();
+					return true;
+				}
+				break;
+			}
+		}
+		return false;
+	}
+
+	public T getComponent<T>() where T : StatusComponent
+	{
+		for (int i = 0; i < components.Length; i++)
+			if (components [i].GetType () == typeof(T))
+				return (T)components [i];
+		return null;
+	}
+
+	/// <summary>
+	/// Invoked when this status is added to its subject entity, or in stacking.
+	/// </summary>
+	public void onApply(Entity subject)
+	{
+		for (int i = 0; i < components.Length; i++)
+			components [i].onApply (subject);
+	}
+
+	/// <summary>
+	/// Invoked when this status is removed from its subject entity, or in stacking.
+	/// </summary>
+	public void onRevert(Entity subject)
+	{
+		for (int i = 0; i < components.Length; i++)
+			components [i].onRevert (subject);
+	}
+
+	/// <summary>
+	/// Invoked by the subject entity once for every update cycle.
+	/// </summary>
+	public void onUpdate(Entity subject)
+	{
+		for (int i = 0; i < components.Length; i++)
+			components [i].onUpdate (subject);
+	}
+
+	/// <summary>
+	/// Invoked when the subject entity dies via gameplay.
+	/// </summary>
+	public void onDeath(Entity subject)
+	{
+		for (int i = 0; i < components.Length; i++)
+			components [i].onDeath (subject);
+	}
+
+	/// <summary>
+	/// Called when this status has completed its duration, and has no remaining stacks
+	/// in the case of serial decay.
+	/// </summary>
+	public void onStatusEnded()
+	{
+		if (durationCompleted != null)
+			durationCompleted (this);
+	}
+
 	#endregion
 
 	#region INTERNAL_TYPES
@@ -114,5 +216,7 @@ public class Status
 	/// The types of status decay behavior
 	/// </summary>
 	public enum DecayType { communal, serial }
+
+	public delegate void StatusEnded(Status s);
 	#endregion
 }
