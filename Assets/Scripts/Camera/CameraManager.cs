@@ -30,10 +30,10 @@ public class CameraManager : MonoBehaviour
 		" its position.")]
 	public bool smoothFollow = false;
 
-	[Tooltip("The seepd at which a smooth camera will adjust its position.")]
+	[Tooltip("The speed at which a smooth camera will adjust its position.")]
 	public float smoothSpeed = 5f;
 
-	[Tooltip("The distance teh camera must be from its target for the camera" +
+	[Tooltip("The distance the camera must be from its target for the camera" +
 		" to begin updating its position.")]
 	public float followRadius = 0f;
 
@@ -129,16 +129,45 @@ public class CameraManager : MonoBehaviour
 		shakeDec = decayRate;
 	}
 
+	public void zoom(float target) //DEBUG remove this
+	{
+		zoom (target, 10);
+	}
+
 	public void zoom(float target, float speed = 0f)
 	{
-		//TODO camera zoom
-		throw new System.NotImplementedException ();
+		if (speed == 0)
+			cam.orthographicSize = target;
+		else
+			StartCoroutine (doZoom (target, speed));
+	}
+	private IEnumerator doZoom(float target, float speed)
+	{
+		speed *= Mathf.Sign (target - cam.orthographicSize);
+		while (Mathf.Abs (cam.orthographicSize - target) > 0.01)
+		{
+			cam.orthographicSize += speed * Time.deltaTime;
+			yield return null;
+		}
 	}
 
 	public void recenter(float speed)
 	{
 		//TODO camera recenter
 		throw new System.NotImplementedException ();
+	}
+
+	public void OnDrawGizmos()
+	{
+		//bounds
+		Gizmos.color = Color.red;
+		Vector3 boundsCenter = (Vector3)((min + max) / 2);
+		Vector3 boundsSize = (Vector3)(max - min);
+		Gizmos.DrawWireCube (boundsCenter, boundsSize);
+
+		//follow radius
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireSphere (transform.position, followRadius);
 	}
 	#endregion
 }
