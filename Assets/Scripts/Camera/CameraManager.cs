@@ -89,7 +89,7 @@ public class CameraManager : MonoBehaviour
 			{
 				tarPos += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
 				transform.position = Vector3.Lerp (transform.position, tarPos, Time.deltaTime * smoothSpeed);
-				//TODO bounds calculations
+				fitToBounds ();
 			}
 		}
 	}
@@ -102,8 +102,47 @@ public class CameraManager : MonoBehaviour
 			Vector2 dtt = target.position - transform.position;
 			if (dtt.magnitude > followRadius)
 				transform.position += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
-			//TODO bounds calculations
+			fitToBounds ();
 		}
+	}
+
+	private void fitToBounds()
+	{
+		//if min and max are not set, do not apply bounds
+		if (min == Vector2.zero && max == Vector2.zero)
+			return;
+
+		//camera dimensions
+		float cHeight = cam.orthographicSize;
+		float cWidth = cHeight * (Screen.width / Screen.height);
+
+		//corners of the camera view
+		float cMinX = transform.position.x - (cWidth / 2f);
+		float cMaxX = transform.position.x + (cWidth / 2f);
+		float cMinY = transform.position.y - (cHeight / 2f);
+		float cMaxY = transform.position.y + (cHeight / 2f);
+
+		//x clamping
+		if (cMinX < min.x)
+		{
+			if (cMaxX > max.x)
+				transform.position = new Vector3 ((min.x + max.x) / 2f, transform.position.y);
+			else
+				transform.position = new Vector3(min.x - cMinX, transform.position.y);
+		}
+		else if (cMaxX > max.x)
+			transform.position = new Vector3(cMaxX - max.x, transform.position.y);
+
+		//y claming
+		if (cMinY < min.y)
+		{
+			if (cMaxY > max.y)
+				transform.position = new Vector3 ((min.y + max.y) / 2f, transform.position.y);
+			else
+				transform.position = new Vector3(transform.position.x, min.y - cMinY);
+		}
+		else if (cMaxX > max.x)
+			transform.position = new Vector3(transform.position.x, cMaxY - max.y);
 	}
 
 	public Transform getTarget()
@@ -116,10 +155,17 @@ public class CameraManager : MonoBehaviour
 		target = t;
 	}
 
-	public void setBounds(Vector2 min, Vector2 max)
+	/// <summary>
+	/// Sets the bounds for this camera. If the bounds were valid, returns true, else
+	/// returns false.
+	/// </summary>
+	public bool setBounds(Vector2 min, Vector2 max)
 	{
+		if (min.x > max.x || min.y > max.y)
+			return false;
 		this.min = min;
 		this.max = max;
+		return true;
 	}
 
 	public void shake(float duration, float intensity, float decayRate = 0f)
