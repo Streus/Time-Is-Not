@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class CameraManager : MonoBehaviour
 {
 	#region STATIC_VARS
@@ -113,8 +114,8 @@ public class CameraManager : MonoBehaviour
 			return;
 
 		//camera dimensions
-		float cHeight = cam.orthographicSize;
-		float cWidth = cHeight * (Screen.width / Screen.height);
+		float cHeight = cam.orthographicSize * 2;
+		float cWidth = cHeight * cam.aspect;
 
 		//corners of the camera view
 		float cMinX = transform.position.x - (cWidth / 2f);
@@ -128,10 +129,14 @@ public class CameraManager : MonoBehaviour
 			if (cMaxX > max.x)
 				transform.position = new Vector3 ((min.x + max.x) / 2f, transform.position.y);
 			else
-				transform.position = new Vector3(min.x - cMinX, transform.position.y);
+				transform.position = new Vector3(
+					transform.position.x + min.x - cMinX,
+					transform.position.y);
 		}
 		else if (cMaxX > max.x)
-			transform.position = new Vector3(cMaxX - max.x, transform.position.y);
+			transform.position = new Vector3(
+				transform.position.x + max.x - cMaxX,
+				transform.position.y);
 
 		//y claming
 		if (cMinY < min.y)
@@ -139,10 +144,14 @@ public class CameraManager : MonoBehaviour
 			if (cMaxY > max.y)
 				transform.position = new Vector3 ((min.y + max.y) / 2f, transform.position.y);
 			else
-				transform.position = new Vector3(transform.position.x, min.y - cMinY);
+				transform.position = new Vector3(
+					transform.position.x,
+					transform.position.y + min.y - cMinY);
 		}
-		else if (cMaxX > max.x)
-			transform.position = new Vector3(transform.position.x, cMaxY - max.y);
+		else if (cMaxY > max.y)
+			transform.position = new Vector3(
+				transform.position.x,
+				transform.position.y + max.y - cMaxY);
 	}
 
 	public Transform getTarget()
@@ -175,7 +184,7 @@ public class CameraManager : MonoBehaviour
 		shakeDec = decayRate;
 	}
 
-	public void zoom(float target) //DEBUG remove this
+	public void zoom(float target) //DEBUG for testing. remove this
 	{
 		zoom (target, 10);
 	}
@@ -201,6 +210,19 @@ public class CameraManager : MonoBehaviour
 	{
 		//TODO camera recenter
 		throw new System.NotImplementedException ();
+	}
+
+	public void setProfile(CameraProfile profile)
+	{
+		if (profile == null)
+			return;
+
+		transform.position = profile.position;
+		transform.rotation = Quaternion.Euler(profile.rotation);
+		smoothFollow = profile.smoothFollow;
+		smoothSpeed = profile.smoothSpeed;
+		followRadius = profile.followRadius;
+		zoom (profile.zoomLevel);
 	}
 
 	public void OnDrawGizmos()
