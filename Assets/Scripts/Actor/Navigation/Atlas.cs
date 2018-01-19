@@ -35,7 +35,8 @@ public class Atlas : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Awake()
 	{
-		graph = new Dictionary<Vector2, Node> ();
+		if (graph == null)
+			graph = new Dictionary<Vector2, Node> ();
 	}
 
 	public void Update()
@@ -220,6 +221,19 @@ public class Atlas : MonoBehaviour
 			return;
 
 		Gizmos.color = Color.green;
+
+		//draw graph
+		foreach (Node n in graph.Values)
+		{
+			//node
+			Gizmos.DrawWireSphere ((Vector3)n.getPosition(), cellDimension/4);
+
+			//node's connections
+			for (int i = 0; i < n.links.Count; i++)
+			{
+				Gizmos.DrawLine ((Vector3)n.getPosition (), (Vector3)n.links [i].getPosition ());
+			}
+		}
 	}
 	#endregion
 
@@ -234,6 +248,11 @@ public class Atlas : MonoBehaviour
 		{
 			this.position = position;
 			links = new List<Node>();
+		}
+
+		public Vector2 getPosition()
+		{
+			return position;
 		}
 	}
 	#endregion
