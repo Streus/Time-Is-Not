@@ -8,17 +8,24 @@ public class Atlas : MonoBehaviour
 {
 	#region INSTANCE_VARS
 
+	[SerializeField]
 	private GameObject maxpoint;
+	[SerializeField]
 	private int resolution;
+	[SerializeField]
 	private bool bindToWidth;
+	[SerializeField]
 	private LayerMask mask;
 
+	[SerializeField]
 	private bool diagonalRoutes = false;
 
+	public Color graphColor = Color.green;
 	public bool gizmoGrid = true;
 	public bool gizmoNodes = true;
 
-	private Dictionary<Vector2, Node> graph;
+	[SerializeField]
+	private Dictionary<Vector2, Node> graph; //TODO change data structure
 
 	private float cellDimension
 	{
@@ -192,7 +199,7 @@ public class Atlas : MonoBehaviour
 		if (!gizmoGrid || maxpoint == null)
 			return;
 
-		Gizmos.color = gizmoNodes ? Color.grey : Color.yellow;
+		Gizmos.color = gizmoNodes ? Color.grey : graphColor;
 		Vector3 start, end;
 
 		if (maxpoint.transform.position.x < transform.position.x ||
@@ -217,10 +224,10 @@ public class Atlas : MonoBehaviour
 			Gizmos.DrawLine (start, end);
 		}
 
-		if (!gizmoNodes || graph.Values == null || graph.Values.Count <= 0)
+		if (!gizmoNodes || graph == null || graph.Values.Count <= 0)
 			return;
 
-		Gizmos.color = Color.green;
+		Gizmos.color = graphColor;
 
 		//draw graph
 		foreach (Node n in graph.Values)
@@ -239,8 +246,10 @@ public class Atlas : MonoBehaviour
 
 	#region INTERNAL_TYPES
 
-	public struct Node
+	[System.Serializable]
+	public class Node
 	{
+		[SerializeField]
 		private Vector2 position;
 		public List<Node> links;
 
@@ -253,6 +262,64 @@ public class Atlas : MonoBehaviour
 		public Vector2 getPosition()
 		{
 			return position;
+		}
+	}
+
+	[System.Serializable]
+	public class GraphMap
+	{
+		private Node[,] graph;
+		private Vector2 min, max;
+		private float cellSize;
+
+		public GraphMap(Vector2 min, Vector2 max, float cellSize, int width, int height)
+		{
+			this.min = min;
+			this.max = max;
+			this.cellSize = cellSize;
+			graph = new Node[width, height];
+		}
+
+		public void put(Vector2 pos, Node n)
+		{
+			Vector2 p = normalize (pos);
+			if (p == null)
+				return;
+			graph [(int)p.x, (int)p.y] = n;
+		}
+
+		public bool get(Vector2 pos, out Node n)
+		{
+			n = null;
+			Vector2 p = normalize (pos);
+			if (p == null)
+				return false;
+
+			n = graph [(int)p.x, (int)p.y];
+			return true;
+		}
+
+		public Node this[int x, int y]
+		{
+			get
+			{
+				return graph [x, y];
+			}
+		}
+
+		/// <summary>
+		/// Normalize the specified vector to this map's grid
+		/// </summary>
+		private Vector2 normalize(Vector2 i)
+		{
+			if (i.x > max.x)
+				i = new Vector2 (max.x, i.y);
+			if (i.y > max.y)
+				i = new Vector2 (i.x, max.y);
+
+			Vector2 p = i - min;
+			p = new Vector2 (Mathf.Floor(p.x / cellSize), Mathf.Floor(p.y / cellSize));
+			return p;
 		}
 	}
 	#endregion
