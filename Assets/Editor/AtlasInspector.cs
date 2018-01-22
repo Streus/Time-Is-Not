@@ -72,6 +72,11 @@ public class AtlasInspector : Editor
 		GUILayout.Label ("Other Options", EditorStyles.boldLabel);
 
 		GUILayout.BeginHorizontal ();
+		EditorGUILayout.PrefixLabel ("Graph Color");
+		map.graphColor = (Color)EditorGUILayout.ColorField (map.graphColor);
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal ();
 		EditorGUILayout.PrefixLabel ("Show Grid");
 		map.gizmoGrid = (bool)EditorGUILayout.Toggle (map.gizmoGrid);
 		GUILayout.EndHorizontal ();
