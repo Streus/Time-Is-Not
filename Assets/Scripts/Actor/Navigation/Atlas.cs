@@ -25,7 +25,7 @@ public class Atlas : MonoBehaviour
 	public bool gizmoNodes = true;
 
 	[SerializeField]
-	private Dictionary<Vector2, Node> graph; //TODO change data structure
+	private GraphMap graph; //TODO change data structure
 
 	private float cellDimension
 	{
@@ -42,8 +42,7 @@ public class Atlas : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Awake()
 	{
-		if (graph == null)
-			graph = new Dictionary<Vector2, Node> ();
+		
 	}
 
 	public void Update()
@@ -65,10 +64,9 @@ public class Atlas : MonoBehaviour
 		}
 
 		//reset the graph to a blank collection
-		if (graph == null)
-			graph = new Dictionary<Vector2, Node> ();
-		else
-			graph.Clear();
+		int width = Mathf.FloorToInt ((maxpoint.transform.position.x - transform.position.x) / cellDimension);
+		int height = Mathf.FloorToInt ((maxpoint.transform.position.y - transform.position.y) / cellDimension);
+		graph = new GraphMap (transform.position, maxpoint.transform.position, cellDimension, width, height);
 
 		Profiler.BeginSample ("Atlas Generate", this);
 
@@ -88,19 +86,19 @@ public class Atlas : MonoBehaviour
 				{
 					//place node
 					Node curr = new Node (nodePlacePos);
-					graph.Add (nodePlacePos, curr);
+					graph.put (nodePlacePos, curr);
 
 					//build connections
 					Vector2 left = new Vector2(nodePlacePos.x - nodeDimensions.x, nodePlacePos.y);
 					Vector2 down = new Vector2(nodePlacePos.x, nodePlacePos.y - nodeDimensions.y);
 
 					Node lNode, dNode;
-					if (graph.TryGetValue (left, out lNode))
+					if (graph.get (left, out lNode))
 					{
 						curr.links.Add (lNode);
 						lNode.links.Add (curr);
 					}
-					if (graph.TryGetValue (down, out dNode))
+					if (graph.get (down, out dNode))
 					{
 						curr.links.Add (dNode);
 						dNode.links.Add (curr);
@@ -112,12 +110,12 @@ public class Atlas : MonoBehaviour
 						Vector2 downRight = new Vector2 (nodePlacePos.x + nodeDimensions.x, nodePlacePos.y - nodeDimensions.y);
 
 						Node dlNode, drNode;
-						if (graph.TryGetValue (downLeft, out dlNode))
+						if (graph.get (downLeft, out dlNode))
 						{
 							curr.links.Add (dlNode);
 							dlNode.links.Add (curr);
 						}
-						if (graph.TryGetValue (downRight, out drNode))
+						if (graph.get (downRight, out drNode))
 						{
 							curr.links.Add (drNode);
 							drNode.links.Add (curr);
@@ -143,7 +141,7 @@ public class Atlas : MonoBehaviour
 	/// </summary>
 	public void clear()
 	{
-		graph.Clear ();
+		graph.clear ();
 		Debug.Log ("Graph Cleared!");
 	}
 
@@ -224,21 +222,24 @@ public class Atlas : MonoBehaviour
 			Gizmos.DrawLine (start, end);
 		}
 
-		if (!gizmoNodes || graph == null || graph.Values.Count <= 0)
+		if (!gizmoNodes || graph == null || graph.size <= 0)
 			return;
 
 		Gizmos.color = graphColor;
 
 		//draw graph
-		foreach (Node n in graph.Values)
+		for (int i = 0; i < graph.capacity; i++)
 		{
+			if (graph [i] == null)
+				continue;
+
 			//node
-			Gizmos.DrawWireSphere ((Vector3)n.getPosition(), cellDimension/4);
+			Gizmos.DrawWireSphere ((Vector3)graph[i].getPosition(), cellDimension/4);
 
 			//node's connections
-			for (int i = 0; i < n.links.Count; i++)
+			for (int j = 0; j < graph[i].links.Count; j++)
 			{
-				Gizmos.DrawLine ((Vector3)n.getPosition (), (Vector3)n.links [i].getPosition ());
+				Gizmos.DrawLine ((Vector3)graph[i].getPosition (), (Vector3)graph[i].links [j].getPosition ());
 			}
 		}
 	}
@@ -272,12 +273,26 @@ public class Atlas : MonoBehaviour
 		private Vector2 min, max;
 		private float cellSize;
 
+		private int _size;
+		public int size { get { return _size; } }
+
+		public int capacity
+		{
+			get { return graph.GetLength (0) * graph.GetLength (1); }
+		}
+
+		public GraphMap() : this(default(Vector2), default(Vector2), 1f, 1, 1)
+		{
+			
+		}
+
 		public GraphMap(Vector2 min, Vector2 max, float cellSize, int width, int height)
 		{
 			this.min = min;
 			this.max = max;
 			this.cellSize = cellSize;
 			graph = new Node[width, height];
+			_size = 0;
 		}
 
 		public void put(Vector2 pos, Node n)
@@ -286,6 +301,7 @@ public class Atlas : MonoBehaviour
 			if (p == null)
 				return;
 			graph [(int)p.x, (int)p.y] = n;
+			_size++;
 		}
 
 		public bool get(Vector2 pos, out Node n)
@@ -295,8 +311,25 @@ public class Atlas : MonoBehaviour
 			if (p == null)
 				return false;
 
-			n = graph [(int)p.x, (int)p.y];
+			try
+			{
+				n = graph [(int)p.x, (int)p.y];
+			}
+			catch(System.IndexOutOfRangeException ioore)
+			{
+				return false;
+			}
 			return true;
+		}
+
+		public Node this[int i]
+		{
+			get
+			{
+				int x = i % graph.GetLength(0);
+				int y = i / graph.GetLength (1);
+				return this [x, y];
+			}
 		}
 
 		public Node this[int x, int y]
@@ -307,15 +340,24 @@ public class Atlas : MonoBehaviour
 			}
 		}
 
+		public void clear()
+		{
+			if (graph == null)
+				return;
+			graph = new Node[graph.GetLength (0), graph.GetLength (1)];
+		}
+
 		/// <summary>
 		/// Normalize the specified vector to this map's grid
 		/// </summary>
 		private Vector2 normalize(Vector2 i)
 		{
+			/*
 			if (i.x > max.x)
 				i = new Vector2 (max.x, i.y);
 			if (i.y > max.y)
 				i = new Vector2 (i.x, max.y);
+				*/
 
 			Vector2 p = i - min;
 			p = new Vector2 (Mathf.Floor(p.x / cellSize), Mathf.Floor(p.y / cellSize));
