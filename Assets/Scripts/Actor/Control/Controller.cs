@@ -33,13 +33,13 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		physbody = GetComponent<Rigidbody2D> ();
 	}
 
-	public void Update()
+	public virtual void Update()
 	{
 		if (state != null)
 			state.update (this);
 	}
 
-	public void FixedUpdate()
+	public virtual void FixedUpdate()
 	{
 
 	}
@@ -49,6 +49,11 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		state.exit (this);
 		state = s;
 		state.enter (this);
+	}
+
+	public Entity getSelf()
+	{
+		return self;
 	}
 
 	//TODO IReapable integration for Controller

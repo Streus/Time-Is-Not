@@ -69,10 +69,18 @@ public sealed class Entity : MonoBehaviour
 		}
 	}
 
+	#region GETTERS_SETTERS
+
 	public Faction getFaction()
 	{
 		return faction;
 	}
+
+	public int getMovespeed()
+	{
+		return movespeed;
+	}
+	#endregion
 
 	#region ABILITY_MANAGEMENT
 
