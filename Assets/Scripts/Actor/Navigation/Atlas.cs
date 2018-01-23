@@ -25,7 +25,7 @@ public class Atlas : MonoBehaviour
 	public bool gizmoNodes = true;
 
 	[SerializeField]
-	private GraphMap graph; //TODO change data structure
+	private GraphMap graph;
 
 	private float cellDimension
 	{
@@ -269,10 +269,14 @@ public class Atlas : MonoBehaviour
 	[System.Serializable]
 	public class GraphMap
 	{
+		[SerializeField]
 		private Node[,] graph;
+		[SerializeField]
 		private Vector2 min, max;
+		[SerializeField]
 		private float cellSize;
 
+		[SerializeField]
 		private int _size;
 		public int size { get { return _size; } }
 
@@ -281,10 +285,7 @@ public class Atlas : MonoBehaviour
 			get { return graph.GetLength (0) * graph.GetLength (1); }
 		}
 
-		public GraphMap() : this(default(Vector2), default(Vector2), 1f, 1, 1)
-		{
-			
-		}
+		public GraphMap() : this(default(Vector2), default(Vector2), 1f, 1, 1) { }
 
 		public GraphMap(Vector2 min, Vector2 max, float cellSize, int width, int height)
 		{
@@ -308,8 +309,6 @@ public class Atlas : MonoBehaviour
 		{
 			n = null;
 			Vector2 p = normalize (pos);
-			if (p == null)
-				return false;
 
 			try
 			{
@@ -319,6 +318,9 @@ public class Atlas : MonoBehaviour
 			{
 				return false;
 			}
+
+			if (n == null)
+				return false;
 			return true;
 		}
 
