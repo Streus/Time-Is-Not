@@ -32,7 +32,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		anim = GetComponent<Animator> ();
 		physbody = GetComponent<Rigidbody2D> ();
 	}
-
+		
 	public virtual void Update()
 	{
 		if (state != null)
@@ -50,7 +50,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		state = s;
 		state.enter (this);
 	}
-
+		
 	public Entity getSelf()
 	{
 		return self;

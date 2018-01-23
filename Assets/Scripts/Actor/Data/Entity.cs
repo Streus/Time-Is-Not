@@ -68,14 +68,13 @@ public sealed class Entity : MonoBehaviour
 				abilities [i].updateCooldown (Time.deltaTime);
 		}
 	}
-
+		
 	#region GETTERS_SETTERS
-
 	public Faction getFaction()
 	{
 		return faction;
 	}
-
+		
 	public int getMovespeed()
 	{
 		return movespeed;
