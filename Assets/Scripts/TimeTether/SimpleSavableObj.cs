@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable 
 {
-	[SerializeField]
+	//[SerializeField]
 	private bool allowReset = true;
 
 	[SerializeField]
