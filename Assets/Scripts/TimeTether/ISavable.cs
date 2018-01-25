@@ -1,5 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
+/// <summary>
+/// The Savable interface defines functions that must be implemented by scripts which save data (seeds) as part of the time tether
+/// It is based on a farmer method of serialization that uses reap (save) and sow (load) functions
+/// </summary>
 public interface ISavable
 {
 	// Extract important values and return them in a serializable class

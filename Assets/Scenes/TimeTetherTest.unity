@@ -515,6 +515,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1592521529
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.81615627
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043965071208900, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 136fda7da8b3a43228d66f8b9e8661a1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1958594702
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784a295c0348e4e4cb880894f1379ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxNumStates: 3
+  m_maxNumStates: 4
 --- !u!4 &1958594704
 Transform:
   m_ObjectHideFlags: 0
