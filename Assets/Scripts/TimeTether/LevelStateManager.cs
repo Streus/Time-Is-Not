@@ -113,6 +113,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	// Called by RegisteredObjects when their client components are destroyed in gameplay.
 	// Places the passed seed into the current scene's dictionary
+	/*
 	public void store(string ID, SeedBase seed)
 	{
 		Debug.Log("Store destroyed object"); 
@@ -122,6 +123,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			stateSeeds[m_curState + 1].Remove (ID);
 		stateSeeds[m_curState + 1].Add (ID, seed);
 	}
+	*/ 
 
 	bool loadState()
 	{
@@ -145,6 +147,46 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			return false; 
 		}
 
+
+		// We have a registered object that is not in our seed base list
+		// Destroy objects that no longer exist in the scene
+		// First, create a hash set for faster comparisons
+		HashSet<string> seedSet = new HashSet<string> (); 
+
+		foreach (SeedBase sb in stateSeeds[state].Values)
+		{
+			seedSet.Add(sb.registeredID); 
+		}
+
+		RegisteredObject[] registeredObjects = RegisteredObject.getObjects(); 
+
+		for (int i = 0; i < registeredObjects.Length; i++)
+		{
+			// If there is a registered object id for a seed that doesn't exist
+			if (!seedSet.Contains(registeredObjects[i].rID))
+			{
+				Destroy(registeredObjects[i].gameObject); 
+			}
+		}
+
+		// If there is a seed for a registered object that doesn't exist
+		HashSet<string> roSet = new HashSet<string>();
+		foreach (RegisteredObject r in registeredObjects)
+			roSet.Add(r.rID);
+			
+		foreach (SeedBase sb in stateSeeds[state].Values)
+		{
+			if (!roSet.Contains(sb.registeredID))
+			{
+				if (RegisteredObject.recreate (sb.prefabPath, sb.registeredID, sb.parentID) != null)
+					Debug.Log ("[SSM] Respawned prefab object: " + sb.registeredID + ".");
+				else
+					Debug.Log ("[SSM] Failed to respawn prefab object: " + sb.registeredID + ".");
+			}
+		}
+
+		/*
+		// We have a seed for a registered object that doesn't exist
 		//spawn prefabs before starting sow cycle
 		foreach (SeedBase sb in stateSeeds[state].Values)
 		{
@@ -156,6 +198,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 					Debug.Log ("[SSM] Failed to respawn prefab object: " + sb.registeredID + ".");
 			}
 		}
+		*/ 
 
 		//iterate over the list of ROs and pass them data
 		foreach (RegisteredObject ro in RegisteredObject.getObjects())

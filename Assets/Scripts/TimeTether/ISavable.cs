@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using UnityEngine; 
 
 /// <summary>
 /// The Savable interface defines functions that must be implemented by scripts which save data (seeds) as part of the time tether
@@ -6,6 +7,8 @@
 /// </summary>
 public interface ISavable
 {
+	// Reapable methods
+
 	// Extract important values and return them in a serializable class
 	// AKA reap
 	SeedBase saveData ();

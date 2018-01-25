@@ -106,6 +106,7 @@ public class RegisteredObject : MonoBehaviour
 
 	// Special wrapper method for the generic Monobehaviour#Destroy
 	// Manages saving the destruction state of a RO
+	/*
 	public static void destroy(GameObject go)
 	{
 		RegisteredObject ro = go.GetComponent<RegisteredObject> ();
@@ -113,6 +114,7 @@ public class RegisteredObject : MonoBehaviour
 			ro.saveDestruction ();
 		Destroy (go);
 	}
+	*/ 
 
 	/* Instance Methods */
 	public void Reset()
@@ -180,6 +182,7 @@ public class RegisteredObject : MonoBehaviour
 	}
 
 	// Tells the SSM that a RO has been destroyed through gameplay
+	/*
 	private void saveDestruction()
 	{
 		if (prefabPath != "")
@@ -190,6 +193,7 @@ public class RegisteredObject : MonoBehaviour
 
 		LevelStateManager.inst.store (rID, seed);
 	}
+	*/ 
 
 	public override string ToString ()
 	{
@@ -201,127 +205,3 @@ public class ReapException : ApplicationException
 {
 	public ReapException(string message) : base(message) { }
 }
-
-
-
-
-
-//public class RegisteredObject : MonoBehaviour 
-//{
-//	// Static data
-//	private static Dictionary<int, RegisteredObject> m_objects; 
-//
-//	// Data access functions
-//	public static Dictionary<int, RegisteredObject> objects
-//	{
-//		get{
-//			return m_objects; 
-//		}
-//	}
-//
-//	static RegisteredObject()
-//	{
-//		m_objects = new Dictionary<int, RegisteredObject> (); 
-//	}
-//
-//
-//
-//
-//
-//
-//	/// <summary>
-//	/// Finds the registered object, if contained in the objects dictionary.
-//	/// </summary>
-//	/// <returns>The RegisteredObject instance if found, null otherwise.</returns>
-//	/// <param name="ID">The instance ID Dictionary key</param>
-//	public static RegisteredObject findObject(int ID)
-//	{
-//		RegisteredObject result; 
-//		m_objects.TryGetValue(ID, out result); 
-//		return result; 
-//	}
-//
-//	static GameObject create(string prefabPath, Vector3 position, Quaternion rotation)
-//	{
-//		return create (prefabPath, position, rotation, null);
-//	}
-//
-//	static GameObject create(string prefabPath, Vector3 position, Quaternion rotation, Transform parent)
-//	{
-//		GameObject go = Resources.Load<GameObject> ("Prefabs/" + prefabPath);
-//		GameObject inst;
-//		if(parent == null)
-//			inst = Instantiate (go, position, rotation);
-//		else
-//			inst = Instantiate (go, position, rotation, parent);
-//		RegisteredObject ro = inst.GetComponent<RegisteredObject> ();
-//		ro.Reset ();
-//		//ro.prefabPath = prefabPath;
-//		return inst;
-//	}
-//
-//	static GameObject recreate(string prefabPath, string registeredID, string parentID)
-//	{
-//		GameObject go = Resources.Load<GameObject> ("Prefabs/" + prefabPath);
-//		GameObject inst;
-//		if (parentID == "")
-//			inst = Instantiate (go, Vector3.zero, Quaternion.identity);
-//		else
-//		{
-//			RegisteredObject parent = RegisteredObject.findObject (parentID);
-//			//if (parent == null)
-//				//throw new ArgumentException ("[RO] " + parentID + " does not exist!");
-//			inst = Instantiate (go, Vector3.zero, Quaternion.identity, parent.transform);
-//		}
-//		RegisteredObject ro = inst.GetComponent<RegisteredObject> ();
-//		//ro.registeredID = registeredID;
-//		//ro.prefabPath = prefabPath;
-//		return inst;
-//	}
-//
-//	static void destroy(GameObject go)
-//	{
-//		//
-//	}
-//
-//	/* Instance Methods */
-//	public void Reset()
-//	{
-//		//registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
-//	}
-//
-//	public void Awake()
-//	{
-//		//directory.Add (this);
-//
-//	}
-//
-//	public void OnDestroy()
-//	{
-//		//directory.Remove (this);
-//	}
-//
-//	// Get the reapable script attached to this GO and return its seed
-//	public SeedBase reap()
-//	{
-//
-//	}
-//
-//}
-//
-//public class SeedBase
-//{
-//	public bool destroyed;
-//	public bool ignoreReset;
-//	public Vector3 tPosition;
-//	public Quaternion tRotation;
-//	public Vector2 rbPosition;
-//	public float rbRotation;
-//	public Vector2 rbVelocity;
-//	public float rbAngVelocity;
-//
-//	public string prefabPath;
-//	public string registeredID;
-//	public string parentID;
-//}
-

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable 
 {
 	//[SerializeField]
@@ -32,7 +33,7 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 			return; 
 		}
 
-		s.defaultSow (gameObject);
+		s.defaultLoad (gameObject);
 	}
 	public bool ignoreReset() { return !allowReset; }
 

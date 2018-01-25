@@ -125,7 +125,7 @@ public class SeedBase: ISerializable
 		info.AddValue ("parentID", parentID);
 	}
 
-	public void defaultSow(GameObject subject)
+	public void defaultLoad(GameObject subject)
 	{
 		if (destroyed)
 		{

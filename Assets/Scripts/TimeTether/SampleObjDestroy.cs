@@ -16,7 +16,8 @@ public class SampleObjDestroy : MonoBehaviour
 	{
 		if (Input.GetKeyDown(destroyKey))
 		{
-			RegisteredObject.destroy(this.gameObject); 
+			//RegisteredObject.destroy(this.gameObject);
+			Destroy(this.gameObject); 
 		}
 	}
 }
