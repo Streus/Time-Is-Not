@@ -31,83 +31,126 @@ public class TimeTetherTest : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha0))
 		{
-			if (LevelStateManager.curState >= 0)
+			if (LevelStateManager.canLoadTetherPoint(0) && LevelStateManager.loadTetherPoint(0))
 			{
-				LevelStateManager.loadTetherPoint(0); 
+				Debug.Log("Successfully loaded state 0"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 0"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
-			if (LevelStateManager.curState >= 1)
+			if (LevelStateManager.canLoadTetherPoint(1) && LevelStateManager.loadTetherPoint(1))
 			{
-				LevelStateManager.loadTetherPoint(1); 
+				Debug.Log("Successfully loaded state 1"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 1"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			if (LevelStateManager.curState >= 2)
+			if (LevelStateManager.canLoadTetherPoint(2) && LevelStateManager.loadTetherPoint(2))
 			{
-				LevelStateManager.loadTetherPoint(2); 
+				Debug.Log("Successfully loaded state 2"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 2"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			if (LevelStateManager.curState >= 3)
+			if (LevelStateManager.canLoadTetherPoint(3) && LevelStateManager.loadTetherPoint(3))
 			{
-				LevelStateManager.loadTetherPoint(3); 
+				Debug.Log("Successfully loaded state 3"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 3"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			if (LevelStateManager.curState >= 4)
+			if (LevelStateManager.canLoadTetherPoint(4) && LevelStateManager.loadTetherPoint(4))
 			{
-				LevelStateManager.loadTetherPoint(4); 
+				Debug.Log("Successfully loaded state 4"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 4"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha5))
 		{
-			if (LevelStateManager.curState >= 5)
+			if (LevelStateManager.canLoadTetherPoint(5) && LevelStateManager.loadTetherPoint(5))
 			{
-				LevelStateManager.loadTetherPoint(5); 
+				Debug.Log("Successfully loaded state 5"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 5"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha6))
 		{
-			if (LevelStateManager.curState >= 6)
+			if (LevelStateManager.canLoadTetherPoint(6) && LevelStateManager.loadTetherPoint(6))
 			{
-				LevelStateManager.loadTetherPoint(6); 
+				Debug.Log("Successfully loaded state 6"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 6"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha7))
 		{
-			if (LevelStateManager.curState >= 7)
+			if (LevelStateManager.canLoadTetherPoint(7) && LevelStateManager.loadTetherPoint(7))
 			{
-				LevelStateManager.loadTetherPoint(7); 
+				Debug.Log("Successfully loaded state 7"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 7"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha8))
 		{
-			if (LevelStateManager.curState >= 8)
+			if (LevelStateManager.canLoadTetherPoint(8) && LevelStateManager.loadTetherPoint(8))
 			{
-				LevelStateManager.loadTetherPoint(8); 
+				Debug.Log("Successfully loaded state 8"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 8"); 
 			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha9))
 		{
-			if (LevelStateManager.curState >= 9)
+			if (LevelStateManager.canLoadTetherPoint(9) && LevelStateManager.loadTetherPoint(9))
 			{
-				LevelStateManager.loadTetherPoint(9); 
+				Debug.Log("Successfully loaded state 9"); 
+			}
+			else
+			{
+				Debug.Log("Could not load state 9"); 
 			}
 		}
+
+
+
 
 		if (pointText != null)
 		{

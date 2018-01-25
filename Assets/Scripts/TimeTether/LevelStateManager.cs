@@ -49,6 +49,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	{
 		stateSeeds = new List<Dictionary<string, SeedBase>> (); 
 
+		for (int i = 0; i < m_maxNumStates; i++)
+		{
+			stateSeeds.Add(new Dictionary<string, SeedBase> ()); 
+		}
+
 		// Save default state seeds
 		m_curState = -1; 
 		addState(); 
@@ -75,15 +80,19 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		m_curState++; 
 
 		// Check if a Dictionary doesn't exist because the count of stateSeeds is too low/zero
-		if (m_curState < stateSeeds.Count + 1)
+		if (m_curState + 1 > stateSeeds.Count)
 		{
-			stateSeeds.Add(new Dictionary<string, SeedBase> ()); 
+			Debug.LogError("Trying to access an out-of-bounds state in stateSeeds. stateSeeds.count = " + stateSeeds.Count); 
+			//stateSeeds.Add(new Dictionary<string, SeedBase> ()); 
+			return false; 
 		}
 
 		// Check if the Dictionary position of curState is null, and instantiate a new dictionary if so
 		if (stateSeeds[m_curState] == null)
 		{
-			stateSeeds[m_curState] = new Dictionary<string, SeedBase> (); 
+			Debug.LogError("Trying to access a null Dictionary in stateSeeds");
+			//stateSeeds[m_curState] = new Dictionary<string, SeedBase> (); 
+			return false; 
 		}
 
 		//add each RO's data to the dictionary
@@ -106,6 +115,8 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	// Places the passed seed into the current scene's dictionary
 	public void store(string ID, SeedBase seed)
 	{
+		Debug.Log("Store destroyed object"); 
+
 		//add the entry to the current scene dictionary
 		if (stateSeeds[m_curState + 1].ContainsKey (ID))
 			stateSeeds[m_curState + 1].Remove (ID);
@@ -134,6 +145,18 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			return false; 
 		}
 
+		//spawn prefabs before starting sow cycle
+		foreach (SeedBase sb in stateSeeds[state].Values)
+		{
+			if (sb.prefabPath != "")
+			{
+				if (RegisteredObject.recreate (sb.prefabPath, sb.registeredID, sb.parentID) != null)
+					Debug.Log ("[SSM] Respawned prefab object: " + sb.registeredID + ".");
+				else
+					Debug.Log ("[SSM] Failed to respawn prefab object: " + sb.registeredID + ".");
+			}
+		}
+
 		//iterate over the list of ROs and pass them data
 		foreach (RegisteredObject ro in RegisteredObject.getObjects())
 		{
@@ -156,7 +179,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return true;
 	}
 
-	// State change methods
+	// Public state query methods
 	public static bool canCreateTetherPoint()
 	{
 		if (curState + 1 > maxNumStates)
@@ -166,6 +189,16 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return true; 
 	}
 
+	public static bool canLoadTetherPoint(int state)
+	{
+		if (state < 0 || state > curState)
+		{
+			return false; 
+		}
+		return true; 
+	}
+
+	// State change methods
 	public static void createTetherPoint()
 	{
 		if (canCreateTetherPoint())
@@ -178,13 +211,18 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	/// Public function for loading a specific tether point
 	/// </summary>
 	/// <param name="state">State.</param>
-	public static void loadTetherPoint(int state)
+	public static bool loadTetherPoint(int state)
 	{
 		// Check that state is valid
 		// TODO check that state < curState is correct
 		if (state >= 0 && state <= curState)
 		{
 			inst.loadState(state); 
+			return true; 
+		}
+		else
+		{
+			return false; 
 		}
 	}
 

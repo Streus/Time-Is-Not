@@ -26,6 +26,9 @@ public class RegisteredObject : MonoBehaviour
 		get { return registeredID; }
 	}
 
+	// TODO- test if this works
+	//public GameObject recreatePrefab; 
+
 	// Path to a prefab to which this RO is attached
 	private string prefabPath = "";
 
@@ -79,6 +82,26 @@ public class RegisteredObject : MonoBehaviour
 		ro.registeredID = registeredID;
 		ro.prefabPath = prefabPath;
 		return inst;
+
+
+		// TODO- clean this up, if it's used 
+		/*
+		GameObject inst; 
+		if (parentID == "")
+			inst = Instantiate (recreatePrefab, Vector3.zero, Quaternion.identity);
+		else
+		{
+			RegisteredObject parent = RegisteredObject.findObject (parentID);
+			if (parent == null)
+				throw new ArgumentException ("[RO] " + parentID + " does not exist!");
+			inst = Instantiate (recreatePrefab, Vector3.zero, Quaternion.identity, parent.transform);
+		}
+
+		RegisteredObject ro = inst.GetComponent<RegisteredObject> ();
+		ro.registeredID = registeredID;
+		ro.prefabPath = prefabPath;
+		return inst;
+		*/ 
 	}
 
 	// Special wrapper method for the generic Monobehaviour#Destroy
