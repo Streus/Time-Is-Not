@@ -154,7 +154,7 @@ public class TimeTetherTest : MonoBehaviour
 
 		if (pointText != null)
 		{
-			pointText.text = LevelStateManager.curState + " / " + LevelStateManager.maxNumStates; 
+			pointText.text = LevelStateManager.curState + " / " + (LevelStateManager.maxNumStates - 1); 
 		}
 	}
 }

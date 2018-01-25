@@ -82,7 +82,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		// Check if a Dictionary doesn't exist because the count of stateSeeds is too low/zero
 		if (m_curState + 1 > stateSeeds.Count)
 		{
-			Debug.LogError("Trying to access an out-of-bounds state in stateSeeds. stateSeeds.count = " + stateSeeds.Count); 
+			Debug.LogError("Trying to access an out-of-bounds state in stateSeeds. stateSeeds.count = " + stateSeeds.Count + "; m_curState = " + m_curState); 
 			//stateSeeds.Add(new Dictionary<string, SeedBase> ()); 
 			return false; 
 		}
@@ -182,7 +182,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	// Public state query methods
 	public static bool canCreateTetherPoint()
 	{
-		if (curState + 1 > maxNumStates)
+		if (curState + 1 >= maxNumStates)
 		{
 			return false; 
 		}
