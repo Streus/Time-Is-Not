@@ -6,6 +6,12 @@ using UnityEngine.Profiling;
 [ExecuteInEditMode]
 public class Atlas : MonoBehaviour
 {
+	#region STATIC_VARS
+
+	private static Atlas _instance;
+	public static Atlas instance { get { return _instance; } }
+	#endregion
+
 	#region INSTANCE_VARS
 
 	[SerializeField]
@@ -42,12 +48,113 @@ public class Atlas : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Awake()
 	{
-		
+		if (_instance == null)
+			_instance = this;
+		else
+		{
+			Debug.LogError ("More than one Atlas in a scene is not supported!");
+			Destroy (gameObject);
+		}
 	}
 
 	public void Update()
 	{
 
+	}
+
+	/// <summary>
+	/// Attempts to define the shortest path from start to end using a basic A*-based
+	/// algorithm. Returns false if a path could not be found.
+	/// </summary>
+	public bool findPath(Vector3 start, Vector3 end, out Queue<Vector3> path)
+	{
+		path = null;
+
+		if (graph == null)
+			return false;
+
+		List<Node> closedList = new List<Node> ();
+		Queue<Node> openList = new Queue<Node> ();
+
+		Dictionary<Node, float> gScores, fScores;
+		gScores = new Dictionary<Node, float> ();
+		fScores = new Dictionary<Node, float> ();
+
+		Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node> ();
+
+		Node startNode;
+		Node endNode;
+		if (graph.get (start, out startNode))
+			openList.Enqueue (startNode);
+		else
+			return false;
+		
+		if (!graph.get (end, out endNode))
+			return false;
+
+		gScores.Add (startNode, 0);
+		fScores.Add (startNode, heuristicCost (startNode.getPosition (), end));
+
+		Node current = null;
+		while (openList.Count > 0)
+		{
+			current = openList.Dequeue ();
+
+			if (current.getPosition () == endNode.getPosition ())
+			{
+				path = new Queue<Vector3> ();
+				path.Enqueue ((Vector3)current.getPosition ());
+				Node prev;
+				while (cameFrom.TryGetValue (current, out prev))
+				{
+					path.Enqueue ((Vector3)prev.getPosition());
+					current = prev;
+				}
+				return true;
+			}
+
+			closedList.Add (current);
+
+			for (int i = 0; i < current.links.Count; i++)
+			{
+				Node neighbor;
+				if (graph.get (current.links [i], out neighbor))
+				{
+					if (closedList.Contains (neighbor))
+						continue;
+
+					if (!openList.Contains (neighbor))
+						openList.Enqueue (neighbor);
+
+					float curr_g;
+					if (!gScores.TryGetValue (current, out curr_g))
+						curr_g = float.PositiveInfinity;
+
+					float neig_g;
+					if (!gScores.TryGetValue (neighbor, out neig_g))
+						neig_g = float.PositiveInfinity;
+
+					float tent_g = curr_g + Vector2.Distance (current.getPosition (), current.links [i]);
+					if (tent_g >= neig_g)
+						continue;
+
+					cameFrom.Remove (neighbor);
+					cameFrom.Add (neighbor, current);
+
+					gScores.Remove (neighbor);
+					gScores.Add (neighbor, tent_g);
+
+					fScores.Remove (neighbor);
+					fScores.Add (neighbor, tent_g + heuristicCost (neighbor.getPosition (), endNode.getPosition ()));
+				}
+			}
+		}
+		return false;
+	}
+
+	private float heuristicCost(Vector3 start, Vector3 end)
+	{
+		return (Mathf.Abs (end.x - start.x) + Mathf.Abs (end.y - start.y)) * cellDimension;
 	}
 
 	/// <summary>
@@ -312,6 +419,12 @@ public class Atlas : MonoBehaviour
 		public bool get(Vector2 pos, out Node n)
 		{
 			n = null;
+
+			if (pos.x > max.x)
+				return false;
+			if (pos.y > max.y)
+				return false;
+
 			Vector2 p = normalize (pos);
 
 			try
@@ -356,13 +469,6 @@ public class Atlas : MonoBehaviour
 		/// </summary>
 		private Vector2 normalize(Vector2 i)
 		{
-			/*
-			if (i.x > max.x)
-				i = new Vector2 (max.x, i.y);
-			if (i.y > max.y)
-				i = new Vector2 (i.x, max.y);
-				*/
-
 			Vector2 p = i - min;
 			p = new Vector2 (Mathf.Floor(p.x / cellSize), Mathf.Floor(p.y / cellSize));
 			return p;

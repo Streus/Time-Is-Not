@@ -21,7 +21,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 	protected Animator anim;
 	protected Rigidbody2D physbody;
 
-	protected object stateData;
+	private Queue<Vector3> path;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -31,6 +31,8 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		self = GetComponent<Entity> ();
 		anim = GetComponent<Animator> ();
 		physbody = GetComponent<Rigidbody2D> ();
+
+		path = null;
 	}
 		
 	public virtual void Update()
@@ -54,6 +56,36 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 	public Entity getSelf()
 	{
 		return self;
+	}
+
+	public void setPath(Vector3 target)
+	{
+		if (!Atlas.instance.findPath (transform.position, target, out path))
+			Debug.LogError ("Could not find path to " + target.ToString () + ".");
+	}
+
+	public bool currentPosition(out Vector3 pos)
+	{
+		pos = Vector3.zero;
+		if (path == null || path.Count <= 0)
+			return false;
+		pos = path.Peek ();
+		return true;
+	}
+
+	public bool nextPosition(out Vector3 pos)
+	{
+		pos = Vector3.zero;
+		if (path == null || path.Count <= 0)
+			return false;
+		pos = path.Dequeue ();
+		return true;
+	}
+
+	public void OnDrawGizmos()
+	{
+		Gizmos.color = state != null ? state.color : Color.white;
+		Gizmos.DrawWireSphere (transform.position, 1f);
 	}
 
 	//TODO IReapable integration for Controller
