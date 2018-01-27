@@ -171,21 +171,22 @@ public class Atlas : MonoBehaviour
 		}
 
 		//reset the graph to a blank collection
-		int width = Mathf.FloorToInt ((maxpoint.transform.position.x - transform.position.x) / cellDimension);
-		int height = Mathf.FloorToInt ((maxpoint.transform.position.y - transform.position.y) / cellDimension);
-		graph = new GraphMap (transform.position, maxpoint.transform.position, cellDimension, width, height);
+		float cd = cellDimension;
+		int width = Mathf.FloorToInt ((maxpoint.transform.position.x - transform.position.x) / cd);
+		int height = Mathf.FloorToInt ((maxpoint.transform.position.y - transform.position.y) / cd);
+		graph = new GraphMap (transform.position, maxpoint.transform.position, cd, width, height);
+		Debug.Log (graph.ToString ()); //DEBUG graph toString
 
 		Profiler.BeginSample ("Atlas Generate", this);
 
 		//staring position for node placement as well as size of square cells
-		float cd = cellDimension;
 		Vector2 nodePlacePos = new Vector2 (transform.position.x + (cd / 2), transform.position.y + (cd / 2));
 		Vector2 nodeDimensions = new Vector2 (cd, cd);
 
 		//place nodes and make connections between nodes
-		for (int i = 0; i < resolution; i++)
+		for (int i = 0; i < height; i++)
 		{
-			for (int j = 0; j < resolution; j++)
+			for (int j = 0; j < width; j++)
 			{
 				RaycastHit2D hit;
 				hit = Physics2D.BoxCast (nodePlacePos, nodeDimensions, 0f, Vector2.zero, 0f, mask);
@@ -196,8 +197,8 @@ public class Atlas : MonoBehaviour
 					graph.put (nodePlacePos, curr);
 
 					//build connections
-					Vector2 left = new Vector2 (nodePlacePos.x - nodeDimensions.x, nodePlacePos.y);
-					Vector2 down = new Vector2 (nodePlacePos.x, nodePlacePos.y - nodeDimensions.y);
+					Vector2 left = new Vector2 (nodePlacePos.x - cd, nodePlacePos.y);
+					Vector2 down = new Vector2 (nodePlacePos.x, nodePlacePos.y - cd);
 
 					Node lNode, dNode;
 					if (graph.get (left, out lNode))
@@ -214,7 +215,7 @@ public class Atlas : MonoBehaviour
 					if (diagonalRoutes)
 					{
 						Vector2 downLeft = nodePlacePos - nodeDimensions;
-						Vector2 downRight = new Vector2 (nodePlacePos.x + nodeDimensions.x, nodePlacePos.y - nodeDimensions.y);
+						Vector2 downRight = new Vector2 (nodePlacePos.x + cd, nodePlacePos.y - cd);
 
 						Node dlNode, drNode;
 						if (graph.get (downLeft, out dlNode))
@@ -231,11 +232,11 @@ public class Atlas : MonoBehaviour
 				}
 
 				//move right one cell
-				nodePlacePos = new Vector2 (nodePlacePos.x + cellDimension, nodePlacePos.y);
+				nodePlacePos = new Vector2 (nodePlacePos.x + cd, nodePlacePos.y);
 			}
 
 			//move up a row
-			nodePlacePos = new Vector2 (transform.position.x + (cd / 2), nodePlacePos.y + cellDimension);
+			nodePlacePos = new Vector2 (transform.position.x + (cd / 2), nodePlacePos.y + cd);
 		}
 
 		Profiler.EndSample ();
@@ -337,7 +338,7 @@ public class Atlas : MonoBehaviour
 		//draw graph
 		for (int i = 0; i < graph.capacity; i++)
 		{
-			if (graph [i] == null|| graph [i].links == null || graph[i].getPosition() == Vector2.zero)
+			if (graph [i] == null|| graph [i].links == null || graph[i].links.Count <= 0)
 				continue;
 
 			//node
@@ -409,10 +410,26 @@ public class Atlas : MonoBehaviour
 			_size = 0;
 		}
 
+		private int xyti(float x, float y)
+		{
+			return xyti ((int)x, (int)y);
+		}
+		private int xyti(int x, int y)
+		{
+			return (int)(x + y * width);
+		}
+
 		public void put(Vector2 pos, Node n)
 		{
 			Vector2 p = normalize (pos);
-			graph [(int)p.x  * height + (int)p.y] = n;
+			try
+			{
+				graph [xyti(p.x, p.y)] = n;
+			}
+			catch(System.IndexOutOfRangeException ioore)
+			{
+				Debug.Log (ioore.ToString() + "\n" + p.ToString() + " -> " + xyti(p.x, p.y));
+			}
 			_size++;
 		}
 
@@ -420,16 +437,16 @@ public class Atlas : MonoBehaviour
 		{
 			n = null;
 
-			if (pos.x > max.x)
+			if (pos.x > max.x || pos.y > max.y)
 				return false;
-			if (pos.y > max.y)
+			if (pos.x < min.x || pos.y < min.y)
 				return false;
 
 			Vector2 p = normalize (pos);
 
 			try
 			{
-				n = graph [(int)p.x * height + (int)p.y];
+				n = graph [xyti(p.x, p.y)];
 			}
 			catch(System.IndexOutOfRangeException ioore)
 			{
@@ -453,7 +470,7 @@ public class Atlas : MonoBehaviour
 		{
 			get
 			{
-				return graph [x * height + y];
+				return graph [xyti(x, y)];
 			}
 		}
 
@@ -476,12 +493,14 @@ public class Atlas : MonoBehaviour
 
 		public override string ToString ()
 		{
-			string str = "GraphMap:\n";
-			str += "Size: " + _size + "\n";
-			str += "Capacity: " + capacity + "\n";
-			str += "Min: " + min.ToString () + "\n";
-			str += "Max: " + max.ToString () + "\n";
-			str += "Cell Size: " + cellSize.ToString ("N");
+			string str = "GraphMap:";
+			str += "\nSize: " + _size;
+			str += "\nCapacity: " + capacity;
+			str += "\nMin: " + min.ToString ();
+			str += "\nMax: " + max.ToString ();
+			str += "\nCell Size: " + cellSize.ToString ("N");
+			str += "\nWidth: " + width;
+			str += "\nHeight: " + height;
 
 			return str;
 		}
