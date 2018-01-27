@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
 	public LevelData levelData; 
@@ -22,8 +23,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 		Seed seed = (Seed)s;
 
-		// Seed should not implement a default sow
-		//s.defaultSow (gameObject);
+		s.defaultLoad (gameObject);
 
 		levelData = seed.levelData; 
 	}
@@ -45,6 +45,7 @@ public enum AlertState
 	TRIGGERED
 }; 
 
+[System.Serializable]
 public class LevelData
 {
 	public AlertState alertTriggered; 
