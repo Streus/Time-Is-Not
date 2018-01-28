@@ -66,7 +66,7 @@ public class Atlas : MonoBehaviour
 	/// Attempts to define the shortest path from start to end using a basic A*-based
 	/// algorithm. Returns false if a path could not be found.
 	/// </summary>
-	public bool findPath(Vector3 start, Vector3 end, out Queue<Vector3> path)
+	public bool findPath(Vector3 start, Vector3 end, out Stack<Vector3> path)
 	{
 		path = null;
 
@@ -102,12 +102,12 @@ public class Atlas : MonoBehaviour
 
 			if (current.getPosition () == endNode.getPosition ())
 			{
-				path = new Queue<Vector3> ();
-				path.Enqueue ((Vector3)current.getPosition ());
+				path = new Stack<Vector3> ();
+				path.Push ((Vector3)current.getPosition ());
 				Node prev;
 				while (cameFrom.TryGetValue (current, out prev))
 				{
-					path.Enqueue ((Vector3)prev.getPosition());
+					path.Push ((Vector3)prev.getPosition());
 					current = prev;
 				}
 				return true;

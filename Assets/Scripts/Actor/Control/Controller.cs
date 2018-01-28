@@ -21,7 +21,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 	protected Animator anim;
 	protected Rigidbody2D physbody;
 
-	private Queue<Vector3> path;
+	private Stack<Vector3> path;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -78,7 +78,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		pos = Vector3.zero;
 		if (path == null || path.Count <= 0)
 			return false;
-		pos = path.Dequeue ();
+		pos = path.Pop ();
 		return true;
 	}
 

@@ -11,7 +11,7 @@ public class BasicNavAction : Action
 		if (c.currentPosition (out pos))
 		{
 			float dist = Vector3.Distance (c.transform.position, pos);
-			if (dist < (float)c.getSelf ().getMovespeed ())
+			if (dist < (float)c.getSelf ().getMovespeed () * Time.deltaTime)
 			{
 				if (!c.nextPosition (out pos))
 					return;
