@@ -98,8 +98,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		//add each RO's data to the dictionary
 		foreach (RegisteredObject ro in RegisteredObject.getObjects())
 		{
-			if (stateSeeds[m_curState].ContainsKey (ro.rID))
-				stateSeeds[m_curState].Remove (ro.rID);
+			//Debug.Log("RegisteredObject name: " + ro.gameObject.name + "; ID: " + ro.rID); 
+
+			stateSeeds[m_curState].Remove (ro.rID);
 			stateSeeds[m_curState].Add (ro.rID, ro.reap ());
 		}
 
@@ -155,6 +156,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 		foreach (SeedBase sb in stateSeeds[state].Values)
 		{
+			//Debug.Log("Load seed ID: " + sb.registeredID); 
 			seedSet.Add(sb.registeredID); 
 		}
 
@@ -162,9 +164,13 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 		for (int i = 0; i < registeredObjects.Length; i++)
 		{
+			//Debug.Log("RegisteredObject " + i + "; name: " + registeredObjects[i].gameObject.name); 
+
 			// If there is a registered object id for a seed that doesn't exist
 			if (!seedSet.Contains(registeredObjects[i].rID))
 			{
+				// TODO- restore this functionality when it's not broken
+				Debug.Log("Destroy " + registeredObjects[i].gameObject.name); 
 				Destroy(registeredObjects[i].gameObject); 
 			}
 		}
@@ -172,7 +178,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		// If there is a seed for a registered object that doesn't exist
 		HashSet<string> roSet = new HashSet<string>();
 		foreach (RegisteredObject r in registeredObjects)
+		{
 			roSet.Add(r.rID);
+		}
 			
 		foreach (SeedBase sb in stateSeeds[state].Values)
 		{
@@ -185,7 +193,8 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			}
 		}
 
-		/*
+
+		/* Deprecrated
 		// We have a seed for a registered object that doesn't exist
 		//spawn prefabs before starting sow cycle
 		foreach (SeedBase sb in stateSeeds[state].Values)

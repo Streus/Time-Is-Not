@@ -8,7 +8,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class RegisteredObject : MonoBehaviour
 {
 	/* Static Vars */
@@ -124,13 +126,33 @@ public class RegisteredObject : MonoBehaviour
 
 	public void Awake()
 	{
+		#if UNITY_EDITOR
+		if(!Application.isPlaying)
+			Reset();
+		#endif
 		directory.Add (this);
 	}
 
 	public void OnDestroy()
 	{
+		#if UNITY_EDITOR
+		if (!isQuitting && Application.isPlaying && prefabPath == "")
+		{
+			Debug.LogError("The RegisteredObject " + gameObject.name + " is being destroyed but does not have a prefab path. " +
+				"You shouldn't destroy RegisteredObjects that were directly placed in the Editor and not through a spawner"); 
+		}
+		#endif
+
 		directory.Remove (this);
 	}
+
+	#if UNITY_EDITOR
+	bool isQuitting = false; 
+	void OnApplicationQuit()
+	{ 
+		isQuitting = true; 
+	}
+	#endif
 
 	// Get the savable script attached to this GO and return its seed
 	public SeedBase reap()
@@ -144,8 +166,7 @@ public class RegisteredObject : MonoBehaviour
 
 		//pass in a prefabPath so that if this RO is a prefab, it can be spawned again later
 		seed.prefabPath = prefabPath;
-		if (prefabPath != "")
-			seed.registeredID = registeredID;
+		seed.registeredID = registeredID;
 
 		//pass in this RO's parent object, ifex
 		Transform parent = gameObject.transform.parent;
@@ -154,8 +175,8 @@ public class RegisteredObject : MonoBehaviour
 			RegisteredObject parentRO = parent.GetComponent<RegisteredObject> ();
 			if (parentRO != null)
 				seed.parentID = parentRO.registeredID;
-			//else
-				//Debug.Log(ToString () + " is under a non-RO. Make its parent an RO to save its data properly.", Console.LogTag.error);
+			else
+				Debug.Log(ToString () + " is under a non-RO. Make its parent an RO to save its data properly.");
 		}
 		else
 			seed.parentID = "";

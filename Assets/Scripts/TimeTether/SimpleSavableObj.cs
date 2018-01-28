@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[RequireComponent(typeof(RegisteredObject))]
 public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable 
 {
 	//[SerializeField]
