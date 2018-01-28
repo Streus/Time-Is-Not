@@ -10,8 +10,7 @@ public sealed class State : ScriptableObject
 {
 	#region INSTANCE_VARS
 	[Tooltip("Used for debugging purposes.")]
-	[SerializeField]
-	private Color color;
+	public Color color;
 
 	[Tooltip("Behavior performed when this state is entered")]
 	[SerializeField]
@@ -50,13 +49,9 @@ public sealed class State : ScriptableObject
 			{
 				if (paths [i].success != null)
 					c.setState (paths [i].success);
-				else
-					Debug.LogWarning ("Null Success State! Path: [" + paths[i].name + "] State: [" + name + "]");
 			}
 			else if (paths [i].failure != null)
 				c.setState (paths [i].failure);
-			else
-				Debug.LogWarning ("Null Failure State! Path: [" + paths[i].name + "] State: [" + name + "]");
 		}
 	}
 
