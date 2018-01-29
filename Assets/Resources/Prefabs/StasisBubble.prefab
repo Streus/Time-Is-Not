@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 198172384309097030}
   - component: {fileID: 50522125307947536}
   - component: {fileID: 58849808099460302}
+  - component: {fileID: 114464907958106464}
   m_Layer: 0
   m_Name: StasisBubble
   m_TagString: StasisField
@@ -79,6 +80,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114464907958106464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496106871955950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93bc1b1a5beb4c95b67fec14356b8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleAliveTime: 10
+  useBubbleAliveTimer: 1
 --- !u!198 &198172384309097030
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -138,7 +152,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 467988198
+  randomSeed: -1160359593
   InitialModule:
     serializedVersion: 3
     enabled: 1

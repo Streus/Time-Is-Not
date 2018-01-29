@@ -8,6 +8,12 @@ public class TimeTetherTest : MonoBehaviour
 	public KeyCode createPointKey;
 	public Text pointText; 
 
+	public KeyCode createStasisKey; 
+	public KeyCode removeStasisKey; 
+	public Text stasisText; 
+
+	public GameObject stasisBubblePrefab; 
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +22,7 @@ public class TimeTetherTest : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		// Time tether
 		if (Input.GetKeyDown(createPointKey))
 		{
 			if (LevelStateManager.canCreateTetherPoint())
@@ -149,12 +156,29 @@ public class TimeTetherTest : MonoBehaviour
 			}
 		}
 
+		// Stasis Keys
+		if (Input.GetKeyDown(createStasisKey))
+		{
+			Vector3 spawnPos = new Vector3 (transform.position.x + Random.Range(-2.0f, 2.0f), transform.position.y + Random.Range(-2.0f, 2.0f), transform.position.z); 
+			StasisBubble newStasis = ((GameObject)Instantiate(stasisBubblePrefab, spawnPos, transform.rotation)).GetComponent<StasisBubble>(); 
+			LevelStateManager.addStasisBubble(newStasis); 
+		}
 
+		if (Input.GetKeyDown(removeStasisKey))
+		{
+			LevelStateManager.removeLastStasisBubble(); 
+		}
 
-
+		// Sample tether UI
 		if (pointText != null)
 		{
 			pointText.text = LevelStateManager.curState + " / " + (LevelStateManager.maxNumStates - 1); 
+		}
+
+		// Sample stasis UI
+		if (stasisText != null)
+		{
+			stasisText.text = LevelStateManager.numStasisLeft + " / " + LevelStateManager.maxNumStasis; 
 		}
 	}
 }

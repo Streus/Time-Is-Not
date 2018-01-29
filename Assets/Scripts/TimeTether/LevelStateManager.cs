@@ -22,6 +22,10 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	// State Variables
 
+	/*
+	 * Time Tether
+	 */
+
 	// curState represents the last save state available
 	// If pointA represents the last save state made, pointB represents the next available save state, and the arrow 
 	// 		in between represents the player's current pos in the timeline, then curState equals pointA
@@ -45,6 +49,39 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	List<Dictionary<string, SeedBase>> stateSeeds; 
 
 
+	/*
+	 * Stasis Bubbles
+	 */
+
+	private int m_numStasis; 
+	public static int numStasis
+	{
+		get{
+			return inst.m_numStasis; 
+		}
+	}
+	public static int numStasisLeft
+	{
+		get{
+			return inst.m_maxNumStasis - inst.m_numStasis; 
+		}
+	}
+
+	[SerializeField] private int m_maxNumStasis; 
+	public static int maxNumStasis
+	{
+		get{
+			return inst.m_maxNumStasis; 
+		}
+	}
+
+	private static List<StasisBubble> stasisBubbles; 
+
+	void Awake()
+	{
+		stasisBubbles = new List<StasisBubble> (); 
+	}
+
 	void Start()
 	{
 		stateSeeds = new List<Dictionary<string, SeedBase>> (); 
@@ -63,6 +100,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	{
 		
 	}
+
+
+	/*
+	 * Time Tether
+	 */
 
 	// Internal State Methods 
 	bool addState()
@@ -278,5 +320,109 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		}
 	}
 
+
+	/*
+	 * Stasis Bubbles
+	 */
+
+	public static bool canAddStasisBubble()
+	{
+		if (numStasis < maxNumStasis)
+		{
+			return true; 
+		}
+		return false; 
+	}
+
+	public static bool canRemoveStasisBubble()
+	{
+		if (numStasis > 0)
+		{
+			return true; 
+		}
+		return false; 
+	}
+
+	public static bool addStasisBubble(StasisBubble bubble)
+	{
+		// Error cases:
+		// No more stasis bubbles left; bubble is null; or the list already contains an instance of bubble
+		if (!canAddStasisBubble() || bubble == null || stasisBubbles.Contains(bubble))
+		{
+			// Add stasis event (failure)
+			if (inst.stasisAdded != null)
+			{
+				inst.stasisAdded(false); 
+			}
+
+			return false; 
+		}
+
+		// Increment numStasis
+		inst.m_numStasis += 1;
+
+		// Add the bubble to LevelStateManager's List
+		stasisBubbles.Add(bubble); 
+
+		// Add stasis event (success)
+		if (inst.stasisAdded != null)
+		{
+			inst.stasisAdded(true); 
+		}
+
+		return true; 
+	}
+
+	/// <summary>
+	/// Alternate removeStasis() that gets rid of the last stasis bubble placed
+	/// </summary>
+	public static bool removeLastStasisBubble()
+	{
+		return removeStasisBubble(stasisBubbles[stasisBubbles.Count - 1]); 
+	}
+
+	/// <summary>
+	/// Alternate removeStasis() that gets rid of all stasis bubbles. Currently does not return a bool
+	/// </summary>
+	public static void removeAllStasisBubbles()
+	{
+		while (stasisBubbles.Count > 0)
+		{
+			removeLastStasisBubble(); 
+		}
+	}
+
+	public static bool removeStasisBubble(StasisBubble bubble)
+	{
+		// Error cases:
+		// No stasis bubbles in play, bubble is null, or the list does not contain the instance of bubble
+		if (!canRemoveStasisBubble() || bubble == null || !stasisBubbles.Contains(bubble))
+		{
+			// Remove stasis event (failure)
+			if (inst.stasisRemoved != null)
+			{
+				inst.stasisRemoved(false); 
+			}
+
+			return false; 
+		}
+
+		// Decrement numStasis
+		inst.m_numStasis -= 1; 
+
+		// Remove the bubble from the LevelStateManager's List
+		stasisBubbles.Remove(bubble); 
+
+		// Call the bubble's custom destroy function
+		bubble.DestroyBubble(); 
+
+		// Remove stasis event (success)
+		if (inst.stasisRemoved != null)
+		{
+			inst.stasisRemoved(true); 
+		}
+
+		return true; 
+	}
 
 }
