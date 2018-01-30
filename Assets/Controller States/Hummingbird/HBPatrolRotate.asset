@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
+  m_Name: HBPatrolRotate
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 1, b: 0, a: 1}
+  enterAction: {fileID: 0}
+  actions:
+  - {fileID: 11400000, guid: 21e31496a97f2984a9ad777c44e3ea68, type: 2}
+  exitAction: {fileID: 0}
+  paths:
+  - name: Complete Rotation
+    success: {fileID: 11400000, guid: 908c9b0d006182140a016c19bc6d061a, type: 2}
+    failure: {fileID: 0}
+    decision: {fileID: 11400000, guid: d0a84695e5661c64db65933b89d9767f, type: 2}
+  - name: Encounter Player
+    success: {fileID: 11400000, guid: bdc5773fc29f5f6428428d672d17bdfa, type: 2}
+    failure: {fileID: 0}
+    decision: {fileID: 11400000, guid: a82489a219996df4db5bc1da58fd9c2d, type: 2}

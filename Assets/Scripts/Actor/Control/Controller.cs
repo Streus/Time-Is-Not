@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 
 	[Tooltip("The current state this controller is using in its state machine.")]
 	[SerializeField]
-	private State state;
+	protected State state;
 
 	protected Entity self;
 	protected Animator anim;
@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 
 	#region INSTANCE_METHODS
 
-	public void Awake()
+	public virtual void Awake()
 	{
 		self = GetComponent<Entity> ();
 		anim = GetComponent<Animator> ();
@@ -80,6 +80,19 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 			return false;
 		pos = path.Pop ();
 		return true;
+	}
+
+	public void facePoint(Vector2 point, float maxDelta = 360f)
+	{
+		Quaternion rot = Quaternion.LookRotation (transform.position - new Vector3(point.x, point.y, -100f), Vector3.forward);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, maxDelta);
+		transform.eulerAngles = new Vector3 (0f, 0f, transform.eulerAngles.z);
+	}
+
+	public void faceTarget(Transform target)
+	{
+		if (transform != null)
+			facePoint (transform.position);
 	}
 
 	public void OnDrawGizmos()

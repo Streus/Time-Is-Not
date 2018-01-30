@@ -8,6 +8,26 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI/State")]
 public sealed class State : ScriptableObject
 {
+	#region STATIC_METHODS
+
+	public static T cast<T>(Controller c) where T : Controller
+	{
+		T t = default(T);
+		try
+		{
+			t = (T)c;
+		}
+		catch (System.InvalidCastException ice)
+		{
+			Debug.LogError ("This state requires a " + typeof(T).Name + " controller." +
+				"\n" + c.name + " has an invalid state!");
+			return default(T);
+		}
+
+		return t;
+	}
+	#endregion
+
 	#region INSTANCE_VARS
 	[Tooltip("Used for debugging purposes.")]
 	public Color color;
