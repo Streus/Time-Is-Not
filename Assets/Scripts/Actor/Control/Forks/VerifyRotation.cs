@@ -14,6 +14,6 @@ public class VerifyRotation : Fork
 		PatrolNode p = bird.getPatrolTarget ();
 
 		Debug.Log (Vector3.Angle (bird.transform.position - p.transform.position, bird.transform.up));
-		return Vector3.Angle (bird.transform.position - p.transform.position, bird.transform.up) < tolerance;
+		return Vector3.Angle (bird.transform.position - p.transform.position, -bird.transform.up) < tolerance;
 	}
 }
