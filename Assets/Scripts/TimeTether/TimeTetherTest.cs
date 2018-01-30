@@ -164,7 +164,7 @@ public class TimeTetherTest : MonoBehaviour
 			LevelStateManager.addStasisBubble(newStasis); 
 		}
 
-		if (Input.GetKeyDown(removeStasisKey))
+		if (Input.GetKeyDown(removeStasisKey) && LevelStateManager.canRemoveStasisBubble())
 		{
 			LevelStateManager.removeLastStasisBubble(); 
 		}
