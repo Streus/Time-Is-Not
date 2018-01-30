@@ -24,7 +24,8 @@ public class HBSightCone : Fork
 				if (Vector3.Angle (dir, bird.transform.up) < bird.getFOV () / 2f)
 				{
 					RaycastHit2D wallCheck;
-					wallCheck = Physics2D.Raycast (bird.transform.position, dir, bird.getSightRange (), obstMask.value);
+					float dist = Vector2.Distance (bird.transform.position, hits [i].collider.transform.position);
+					wallCheck = Physics2D.Raycast (bird.transform.position, dir, dist, obstMask.value);
 					if (wallCheck.collider == null)
 					{
 						bird.setPursuitTarget (hits [i].collider.transform);
