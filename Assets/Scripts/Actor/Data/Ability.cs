@@ -69,7 +69,7 @@ public sealed partial class Ability
 	public static Ability get(string name)
 	{
 		Ability a;
-		if (name != null && repo.TryGetValue (name, out a))
+		if (name != "" && repo.TryGetValue (name, out a))
 			return new Ability (a);
 		return null;
 	}

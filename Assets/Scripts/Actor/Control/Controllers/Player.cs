@@ -12,9 +12,18 @@ public class Player : Controller
 	#endregion
 
 	#region INSTANCE_METHODS
+	public void Start ()
+	{
+		getSelf ().addAbility (Ability.get ("Place Stasis"));
+	}
+
 	public override void Update ()
 	{
 		base.Update ();
+
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));
+		if (Input.GetKeyDown (KeyCode.Mouse0))
+			getSelf ().getAbility (0).use (getSelf (), mousePos);
 
 		Vector2 movementVector = Vector2.zero;
 

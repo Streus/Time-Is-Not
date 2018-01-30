@@ -42,7 +42,7 @@ public sealed class Entity : MonoBehaviour
 
 	public void Awake()
 	{
-		abilities = new List<Ability> ();
+		abilities = new List<Ability> (1);
 		statuses = new List<Status> ();
 	}
 
@@ -61,11 +61,15 @@ public sealed class Entity : MonoBehaviour
 			}
 		}
 
-		//update abilities
-		for (i = 0; i < abilities.Capacity; i++)
+		if (abilities.Count > 0)
 		{
-			if (abilities [i] != null)
-				abilities [i].updateCooldown (Time.deltaTime);
+			//update abilities
+			for (i = 0; i < abilities.Capacity; i++)
+			{
+				Debug.Log (gameObject.name + "|" + i); //DEBUG
+				if (abilities [i] != null)
+					abilities [i].updateCooldown (Time.deltaTime);
+			}
 		}
 	}
 		
