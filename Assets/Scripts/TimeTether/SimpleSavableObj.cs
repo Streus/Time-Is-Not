@@ -24,7 +24,7 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		if (s == null)
 			return;
 
-		if (!inStasis)
+		if (inStasis)
 		{
 			return; 
 		}

@@ -143,6 +143,10 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 		return seed;
 	}
 
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
 		if (s == null)
@@ -163,11 +167,18 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 			disable ();
 	}
 
+	/// <summary>
+	/// Checks if the object should be able to be reset.
+	/// </summary>
+	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
 	public bool shouldIgnoreReset() 
 	{ 
 		return !inStasis; 
 	}
 
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
 	public class Seed : SeedBase
 	{
 		//is the laser on?
@@ -180,11 +191,19 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 
 	//****Stasisable Object Functions****
 
+	/// <summary>
+	/// Toggles if the object is in stasis.
+	/// </summary>
+	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
 	public void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
 	}
 
+	/// <summary>
+	/// shows if the object is in stasis
+	/// </summary>
+	/// <returns><c>true</c>, if stasis is active, <c>false</c> otherwise.</returns>
 	public bool InStasis()
 	{
 		return inStasis; 

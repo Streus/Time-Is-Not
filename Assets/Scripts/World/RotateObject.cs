@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateObject : MonoBehaviour, IActivatable
+public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 {
 	[Tooltip("Which direction to rotate.")]
 	[SerializeField]
@@ -15,6 +15,9 @@ public class RotateObject : MonoBehaviour, IActivatable
 	[Tooltip("How fast the object turns.")]
 	[SerializeField]
 	private float _turnSpeed = 1;
+
+	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
+	private bool inStasis = false;
 
 	// Use this for initialization
 	void Start () 
@@ -30,7 +33,7 @@ public class RotateObject : MonoBehaviour, IActivatable
 
 	void Rotate()
 	{
-		if (!_active)
+		if (!_active || inStasis)
 			return;
 		int turnDirection = 1;
 		if (_clockwise)
@@ -52,5 +55,83 @@ public class RotateObject : MonoBehaviour, IActivatable
 	{
 		_active = state;
 		return _active;
+	}
+
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed (gameObject);
+
+		seed.isOn = _active;
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		if (!inStasis)
+		{
+			return; 
+		}
+
+		Seed seed = (Seed)s;
+
+		s.defaultLoad (gameObject);
+
+		_active = seed.isOn;
+	}
+
+	/// <summary>
+	/// Checks if the object should be able to be reset.
+	/// </summary>
+	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
+	public bool shouldIgnoreReset() 
+	{ 
+		return !inStasis; 
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the object moving?
+		public bool isOn;
+
+		public Seed(GameObject subject) : base(subject) {}
+
+	}
+
+
+	//****Stasisable Object Functions****
+
+	/// <summary>
+	/// Toggles if the object is in stasis.
+	/// </summary>
+	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
+	public void ToggleStasis(bool turnOn)
+	{
+		inStasis = turnOn;
+	}
+
+	/// <summary>
+	/// shows if the object is in stasis
+	/// </summary>
+	/// <returns><c>true</c>, if stasis is active, <c>false</c> otherwise.</returns>
+	public bool InStasis()
+	{
+		return inStasis; 
 	}
 }

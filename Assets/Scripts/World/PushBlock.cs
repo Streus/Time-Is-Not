@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PushBlock : MonoBehaviour
 {
-	enum Direction {Up, Right, Down, Left, None};
+	public enum Direction {Up, Right, Down, Left, None};
 
 	//Shows the direction the box is currently allowed to move.
-	private Direction _moveDirection = Direction.None;
+	public Direction _moveDirection = Direction.None;
 
 	//Check to see if the box is currently moving or not.
-	private bool _moving = false;
+	public bool _moving = false;
 
 	//Rigidbody component of the object.
 	private Rigidbody2D _rb2d;
 
 	//Check to see if the player is touching the block.
-	private bool _playerInRange = false;
+	public bool _playerInRange = false;
 
 	[Tooltip("Push speed.")]
 	[SerializeField]
@@ -54,55 +54,53 @@ public class PushBlock : MonoBehaviour
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange)
+		if(!_moving && _playerInRange)
 		{
-			if(!_moving)
+			//Move in direction if key is pressed
+			switch(_moveDirection)
 			{
-				//Move in direction if key is pressed
-				switch(_moveDirection)
-				{
-				case Direction.Up:
-					if (Input.GetKeyDown (_upKey))
-						move (_moveDirection);
-					break;
-				case Direction.Right:
-					if (Input.GetKeyDown (_rightKey))
-						move (_moveDirection);
-					break;
-				case Direction.Down:
-					if (Input.GetKeyDown (_downKey))
-						move (_moveDirection);
-					break;
-				case Direction.Left:
-					if (Input.GetKeyDown (_leftKey))
-						move (_moveDirection);
-					break;
-				}
-			}
-			else
-			{
-				//stop moving when key is released
-				switch(_moveDirection)
-				{
-				case Direction.Up:
-					if (Input.GetKeyDown (_downKey))
-						stop();
-					break;
-				case Direction.Right:
-					if (Input.GetKeyDown (_leftKey))
-						stop();
-					break;
-				case Direction.Down:
-					if (Input.GetKeyDown (_upKey))
-						stop();
-					break;
-				case Direction.Left:
-					if (Input.GetKeyDown (_rightKey))
-						stop();
-					break;
-				}
+			case Direction.Up:
+				if (Input.GetKey (_upKey))
+					move (_moveDirection);
+				break;
+			case Direction.Right:
+				if (Input.GetKey (_rightKey))
+					move (_moveDirection);
+				break;
+			case Direction.Down:
+				if (Input.GetKey (_downKey))
+					move (_moveDirection);
+				break;
+			case Direction.Left:
+				if (Input.GetKey (_leftKey))
+					move (_moveDirection);
+				break;
 			}
 		}
+		if(_moving)
+		{
+			//stop moving when key is released
+			switch(_moveDirection)
+			{
+			case Direction.Up:
+				if (!Input.GetKey (_upKey))
+					stop();
+				break;
+			case Direction.Right:
+				if (!Input.GetKey (_rightKey))
+					stop();
+				break;
+			case Direction.Down:
+				if (!Input.GetKey (_downKey))
+					stop();
+				break;
+			case Direction.Left:
+				if (!Input.GetKey (_leftKey))
+					stop();
+				break;
+			}
+		}
+
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -122,17 +120,17 @@ public class PushBlock : MonoBehaviour
 				{
 					//Move horizontal
 					if (xDist > 0)
-						_moveDirection = Direction.Right;
-					else
 						_moveDirection = Direction.Left;
+					else
+						_moveDirection = Direction.Right;
 				}
 				else
 				{
 					//move Vertical
 					if (yDist > 0)
-						_moveDirection = Direction.Up;
-					else
 						_moveDirection = Direction.Down;
+					else
+						_moveDirection = Direction.Up;
 				}
 			}
 		}

@@ -2,26 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : Interactable 
+public class Door : Interactable 
 {
-	[Tooltip("Interact button(TEMPORARY)")]
+	[Tooltip("Interact key (TEMPORARY)")]
 	[SerializeField]
 	private KeyCode _interactKey = KeyCode.E;
 
-	//is the player close enough to use the button?
-	private bool _playerInRange = false;
+	[Tooltip("Shows if the door is open or not.")]
+	[SerializeField]
+	public bool _isOpen = false;
+
+	[Tooltip("Is the door openable by hand or controled via interactable")]
+	[SerializeField]
+	public DoorTypes _type = DoorTypes.Electronic;
+
+	//the door's sprite
+	private Sprite sprite;
+
+	//Shows if the player is close enough to open the door
+	private bool _playerInRange = true;
+
+	public enum DoorTypes {Manual, Electronic};
 
 
 	// Use this for initialization
 	void Start () 
 	{
-		//TODO: get input button from input module
+		sprite = gameObject.GetComponent<Sprite> ();
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		getInput ();
+
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -33,7 +47,15 @@ public class Button : Interactable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = true;
-				//TODO: display button prompt
+				if(_type == DoorTypes.Manual)
+				{
+					//TODO: display button prompt
+				}
+				else
+				{
+					//TODO: display negative prompt
+				}
+
 			}
 		}
 	}
@@ -56,7 +78,7 @@ public class Button : Interactable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey))
+		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual))
 		{
 			onInteract ();
 		}
@@ -64,43 +86,16 @@ public class Button : Interactable
 
 	public override void onInteract ()
 	{
+		_isOpen = !_isOpen;
 		toggleActivatables ();
+
+		if(_isOpen)
+		{
+			//TODO: play open animation
+		}
+		else
+		{
+			//TODO: Player close animation
+		}
 	}
-
-	//****Savable Object Functions****
-
-	/// <summary>
-	/// Saves the data into a seed.
-	/// </summary>
-	/// <returns>The seed.</returns>
-	public SeedBase saveData()
-	{
-		SeedBase seed = new SeedBase (gameObject);
-
-		return seed;
-	}
-
-	/// <summary>
-	/// Loads the data from a seed.
-	/// </summary>
-	/// <returns>The seed.</returns>
-	public void loadData(SeedBase s)
-	{
-		if (s == null)
-			return;
-
-		_playerInRange = false;
-
-		s.defaultLoad (gameObject);
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return false; 
-	}
-
 }

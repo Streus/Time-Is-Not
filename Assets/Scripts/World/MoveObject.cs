@@ -24,10 +24,14 @@ public class MoveObject : MonoBehaviour, IActivatable
 	private EndStyle _endBehavior = EndStyle.TeleportToStart;
 
 	//if true, the object will move backwards through the points
-	private bool reverseMovement = false;
+	private bool _reverseMovement = false;
 
 	//The current target Point
 	private int _nextPoint = 0;
+
+	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
+	private bool inStasis = false;
+
 
 	// Use this for initialization
 	void Start () 
@@ -61,7 +65,7 @@ public class MoveObject : MonoBehaviour, IActivatable
 		if(Vector2.Distance(transform.position, _points[_nextPoint]) < 0.1f)
 		{
 			//get next point
-			if(_nextPoint == _points.Length -1 || (reverseMovement && _nextPoint == 0))
+			if(_nextPoint == _points.Length -1 || (_reverseMovement && _nextPoint == 0))
 			{
 				//the platform is at the last point
 				switch(_endBehavior)
@@ -72,14 +76,14 @@ public class MoveObject : MonoBehaviour, IActivatable
 					break;
 				case EndStyle.LoopToStart:
 					//set next point to the start (or end if reversing)
-					if (reverseMovement)
+					if (_reverseMovement)
 						_nextPoint = _points.Length - 1;
 					else
 						_nextPoint = 0;
 					break;
 				case EndStyle.TeleportToStart:
 					//teleport to start (or end if reversing)
-					if(reverseMovement)
+					if(_reverseMovement)
 						_nextPoint = _points.Length - 1;
 					else 
 						_nextPoint = 0;
@@ -87,8 +91,8 @@ public class MoveObject : MonoBehaviour, IActivatable
 					break;
 				case EndStyle.BackAndForth:
 					//toggle the direction and set next point
-					reverseMovement = !reverseMovement;
-					if (reverseMovement)
+					_reverseMovement = !_reverseMovement;
+					if (_reverseMovement)
 						_nextPoint--;
 					else
 						_nextPoint++;
@@ -98,7 +102,7 @@ public class MoveObject : MonoBehaviour, IActivatable
 			else
 			{
 				//incriment the target point
-				if (reverseMovement)
+				if (_reverseMovement)
 					_nextPoint--;
 				else
 					_nextPoint++;
@@ -122,6 +126,98 @@ public class MoveObject : MonoBehaviour, IActivatable
 	{
 		_active = state;
 		return _active;
+	}
+
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed (gameObject);
+
+		seed.isOn = _active;
+
+		seed.isReversed = _reverseMovement;
+
+		seed.nextPoint = _nextPoint;
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		if (!inStasis)
+		{
+			return; 
+		}
+
+		Seed seed = (Seed)s;
+
+		s.defaultLoad (gameObject);
+
+		_active = seed.isOn;
+
+		_reverseMovement = seed.isReversed;
+
+		_nextPoint = seed.nextPoint;
+	}
+
+	/// <summary>
+	/// Checks if the object should be able to be reset.
+	/// </summary>
+	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
+	public bool shouldIgnoreReset() 
+	{ 
+		return !inStasis; 
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the object moving?
+		public bool isOn;
+
+		//is it moving backward?
+		public bool isReversed;
+
+		//which point should it move toward?
+		public int nextPoint;
+
+		public Seed(GameObject subject) : base(subject) {}
+
+	}
+
+
+	//****Stasisable Object Functions****
+
+	/// <summary>
+	/// Toggles if the object is in stasis.
+	/// </summary>
+	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
+	public void ToggleStasis(bool turnOn)
+	{
+		inStasis = turnOn;
+	}
+
+	/// <summary>
+	/// shows if the object is in stasis
+	/// </summary>
+	/// <returns><c>true</c>, if stasis is active, <c>false</c> otherwise.</returns>
+	public bool InStasis()
+	{
+		return inStasis; 
 	}
 
 }
