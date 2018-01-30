@@ -157,7 +157,7 @@ public class TimeTetherTest : MonoBehaviour
 		}
 
 		// Stasis Keys
-		if (Input.GetKeyDown(createStasisKey))
+		if (Input.GetKeyDown(createStasisKey) && LevelStateManager.canAddStasisBubble())
 		{
 			Vector3 spawnPos = new Vector3 (transform.position.x + Random.Range(-2.0f, 2.0f), transform.position.y + Random.Range(-2.0f, 2.0f), transform.position.z); 
 			StasisBubble newStasis = ((GameObject)Instantiate(stasisBubblePrefab, spawnPos, transform.rotation)).GetComponent<StasisBubble>(); 
