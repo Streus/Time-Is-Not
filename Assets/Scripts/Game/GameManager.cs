@@ -16,12 +16,18 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// Delegates
 	public delegate void StateToggled(bool state); 
 
+	// Reference variables
+	[SerializeField] private GameObject playerObj; 
+
+	// Savable data
+	[SerializeField] List<string> codes; 
+
 	// --- ISavable Methods ---
 	public SeedBase saveData()
 	{
 		//SeedBase seed = new SeedBase (gameObject);
 		Seed seed = new Seed (gameObject);
-		//seed.variable = variable; 
+		seed.codes = codes; 
 
 		return seed;
 	}
@@ -32,17 +38,16 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 		Seed seed = (Seed)s;
 
-		s.defaultLoad (gameObject);
+		codes = seed.codes;
 
-		//variable = seed.variable; 
+		s.defaultLoad (gameObject); 
 	}
 	public bool shouldIgnoreReset() { return false; }
 
 	public class Seed : SeedBase
 	{
 		// Define all the extra variables that should be saved here
-
-
+		public List<string> codes; 
 
 		public Seed(GameObject subject) : base(subject) { }
 
@@ -80,6 +85,36 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			inst.pauseLockedToggled(state); 
 		}
+	}
+
+	public static GameObject GetPlayer()
+	{
+		return inst.playerObj; 
+	}
+
+	public static bool AddCode(string codeName)
+	{
+		if (inst.codes.Contains(codeName))
+		{
+			return false; 
+		}
+		if (codeName == "")
+		{
+			Debug.LogError("Tried to add a code with an empty string"); 
+			return false; 
+		}
+
+		inst.codes.Add(codeName); 
+		return true; 
+	}
+
+	public static bool HasCode(string codeName)
+	{
+		if (inst.codes.Contains(codeName))
+		{
+			return true; 
+		}
+		return false; 
 	}
 
 }
