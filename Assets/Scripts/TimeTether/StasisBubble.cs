@@ -8,15 +8,28 @@ public class StasisBubble : MonoBehaviour
 	float bubbleAliveTimer;
 
 	public bool useBubbleAliveTimer; 
+	public bool shrinkWithTimer; 
+	public bool fadeWithTimer; 
 
 	// Temporary
 	private Vector3 initScale; 
+
+	SpriteRenderer spriteRend; 
+	float maxBubbleAlpha; 
+
+	ParticleSystem stasisParticles;
 
 	// Use this for initialization
 	void Start () 
 	{
 		bubbleAliveTimer = bubbleAliveTime; 
 		initScale = transform.localScale; 
+		spriteRend = GetComponent<SpriteRenderer>(); 
+		if (spriteRend != null)
+		{
+			maxBubbleAlpha = spriteRend.color.a; 
+		}
+		stasisParticles = GetComponent<ParticleSystem>(); 
 	}
 	
 	// Update is called once per frame
@@ -31,7 +44,19 @@ public class StasisBubble : MonoBehaviour
 			}
 
 			// Temporary: Make the bubble get smaller over time
-			transform.localScale = new Vector3((bubbleAliveTimer / bubbleAliveTime) * initScale.x, (bubbleAliveTimer / bubbleAliveTime) * initScale.y, (bubbleAliveTimer / bubbleAliveTime) * initScale.z); 
+			if (shrinkWithTimer)
+			{
+				transform.localScale = new Vector3 ((bubbleAliveTimer / bubbleAliveTime) * initScale.x, (bubbleAliveTimer / bubbleAliveTime) * initScale.y, (bubbleAliveTimer / bubbleAliveTime) * initScale.z); 
+			}
+
+			// Temporary: Make the bubble fade over time
+			if (fadeWithTimer)
+			{
+				if (spriteRend != null)
+				{
+					spriteRend.color = new Color (spriteRend.color.r, spriteRend.color.g, spriteRend.color.b, (bubbleAliveTimer / bubbleAliveTime) * maxBubbleAlpha); 
+				}
+			}
 		}
 	}
 
@@ -40,7 +65,10 @@ public class StasisBubble : MonoBehaviour
 	/// </summary>
 	public void RemoveBubble()
 	{
-		LevelStateManager.removeStasisBubble(this); 
+		if (!LevelStateManager.removeStasisBubble(this))
+		{
+			DestroyBubble(); 
+		}
 	}
 
 	/// <summary>
