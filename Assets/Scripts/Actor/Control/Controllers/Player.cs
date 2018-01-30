@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Player : Controller
 {
+	#region INSTANCE_VARS
+	[SerializeField]
+	private State pushState;
+
+	private State prePushState;
+	#endregion
+
+	#region INSTANCE_METHODS
 	public override void Update ()
 	{
 		base.Update ();
@@ -28,4 +36,17 @@ public class Player : Controller
 	{
 		base.FixedUpdate ();
 	}
+
+	public void enterPushState()
+	{
+		prePushState = getState();
+		setState (pushState);
+	}
+
+	public void exitPushState()
+	{
+		setState (prePushState);
+	}
+
+	#endregion
 }

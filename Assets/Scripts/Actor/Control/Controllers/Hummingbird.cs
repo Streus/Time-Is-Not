@@ -32,12 +32,11 @@ public class Hummingbird : Controller
 	{
 		base.Awake ();
 
-		defaultState = state;
-		if (patrolStart == null && state.name == "HBPatrol")
+		defaultState = getState();
+		if (patrolStart == null && getState().name == "HBPatrol")
 		{
 			Debug.LogError ("A patrol path must be defined for the patrol state!" +
 				"\n" + gameObject.name + " does not have a defined patrol path.");
-			state = null;
 		}
 	}
 
@@ -80,7 +79,7 @@ public class Hummingbird : Controller
 
 	public void OnDrawGizmos()
 	{
-		Gizmos.color = state.color;
+		Gizmos.color = getState().color;
 
 		Vector3 fwd = transform.up;
 		Vector3 rightBound = (Quaternion.Euler (0, 0, fieldOfView/2f) * fwd);

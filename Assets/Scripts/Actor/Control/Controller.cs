@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 
 	[Tooltip("The current state this controller is using in its state machine.")]
 	[SerializeField]
-	protected State state;
+	private State state;
 
 	protected Entity self;
 	protected Animator anim;
@@ -44,6 +44,11 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 	public virtual void FixedUpdate()
 	{
 
+	}
+
+	public State getState()
+	{
+		return state;
 	}
 
 	public void setState(State s)
