@@ -8,6 +8,10 @@ public class Button : Interactable
 	[SerializeField]
 	private KeyCode _interactKey = KeyCode.E;
 
+	[Tooltip("List of activatables to affect.")]
+	[SerializeField]
+	private GameObject[] _activatables;
+
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
@@ -62,8 +66,52 @@ public class Button : Interactable
 		}
 	}
 
+	/// <summary>
+	/// Trigger the Interactable.
+	/// </summary>
 	public override void onInteract ()
 	{
-		toggleActivatables ();
+		foreach(GameObject activatable in _activatables)
+		{
+			if(activatable.GetComponent<IActivatable>() != null)
+				activatable.GetComponent<IActivatable>().onActivate ();
+		}
 	}
+
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		SeedBase seed = new SeedBase (gameObject);
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		_playerInRange = false;
+
+		s.defaultLoad (gameObject);
+	}
+
+	/// <summary>
+	/// Checks if the object should be able to be reset.
+	/// </summary>
+	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
+	public bool shouldIgnoreReset() 
+	{ 
+		return false; 
+	}
+
 }
