@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Pickup : MonoBehaviour 
+public class Pickup : MonoBehaviour 
 {
 	/// <summary>
 	/// applies the pickup to the entity.
 	/// </summary>
-	/// <param name="entity">the entity to apply the pickup to.</param>
-	public abstract void apply (Entity entity);
+	public void apply ()
+	{
+		
+	}
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		Entity e = col.GetComponent<Entity> ();
-		if (e != null)
-			apply (e);
+		if (col.GetComponent<Entity> () != null) 
+		{
+			Entity e = col.GetComponent<Entity> ();
+			if(e.getFaction() == Entity.Faction.player)
+				apply ();
+		}
 	}
 }

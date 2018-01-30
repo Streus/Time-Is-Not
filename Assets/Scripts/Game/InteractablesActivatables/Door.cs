@@ -17,7 +17,18 @@ public class Door : Interactable, IActivatable
 	public DoorTypes _type = DoorTypes.Electronic;
 
 	//the door's sprite
-	private Sprite sprite;
+	private SpriteRenderer _sprite;
+
+	//the collider for the door
+	private Collider2D _col;
+
+	[Tooltip("The open sprite")]
+	[SerializeField]
+	private Sprite _openSprite;
+
+	[Tooltip("The closed sprite")]
+	[SerializeField]
+	private Sprite _closedSprite;
 
 	//Shows if the player is close enough to open the door
 	private bool _playerInRange = true;
@@ -28,7 +39,8 @@ public class Door : Interactable, IActivatable
 	// Use this for initialization
 	void Start () 
 	{
-		sprite = gameObject.GetComponent<Sprite> ();
+		_sprite = gameObject.GetComponent<SpriteRenderer> ();
+		_col = gameObject.GetComponent<Collider2D> ();
 
 	}
 
@@ -104,16 +116,16 @@ public class Door : Interactable, IActivatable
 	public bool onActivate()
 	{
 		if (_type == DoorTypes.Manual)
-			return;
-		_isOpen = !_isOpen;
-		if(_isOpen)
+			return _isOpen;
+		if(!_isOpen)
 		{
-			//TODO: play open animation
+			Open ();
 		}
 		else
 		{
-			//TODO: Player close animation
+			Close ();
 		}
+		return _isOpen;
 	}
 
 	/// <summary>
@@ -122,25 +134,29 @@ public class Door : Interactable, IActivatable
 	public bool onActivate (bool state)
 	{
 		if (_type == DoorTypes.Manual)
-			return;
-		_isOpen = state;
-		if(_isOpen)
+			return _isOpen;
+		if(state)
 		{
-			//TODO: play open animation
+			Open ();
 		}
 		else
 		{
-			//TODO: Player close animation
+			Close ();
 		}
+		return _isOpen;
 	}
 
 	void Open()
 	{
 		_isOpen = true;
+		_sprite.sprite = _openSprite;
+		_col.enabled = false;
 	}
 
 	void Close()
 	{
 		_isOpen = false;
+		_sprite.sprite = _closedSprite;
+		_col.enabled = true;
 	}
 }
