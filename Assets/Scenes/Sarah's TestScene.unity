@@ -547,6 +547,7 @@ GameObject:
   - component: {fileID: 891497107}
   - component: {fileID: 891497106}
   - component: {fileID: 891497105}
+  - component: {fileID: 891497109}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -560,7 +561,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 891497104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd7a6b5dedc7f45bd9360f020217d21a, type: 3}
   m_Name: 
@@ -643,6 +644,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &891497109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 891497104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf64b3365c0ac4087a0c8d8ef057e5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _interactKey: 101
 --- !u!1 &998379467
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c60fdc1be0ec4f77af94ac1ea1c2676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveDirection: 4
+  _moving: 0
+  _playerInRange: 0
   _moveSpeed: 1
   _canMove: 1
   _upKey: 119

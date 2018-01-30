@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : Interactable 
+public class Door : Interactable, IActivatable
 {
 	[Tooltip("Interact key (TEMPORARY)")]
 	[SerializeField]
@@ -87,7 +87,6 @@ public class Door : Interactable
 	public override void onInteract ()
 	{
 		_isOpen = !_isOpen;
-		toggleActivatables ();
 
 		if(_isOpen)
 		{
@@ -97,5 +96,51 @@ public class Door : Interactable
 		{
 			//TODO: Player close animation
 		}
+	}
+
+	/// <summary>
+	/// Toggle the object's state.
+	/// </summary>
+	public bool onActivate()
+	{
+		if (_type == DoorTypes.Manual)
+			return;
+		_isOpen = !_isOpen;
+		if(_isOpen)
+		{
+			//TODO: play open animation
+		}
+		else
+		{
+			//TODO: Player close animation
+		}
+	}
+
+	/// <summary>
+	/// Set the object's state.
+	/// </summary>
+	public bool onActivate (bool state)
+	{
+		if (_type == DoorTypes.Manual)
+			return;
+		_isOpen = state;
+		if(_isOpen)
+		{
+			//TODO: play open animation
+		}
+		else
+		{
+			//TODO: Player close animation
+		}
+	}
+
+	void Open()
+	{
+		_isOpen = true;
+	}
+
+	void Close()
+	{
+		_isOpen = false;
 	}
 }

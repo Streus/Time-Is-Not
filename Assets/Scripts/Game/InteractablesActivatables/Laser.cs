@@ -20,6 +20,10 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 	[SerializeField]
 	private LaserType _type;
 
+	[Tooltip("List of activatables to affect.")]
+	[SerializeField]
+	private GameObject[] _activatables;
+
 	//the line renderer for the laser
 	private LineRenderer _laserLine;
 
@@ -85,7 +89,11 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 	public override void onInteract ()
 	{
 		disable ();
-		toggleActivatables ();
+		foreach(GameObject activatable in _activatables)
+		{
+			if(activatable.GetComponent<IActivatable>() != null)
+				activatable.GetComponent<IActivatable>().onActivate ();
+		}
 	}
 
 	/// <summary>

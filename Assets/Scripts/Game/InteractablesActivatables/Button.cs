@@ -8,6 +8,10 @@ public class Button : Interactable
 	[SerializeField]
 	private KeyCode _interactKey = KeyCode.E;
 
+	[Tooltip("List of activatables to affect.")]
+	[SerializeField]
+	private GameObject[] _activatables;
+
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
@@ -62,9 +66,16 @@ public class Button : Interactable
 		}
 	}
 
+	/// <summary>
+	/// Trigger the Interactable.
+	/// </summary>
 	public override void onInteract ()
 	{
-		toggleActivatables ();
+		foreach(GameObject activatable in _activatables)
+		{
+			if(activatable.GetComponent<IActivatable>() != null)
+				activatable.GetComponent<IActivatable>().onActivate ();
+		}
 	}
 
 	//****Savable Object Functions****
