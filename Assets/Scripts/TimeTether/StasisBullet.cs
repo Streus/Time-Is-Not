@@ -24,6 +24,7 @@ public class StasisBullet : MonoBehaviour
 	public void Awake()
 	{
 		GetComponent<Rigidbody2D> ().AddForce (transform.up * speed, ForceMode2D.Impulse);
+		LevelStateManager.inst.stateLoaded += cleanUp;
 	}
 
 	public void Update()
@@ -31,6 +32,12 @@ public class StasisBullet : MonoBehaviour
 		duration -= Time.deltaTime;
 		if (duration <= 0f)
 			OnTriggerEnter2D (null);
+	}
+
+	private void cleanUp(bool success)
+	{
+		if (success)
+			Destroy (gameObject);
 	}
 
 	public void OnTriggerEnter2D(Collider2D col)
