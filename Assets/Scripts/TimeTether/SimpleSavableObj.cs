@@ -7,7 +7,7 @@ using UnityEngine;
 public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable 
 {
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
-	private bool inStasis = true;
+	private bool inStasis = false;
 
 	public GameObject stasisVisual; 
 
