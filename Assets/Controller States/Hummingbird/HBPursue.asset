@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
-  m_Name: BasicPathfinding
+  m_Name: HBPursue
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
-  enterAction: {fileID: 11400000, guid: 0cdd0a16193c2414d8f9b2a1fbbef330, type: 2}
+  enterAction: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: ae31ad3c5459a1d419994907f6086e12, type: 2}
+  - {fileID: 11400000, guid: 5c43aef1d1842084a9a60e8379b0e711, type: 2}
   exitAction: {fileID: 0}
   paths:
-  - name: DonePathfinding
+  - name: Loose Player
     success: {fileID: 0}
-    failure: {fileID: 11400000}
-    decision: {fileID: 11400000, guid: 9b50385d92f2438418742b969cac1fca, type: 2}
+    failure: {fileID: 11400000, guid: 9db68cedf5d592945a351d7dc196544b, type: 2}
+    decision: {fileID: 11400000, guid: a82489a219996df4db5bc1da58fd9c2d, type: 2}

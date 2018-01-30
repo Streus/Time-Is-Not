@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AI/Actions/BasicNavAction")]
-public class BasicNavAction : Action
+[CreateAssetMenu(menuName = "AI/Actions/BasicNav")]
+public class BasicNav : Action
 {
 	public override void perform (Controller c)
 	{
