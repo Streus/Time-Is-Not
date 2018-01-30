@@ -82,7 +82,7 @@ public class StasisTrigger : MonoBehaviour
 	{
 		if (istasisable != null)
 		{
-			if (istasisable.IsInStasis() != turnOn)
+			if (istasisable.InStasis() != turnOn)
 			{
 				istasisable.ToggleStasis(turnOn);
 			}

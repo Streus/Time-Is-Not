@@ -51,7 +51,7 @@ public class SeedBase: ISerializable
 		}
 
 		destroyed = false;
-		ignoreReset = subject.GetComponent<ISavable> ().ignoreReset ();
+		ignoreReset = subject.GetComponent<ISavable> ().shouldIgnoreReset ();
 
 		prefabPath = "";
 		registeredID = "";

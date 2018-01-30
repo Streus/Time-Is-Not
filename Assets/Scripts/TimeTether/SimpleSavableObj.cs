@@ -6,13 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(RegisteredObject))]
 public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable 
 {
-	//[SerializeField]
-	private bool allowReset = true;
-
-	[SerializeField]
-	private bool allowStasis = true;
-
-	bool inStasis; 
+	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
+	private bool inStasis = true;
 
 	public GameObject stasisVisual; 
 
@@ -29,14 +24,14 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		if (s == null)
 			return;
 
-		if (!allowReset)
+		if (!inStasis)
 		{
 			return; 
 		}
 
 		s.defaultLoad (gameObject);
 	}
-	public bool ignoreReset() { return !allowReset; }
+	public bool shouldIgnoreReset() { return !inStasis; }
 
 
 	// --- IStasisable Methods ---
@@ -44,10 +39,8 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 	{
 		inStasis = turnOn; 
 
-		if (turnOn && allowStasis)
+		if (turnOn)
 		{
-			allowReset = false; 
-
 			if (stasisVisual != null)
 			{
 				stasisVisual.SetActive(true); 
@@ -57,8 +50,6 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		}
 		else
 		{
-			allowReset = true; 
-
 			if (stasisVisual != null)
 			{
 				stasisVisual.SetActive(false); 
@@ -68,7 +59,7 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		}
 	}
 
-	public bool IsInStasis()
+	public bool InStasis()
 	{
 		return inStasis; 
 	}
@@ -82,10 +73,6 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		if (stasisVisual != null)
 		{
 			stasisVisual.SetActive(inStasis); 
-			if (!allowStasis)
-			{
-				stasisVisual.SetActive(false); 
-			}
 		}
 	}
 	

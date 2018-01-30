@@ -18,5 +18,5 @@ public interface ISavable
 	void loadData(SeedBase seed);
 
 	// if true, the SSM will never reset this object back to its default values
-	bool ignoreReset ();
+	bool shouldIgnoreReset ();
 }

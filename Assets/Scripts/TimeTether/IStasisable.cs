@@ -8,5 +8,5 @@ public interface IStasisable
 {
 	void ToggleStasis(bool turnOn); 
 
-	bool IsInStasis (); 
+	bool InStasis (); 
 }

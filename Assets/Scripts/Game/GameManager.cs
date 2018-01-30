@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 		levelData = seed.levelData; 
 	}
-	public bool ignoreReset() { return false; }
+	public bool shouldIgnoreReset() { return false; }
 
 	public class Seed : SeedBase
 	{
