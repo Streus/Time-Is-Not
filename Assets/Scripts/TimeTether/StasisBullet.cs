@@ -11,13 +11,16 @@ public class StasisBullet : MonoBehaviour
 	[SerializeField]
 	private float speed = 5f;
 	[SerializeField]
-	private float duration = 1f;
+	private float tolerance = 0.1f;
 
-	public static StasisBullet create(Vector3 position, Quaternion direction)
+	private Vector3 targetPos;
+
+	public static StasisBullet create(Vector3 position, Quaternion direction, Vector3 targetPos)
 	{
 		GameObject pref = Resources.Load<GameObject> ("Prefabs/StasisBullet");
 		GameObject inst = Instantiate<GameObject> (pref, position, direction);
 		StasisBullet sb = inst.GetComponent<StasisBullet> ();
+		sb.targetPos = targetPos;
 		return sb;
 	}
 
@@ -29,14 +32,14 @@ public class StasisBullet : MonoBehaviour
 
 	public void Update()
 	{
-		duration -= Time.deltaTime;
-		if (duration <= 0f)
+		GetComponent<Rigidbody2D> ().simulated = !GameManager.isPaused ();
+
+		if (Vector3.Distance (transform.position, targetPos) < tolerance)
 			OnTriggerEnter2D (null);
 	}
 
 	private void cleanUp(bool success)
 	{
-		// TODO: this is broken
 		if (success)
 			Destroy (gameObject);
 	}
@@ -44,7 +47,8 @@ public class StasisBullet : MonoBehaviour
 	public void OnTriggerEnter2D(Collider2D col)
 	{
 		StasisBubble newStasis = Instantiate<GameObject>(stasisBubblePref, transform.position, transform.rotation).GetComponent<StasisBubble>(); 
-		LevelStateManager.addStasisBubble(newStasis); 
+		LevelStateManager.addStasisBubble(newStasis);
+		LevelStateManager.inst.stateLoaded -= cleanUp;
 		Destroy (gameObject);
 	}
 }

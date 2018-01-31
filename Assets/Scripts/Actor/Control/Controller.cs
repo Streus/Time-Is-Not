@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IReapable is implemented
+public class Controller : MonoBehaviour, ISavable
 {
 	#region INSTANCE_VARS
 
@@ -37,7 +37,7 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		
 	public virtual void Update()
 	{
-		if (state != null)
+		if (state != null && !GameManager.isPaused())
 			state.update (this);
 	}
 
@@ -106,18 +106,41 @@ public class Controller : MonoBehaviour //,IReapable TODO uncomment this when IR
 		Gizmos.DrawWireSphere (transform.position, 1f);
 	}
 
-	//TODO IReapable integration for Controller
-	//public SeedBase reap()
-	//public void sow(SeedBase s)
-	//public bool ignoreReset()
+	#region ISAVABLE_METHODS
+	public virtual SeedBase saveData()
+	{
+		Seed s = new Seed (gameObject);;
+		return s;
+	}
+
+	public virtual void loadData(SeedBase seed)
+	{
+		Seed s = (Seed)seed;
+		s.defaultLoad (gameObject);
+		state = s.state;
+		path = s.path;
+	}
+
+	public bool shouldIgnoreReset()
+	{
+		return !allowReset;
+	}
+	#endregion
 	#endregion
 
 	#region INTERNAL_TYPES
-	/*
-	private class Seed : SeedBase
-	{
 
+	protected class Seed : SeedBase
+	{
+		public State state;
+		public Stack<Vector3> path;
+
+		public Seed(GameObject g) : base(g)
+		{
+			Controller c = g.GetComponent<Controller>();
+			state = c.state;
+			path = c.path;
+		}
 	}
-	*/
 	#endregion
 }

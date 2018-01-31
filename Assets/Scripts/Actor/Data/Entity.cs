@@ -217,18 +217,6 @@ public sealed class Entity : MonoBehaviour
 			statusRemoved (s);
 	}
 
-	/* TODO Entity needs SeedBase
-	public SeedBase reap()
-	{
-
-	}
-
-	public void sow(SeedBase s)
-	{
-
-	}
-	*/
-
 	public void onDeath()
 	{
 		//invoke statuses
@@ -239,8 +227,6 @@ public sealed class Entity : MonoBehaviour
 			died ();
 
 		//TODO maybe play death animation?
-
-		Destroy (gameObject); //TODO replace this with RegisteredObject's destroy eventually
 	}
 
 	#endregion

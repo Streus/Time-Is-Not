@@ -62,6 +62,13 @@ public class GameManager : Singleton<GameManager> , ISavable
 	}
 
 	// MonoBehaviors
+	public void Awake()
+	{
+		if (playerObj != null)
+		{
+			playerObj.GetComponent<Entity> ().died += killPlayer;
+		}
+	}
 
 	public static void setPause(bool state)
 	{
@@ -103,7 +110,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public static void killPlayer()
 	{
 		inst.isDead = true; 
-		inst.paused = true; 
+		inst.paused = true;
 	}
 
 	public static GameObject GetPlayer()

@@ -30,7 +30,7 @@ public partial class Ability
 		float sign = e.transform.position.x < tarPos.x ? -1f : 1f;
 		Quaternion rot = Quaternion.Euler(0f, 0f, angle * sign);
 
-		StasisBullet s = StasisBullet.create (e.transform.position, rot);
+		StasisBullet s = StasisBullet.create (e.transform.position, rot, tarPos);
 		Physics2D.IgnoreCollision (s.GetComponent<Collider2D> (), e.GetComponent<Collider2D> ());
 
 		return true;

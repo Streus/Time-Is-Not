@@ -77,6 +77,24 @@ public class Hummingbird : Controller
 	}
 	#endregion
 
+	#region ISAVABLE_METHODS
+
+	public override SeedBase saveData ()
+	{
+		HSeed s = new HSeed (gameObject);
+		return s;
+	}
+
+	public override void loadData (SeedBase seed)
+	{
+		base.loadData (seed);
+		HSeed h = (HSeed)seed;
+		patrolStart = h.currentNode;
+		defaultState = h.defaultState;
+		pursuitTarget = h.pursuitTarget;
+	}
+	#endregion
+
 	public void OnDrawGizmos()
 	{
 		Gizmos.color = getState().color;
@@ -88,6 +106,24 @@ public class Hummingbird : Controller
 		Gizmos.DrawLine (transform.position, (transform.up * sightRange) + transform.position);
 		Gizmos.DrawLine (transform.position, (rightBound.normalized * sightRange) + transform.position);
 		Gizmos.DrawLine (transform.position, (leftBound.normalized * sightRange) + transform.position);
+	}
+	#endregion
+
+	#region INTERNAL_TYPES
+
+	private class HSeed : Seed
+	{
+		public PatrolNode currentNode;
+		public State defaultState;
+		public Transform pursuitTarget;
+
+		public HSeed(GameObject g) : base(g)
+		{
+			Hummingbird h = g.GetComponent<Hummingbird>();
+			currentNode = h.patrolStart;
+			defaultState = h.defaultState;
+			pursuitTarget = h.pursuitTarget;
+		}
 	}
 	#endregion
 }
