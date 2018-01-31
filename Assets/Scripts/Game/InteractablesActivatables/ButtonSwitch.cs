@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : Interactable 
+public class ButtonSwitch : Interactable 
 {
 	[Tooltip("Interact button(TEMPORARY)")]
 	[SerializeField]
