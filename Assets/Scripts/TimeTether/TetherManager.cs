@@ -190,7 +190,7 @@ public class TetherManager : MonoBehaviour
 	// Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
 	void RemoveTimeTetherIndicator(int index)
 	{
-		Debug.Log("Remove indicators starting at index " + index); 
+		//Debug.Log("Remove indicators starting at index " + index); 
 
 		for (int i = index; i < timeTetherIndicators.Length; i++)
 		{
