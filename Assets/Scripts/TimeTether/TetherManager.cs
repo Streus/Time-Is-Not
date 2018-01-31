@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class TetherManager : MonoBehaviour 
 {
-    public GameObject menu;
-
 	public KeyCode createPointKey;
 	public KeyCode bringUpTetherUIKey; 
 
@@ -41,7 +39,6 @@ public class TetherManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        menu.SetActive(false);
 		fadeImage.gameObject.SetActive(true); 
 		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
@@ -50,17 +47,6 @@ public class TetherManager : MonoBehaviour
     // Update is called once per frame
     void Update() 
 	{
-		/* The panel has been removed for now
-        if (Input.GetKey(KeyCode.Space))
-        {
-            menu.SetActive(true);
-        }
-        else
-        {
-            menu.SetActive(false);
-        }
-        */ 
-
 		UpdateUIZoomState(); 
 
 		if (!GameManager.isPlayerDead() && Input.GetKeyDown(createPointKey) && arrowReachedPointTarget && tetherUINotZoomed)
