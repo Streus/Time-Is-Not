@@ -18,13 +18,15 @@ public class TetherManager : MonoBehaviour
 	float xTarget; 
 
 	public GameObject timeTetherIndicatorPrefab; 
-	[HideInInspector] public List<GameObject> timeTetherIndicators; 
+	[HideInInspector] GameObject[] timeTetherIndicators; 
 
 
 	// Use this for initialization
 	void Start () 
 	{
         menu.SetActive(false);
+		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
+		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
 	}
 
     // Update is called once per frame
@@ -89,6 +91,7 @@ public class TetherManager : MonoBehaviour
 	public void LoadPoint(int state)
 	{
 		arrowReachedPointTarget = false; 
+		RemoveTimeTetherIndicator(state + 1); 
 		LevelStateManager.loadTetherPoint(state);
 	}
 
@@ -99,7 +102,7 @@ public class TetherManager : MonoBehaviour
 			Debug.Log("Create tether point"); 
 			arrowReachedPointTarget = false; 
 			LevelStateManager.createTetherPoint(); 
-			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position);
+			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
 		}
 		else
 		{
@@ -107,18 +110,24 @@ public class TetherManager : MonoBehaviour
 		}
 	}
 
-	void CreateTimeTetherIndicator(Vector3 pos)
+	void CreateTimeTetherIndicator(Vector3 pos, int state)
 	{
 		GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform); 
-		timeTetherIndicators.Add(indicator); 
+		//timeTetherIndicators.Add(indicator); 
+		timeTetherIndicators[state] = indicator; 
 	}
 
+	// Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
 	void RemoveTimeTetherIndicator(int index)
 	{
-		if (index < timeTetherIndicators.Count)
+		Debug.Log("Remove indicators starting at index " + index); 
+
+		for (int i = index; i < timeTetherIndicators.Length; i++)
 		{
-			Destroy(timeTetherIndicators[index].gameObject); 
-			timeTetherIndicators.RemoveAt(index); 
+			if (timeTetherIndicators[i] != null)
+			{
+				Destroy(timeTetherIndicators[i].gameObject);
+			}
 		}
 	}
 }

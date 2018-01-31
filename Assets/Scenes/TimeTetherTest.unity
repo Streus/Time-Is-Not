@@ -859,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: 7J7pNJyunE+luIlFZdZ3aQ
+  registeredID: GL6S6FvBfUO89HyKcZeS2w
 --- !u!1 &406949009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,6 +2121,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300020, guid: 1e57063d661a14733ab5c9ea74efc3af,
         type: 3}
+    - target: {fileID: 114799244191591094, guid: 331aba3f0c0d5482b9bee9c9385021ea,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 331aba3f0c0d5482b9bee9c9385021ea, type: 2}
   m_IsPrefabParent: 0
@@ -2871,7 +2876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396e93cbfc6f71842b6f839b42081fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 3
+  state: 4
 --- !u!114 &1484226237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2917,7 +2922,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
