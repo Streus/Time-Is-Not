@@ -8,6 +8,7 @@ public class KeyCodeUIElement : MonoBehaviour
 	public string keyCode; 
 	public Image uiImage; 
 
+	/*
 	void OnEnable()
 	{
 		GameManager.inst.codesUpdated += UpdateCodeState; 
@@ -17,12 +18,18 @@ public class KeyCodeUIElement : MonoBehaviour
 	{
 		GameManager.inst.codesUpdated -= UpdateCodeState;
 	}
+	*/ 
 
 	// Use this for initialization
 	void Start () 
 	{
 		uiImage = GetComponent<Image>(); 
-		UpdateCodeState(); 
+		//UpdateCodeState(); 
+	}
+
+	void Update()
+	{
+		UpdateCodeState();
 	}
 
 	void UpdateCodeState()

@@ -36,6 +36,7 @@ public class StasisBullet : MonoBehaviour
 
 	private void cleanUp(bool success)
 	{
+		// TODO: this is broken
 		if (success)
 			Destroy (gameObject);
 	}

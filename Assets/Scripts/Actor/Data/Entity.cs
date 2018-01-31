@@ -66,7 +66,7 @@ public sealed class Entity : MonoBehaviour
 			//update abilities
 			for (i = 0; i < abilities.Capacity; i++)
 			{
-				Debug.Log (gameObject.name + "|" + i); //DEBUG
+				//Debug.Log (gameObject.name + "|" + i); //DEBUG
 				if (abilities [i] != null)
 					abilities [i].updateCooldown (Time.deltaTime);
 			}
