@@ -104,7 +104,7 @@ public class TetherManager : MonoBehaviour
 			tetherZoomKeyLock = false; 
 		}
 
-		if (Vector3.Distance(tetherUIParent.transform.localPosition, tetherUIPos0) < 0.8f)
+		if (Vector3.Distance(tetherUIParent.transform.localPosition, tetherUIPos0) < 2f)
 		{
 			tetherUINotZoomed = true; 
 		}

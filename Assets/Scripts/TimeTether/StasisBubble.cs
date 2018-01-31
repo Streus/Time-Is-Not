@@ -35,7 +35,7 @@ public class StasisBubble : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (useBubbleAliveTimer)
+		if (useBubbleAliveTimer && !GameManager.isPaused())
 		{
 			bubbleAliveTimer -= Time.deltaTime; 
 			if (bubbleAliveTimer <= 0)
