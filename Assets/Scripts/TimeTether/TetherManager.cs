@@ -3,37 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+/// <summary>
+/// Manages interaction with time tether systems in LevelStateManager and the time tether UI systems
+/// </summary>
 public class TetherManager : MonoBehaviour 
 {
+	[Tooltip("The key used to create a tether point.")]
 	public KeyCode createPointKey;
+	[Tooltip("The key that needs to be held to bring up the load tether point selection UI")]
 	public KeyCode bringUpTetherUIKey; 
 
 	// Time tether UI
+	[Tooltip("(Drag In) The GameObject with the tether UI that zooms between the corner and the screen center")]
 	public GameObject tetherUIParent; 
+
+	[Tooltip("The position of the tetherUIParent when at the bottom corner of the screen.")]
 	public Vector3 tetherUIPos0;
+
+	[Tooltip("The position of the tetherUIParent when zoomed in at the screen center")]
 	public Vector3 tetherUIPos1; 
+
+	[Tooltip("The localScale of the tetherUIParent when at the bottom corner of the screen")]
 	public Vector3 tetherUIScale0;
+
+	[Tooltip("The localScale of the tetherUIParent when zoomed in at the screen center")]
 	public Vector3 tetherUIScale1; 
 
-	public float tetherUIZoomUpSpeed; 
-	public float tetherUIZoomDownSpeed; 
+	[Tooltip("The speed that the tether UI moves/scales to the center of the screen")]
+	public float tetherUIZoomUpSpeed = 1; 
 
+	[Tooltip("The speed that the tether UI moves/scales down from the center of the screen")]
+	public float tetherUIZoomDownSpeed = 1; 
+
+	[Tooltip("(Drag In) The background image that darkens the background when the tether UI is up")]
 	public Image fadeImage; 
-	public float fadeImageMaxAlpha; 
 
+	[Tooltip("The alpha value of fadeImage when fully faded in (0 - 1)")]
+	[Range(0,1)] public float fadeImageMaxAlpha; 
+
+	// UI state booleans
+
+	// When the arrow is moving back after clicking to load a state
 	bool arrowMovingBack;  
+
+	// Set to true after loading a state forces the UI to minimize; 
+	// prevents the UI from immediately popping back up while bringUpTetherUIKey is still held
 	bool tetherZoomKeyLock; 
+
+	// True if the tether UI is in the lower left corner
 	bool tetherUINotZoomed; 
 
-	public Image[] ui_tetherPoints; 
-	public Color ui_pointActiveColor; 
-	public Color ui_pointInactiveColor; 
-	public GameObject curTimeArrow; 
-	[SerializeField] bool arrowReachedPointTarget; 
-	float xTarget; 
+	// Used in UpdateTetherTimeline to determine whether the arrow is lerping above or in-between nodes
+	bool arrowReachedPointTarget;
 
+	// Used in UpdateTetherTimeline to hold the target position the arrow is lerping to
+	float xTarget;
+
+	[Tooltip("(Drag In) The nodes (also buttons) that represent each state in the UI tether timeline")]
+	public Image[] ui_tetherPoints; 
+
+	[Tooltip("The color of ui_tetherPoints when holding a state")]
+	public Color ui_pointActiveColor; 
+
+	[Tooltip("The color of ui_tetherPoints when not holding a state")]
+	public Color ui_pointInactiveColor; 
+
+	[Tooltip("(Drag In) The arrow that moves along the timeline")]
+	public GameObject curTimeArrow; 
+
+	[Tooltip("(Drag In) The prefab for the object dropped at the player position each time a tether point is created.")]
 	public GameObject timeTetherIndicatorPrefab; 
-	[HideInInspector] GameObject[] timeTetherIndicators; 
+
+	// An array holding all the timeTetherIndicators spawned in the scene. 
+	GameObject[] timeTetherIndicators; 
 
 
 	// Use this for initialization
@@ -49,6 +91,9 @@ public class TetherManager : MonoBehaviour
 	{
 		UpdateUIZoomState(); 
 
+		// This is where the game detects when the player wants to create a tether point
+		// Restrictions: player can't be dead, arrow can't be moving between points, and timeline must be in corner
+		// TODO: can't restrict while game is paused, but need to find another way to prevent creation when a pause menu is up
 		if (!GameManager.isPlayerDead() && Input.GetKeyDown(createPointKey) && arrowReachedPointTarget && tetherUINotZoomed)
 		{
 			CreatePoint(); 
@@ -58,10 +103,18 @@ public class TetherManager : MonoBehaviour
     
 	}
 
+	/// <summary>
+	/// Updates other aspects of the UI state, including the zoom of the tether UI timeline
+	/// </summary>
 	void UpdateUIZoomState()
 	{
+		// If the player isn't dead, they can bring up the tether timeline by holding the bringUpTetherUIKey
 		if (!GameManager.isPlayerDead())
 		{
+			// Make the timeline zoom and move up to the center
+			// Can happen in two cases
+			// 		(a) The bringUpTetherUIKey is held down and the ability to bring up the UI isn't locked
+			//		(b) The arrow is moving back after loading a state, preventing the UI from minimizing in the else statement
 			if ((Input.GetKey(bringUpTetherUIKey) && !tetherZoomKeyLock) || arrowMovingBack)
 			{
 				GameManager.setPause(true);
@@ -69,6 +122,7 @@ public class TetherManager : MonoBehaviour
 				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
 				fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.1f, true);
 			}
+			// Make the timeline zoom and move back to the corner
 			else
 			{
 				GameManager.setPause(false);
@@ -77,6 +131,7 @@ public class TetherManager : MonoBehaviour
 				fadeImage.CrossFadeAlpha(0, 0.1f, true);
 			}
 		}
+		// If the player has just died, force the timeline to come up and don't let players exit out of it
 		else
 		{
 			GameManager.setPause(true);
@@ -85,11 +140,14 @@ public class TetherManager : MonoBehaviour
 			fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.15f, true);
 		}
 
+		// When the UI starts to minimize back to the corner, don't allow it to maximize again until the bringUpTetherUIKey has been released
 		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && !Input.GetKey(bringUpTetherUIKey))
 		{
 			tetherZoomKeyLock = false; 
 		}
 
+		// Set the state of tetherUINotZoomed, based on the position distance
+		// This is somewhat imprecise; set the 'lower than' value to determine how close it must lerp before, for example, the player can place more tether points
 		if (Vector3.Distance(tetherUIParent.transform.localPosition, tetherUIPos0) < 2f)
 		{
 			tetherUINotZoomed = true; 
@@ -100,8 +158,12 @@ public class TetherManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Called via update to set the position of the curTimeArrow and the color of the tether point nodes
+	/// </summary>
 	void UpdateTetherTimelineUI()
 	{
+		// Update the color of each tether point node
 		for (int i = 1; i < LevelStateManager.maxNumStates; i++)
 		{
 
@@ -118,22 +180,33 @@ public class TetherManager : MonoBehaviour
 
 		RectTransform rp = curTimeArrow.GetComponent<RectTransform>(); 
 
+		// Chooses the target position of the arrow, which must either be on top of the node or in between nodes
+		// arrowReachedPointTarget is used to control where the arrow is lerping
+
+		// Arrow position on top of node, using hard-coded values
 		if (!arrowReachedPointTarget)
 		{
+			// Initial x position is -11, with a spacing of 1.5 between each node
 			xTarget = -11 + (1.5f * LevelStateManager.curState);
 		}
+		// Arrow position is in between nodes
 		else
 		{
+			// Initial x position is -10.25, with a spacing of 1.5 between each node
 			xTarget = -10.25f + (1.5f * LevelStateManager.curState); 
 		}
 
+		// Set the RectTransform's position, lerping to the target
 		float xLerp = Mathf.Lerp(rp.anchoredPosition.x, xTarget, 0.2f); 
 		rp.anchoredPosition = new Vector2 (xLerp, rp.anchoredPosition.y); 
 
+		// Handle state changes when the arrow approx reaches its target position
 		if (!arrowReachedPointTarget && Mathf.Abs(rp.anchoredPosition.x - xTarget) < 0.01f)
 		{
+			// Setting arrowReachedTargetPoint causes the xTarget above to change so the arrow moves to its new target in-between nodes
 			arrowReachedPointTarget = true; 
 
+			// Used in conjunction with the zoomed-in tether UI to control its state
 			if (arrowMovingBack)
 			{
 				arrowMovingBack = false;
@@ -143,6 +216,10 @@ public class TetherManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Called via UI buttons in the timeline to load a state
+	/// </summary>
+	/// <param name="state">State, as determined in the button</param>
 	public void LoadPoint(int state)
 	{
 		arrowReachedPointTarget = false; 
