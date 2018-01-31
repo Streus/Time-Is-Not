@@ -8,11 +8,16 @@ public class TimeTetherTest : MonoBehaviour
 	public KeyCode createPointKey;
 	public Text pointText; 
 
+	public GameObject timeTetherIndicatorPrefab; 
+	public List<GameObject> timeTetherIndicators; 
+
 	public KeyCode createStasisKey; 
 	public KeyCode removeStasisKey; 
 	public Text stasisText; 
 
 	public GameObject stasisBubblePrefab; 
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +34,7 @@ public class TimeTetherTest : MonoBehaviour
 			{
 				Debug.Log("Create tether point"); 
 				LevelStateManager.createTetherPoint(); 
+				CreateTimeTetherIndicator(new Vector3 (LevelStateManager.curState, 0, 0));
 			}
 			else
 			{
@@ -41,6 +47,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(0) && LevelStateManager.loadTetherPoint(0))
 			{
 				Debug.Log("Successfully loaded state 0"); 
+				RemoveTimeTetherIndicator(0); 
 			}
 			else
 			{
@@ -53,6 +60,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(1) && LevelStateManager.loadTetherPoint(1))
 			{
 				Debug.Log("Successfully loaded state 1"); 
+				RemoveTimeTetherIndicator(1); 
 			}
 			else
 			{
@@ -65,6 +73,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(2) && LevelStateManager.loadTetherPoint(2))
 			{
 				Debug.Log("Successfully loaded state 2"); 
+				RemoveTimeTetherIndicator(2); 
 			}
 			else
 			{
@@ -77,6 +86,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(3) && LevelStateManager.loadTetherPoint(3))
 			{
 				Debug.Log("Successfully loaded state 3"); 
+				RemoveTimeTetherIndicator(3); 
 			}
 			else
 			{
@@ -89,6 +99,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(4) && LevelStateManager.loadTetherPoint(4))
 			{
 				Debug.Log("Successfully loaded state 4"); 
+				RemoveTimeTetherIndicator(4); 
 			}
 			else
 			{
@@ -101,6 +112,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(5) && LevelStateManager.loadTetherPoint(5))
 			{
 				Debug.Log("Successfully loaded state 5"); 
+				RemoveTimeTetherIndicator(5); 
 			}
 			else
 			{
@@ -112,7 +124,8 @@ public class TimeTetherTest : MonoBehaviour
 		{
 			if (LevelStateManager.canLoadTetherPoint(6) && LevelStateManager.loadTetherPoint(6))
 			{
-				Debug.Log("Successfully loaded state 6"); 
+				Debug.Log("Successfully loaded state 6");
+				RemoveTimeTetherIndicator(6); 
 			}
 			else
 			{
@@ -125,6 +138,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(7) && LevelStateManager.loadTetherPoint(7))
 			{
 				Debug.Log("Successfully loaded state 7"); 
+				RemoveTimeTetherIndicator(7); 
 			}
 			else
 			{
@@ -137,6 +151,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(8) && LevelStateManager.loadTetherPoint(8))
 			{
 				Debug.Log("Successfully loaded state 8"); 
+				RemoveTimeTetherIndicator(8); 
 			}
 			else
 			{
@@ -149,6 +164,7 @@ public class TimeTetherTest : MonoBehaviour
 			if (LevelStateManager.canLoadTetherPoint(9) && LevelStateManager.loadTetherPoint(9))
 			{
 				Debug.Log("Successfully loaded state 9"); 
+				RemoveTimeTetherIndicator(9); 
 			}
 			else
 			{
@@ -179,6 +195,21 @@ public class TimeTetherTest : MonoBehaviour
 		if (stasisText != null)
 		{
 			stasisText.text = LevelStateManager.numStasisLeft + " / " + LevelStateManager.maxNumStasis; 
+		}
+	}
+
+	void CreateTimeTetherIndicator(Vector3 pos)
+	{
+		GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform); 
+		timeTetherIndicators.Add(indicator); 
+	}
+
+	void RemoveTimeTetherIndicator(int index)
+	{
+		if (index < timeTetherIndicators.Count)
+		{
+			Destroy(timeTetherIndicators[index].gameObject); 
+			timeTetherIndicators.RemoveAt(index); 
 		}
 	}
 }
