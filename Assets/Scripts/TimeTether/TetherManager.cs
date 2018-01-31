@@ -8,8 +8,25 @@ public class TetherManager : MonoBehaviour
     public GameObject menu;
 
 	public KeyCode createPointKey;
+	public KeyCode bringUpTetherUIKey; 
 
 	// Time tether UI
+	public GameObject tetherUIParent; 
+	public Vector3 tetherUIPos0;
+	public Vector3 tetherUIPos1; 
+	public Vector3 tetherUIScale0;
+	public Vector3 tetherUIScale1; 
+
+	public float tetherUIZoomUpSpeed; 
+	public float tetherUIZoomDownSpeed; 
+
+	public Image fadeImage; 
+	public float fadeImageMaxAlpha; 
+
+	bool arrowMovingBack;  
+	bool tetherZoomKeyLock; 
+	bool tetherUINotZoomed; 
+
 	public Image[] ui_tetherPoints; 
 	public Color ui_pointActiveColor; 
 	public Color ui_pointInactiveColor; 
@@ -25,6 +42,7 @@ public class TetherManager : MonoBehaviour
 	void Start () 
 	{
         menu.SetActive(false);
+		fadeImage.gameObject.SetActive(true); 
 		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
 	}
@@ -43,16 +61,60 @@ public class TetherManager : MonoBehaviour
         }
         */ 
 
-		if (Input.GetKeyDown(createPointKey))
+		UpdateUIZoomState(); 
+
+		if (!GameManager.isPlayerDead() && Input.GetKeyDown(createPointKey) && arrowReachedPointTarget && tetherUINotZoomed)
 		{
 			CreatePoint(); 
 		}
 
-		UpdateUI();
+		UpdateTetherTimelineUI();
     
 	}
 
-	void UpdateUI()
+	void UpdateUIZoomState()
+	{
+		if (!GameManager.isPlayerDead())
+		{
+			if ((Input.GetKey(bringUpTetherUIKey) && !tetherZoomKeyLock) || arrowMovingBack)
+			{
+				GameManager.setPause(true);
+				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
+				fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.1f, true);
+			}
+			else
+			{
+				GameManager.setPause(false);
+				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos0, tetherUIZoomDownSpeed); 
+				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale0, tetherUIZoomDownSpeed); 
+				fadeImage.CrossFadeAlpha(0, 0.1f, true);
+			}
+		}
+		else
+		{
+			GameManager.setPause(true);
+			tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+			tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
+			fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.15f, true);
+		}
+
+		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && !Input.GetKey(bringUpTetherUIKey))
+		{
+			tetherZoomKeyLock = false; 
+		}
+
+		if (Vector3.Distance(tetherUIParent.transform.localPosition, tetherUIPos0) < 0.8f)
+		{
+			tetherUINotZoomed = true; 
+		}
+		else
+		{
+			tetherUINotZoomed = false; 
+		}
+	}
+
+	void UpdateTetherTimelineUI()
 	{
 		for (int i = 1; i < LevelStateManager.maxNumStates; i++)
 		{
@@ -72,7 +134,7 @@ public class TetherManager : MonoBehaviour
 
 		if (!arrowReachedPointTarget)
 		{
-			xTarget = -11 + (1.5f * LevelStateManager.curState); 
+			xTarget = -11 + (1.5f * LevelStateManager.curState);
 		}
 		else
 		{
@@ -85,12 +147,20 @@ public class TetherManager : MonoBehaviour
 		if (!arrowReachedPointTarget && Mathf.Abs(rp.anchoredPosition.x - xTarget) < 0.01f)
 		{
 			arrowReachedPointTarget = true; 
+
+			if (arrowMovingBack)
+			{
+				arrowMovingBack = false;
+
+				tetherZoomKeyLock = true; 
+			}
 		}
 	}
 
 	public void LoadPoint(int state)
 	{
 		arrowReachedPointTarget = false; 
+		arrowMovingBack = true; 
 		RemoveTimeTetherIndicator(state + 1); 
 		LevelStateManager.loadTetherPoint(state);
 	}

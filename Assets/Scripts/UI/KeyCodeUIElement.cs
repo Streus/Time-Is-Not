@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KeyCodeUIElement : MonoBehaviour 
 {
 	public string keyCode; 
-	public Image uiImage; 
+	Image uiImage; 
 
 	/*
 	void OnEnable()

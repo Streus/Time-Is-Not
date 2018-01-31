@@ -9,6 +9,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 	bool paused; 
 	bool pauseLock; 
 
+	// Death functionality
+	[SerializeField] bool isDead; 
+
 	// Actions
 	public event StateToggled pauseToggled; 
 	public event StateToggled pauseLockedToggled; 
@@ -41,6 +44,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 		Seed seed = (Seed)s;
 
 		codes = seed.codes;
+
+		if (isDead)
+			isDead = false; 
 
 		s.defaultLoad (gameObject); 
 	}
@@ -87,6 +93,17 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			inst.pauseLockedToggled(state); 
 		}
+	}
+
+	public static bool isPlayerDead()
+	{
+		return inst.isDead; 
+	}
+
+	public static void killPlayer()
+	{
+		inst.isDead = true; 
+		inst.paused = true; 
 	}
 
 	public static GameObject GetPlayer()
