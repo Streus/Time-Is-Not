@@ -12,9 +12,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// Actions
 	public event StateToggled pauseToggled; 
 	public event StateToggled pauseLockedToggled; 
+	public event CodesUpdated codesUpdated; 
 
 	// Delegates
 	public delegate void StateToggled(bool state); 
+	public delegate void CodesUpdated (); 
 
 	// Reference variables
 	[SerializeField] private GameObject playerObj; 
@@ -105,6 +107,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 		}
 
 		inst.codes.Add(codeName); 
+
+		if (inst.codesUpdated != null)
+		{
+			inst.codesUpdated(); 
+		}
+
 		return true; 
 	}
 
