@@ -176,7 +176,10 @@ public class RegisteredObject : MonoBehaviour
 			if (parentRO != null)
 				seed.parentID = parentRO.registeredID;
 			else
-				Debug.Log(ToString () + " is under a non-RO. Make its parent an RO to save its data properly.");
+			{
+				// TODO see if this needs to be added back; temporarily removed
+				//Debug.Log(ToString() + " is under a non-RO. Make its parent an RO to save its data properly.");
+			}
 		}
 		else
 			seed.parentID = "";
