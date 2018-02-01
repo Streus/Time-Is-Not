@@ -82,7 +82,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 		}
 		if(_moving)
 		{
-			if (!_playerInRange || !_canMove || GameManager.isPaused ())
+			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis)
 				stop ();
 			//stop moving when key is released
 			switch(_moveDirection)
@@ -259,6 +259,13 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	public void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn; 
+		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
+		if (sprite == null)
+			return;
+		if (inStasis)
+			sprite.color = Color.yellow;
+		else
+			sprite.color = Color.white;
 	}
 
 	public bool InStasis()
