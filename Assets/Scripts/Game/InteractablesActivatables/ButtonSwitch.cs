@@ -12,6 +12,14 @@ public class ButtonSwitch : Interactable
 	[SerializeField]
 	private GameObject[] _activatables;
 
+	[Tooltip("Button prompt sprite")]
+	[SerializeField]
+	private GameObject _buttonPrompt;
+
+	[Tooltip("Negative button prompt sprite.")]
+	[SerializeField]
+	private GameObject _negativePrompt;
+
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
@@ -37,7 +45,17 @@ public class ButtonSwitch : Interactable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = true;
-				//TODO: display button prompt
+				//show button prompts
+				if(isEnabled())
+				{
+					_buttonPrompt.SetActive (true);
+					_negativePrompt.SetActive (false);
+				}
+				else
+				{
+					_negativePrompt.SetActive (true);
+					_buttonPrompt.SetActive (false);
+				}
 			}
 		}
 	}
@@ -50,7 +68,9 @@ public class ButtonSwitch : Interactable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = false;
-				//TODO: hide button prompt
+				//hide button prompts
+				_buttonPrompt.SetActive (false);
+				_negativePrompt.SetActive (false);
 			}
 		}
 	}
