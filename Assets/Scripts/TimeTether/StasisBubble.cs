@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class StasisBubble : MonoBehaviour 
 {
+	[Tooltip("If true, the bubble will be destroyed after a period of time determined by bubbleAliveTime")]
+	public bool useBubbleAliveTimer; 
+
+	[Header("Variables Affected by Timer")]
+	[Tooltip("How long the bubble lasts")]
 	public float bubbleAliveTime; 
 	float bubbleAliveTimer;
-
-	public bool useBubbleAliveTimer; 
+	[Tooltip("Should the bubble shrink as it disappears? This has a functional effect.")]
 	public bool shrinkWithTimer; 
+	[Tooltip("Should the bubble fade as it disappears? This only has an aesthetic effect")]
 	public bool fadeWithTimer; 
 
 	// Temporary
