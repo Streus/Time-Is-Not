@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI/Actions/Player/Default")]
 public class PlayerDefaultControl : Action
 {
+	public LayerMask moveMask;
+
 	public override void perform (Controller c)
 	{
 		Player p = State.cast<Player> (c);
@@ -26,6 +28,12 @@ public class PlayerDefaultControl : Action
 
 		movementVector = movementVector.normalized * p.getSelf().getMovespeed () * Time.deltaTime;
 
-		p.transform.Translate ((Vector3)movementVector);
+		RaycastHit2D[] hits = new RaycastHit2D[1];
+		int hitCount = 0;
+		ContactFilter2D cf = new ContactFilter2D ();
+		cf.layerMask = moveMask;
+		hitCount = p.GetComponent<Collider2D> ().Cast (movementVector, cf, hits, p.getSelf ().getMovespeed () * Time.deltaTime);
+		if(hitCount <= 0)
+			p.transform.Translate ((Vector3)movementVector);
 	}
 }
