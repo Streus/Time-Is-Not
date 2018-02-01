@@ -51,7 +51,6 @@ public class MoveObject : MonoBehaviour, IActivatable
 	{
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawLine (transform.position, _points[0]);
-		Gizmos.color = Color.white;
 		for(int i = 0; i < _points.Length - 1; i++)
 		{
 			Gizmos.DrawLine (_points[i], _points[i+1]);

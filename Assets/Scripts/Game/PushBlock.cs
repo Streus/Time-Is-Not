@@ -21,9 +21,12 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
 
-	[Tooltip("Push speed.")]
+	//move speed
+	private float _moveSpeed = 2;
+
+	[Tooltip("Push speed Multiplier.")]
 	[SerializeField]
-	private float _moveSpeed = 1;
+	private float _speedMult = 1;
 
 	[Tooltip("Controls if the box can be pushed or not.")]
 	[SerializeField]
@@ -116,6 +119,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
+				_moveSpeed = (entityHit.getMovespeed () * _speedMult);
 				_playerInRange = true;
 				float xDist = col.transform.position.x - transform.position.x;
 				float yDist = col.transform.position.y - transform.position.y;
