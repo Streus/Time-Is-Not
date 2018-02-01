@@ -7,6 +7,9 @@ public class StasisBubble : MonoBehaviour
 	[Tooltip("If true, the bubble will be destroyed after a period of time determined by bubbleAliveTime")]
 	public bool useBubbleAliveTimer; 
 
+	[Tooltip("If true, right clicking within the bubble collider bounds will destroy it.")]
+	public bool canRightClickDestroy;
+
 	[Header("Variables Affected by Timer")]
 	[Tooltip("How long the bubble lasts")]
 	public float bubbleAliveTime; 
@@ -19,6 +22,8 @@ public class StasisBubble : MonoBehaviour
 	// Temporary
 	private Vector3 initScale; 
 
+	private Collider2D bubbleCollider; 
+
 	SpriteRenderer spriteRend; 
 	float maxBubbleAlpha; 
 
@@ -29,6 +34,7 @@ public class StasisBubble : MonoBehaviour
 	{
 		bubbleAliveTimer = bubbleAliveTime; 
 		initScale = transform.localScale; 
+		bubbleCollider = GetComponent<Collider2D>(); 
 		spriteRend = GetComponent<SpriteRenderer>(); 
 		if (spriteRend != null)
 		{
@@ -63,7 +69,26 @@ public class StasisBubble : MonoBehaviour
 				}
 			}
 		}
+
+		// Temporary: You can right click to remove a stasis bubble
+		if (canRightClickDestroy)
+		{
+			Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)); 
+
+			if (Input.GetMouseButtonDown(1))
+			{
+				if (bubbleCollider.bounds.Contains(mouseWorldPos))
+				{
+					RemoveBubble();
+				}
+				else
+				{
+					Debug.Log("Not in bubble. mouseWorldPos: " + mouseWorldPos); 
+				}
+			}
+		}
 	}
+
 
 	/// <summary>
 	/// Tell the LevelStateMangager to remove this bubble
