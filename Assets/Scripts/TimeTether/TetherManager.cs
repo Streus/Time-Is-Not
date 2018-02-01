@@ -203,15 +203,19 @@ public class TetherManager : MonoBehaviour
 		// Handle state changes when the arrow approx reaches its target position
 		if (!arrowReachedPointTarget && Mathf.Abs(rp.anchoredPosition.x - xTarget) < 0.01f)
 		{
-			// Setting arrowReachedTargetPoint causes the xTarget above to change so the arrow moves to its new target in-between nodes
-			arrowReachedPointTarget = true; 
-
 			// Used in conjunction with the zoomed-in tether UI to control its state
 			if (arrowMovingBack)
 			{
 				arrowMovingBack = false;
-
 				tetherZoomKeyLock = true; 
+			}
+			else
+			{
+				if (tetherUINotZoomed)
+				{
+					// Setting arrowReachedTargetPoint causes the xTarget above to change so the arrow moves to its new target in-between nodes
+					arrowReachedPointTarget = true; 
+				}
 			}
 		}
 	}
