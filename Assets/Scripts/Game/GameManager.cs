@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CodeName
+{
+	CODE_1, 
+	CODE_2,
+	CODE_3,
+	CODE_4,
+	CODE_5,
+	CODE_6,
+	CODE_7
+};
+
 [RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
@@ -25,7 +36,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	[SerializeField] private GameObject playerObj; 
 
 	// Savable data
-	[SerializeField] List<string> codes; 
+	[SerializeField] List<CodeName> codes; 
 
 	// --- ISavable Methods ---
 	public SeedBase saveData()
@@ -55,7 +66,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public class Seed : SeedBase
 	{
 		// Define all the extra variables that should be saved here
-		public List<string> codes; 
+		public List<CodeName> codes; 
 
 		public Seed(GameObject subject) : base(subject) { }
 
@@ -118,15 +129,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return inst.playerObj; 
 	}
 
-	public static bool AddCode(string codeName)
+	public static bool AddCode(CodeName codeName)
 	{
 		if (inst.codes.Contains(codeName))
 		{
-			return false; 
-		}
-		if (codeName == "")
-		{
-			Debug.LogError("Tried to add a code with an empty string"); 
 			return false; 
 		}
 
@@ -140,7 +146,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return true; 
 	}
 
-	public static bool HasCode(string codeName)
+	public static bool HasCode(CodeName codeName)
 	{
 		if (inst.codes.Contains(codeName))
 		{
