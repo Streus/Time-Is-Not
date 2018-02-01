@@ -52,7 +52,8 @@ public class PressurePlate : Interactable
 		Gizmos.color = Color.blue;
 		for(int i = 0; i < _activatables.Length; i++)
 		{
-			Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
+			if(_activatables[i] != null)
+				Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
 		}
 
 	}

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ButtonSwitch : Interactable 
 {
+	[Tooltip("Time before the button triggers again (if 0 or infinity, will have no timer.")]
+	[SerializeField]
+	private float _timer = 0;
+
 	[Tooltip("Interact button(TEMPORARY)")]
 	[SerializeField]
 	private KeyCode _interactKey = KeyCode.E;
@@ -55,7 +59,8 @@ public class ButtonSwitch : Interactable
 		Gizmos.color = Color.blue;
 		for(int i = 0; i < _activatables.Length; i++)
 		{
-			Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
+			if(_activatables[i] != null)
+				Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
 		}
 
 	}
@@ -99,6 +104,12 @@ public class ButtonSwitch : Interactable
 		}
 	}
 
+	IEnumerator buttonTimer(float seconds)
+	{		
+		yield return new WaitForSeconds (seconds);
+		onInteract ();
+	}
+
 	/// <summary>
 	/// Checks the keyboard for input.
 	/// </summary>
@@ -107,6 +118,10 @@ public class ButtonSwitch : Interactable
 		if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused())
 		{
 			onInteract ();
+			if(_timer != Mathf.Infinity && _timer > 0)
+			{
+				StartCoroutine (buttonTimer (_timer));
+			}
 		}
 	}
 
