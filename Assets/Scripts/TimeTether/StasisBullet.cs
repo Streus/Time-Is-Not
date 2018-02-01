@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO probably needs to be ISavable
 public class StasisBullet : MonoBehaviour
 {
 	[SerializeField]

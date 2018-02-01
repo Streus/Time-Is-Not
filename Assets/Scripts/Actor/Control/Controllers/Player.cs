@@ -34,7 +34,7 @@ public class Player : Controller
 	}
 
 	#region ISAVABLE_METHODS
-
+	/*
 	public override SeedBase saveData ()
 	{
 		return base.saveData ();
@@ -44,12 +44,13 @@ public class Player : Controller
 	{
 		base.loadData (seed);
 	}
+	*/
 	#endregion
 
 	#endregion
 
 	#region INTERNAL_TYPES
-
+	/*
 	private class PSeed : Seed
 	{
 
@@ -58,5 +59,6 @@ public class Player : Controller
 
 		}
 	}
+	*/
 	#endregion
 }
