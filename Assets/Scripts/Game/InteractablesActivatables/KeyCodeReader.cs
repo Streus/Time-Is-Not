@@ -78,7 +78,7 @@ public class KeyCodeReader : Interactable, IActivatable
 			{
 				_playerInRange = true;
 				//show button prompts
-				if(isEnabled())
+				if(isEnabled() && GameManager.HasCode(_codeName))
 				{
 					_buttonPrompt.SetActive (true);
 					_negativePrompt.SetActive (false);
