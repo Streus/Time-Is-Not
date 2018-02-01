@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : Interactable, IActivatable
+public class Door : Interactable, IActivatable, ISavable, IStasisable
 {
 	[Tooltip("Interact key (TEMPORARY)")]
 	[SerializeField]
@@ -40,6 +40,9 @@ public class Door : Interactable, IActivatable
 
 	//collider of the door
 	private PolygonCollider2D _collider;
+
+	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
+	private bool inStasis = false;
 
 	public enum DoorTypes {Manual, Electronic};
 
@@ -102,7 +105,7 @@ public class Door : Interactable, IActivatable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual) && isEnabled())
+		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual) && isEnabled() && !inStasis && !GameManager.isPaused())
 		{
 			onInteract ();
 		}
@@ -127,7 +130,7 @@ public class Door : Interactable, IActivatable
 	/// </summary>
 	public bool onActivate()
 	{
-		if (_type == DoorTypes.Manual)
+		if (_type == DoorTypes.Manual || inStasis)
 			return _isOpen;
 		if(!_isOpen)
 		{
@@ -145,7 +148,7 @@ public class Door : Interactable, IActivatable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		if (_type == DoorTypes.Manual)
+		if (_type == DoorTypes.Manual || inStasis)
 			return _isOpen;
 		if(state)
 		{
@@ -170,5 +173,86 @@ public class Door : Interactable, IActivatable
 		_isOpen = false;
 		_sprite.sprite = _closedSprite;
 		_collider.enabled = true;
+	}
+
+
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed (gameObject);
+
+		seed.isOpen = _isOpen;
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null || inStasis)
+			return;
+		
+		Seed seed = (Seed)s;
+
+		s.defaultLoad (gameObject);
+
+		if (seed.isOpen)
+			Open ();
+		else
+			Close ();
+	}
+
+	/// <summary>
+	/// Checks if the object should be able to be reset.
+	/// </summary>
+	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
+	public bool shouldIgnoreReset() 
+	{ 
+		return !inStasis; 
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the door open?
+		public bool isOpen;
+
+		public Seed(GameObject subject) : base(subject) {}
+
+	}
+
+
+	//****Stasisable Object Functions****
+
+	/// <summary>
+	/// Toggles if the object is in stasis.
+	/// </summary>
+	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
+	public void ToggleStasis(bool turnOn)
+	{
+		inStasis = turnOn;
+		if (inStasis)
+			_sprite.color = Color.yellow;
+		else
+			_sprite.color = Color.white;
+	}
+
+	/// <summary>
+	/// shows if the object is in stasis
+	/// </summary>
+	/// <returns><c>true</c>, if stasis is active, <c>false</c> otherwise.</returns>
+	public bool InStasis()
+	{
+		return inStasis; 
 	}
 }

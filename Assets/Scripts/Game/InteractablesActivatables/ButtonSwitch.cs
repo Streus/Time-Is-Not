@@ -20,6 +20,18 @@ public class ButtonSwitch : Interactable
 	[SerializeField]
 	private GameObject _negativePrompt;
 
+	[Tooltip("Unpressed state sprite.")]
+	[SerializeField]
+	private Sprite _unpressedSprite;
+
+	[Tooltip("Pressed state sprite.")]
+	[SerializeField]
+	private Sprite _pressedSprite;
+
+	//spriteRenderer for the object
+	private SpriteRenderer _sprite;
+
+
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
@@ -27,6 +39,7 @@ public class ButtonSwitch : Interactable
 	// Use this for initialization
 	void Start () 
 	{
+		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		//TODO: get input button from input module
 	}
 	
@@ -91,7 +104,7 @@ public class ButtonSwitch : Interactable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey))
+		if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused())
 		{
 			onInteract ();
 		}
@@ -107,6 +120,14 @@ public class ButtonSwitch : Interactable
 			if(activatable.GetComponent<IActivatable>() != null)
 				activatable.GetComponent<IActivatable>().onActivate ();
 		}
+		_sprite.sprite = _pressedSprite;
+		StartCoroutine (spriteTimer (0.4f));
+	}
+
+	IEnumerator spriteTimer(float seconds)
+	{
+		yield return new WaitForSeconds (seconds);
+		_sprite.sprite = _unpressedSprite;
 	}
 
 	//****Savable Object Functions****

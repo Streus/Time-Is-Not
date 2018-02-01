@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Laser : Interactable, IActivatable, ISavable, IStasisable
+public class Laser : Interactable, IActivatable, ISavable
 {
 	[Tooltip("How far can the laser go? 0-Infinity.")]
 	[SerializeField]
@@ -27,9 +27,6 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 
 	//the line renderer for the laser
 	private LineRenderer _laserLine;
-
-	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
-	private bool inStasis = false;
 
 	enum LaserType {Death, Trigger};
 
@@ -172,11 +169,6 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 		if (s == null)
 			return;
 
-		if (!inStasis)
-		{
-			return; 
-		}
-
 		Seed seed = (Seed)s;
 
 		s.defaultLoad (gameObject);
@@ -193,7 +185,7 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
 	public bool shouldIgnoreReset() 
 	{ 
-		return !inStasis; 
+		return false; 
 	}
 
 	/// <summary>
@@ -207,26 +199,4 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 		public Seed(GameObject subject) : base(subject) {}
 
 	}
-
-
-	//****Stasisable Object Functions****
-
-	/// <summary>
-	/// Toggles if the object is in stasis.
-	/// </summary>
-	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
-	public void ToggleStasis(bool turnOn)
-	{
-		inStasis = turnOn;
-	}
-
-	/// <summary>
-	/// shows if the object is in stasis
-	/// </summary>
-	/// <returns><c>true</c>, if stasis is active, <c>false</c> otherwise.</returns>
-	public bool InStasis()
-	{
-		return inStasis; 
-	}
-
 }

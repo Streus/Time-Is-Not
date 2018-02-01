@@ -33,7 +33,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 
 	void Rotate()
 	{
-		if (!_active || inStasis)
+		if (!_active || inStasis || GameManager.isPaused())
 			return;
 		int turnDirection = 1;
 		if (_clockwise)
@@ -78,13 +78,8 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
+		if (s == null || inStasis)
 			return;
-
-		if (!inStasis)
-		{
-			return; 
-		}
 
 		Seed seed = (Seed)s;
 
@@ -124,6 +119,14 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	public void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
+
+		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
+		if (sprite == null)
+			return;
+		if(inStasis)
+			sprite.color = Color.yellow;
+		else
+			sprite.color = Color.white;
 	}
 
 	/// <summary>

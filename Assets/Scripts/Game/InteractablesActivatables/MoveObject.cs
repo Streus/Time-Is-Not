@@ -67,7 +67,7 @@ public class MoveObject : MonoBehaviour, IActivatable
 	/// <param name="point">Point to move to.</param>
 	void MoveToPoint(Vector2 point)
 	{
-		if (!_active)
+		if (!_active || inStasis || GameManager.isPaused())
 			return;
 		transform.position = Vector2.MoveTowards (transform.position, _points [_nextPoint], _moveSpeed * Time.deltaTime);
 	}
@@ -224,6 +224,14 @@ public class MoveObject : MonoBehaviour, IActivatable
 	public void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
+
+		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
+		if (sprite == null)
+			return;
+		if(inStasis)
+			sprite.color = Color.yellow;
+		else
+			sprite.color = Color.white;
 	}
 
 	/// <summary>
