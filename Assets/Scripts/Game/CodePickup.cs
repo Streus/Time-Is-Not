@@ -5,8 +5,12 @@ using UnityEngine;
 [ExecuteInEditMode] 
 public class CodePickup : MonoBehaviour
 {
+	[Header("Use the dropdown to automatically set the code type")] 
+	[Tooltip("The number of the current key code, which will add to the inventory. It will automatically update in the Inspector if set in edit mode")]
 	public CodeName codeName; 
 
+	[Header("Other (Don't edit)")] 
+	[Tooltip("(Drag in) The sprites for each code.")]
 	public Sprite[] codeSprites; 
 
 	SpriteRenderer rend; 

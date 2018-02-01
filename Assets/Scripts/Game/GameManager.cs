@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	bool pauseLock; 
 
 	// Death functionality
-	[SerializeField] bool isDead; 
+	bool isDead; 
 
 	// Actions
 	public event StateToggled pauseToggled; 
