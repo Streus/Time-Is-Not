@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushBlock : MonoBehaviour
+public class PushBlock : MonoBehaviour, ISavable, IStasisable
 {
 	public enum Direction {Up, Right, Down, Left, None};
 
 	//Shows the direction the box is currently allowed to move.
-	public Direction _moveDirection = Direction.None;
+	private Direction _moveDirection = Direction.None;
 
 	//Check to see if the box is currently moving or not.
-	public bool _moving = false;
+	private bool _moving = false;
 
 	//Rigidbody component of the object.
 	private Rigidbody2D _rb2d;
 
 	//Check to see if the player is touching the block.
-	public bool _playerInRange = false;
+	private bool _playerInRange = false;
+
+	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
+	private bool inStasis = false;
 
 	[Tooltip("Push speed.")]
 	[SerializeField]
@@ -79,6 +82,8 @@ public class PushBlock : MonoBehaviour
 		}
 		if(_moving)
 		{
+			if (!_playerInRange || !_canMove || GameManager.isPaused ())
+				stop ();
 			//stop moving when key is released
 			switch(_moveDirection)
 			{
@@ -205,5 +210,57 @@ public class PushBlock : MonoBehaviour
 	public bool canMove()
 	{
 		return _canMove;
+	}
+
+	// --- ISavable Methods ---
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed (gameObject);
+
+		return seed;
+	}
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		if (inStasis)
+		{
+			return; 
+		}
+
+		Seed seed = (Seed)s;
+
+		s.defaultLoad (gameObject);
+
+		_canMove = seed.canMove;
+
+		stop ();
+	}
+		
+	public bool shouldIgnoreReset() { return !inStasis; }
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//can the block move?
+		public bool canMove;
+
+		public Seed(GameObject subject) : base(subject) {}
+
+	}
+
+
+	// --- IStasisable Methods ---
+	public void ToggleStasis(bool turnOn)
+	{
+		inStasis = turnOn; 
+	}
+
+	public bool InStasis()
+	{
+		return inStasis; 
 	}
 }

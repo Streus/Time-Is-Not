@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Laser : Interactable, IActivatable, ISavable, IStasisable
 {
 	[Tooltip("How far can the laser go? 0-Infinity.")]

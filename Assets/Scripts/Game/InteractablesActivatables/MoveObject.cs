@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour, IActivatable
 {
+	//TODO: draw gizmos along path
 
 	enum EndStyle {LoopToStart, BackAndForth, Stop, TeleportToStart};
 
@@ -44,6 +45,20 @@ public class MoveObject : MonoBehaviour, IActivatable
 	{
 		MoveToPoint (_points[_nextPoint]);
 		GetNextPoint ();
+	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawLine (transform.position, _points[0]);
+		Gizmos.color = Color.white;
+		for(int i = 0; i < _points.Length - 1; i++)
+		{
+			Gizmos.DrawLine (_points[i], _points[i+1]);
+		}
+		if(_endBehavior == EndStyle.LoopToStart)
+			Gizmos.DrawLine (_points[ _points.Length - 1], _points[0]);
+
 	}
 
 	/// <summary>

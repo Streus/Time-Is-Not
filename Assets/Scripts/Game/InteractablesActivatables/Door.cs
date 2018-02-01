@@ -10,17 +10,14 @@ public class Door : Interactable, IActivatable
 
 	[Tooltip("Shows if the door is open or not.")]
 	[SerializeField]
-	public bool _isOpen = false;
+	private bool _isOpen = false;
 
 	[Tooltip("Is the door openable by hand or controled via interactable")]
 	[SerializeField]
-	public DoorTypes _type = DoorTypes.Electronic;
+	private DoorTypes _type = DoorTypes.Electronic;
 
 	//the door's sprite
 	private SpriteRenderer _sprite;
-
-	//the collider for the door
-	private Collider2D _col;
 
 	[Tooltip("The open sprite")]
 	[SerializeField]
@@ -30,8 +27,19 @@ public class Door : Interactable, IActivatable
 	[SerializeField]
 	private Sprite _closedSprite;
 
+	[Tooltip("Button prompt sprite")]
+	[SerializeField]
+	private GameObject _buttonPrompt;
+
+	[Tooltip("Negative button prompt sprite.")]
+	[SerializeField]
+	private GameObject _negativePrompt;
+
 	//Shows if the player is close enough to open the door
 	private bool _playerInRange = true;
+
+	//collider of the door
+	private PolygonCollider2D _collider;
 
 	public enum DoorTypes {Manual, Electronic};
 
@@ -39,15 +47,15 @@ public class Door : Interactable, IActivatable
 	// Use this for initialization
 	void Start () 
 	{
+		_collider = gameObject.GetComponent<PolygonCollider2D> ();
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
-		_col = gameObject.GetComponent<Collider2D> ();
 
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-
+		getInput ();
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -59,17 +67,20 @@ public class Door : Interactable, IActivatable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = true;
-				if(_type == DoorTypes.Manual)
+				if(_type == DoorTypes.Manual && isEnabled())
 				{
-					//TODO: display button prompt
+					_buttonPrompt.SetActive (true);
+					_negativePrompt.SetActive (false);
 				}
 				else
 				{
-					//TODO: display negative prompt
+					_negativePrompt.SetActive (true);
+					_buttonPrompt.SetActive (false);
 				}
 
 			}
 		}
+
 	}
 
 	void OnTriggerExit2D(Collider2D col)
@@ -80,7 +91,8 @@ public class Door : Interactable, IActivatable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = false;
-				//TODO: hide button prompt
+				_buttonPrompt.SetActive (false);
+				_negativePrompt.SetActive (false);
 			}
 		}
 	}
@@ -90,7 +102,7 @@ public class Door : Interactable, IActivatable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual))
+		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual) && isEnabled())
 		{
 			onInteract ();
 		}
@@ -102,11 +114,11 @@ public class Door : Interactable, IActivatable
 
 		if(_isOpen)
 		{
-			//TODO: play open animation
+			Open ();
 		}
 		else
 		{
-			//TODO: Player close animation
+			Close ();
 		}
 	}
 
@@ -150,13 +162,13 @@ public class Door : Interactable, IActivatable
 	{
 		_isOpen = true;
 		_sprite.sprite = _openSprite;
-		_col.enabled = false;
+		_collider.enabled = false;
 	}
 
 	void Close()
 	{
 		_isOpen = false;
 		_sprite.sprite = _closedSprite;
-		_col.enabled = true;
+		_collider.enabled = true;
 	}
 }
