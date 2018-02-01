@@ -29,6 +29,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	// curState represents the last save state available
 	// If pointA represents the last save state made, pointB represents the next available save state, and the arrow 
 	// 		in between represents the player's current pos in the timeline, then curState equals pointA
+
 	private int m_curState;
 	public static int curState
 	{
@@ -37,6 +38,8 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		}
 	}
 
+	[Header("State/Stasis Settings")] 
+	[Tooltip("The max number of time tether states (including 0). Changing this requires modifying scene UI")]
 	[SerializeField] private int m_maxNumStates; 
 	public static int maxNumStates
 	{
@@ -67,6 +70,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		}
 	}
 
+	[Tooltip("The max number of stasis bubbles available. Changes here will not be reflected in scene UI.")]
 	[SerializeField] private int m_maxNumStasis; 
 	public static int maxNumStasis
 	{

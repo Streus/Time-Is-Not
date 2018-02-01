@@ -8,11 +8,13 @@ using UnityEngine.UI;
 /// </summary>
 public class TetherManager : MonoBehaviour 
 {
+	[Header("Tether Key Bindings")]
 	[Tooltip("The key used to create a tether point.")]
 	public KeyCode createPointKey;
 	[Tooltip("The key that needs to be held to bring up the load tether point selection UI")]
 	public KeyCode bringUpTetherUIKey; 
 
+	[Header("UI Settings - better not to touch")]
 	// Time tether UI
 	[Tooltip("(Drag In) The GameObject with the tether UI that zooms between the corner and the screen center")]
 	public GameObject tetherUIParent; 
