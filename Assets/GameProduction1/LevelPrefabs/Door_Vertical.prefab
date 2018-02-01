@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114466898908858670}
   - component: {fileID: 61019384628950612}
   - component: {fileID: 60113854981423558}
+  - component: {fileID: 114065716446863820}
   m_Layer: 0
   m_Name: Door_Vertical
   m_TagString: Untagged
@@ -156,6 +157,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.67, y: 3.68}
   m_EdgeRadius: 0
+--- !u!114 &114065716446863820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142661982404330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registeredID: dv+EG1eNc0S9V+tdF9nhsg
 --- !u!114 &114466898908858670
 MonoBehaviour:
   m_ObjectHideFlags: 1

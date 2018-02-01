@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 114278909528888888}
   - component: {fileID: 61036718777439934}
   - component: {fileID: 60337932208697780}
+  - component: {fileID: 114463531896381738}
   m_Layer: 0
   m_Name: Door_KeyCode_Vertical
   m_TagString: Untagged
@@ -318,6 +319,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: deae9bdd414b14ef9a898e2f24a10335, type: 3}
   _buttonPrompt: {fileID: 1347769603031766}
   _negativePrompt: {fileID: 1680256299069432}
+--- !u!114 &114463531896381738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1759452745736010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registeredID: 0yv2w8rMIUODoqkQXrxf3Q
 --- !u!212 &212089287028599284
 SpriteRenderer:
   m_ObjectHideFlags: 1
