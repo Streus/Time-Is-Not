@@ -217,6 +217,8 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	{
 		Seed seed = new Seed (gameObject);
 
+		seed.canMove = _canMove;
+
 		return seed;
 	}
 	public void loadData(SeedBase s)
