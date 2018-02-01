@@ -36,6 +36,17 @@ public class ButtonSwitch : Interactable
 		getInput ();
 	}
 
+	//Draw lines to all linked activatables
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.blue;
+		for(int i = 0; i < _activatables.Length; i++)
+		{
+			Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
+		}
+
+	}
+
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.gameObject.GetComponent<Entity> () != null) 

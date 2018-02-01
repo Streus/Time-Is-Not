@@ -57,6 +57,17 @@ public class Laser : Interactable, IActivatable, ISavable, IStasisable
 			
 	}
 
+	//Draw lines to all linked activatables
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.blue;
+		for(int i = 0; i < _activatables.Length; i++)
+		{
+			Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
+		}
+
+	}
+
 	/// <summary>
 	/// Raycasts forward and draws the laser line.
 	/// </summary>

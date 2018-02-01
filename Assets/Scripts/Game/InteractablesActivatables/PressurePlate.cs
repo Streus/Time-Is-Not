@@ -46,6 +46,17 @@ public class PressurePlate : Interactable
 		}
 	}
 
+	//Draw lines to all linked activatables
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.blue;
+		for(int i = 0; i < _activatables.Length; i++)
+		{
+			Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
+		}
+
+	}
+
 
 	/// <summary>
 	/// Checks the area on top of the pressure plate for players or push blocks
