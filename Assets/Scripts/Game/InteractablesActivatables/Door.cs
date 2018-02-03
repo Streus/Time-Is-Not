@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode] 
 public class Door : Interactable, IActivatable, ISavable, IStasisable
 {
 	[Tooltip("Interact key (TEMPORARY)")]
@@ -36,7 +37,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	private GameObject _negativePrompt;
 
 	//Shows if the player is close enough to open the door
-	private bool _playerInRange = true;
+	private bool _playerInRange = false;
 
 	//collider of the door
 	private PolygonCollider2D _collider;
@@ -50,6 +51,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	// Use this for initialization
 	void Start () 
 	{
+		_playerInRange = false;
 		_collider = gameObject.GetComponent<PolygonCollider2D> ();
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 
@@ -58,6 +60,17 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	// Update is called once per frame
 	void Update () 
 	{
+		#if UNITY_EDITOR
+		_sprite = gameObject.GetComponent<SpriteRenderer> ();
+		if(_isOpen && _sprite.sprite != _openSprite)
+		{
+			_sprite.sprite = _openSprite;
+		}
+		if(!_isOpen &&  _sprite.sprite != _closedSprite)
+		{
+			_sprite.sprite = _closedSprite;
+		}
+		#endif
 		getInput ();
 	}
 

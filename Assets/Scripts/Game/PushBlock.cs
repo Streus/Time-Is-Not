@@ -60,7 +60,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	/// </summary>
 	void getInput()
 	{
-		if(!_moving && _playerInRange)
+		if(!_moving && _playerInRange && !GameManager.isPaused() && !inStasis)
 		{
 			//Move in direction if key is pressed
 			switch(_moveDirection)
@@ -119,6 +119,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
+				
 				_moveSpeed = (entityHit.getMovespeed () * _speedMult);
 				_playerInRange = true;
 				float xDist = col.transform.position.x - transform.position.x;

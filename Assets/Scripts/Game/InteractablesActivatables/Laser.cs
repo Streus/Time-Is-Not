@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode] 
 [RequireComponent(typeof(LineRenderer))]
 public class Laser : Interactable, IActivatable, ISavable
 {
@@ -51,7 +52,6 @@ public class Laser : Interactable, IActivatable, ISavable
 			if (_laserLine.enabled)
 				_laserLine.enabled = false;
 		}
-			
 	}
 
 	//Draw lines to all linked activatables
