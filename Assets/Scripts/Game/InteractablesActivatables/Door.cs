@@ -65,10 +65,12 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		if(_isOpen && _sprite.sprite != _openSprite)
 		{
 			_sprite.sprite = _openSprite;
+			_collider.enabled = false;
 		}
 		if(!_isOpen &&  _sprite.sprite != _closedSprite)
 		{
 			_sprite.sprite = _closedSprite;
+			_collider.enabled = true;
 		}
 		#endif
 		getInput ();
