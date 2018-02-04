@@ -15,7 +15,7 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 	// --- ISavable Methods ---
 	public SeedBase saveData()
 	{
-		SeedBase seed = new SeedBase (gameObject);
+		SeedBase seed = new SeedBase (gameObject, !inStasis);
 
 		return seed;
 	}
@@ -28,11 +28,7 @@ public class SimpleSavableObj : MonoBehaviour, ISavable, IStasisable
 		{
 			return; 
 		}
-
-		s.defaultLoad (gameObject);
 	}
-	public bool shouldIgnoreReset() { return !inStasis; }
-
 
 	// --- IStasisable Methods ---
 	public void ToggleStasis(bool turnOn)

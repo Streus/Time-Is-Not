@@ -65,7 +65,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed (gameObject, !inStasis);
 
 		seed.isOn = _active;
 
@@ -83,18 +83,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 
 		Seed seed = (Seed)s;
 
-		s.defaultLoad (gameObject);
-
 		_active = seed.isOn;
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return !inStasis; 
 	}
 
 	/// <summary>
@@ -105,7 +94,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 		//is the object moving?
 		public bool isOn;
 
-		public Seed(GameObject subject) : base(subject) {}
+		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
 
 	}
 

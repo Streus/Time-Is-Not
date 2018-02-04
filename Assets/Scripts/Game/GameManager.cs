@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public SeedBase saveData()
 	{
 		//SeedBase seed = new SeedBase (gameObject);
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed (gameObject, false);
 		seed.codes = codes; 
 
 		return seed;
@@ -58,17 +58,14 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 		if (isDead)
 			isDead = false; 
-
-		s.defaultLoad (gameObject); 
 	}
-	public bool shouldIgnoreReset() { return false; }
 
 	public class Seed : SeedBase
 	{
 		// Define all the extra variables that should be saved here
 		public List<CodeName> codes; 
 
-		public Seed(GameObject subject) : base(subject) { }
+		public Seed(GameObject subject, bool ir) : base(subject, ir) { }
 
 	}
 

@@ -153,7 +153,7 @@ public class ButtonSwitch : Interactable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		SeedBase seed = new SeedBase (gameObject);
+		SeedBase seed = new SeedBase (gameObject, false);
 
 		return seed;
 	}
@@ -168,17 +168,5 @@ public class ButtonSwitch : Interactable
 			return;
 
 		_playerInRange = false;
-
-		s.defaultLoad (gameObject);
 	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return false; 
-	}
-
 }
