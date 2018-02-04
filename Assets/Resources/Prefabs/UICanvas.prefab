@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 224211042095256710}
   - component: {fileID: 222946676671650092}
   - component: {fileID: 114781748879827692}
+  - component: {fileID: 114971653639248618}
   m_Layer: 5
   m_Name: StasisBubbleHeaderText
   m_TagString: Untagged
@@ -298,13 +299,14 @@ GameObject:
   - component: {fileID: 223737304343049290}
   - component: {fileID: 114560004237430946}
   - component: {fileID: 114262126727349994}
+  - component: {fileID: 114231092212344992}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1640550357394514
 GameObject:
   m_ObjectHideFlags: 1
@@ -454,6 +456,7 @@ GameObject:
   - component: {fileID: 224020011745417684}
   - component: {fileID: 222126895464562946}
   - component: {fileID: 114678512255752330}
+  - component: {fileID: 114789349143795900}
   m_Layer: 5
   m_Name: KeyCodeHeaderText
   m_TagString: Untagged
@@ -817,6 +820,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114231092212344992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442589936957390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd738e7aa76b41c393e2f32c38cb18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabled: 0
 --- !u!114 &114242799536612586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1515,6 +1530,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Stasis Bubbles Left
+--- !u!114 &114789349143795900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811316343657960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.75735295, g: 1, b: 0.96987826, a: 0.8627451}
+  m_EffectDistance: {x: 0.5, y: -0.5}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114791880471285652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1809,6 +1838,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114971653639248618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1193426416966920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.75735295, g: 1, b: 0.96987826, a: 0.8627451}
+  m_EffectDistance: {x: 0.5, y: -0.5}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114974483557865038
 MonoBehaviour:
   m_ObjectHideFlags: 1
