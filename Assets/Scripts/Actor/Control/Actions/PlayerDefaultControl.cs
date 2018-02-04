@@ -31,8 +31,9 @@ public class PlayerDefaultControl : Action
 		RaycastHit2D[] hits = new RaycastHit2D[1];
 		int hitCount = 0;
 		ContactFilter2D cf = new ContactFilter2D ();
-		cf.layerMask = moveMask;
+		cf.SetLayerMask(moveMask);
 		hitCount = p.GetComponent<Collider2D> ().Cast (movementVector, cf, hits, p.getSelf ().getMovespeed () * Time.deltaTime);
+		//Debug.Log(hitCount); //DEBUGs
 		if(hitCount <= 0)
 			p.transform.Translate ((Vector3)movementVector);
 	}
