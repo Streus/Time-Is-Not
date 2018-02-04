@@ -48,7 +48,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	}
 
 	// State data
-	List<Dictionary<string, SeedBase>> stateSeeds; 
+	List<Dictionary<string, SeedCollection>> stateSeeds; 
 
 
 	/*
@@ -87,11 +87,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	void Start()
 	{
-		stateSeeds = new List<Dictionary<string, SeedBase>> (); 
+		stateSeeds = new List<Dictionary<string, SeedCollection>> (); 
 
 		for (int i = 0; i < m_maxNumStates; i++)
 		{
-			stateSeeds.Add(new Dictionary<string, SeedBase> ()); 
+			stateSeeds.Add(new Dictionary<string, SeedCollection> ());
 		}
 
 		// Save default state seeds
@@ -202,7 +202,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		// First, create a hash set for faster comparisons
 		HashSet<string> seedSet = new HashSet<string> (); 
 
-		foreach (SeedBase sb in stateSeeds[state].Values)
+		foreach (SeedCollection sb in stateSeeds[state].Values)
 		{
 			//Debug.Log("Load seed ID: " + sb.registeredID); 
 			seedSet.Add(sb.registeredID); 
@@ -230,7 +230,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			roSet.Add(r.rID);
 		}
 			
-		foreach (SeedBase sb in stateSeeds[state].Values)
+		foreach (SeedCollection sb in stateSeeds[state].Values)
 		{
 			if (!roSet.Contains(sb.registeredID))
 			{
@@ -260,7 +260,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		//iterate over the list of ROs and pass them data
 		foreach (RegisteredObject ro in RegisteredObject.getObjects())
 		{
-			SeedBase data;
+			SeedCollection data;
 			if (stateSeeds[state].TryGetValue (ro.rID, out data))
 				ro.sow (data);
 		}
@@ -268,7 +268,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		// Reset state data for dictionaries after the current new state, if they've already been instantiated
 		for (int i = state + 1; i < stateSeeds.Count; i++)
 		{
-			stateSeeds[i] = new Dictionary<string, SeedBase> (); 
+			stateSeeds[i] = new Dictionary<string, SeedCollection> ();
 		}
 
 		if (stateLoaded != null)
