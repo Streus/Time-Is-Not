@@ -153,7 +153,7 @@ public class RegisteredObject : MonoBehaviour
 	// Take a seed and pass it along to the savable script attached to this GO
 	public void sow(SeedCollection collection)
 	{
-		ISavable holes = GetComponents<ISavable> ();
+		ISavable[] holes = GetComponents<ISavable> ();
 
 		//intercept and save prefabPath
 		prefabPath = collection.prefabPath;

@@ -81,7 +81,7 @@ public class Hummingbird : Controller
 
 	public override SeedBase saveData ()
 	{
-		HSeed s = new HSeed (gameObject);
+		HSeed s = new HSeed (gameObject, !allowReset);
 		return s;
 	}
 
@@ -95,7 +95,7 @@ public class Hummingbird : Controller
 	}
 	#endregion
 
-	public void OnDrawGizmos()
+	public override void OnDrawGizmos()
 	{
 		Gizmos.color = getState().color;
 
@@ -117,7 +117,7 @@ public class Hummingbird : Controller
 		public State defaultState;
 		public Transform pursuitTarget;
 
-		public HSeed(GameObject g) : base(g)
+		public HSeed(GameObject g, bool ir) : base(g, ir)
 		{
 			Hummingbird h = g.GetComponent<Hummingbird>();
 			currentNode = h.patrolStart;

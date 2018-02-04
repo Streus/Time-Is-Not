@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushBlock : MonoBehaviour, ISavable, IStasisable
+public class PushBlock : MonoBehaviour, ISavable
 {
 	public enum Direction {Up, Right, Down, Left, None};
 
@@ -240,7 +240,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	// --- ISavable Methods ---
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed ();
 
 		seed.canMove = _canMove;
 
@@ -253,8 +253,6 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 
 		Seed seed = (Seed)s;
 
-		s.defaultLoad (gameObject);
-
 		_canMove = seed.canMove;
 
 		_rb2d.velocity = Vector2.zero;
@@ -264,8 +262,6 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 		_rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 
 	}
-		
-	public bool shouldIgnoreReset() { return inStasis; }
 
 	/// <summary>
 	/// The seed contains all required savable information for the object.
@@ -274,9 +270,6 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	{
 		//can the block move?
 		public bool canMove;
-
-		public Seed(GameObject subject) : base(subject) {}
-
 	}
 
 

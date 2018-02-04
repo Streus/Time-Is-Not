@@ -16,7 +16,4 @@ public interface ISavable
 	// Take a serializable class and attempt to use it to fill values
 	// AKA sow
 	void loadData(SeedBase seed);
-
-	// if true, the SSM will never reset this object back to its default values
-	bool shouldIgnoreReset ();
 }

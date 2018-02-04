@@ -168,7 +168,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed (gameObject, !inStasis);
 
 		seed.isOn = _active;
 
@@ -190,22 +190,11 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 
 		Seed seed = (Seed)s;
 
-		s.defaultLoad (gameObject);
-
 		_active = seed.isOn;
 
 		_reverseMovement = seed.isReversed;
 
 		_nextPoint = seed.nextPoint;
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return !inStasis; 
 	}
 
 	/// <summary>
@@ -222,7 +211,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 		//which point should it move toward?
 		public int nextPoint;
 
-		public Seed(GameObject subject) : base(subject) {}
+		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
 
 	}
 

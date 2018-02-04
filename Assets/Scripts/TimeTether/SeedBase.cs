@@ -13,9 +13,9 @@ public class SeedBase
 	#region INSTANCE_METHODS
 
 	// Create a new Seed that will pull transform and rigidbody info when serialized
-	public SeedBase(ISavable subject)
+	public SeedBase(GameObject subject, bool ignoreReset = false)
 	{
-		ignoreReset = subject.shouldIgnoreReset ();
+		this.ignoreReset = ignoreReset;
 	}
 	#endregion
 }

@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour, ISavable
 
 	[Tooltip("Allow the data from this Controller to be reset by a level state reload?")]
 	[SerializeField]
-	private bool allowReset = true;
+	protected bool allowReset = true;
 
 	[Tooltip("The current state this controller is using in its state machine.")]
 	[SerializeField]
@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour, ISavable
 			facePoint (transform.position);
 	}
 
-	public void OnDrawGizmos()
+	public virtual void OnDrawGizmos()
 	{
 		Gizmos.color = state != null ? state.color : Color.white;
 		Gizmos.DrawWireSphere (transform.position, 1f);
@@ -109,21 +109,15 @@ public class Controller : MonoBehaviour, ISavable
 	#region ISAVABLE_METHODS
 	public virtual SeedBase saveData()
 	{
-		Seed s = new Seed (gameObject);;
+		Seed s = new Seed (gameObject, !allowReset);
 		return s;
 	}
 
 	public virtual void loadData(SeedBase seed)
 	{
 		Seed s = (Seed)seed;
-		s.defaultLoad (gameObject);
 		state = s.state;
 		path = s.path;
-	}
-
-	public bool shouldIgnoreReset()
-	{
-		return !allowReset;
 	}
 	#endregion
 	#endregion
@@ -135,7 +129,7 @@ public class Controller : MonoBehaviour, ISavable
 		public State state;
 		public Stack<Vector3> path;
 
-		public Seed(GameObject g) : base(g)
+		public Seed(GameObject g, bool ir) : base(g, ir)
 		{
 			Controller c = g.GetComponent<Controller>();
 			state = c.state;

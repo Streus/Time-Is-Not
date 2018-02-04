@@ -175,7 +175,7 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed (gameObject, false);
 
 		seed.isOn = isEnabled ();
 
@@ -193,21 +193,10 @@ public class Laser : Interactable, IActivatable, ISavable
 
 		Seed seed = (Seed)s;
 
-		s.defaultLoad (gameObject);
-
 		if (seed.isOn)
 			enable ();
 		else
 			disable ();
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return false; 
 	}
 
 	/// <summary>
@@ -218,7 +207,7 @@ public class Laser : Interactable, IActivatable, ISavable
 		//is the laser on?
 		public bool isOn;
 
-		public Seed(GameObject subject) : base(subject) {}
+		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
 
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode] 
-public class Door : Interactable, IActivatable, ISavable, IStasisable
+public class Door : Interactable, IActivatable, ISavable
 {
 	[Tooltip("Interact key (TEMPORARY)")]
 	[SerializeField]
@@ -228,7 +228,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed ();
 
 		seed.isOpen = _isOpen;
 
@@ -241,9 +241,6 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
-			return;
-
 		Seed seed = (Seed)s;
 
 		if (seed.isOpen) {
@@ -252,18 +249,6 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		else {
 			Close ();
 		}
-
-		s.defaultLoad (gameObject);
-
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return inStasis; 
 	}
 
 	/// <summary>
@@ -274,7 +259,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		//is the door open?
 		public bool isOpen;
 
-		public Seed(GameObject subject) : base(subject) {}
+		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
 
 	}
 
