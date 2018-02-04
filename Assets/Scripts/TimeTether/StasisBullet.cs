@@ -45,6 +45,9 @@ public class StasisBullet : MonoBehaviour
 
 	public void OnTriggerEnter2D(Collider2D col)
 	{
+		if (col != null && col.isTrigger)
+			return;
+		
 		StasisBubble newStasis = Instantiate<GameObject>(stasisBubblePref, transform.position, transform.rotation).GetComponent<StasisBubble>(); 
 		LevelStateManager.addStasisBubble(newStasis);
 		LevelStateManager.inst.stateLoaded -= cleanUp;
