@@ -80,14 +80,23 @@ public class RegisteredObject : MonoBehaviour
 	/* Instance Methods */
 	public void Reset()
 	{
+		generateID ();
+	}
+
+	private void generateID()
+	{
 		registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
 	}
 
 	public void Awake()
 	{
 		#if UNITY_EDITOR
-		if(!Application.isPlaying)
-			Reset();
+		if(!EditorApplication.isPlayingOrWillChangePlaymode)
+		{
+			Undo.RecordObject(this, "Generate ID");
+			generateID();
+			EditorUtility.SetDirty(this);
+		}
 		#endif
 		directory.Add (this);
 	}

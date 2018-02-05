@@ -9,8 +9,8 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	//Shows the direction the box is currently allowed to move.
 	private Direction _moveDirection = Direction.None;
 
-	//Check to see if the box is currently moving or not.
-	private bool _moving = false;
+	//Check to see if the box is currently being pushed or not.
+	private bool _beingPushed = false;
 
 	//Rigidbody component of the object.
 	private Rigidbody2D _rb2d;
@@ -18,11 +18,13 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	//Check to see if the player is touching the block.
 	private bool _playerInRange = false;
 
+	private Player _player;
+
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
 
 	//move speed
-	private float _moveSpeed = 2;
+	private float _moveSpeed = 2; 
 
 	[Tooltip("Push speed Multiplier.")]
 	[SerializeField]
@@ -53,6 +55,34 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	void Update()
 	{
 		getInput ();
+
+		if(_beingPushed)
+		{
+			_rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+			switch (_moveDirection) 
+			{
+			case Direction.Up:
+				transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
+				_player.transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
+				break;
+			case Direction.Right:
+				transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
+				_player.transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
+				break;
+			case Direction.Down:
+				transform.Translate (Vector2.down * _moveSpeed * Time.deltaTime);
+				_player.transform.Translate (Vector2.down * _moveSpeed * Time.deltaTime);
+				break;
+			case Direction.Left:
+				transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
+				_player.transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
+				break;
+			}
+		}
+		else
+		{
+			_rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+		}
 	}
 
 	/// <summary>
@@ -60,7 +90,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	/// </summary>
 	void getInput()
 	{
-		if(!_moving && _playerInRange && !GameManager.isPaused() && !inStasis)
+		if(!_beingPushed && _playerInRange)
 		{
 			//Move in direction if key is pressed
 			switch(_moveDirection)
@@ -83,7 +113,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 				break;
 			}
 		}
-		if(_moving)
+		if(_beingPushed)
 		{
 			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis)
 				stop ();
@@ -119,7 +149,8 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
-				
+				if (_player == null)
+					_player = entityHit.GetComponent<Player> ();
 				_moveSpeed = (entityHit.getMovespeed () * _speedMult);
 				_playerInRange = true;
 				float xDist = col.transform.position.x - transform.position.x;
@@ -164,22 +195,9 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	/// </summary>
 	void move(Direction dir)
 	{
-		_moving = true;
-		switch(dir)
-		{
-		case Direction.Up:
-			_rb2d.velocity = Vector2.up * _moveSpeed;
-			break;
-		case Direction.Right:
-			_rb2d.velocity = Vector2.right * _moveSpeed;
-			break;
-		case Direction.Down:
-			_rb2d.velocity = Vector2.down * _moveSpeed;
-			break;
-		case Direction.Left:
-			_rb2d.velocity = Vector2.left * _moveSpeed;
-			break;
-		}
+		if (!_player.pushing ())
+			_player.enterPushState ();
+		_beingPushed = true;
 		//TODO: put player in push mode and move with block;
 	}
 
@@ -188,8 +206,10 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	/// </summary>
 	void stop()
 	{
+		if (_player.pushing ())
+			_player.exitPushState ();
 		_rb2d.velocity = Vector2.zero;
-		_moving = false;
+		_beingPushed = false;
 		//TODO: put player out of push mode and move on its own;
 	}
 
@@ -228,19 +248,19 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	}
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
+		if (s == null || inStasis)
 			return;
-
-		if (inStasis)
-		{
-			return; 
-		}
 
 		Seed seed = (Seed)s;
 
 		_canMove = seed.canMove;
 
-		stop ();
+		_rb2d.velocity = Vector2.zero;
+
+		_beingPushed = false;
+
+		_rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+
 	}
 
 	/// <summary>

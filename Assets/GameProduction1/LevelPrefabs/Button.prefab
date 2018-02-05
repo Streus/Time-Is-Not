@@ -26,7 +26,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1735698400242542
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4166126779886000
 Transform:
   m_ObjectHideFlags: 1
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1735698400242542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.501, y: -2.22, z: 0}
+  m_LocalPosition: {x: -6.0674314, y: 0.6013521, z: 0}
   m_LocalScale: {x: 0.3076873, y: 0.3076873, z: 0.3076873}
   m_Children:
   - {fileID: 4166126779886000}
@@ -165,10 +165,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _timer: 0
   _interactKey: 101
   _activatables: []
   _buttonPrompt: {fileID: 1315673457316986}
   _negativePrompt: {fileID: 1741508832600182}
+  _unpressedSprite: {fileID: 21300000, guid: 2660a0380f796419fbabc74ab2d76c33, type: 3}
+  _pressedSprite: {fileID: 21300000, guid: 52607fb129f924a44ad3f6f54a89f2ca, type: 3}
 --- !u!212 &212218372576849516
 SpriteRenderer:
   m_ObjectHideFlags: 1

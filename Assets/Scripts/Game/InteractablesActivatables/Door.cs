@@ -65,13 +65,29 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		if(_isOpen && _sprite.sprite != _openSprite)
 		{
 			_sprite.sprite = _openSprite;
+			_collider.enabled = false;
 		}
 		if(!_isOpen &&  _sprite.sprite != _closedSprite)
 		{
 			_sprite.sprite = _closedSprite;
+			_collider.enabled = true;
 		}
 		#endif
 		getInput ();
+
+		if(!inStasis)
+		{
+			if(_isOpen && _collider.enabled)
+			{
+				_sprite.sprite = _openSprite;
+				_collider.enabled = false;
+			}
+			if(!_isOpen && !_collider.enabled)
+			{
+				_sprite.sprite = _closedSprite;
+				_collider.enabled = true;
+			}
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -143,8 +159,10 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// </summary>
 	public bool onActivate()
 	{
-		if (_type == DoorTypes.Manual || inStasis)
+		if (_type == DoorTypes.Manual) {
+			Debug.Log("NOTE: This door cannot be opened remotely, please change it to an electronic door.");
 			return _isOpen;
+		}
 		if(!_isOpen)
 		{
 			Open ();
@@ -177,15 +195,11 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	void Open()
 	{
 		_isOpen = true;
-		_sprite.sprite = _openSprite;
-		_collider.enabled = false;
 	}
 
 	void Close()
 	{
 		_isOpen = false;
-		_sprite.sprite = _closedSprite;
-		_collider.enabled = true;
 	}
 
 
