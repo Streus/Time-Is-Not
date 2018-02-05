@@ -6,29 +6,27 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 {
 	//TODO: draw gizmos along path
 
-	enum EndStyle {LoopToStart, BackAndForth, Stop, TeleportToStart};
+	public enum EndStyle {LoopToStart, BackAndForth, Stop, TeleportToStart};
 
 	[Tooltip("Path object will follow")]
-	[SerializeField]
-	private Vector2[] _points;
+	public Vector2[] _points;
 
 	[Tooltip("Is the object moving?")]
 	[SerializeField]
 	private bool _active = true;
 
 	[Tooltip("How fast the object moves.")]
-	[SerializeField]
-	private float _moveSpeed = 1;
+	public float _moveSpeed = 1;
 
 	[Tooltip("What does the object do when it reaches the last point?")]
-	[SerializeField]
-	private EndStyle _endBehavior = EndStyle.TeleportToStart;
+	public EndStyle _endBehavior = EndStyle.TeleportToStart;
 
 	//if true, the object will move backwards through the points
 	private bool _reverseMovement = false;
 
 	//The current target Point
 	private int _nextPoint = 0;
+
 
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
@@ -44,11 +42,13 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	void Update () 
 	{
 		MoveToPoint (_points[_nextPoint]);
-		GetNextPoint ();
+		setNextPoint ();
 	}
 
 	void OnDrawGizmos()
 	{
+		if (_points.Length == 0)
+			return;
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawLine (transform.position, _points[0]);
 		for(int i = 0; i < _points.Length - 1; i++)
@@ -74,7 +74,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <summary>
 	/// Gets the next point.
 	/// </summary>
-	void GetNextPoint()
+	public void setNextPoint()
 	{
 		if(Vector2.Distance(transform.position, _points[_nextPoint]) < 0.1f)
 		{
@@ -124,6 +124,11 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 		}
 	}
 
+	public Vector2 getNextPoint()
+	{
+		return _points[_nextPoint];
+	}
+
 	/// <summary>
 	/// Toggles the Object's state and returns it.
 	/// </summary>
@@ -139,6 +144,11 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	public bool onActivate(bool state)
 	{
 		_active = state;
+		return _active;
+	}
+
+	public bool active()
+	{
 		return _active;
 	}
 
