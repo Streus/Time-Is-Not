@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObject : MonoBehaviour, IActivatable
+public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 {
 	//TODO: draw gizmos along path
 
