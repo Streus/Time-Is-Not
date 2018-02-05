@@ -167,13 +167,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
+		if (s == null || inStasis)
 			return;
-
-		if (!inStasis)
-		{
-			return; 
-		}
 
 		Seed seed = (Seed)s;
 
