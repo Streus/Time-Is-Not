@@ -58,6 +58,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 
 		if(_beingPushed)
 		{
+			_rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
 			switch (_moveDirection) 
 			{
 			case Direction.Up:
@@ -77,6 +78,10 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 				_player.transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
 				break;
 			}
+		}
+		else
+		{
+			_rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 		}
 	}
 
