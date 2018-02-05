@@ -97,9 +97,49 @@ public class PressurePlate : Interactable
 	{
 		foreach(GameObject activatable in _activatables)
 		{
-			if (activatable.GetComponent<IActivatable> () != null)
-				activatable.GetComponent<IActivatable> ().onActivate (_pressed);
+			if(activatable.GetComponent<IActivatable>() != null)
+				activatable.GetComponent<IActivatable>().onActivate ();
 		}
 	}
 
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed ();
+
+		seed.isPressed = _pressed;
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		Seed seed = (Seed)s;
+
+		if(seed.isPressed)
+		{
+			onInteract ();
+		}
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the plate pressed?
+		public bool isPressed;
+	}
 }
