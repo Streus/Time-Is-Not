@@ -33,6 +33,11 @@ public class Player : Controller
 		setState (prePushState);
 	}
 
+	public bool pushing()
+	{
+		return (pushState == getState ());
+	}
+
 	#region ISAVABLE_METHODS
 	/*
 	public override SeedBase saveData ()
