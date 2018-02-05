@@ -257,7 +257,12 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 
 		_canMove = seed.canMove;
 
-		stop ();
+		_rb2d.velocity = Vector2.zero;
+
+		_beingPushed = false;
+
+		_rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+
 	}
 		
 	public bool shouldIgnoreReset() { return !inStasis; }
