@@ -7,14 +7,15 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class RegisteredObject : MonoBehaviour
 {
-	/* Static Vars */
+	#region STATIC_VARS
 	private static List<RegisteredObject> directory;
 	static RegisteredObject()
 	{ 
 		directory = new List<RegisteredObject>();
 	}
+	#endregion
 
-	/* Instance Vars */
+	#region INSTANCE_VARS
 	[SerializeField]
 	private string registeredID;
 	public string rID
@@ -25,7 +26,13 @@ public class RegisteredObject : MonoBehaviour
 	// Path to a prefab to which this RO is attached
 	private string prefabPath = "";
 
-	/* Static Methods */
+	private bool allowReset = true;
+
+	public delegate void SetBoolean(bool val);
+	public event SetBoolean allowResetChanged;
+	#endregion
+
+	#region STATIC_METHODS
 	public static RegisteredObject[] getObjects()
 	{
 		return directory.ToArray ();
@@ -76,8 +83,9 @@ public class RegisteredObject : MonoBehaviour
 		ro.prefabPath = prefabPath;
 		return inst;
 	}
+	#endregion
 
-	/* Instance Methods */
+	#region INSTANCE_METHODS
 	public void Reset()
 	{
 		generateID ();
@@ -153,18 +161,29 @@ public class RegisteredObject : MonoBehaviour
 	// Take a seed and pass it along to the savable script attached to this GO
 	public void sow(SeedCollection collection)
 	{
+		if (!allowReset)
+			return;
+
 		ISavable[] holes = GetComponents<ISavable> ();
 
 		//intercept and save prefabPath
 		prefabPath = collection.prefabPath;
 
-		collection.defaultLoad(gameObject);
 		if(collection.size > 0)
 			collection.loadSeeds (holes);
+	}
+
+	public void setAllowReset(bool val)
+	{
+		allowReset = val;
+
+		if (allowResetChanged != null)
+			allowResetChanged (val);
 	}
 
 	public override string ToString ()
 	{
 		return "[RO] ID: " + registeredID;
 	}
+	#endregion
 }

@@ -62,20 +62,24 @@ public class SeedCollection
 		}
 	}
 
-	public void loadSeeds(params ISavable[] holes)
+	public void loadSeeds(GameObject subject, params ISavable[] holes)
 	{
+		defaultLoad (subject);
+
 		SeedBase seed;
 		for (int i = 0; i < holes.Length; i++)
 		{
 			if (seeds.TryGetValue (holes [i].GetType (), out seed))
+			{
 				holes [i].loadData (seed);
+			}
 			else
 				Debug.LogError ("Script mismatch! " + holes [i].GetType ().FullName +
 				" is on the GameObject, but not in the collection!");
 		}
 	}
 
-	public void defaultLoad(GameObject subject)
+	private void defaultLoad(GameObject subject)
 	{
 		if (destroyed)
 		{
