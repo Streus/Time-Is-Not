@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushBlock : MonoBehaviour, ISavable, IStasisable
+public class PushBlock : MonoBehaviour, ISavable
 {
 	public enum Direction {Up, Right, Down, Left, None};
 
@@ -49,6 +49,13 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	{
 		//TODO: get input keys from input module
 		_rb2d = gameObject.GetComponent<Rigidbody2D> ();
+
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
 	// Update is called once per frame
@@ -240,7 +247,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	// --- ISavable Methods ---
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, inStasis);
+		Seed seed = new Seed ();
 
 		seed.canMove = _canMove;
 
@@ -270,14 +277,11 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 	{
 		//can the block move?
 		public bool canMove;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 
 
 	// --- IStasisable Methods ---
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn; 
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();

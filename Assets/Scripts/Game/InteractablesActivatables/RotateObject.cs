@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
+public class RotateObject : MonoBehaviour, IActivatable, ISavable
 {
 	[Tooltip("Which direction to rotate.")]
 	[SerializeField]
@@ -22,7 +22,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	// Use this for initialization
 	void Start () 
 	{
-		
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 	}
 	
 	// Update is called once per frame
@@ -40,6 +40,11 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 			turnDirection = -1;
 			
 		transform.Rotate (Vector3.forward * _turnSpeed * turnDirection * Time.deltaTime);
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
 	/// <summary>
@@ -65,7 +70,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, !inStasis);
+		Seed seed = new Seed ();
 
 		seed.isOn = _active;
 
@@ -78,9 +83,6 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null || inStasis)
-			return;
-
 		Seed seed = (Seed)s;
 
 		_active = seed.isOn;
@@ -93,9 +95,6 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	{
 		//is the object moving?
 		public bool isOn;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 
 
@@ -105,7 +104,7 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// Toggles if the object is in stasis.
 	/// </summary>
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
 

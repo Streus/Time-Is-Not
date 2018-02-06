@@ -9,10 +9,6 @@ public class Controller : MonoBehaviour, ISavable
 {
 	#region INSTANCE_VARS
 
-	[Tooltip("Allow the data from this Controller to be reset by a level state reload?")]
-	[SerializeField]
-	protected bool allowReset = true;
-
 	[Tooltip("The current state this controller is using in its state machine.")]
 	[SerializeField]
 	private State state;
@@ -109,7 +105,7 @@ public class Controller : MonoBehaviour, ISavable
 	#region ISAVABLE_METHODS
 	public virtual SeedBase saveData()
 	{
-		Seed s = new Seed (gameObject, !allowReset);
+		Seed s = new Seed (this);
 		return s;
 	}
 
@@ -129,9 +125,8 @@ public class Controller : MonoBehaviour, ISavable
 		public State state;
 		public Stack<Vector3> path;
 
-		public Seed(GameObject g, bool ir) : base(g, ir)
+		public Seed(Controller c)
 		{
-			Controller c = g.GetComponent<Controller>();
 			state = c.state;
 			path = c.path;
 		}

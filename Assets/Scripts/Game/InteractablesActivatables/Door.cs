@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode] 
-public class Door : Interactable, IActivatable, ISavable, IStasisable
+public class Door : Interactable, IActivatable, ISavable
 {
 	[Tooltip("Interact key (TEMPORARY)")]
 	[SerializeField]
@@ -54,6 +54,8 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		_playerInRange = false;
 		_collider = gameObject.GetComponent<PolygonCollider2D> ();
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
+
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 
 	}
 
@@ -127,6 +129,11 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 				_negativePrompt.SetActive (false);
 			}
 		}
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
 	/// <summary>
@@ -211,7 +218,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, !inStasis);
+		Seed seed = new Seed ();
 
 		seed.isOpen = _isOpen;
 
@@ -242,9 +249,6 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	{
 		//is the door open?
 		public bool isOpen;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 
 
@@ -254,7 +258,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// Toggles if the object is in stasis.
 	/// </summary>
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
 		if (inStasis)

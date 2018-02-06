@@ -82,7 +82,7 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, false);
+		Seed seed = new Seed ();
 
 		seed.isOpen = _isOpen;
 
@@ -95,9 +95,6 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
-			return;
-
 		Seed seed = (Seed)s;
 
 		if (seed.isOpen)
@@ -113,8 +110,5 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 	{
 		//is the door open?
 		public bool isOpen;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 }

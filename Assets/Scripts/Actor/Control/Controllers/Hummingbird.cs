@@ -81,7 +81,7 @@ public class Hummingbird : Controller
 
 	public override SeedBase saveData ()
 	{
-		HSeed s = new HSeed (gameObject, !allowReset);
+		HSeed s = new HSeed (this);
 		return s;
 	}
 
@@ -117,9 +117,9 @@ public class Hummingbird : Controller
 		public State defaultState;
 		public Transform pursuitTarget;
 
-		public HSeed(GameObject g, bool ir) : base(g, ir)
+		public HSeed(Controller c) : base(c)
 		{
-			Hummingbird h = g.GetComponent<Hummingbird>();
+			Hummingbird h = State.cast<Hummingbird>(c);
 			currentNode = h.patrolStart;
 			defaultState = h.defaultState;
 			pursuitTarget = h.pursuitTarget;
