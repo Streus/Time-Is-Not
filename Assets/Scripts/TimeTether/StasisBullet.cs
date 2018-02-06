@@ -40,7 +40,10 @@ public class StasisBullet : MonoBehaviour
 	private void cleanUp(bool success)
 	{
 		if (success)
+		{
+			LevelStateManager.inst.stateLoaded -= cleanUp;
 			Destroy (gameObject);
+		}
 	}
 
 	public void OnTriggerEnter2D(Collider2D col)
@@ -50,7 +53,6 @@ public class StasisBullet : MonoBehaviour
 		
 		StasisBubble newStasis = Instantiate<GameObject>(stasisBubblePref, transform.position, transform.rotation).GetComponent<StasisBubble>(); 
 		LevelStateManager.addStasisBubble(newStasis);
-		LevelStateManager.inst.stateLoaded -= cleanUp;
-		Destroy (gameObject);
+		cleanUp (true);
 	}
 }

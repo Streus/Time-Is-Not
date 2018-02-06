@@ -26,10 +26,13 @@ public class RegisteredObject : MonoBehaviour
 	// Path to a prefab to which this RO is attached
 	private string prefabPath = "";
 
+	[Tooltip("Can this object be stasis'd?")]
 	[SerializeField]
 	private bool stasisable = false;
 
-	private bool allowReset = true;
+	// <= 0 == false; > 0 == true
+	[SerializeField] //DEBUG temp
+	private int allowReset = 1;
 
 	public delegate void SetBoolean(bool val);
 	public event SetBoolean allowResetChanged;
@@ -125,6 +128,29 @@ public class RegisteredObject : MonoBehaviour
 		directory.Remove (this);
 	}
 
+	public void OnTriggerEnter2D(Collider2D col)
+	{
+		_OnColliderEnter2D(col);
+	}
+	public void _OnColliderEnter2D(Collider2D col)
+	{
+		Debug.Log ("stasis'd!");
+		StasisBubble sb = col.GetComponent<StasisBubble> ();
+		if (sb != null && stasisable)
+			setAllowReset (false);
+	}
+	public void OnTriggerExit2D(Collider2D col)
+	{
+		_OnColliderExit2D(col);
+	}
+	public void _OnColliderExit2D(Collider2D col)
+	{
+		Debug.Log ("unstasis'd!");
+		StasisBubble sb = col.GetComponent<StasisBubble> ();
+		if (sb != null && stasisable)
+			setAllowReset (true);
+	}
+
 	#if UNITY_EDITOR
 	bool isQuitting = false; 
 	void OnApplicationQuit()
@@ -149,11 +175,6 @@ public class RegisteredObject : MonoBehaviour
 			RegisteredObject parentRO = parent.GetComponent<RegisteredObject> ();
 			if (parentRO != null)
 				collection.parentID = parentRO.registeredID;
-			else
-			{
-				// TODO see if this needs to be added back; temporarily removed
-				//Debug.Log(ToString() + " is under a non-RO. Make its parent an RO to save its data properly.");
-			}
 		}
 		else
 			collection.parentID = "";
@@ -164,7 +185,7 @@ public class RegisteredObject : MonoBehaviour
 	// Take a seed and pass it along to the savable script attached to this GO
 	public void sow(SeedCollection collection)
 	{
-		if (!allowReset)
+		if (allowReset <= 0)
 			return;
 
 		ISavable[] holes = GetComponents<ISavable> ();
@@ -178,15 +199,21 @@ public class RegisteredObject : MonoBehaviour
 
 	public void setAllowReset(bool val)
 	{
-		allowReset = val;
+		if (val)
+			allowReset++;
+		else
+			allowReset--;
+
+		if (allowReset < 0)
+			allowReset = 0;
 
 		if (allowResetChanged != null)
-			allowResetChanged (val);
+			allowResetChanged (!val);
 	}
 
 	public bool getAllowReset()
 	{
-		return allowReset;
+		return allowReset > 0;
 	}
 
 	public override string ToString ()
