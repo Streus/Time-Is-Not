@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete]
 public class StasisTrigger : MonoBehaviour 
 {
 	public GameObject go; 
@@ -12,6 +13,7 @@ public class StasisTrigger : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		/*
 		collidingStasisFields = new List<GameObject> (); 
 
 		if (go == null)
@@ -25,29 +27,35 @@ public class StasisTrigger : MonoBehaviour
 		{
 			Debug.LogError("The gameObject in go does not have an ro-compatibile script attached"); 
 		}
+		*/
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		/*
 		if (CollidingStasisFieldsIsNull())
 		{
 			ToggleStasis(false);
 			collidingStasisFields.Clear(); 
 		}
+		*/
 	}
 
 	void OnTriggerEnter2D(Collider2D other) 
 	{
+		/*
 		if (other.CompareTag("StasisField"))
 		{
 			ToggleStasis(true); 
 			collidingStasisFields.Add(other.gameObject); 
 		}
+		*/
 	}
 
 	void OnTriggerExit2D(Collider2D other)
 	{
+		/*
 		if (other.CompareTag("StasisField"))
 		{
 			collidingStasisFields.Remove(other.gameObject); 
@@ -57,6 +65,7 @@ public class StasisTrigger : MonoBehaviour
 				ToggleStasis(false);
 			}
 		}
+		*/
 	}
 
 

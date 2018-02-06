@@ -89,7 +89,6 @@ public class StasisBubble : MonoBehaviour
 		}
 	}
 
-
 	/// <summary>
 	/// Tell the LevelStateMangager to remove this bubble
 	/// </summary>
