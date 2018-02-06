@@ -60,33 +60,34 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	// Update is called once per frame
 	void Update () 
 	{
-		#if UNITY_EDITOR
-		_sprite = gameObject.GetComponent<SpriteRenderer> ();
-		if(_isOpen && _sprite.sprite != _openSprite)
+		if(!Application.isPlaying) 
 		{
-			_sprite.sprite = _openSprite;
-			_collider.enabled = false;
-		}
-		if(!_isOpen &&  _sprite.sprite != _closedSprite)
-		{
-			_sprite.sprite = _closedSprite;
-			_collider.enabled = true;
-		}
-		#endif
-		getInput ();
-
-		if(!inStasis)
-		{
-			if(_isOpen && _collider.enabled)
-			{
+			_sprite = gameObject.GetComponent<SpriteRenderer> ();
+			if (_isOpen && _sprite.sprite != _openSprite) {
 				_sprite.sprite = _openSprite;
 				_collider.enabled = false;
 			}
-			if(!_isOpen && !_collider.enabled)
-			{
+			if (!_isOpen && _sprite.sprite != _closedSprite) {
 				_sprite.sprite = _closedSprite;
 				_collider.enabled = true;
 			}
+		}
+		getInput ();
+
+		if (inStasis)
+			return;
+		//if not in stasis, update collider and visuals
+		if(_isOpen && _collider.enabled)
+		{
+			Debug.Log ("Opening...");
+			_sprite.sprite = _openSprite;
+			_collider.enabled = false;
+		}
+		if(!_isOpen && !_collider.enabled)
+		{
+			Debug.Log ("Closing...");
+			_sprite.sprite = _closedSprite;
+			_collider.enabled = true;
 		}
 	}
 
@@ -224,17 +225,22 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null || inStasis)
+		if (s == null)
 			return;
-		
+
 		Seed seed = (Seed)s;
+
+		if(inStasis)
+		{
+			if (seed.isOpen)
+				Open ();
+			else
+				Close ();
+			return;
+		}
 
 		s.defaultLoad (gameObject);
 
-		if (seed.isOpen)
-			Open ();
-		else
-			Close ();
 	}
 
 	/// <summary>

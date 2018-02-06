@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : Interactable, ISavable
+public class PressurePlate : Interactable
 {
 
 	[Tooltip("List of activatables to affect.")]
@@ -89,61 +89,4 @@ public class PressurePlate : Interactable, ISavable
 				activatable.GetComponent<IActivatable>().onActivate ();
 		}
 	}
-
-	//****Savable Object Functions****
-
-	/// <summary>
-	/// Saves the data into a seed.
-	/// </summary>
-	/// <returns>The seed.</returns>
-	public SeedBase saveData()
-	{
-		Seed seed = new Seed (gameObject);
-
-		seed.isPressed = _pressed;
-
-		return seed;
-	}
-
-	/// <summary>
-	/// Loads the data from a seed.
-	/// </summary>
-	/// <returns>The seed.</returns>
-	public void loadData(SeedBase s)
-	{
-		if (s == null)
-			return;
-
-		Seed seed = (Seed)s;
-
-		s.defaultLoad (gameObject);
-		if(seed.isPressed)
-		{
-			onInteract ();
-		}
-	}
-
-	/// <summary>
-	/// Checks if the object should be able to be reset.
-	/// </summary>
-	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
-	public bool shouldIgnoreReset() 
-	{ 
-		return false; 
-	}
-
-	/// <summary>
-	/// The seed contains all required savable information for the object.
-	/// </summary>
-	public class Seed : SeedBase
-	{
-		//is the plate pressed?
-		public bool isPressed;
-
-		public Seed(GameObject subject) : base(subject) {}
-
-	}
-
-
-
 }

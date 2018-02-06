@@ -83,6 +83,8 @@ public class Laser : Interactable, IActivatable, ISavable
 		{
 			_laserLine.SetPosition (1, hit.point);
 		}
+		if (!Application.isPlaying)
+			return;
 		if (hit.collider.gameObject.GetComponent<Entity> () != null) 
 		{
 			Entity entityHit = hit.collider.gameObject.GetComponent<Entity> ();
