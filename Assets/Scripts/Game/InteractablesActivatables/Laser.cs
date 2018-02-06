@@ -175,7 +175,7 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, false);
+		Seed seed = new Seed ();
 
 		seed.isOn = isEnabled ();
 
@@ -206,8 +206,5 @@ public class Laser : Interactable, IActivatable, ISavable
 	{
 		//is the laser on?
 		public bool isOn;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 }

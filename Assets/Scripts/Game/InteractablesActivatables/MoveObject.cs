@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
+public class MoveObject : MonoBehaviour, IActivatable, ISavable
 {
 	//TODO: draw gizmos along path
 
@@ -37,9 +37,18 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	// Use this for initialization
 	void Start () 
 	{
+<<<<<<< HEAD
 		if (!Application.isPlaying)
 			return;
 		isInverted = !_active;
+=======
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
+>>>>>>> Rehaul more or less ready. Still need to figure out dumb stasis trigger stuff.
 	}
 	
 	// Update is called once per frame
@@ -168,7 +177,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject, !inStasis);
+		Seed seed = new Seed ();
 
 		seed.isOn = _active;
 
@@ -185,9 +194,6 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null || inStasis)
-			return;
-
 		Seed seed = (Seed)s;
 
 		_active = seed.isOn;
@@ -210,9 +216,6 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 
 		//which point should it move toward?
 		public int nextPoint;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 
 
@@ -222,7 +225,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// Toggles if the object is in stasis.
 	/// </summary>
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
 

@@ -60,6 +60,8 @@ public class Door : Interactable, IActivatable, ISavable
 		_collider = gameObject.GetComponent<PolygonCollider2D> ();
 		_playerInRange = false;
 		isInverted = _isOpen;
+
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 	}
 
 	// Update is called once per frame
@@ -135,6 +137,11 @@ public class Door : Interactable, IActivatable, ISavable
 				_negativePrompt.SetActive (false);
 			}
 		}
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
 	/// <summary>
@@ -258,9 +265,6 @@ public class Door : Interactable, IActivatable, ISavable
 	{
 		//is the door open?
 		public bool isOpen;
-
-		public Seed(GameObject subject, bool ir) : base(subject, ir) {}
-
 	}
 
 
@@ -270,7 +274,7 @@ public class Door : Interactable, IActivatable, ISavable
 	/// Toggles if the object is in stasis.
 	/// </summary>
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn;
 		if (inStasis)

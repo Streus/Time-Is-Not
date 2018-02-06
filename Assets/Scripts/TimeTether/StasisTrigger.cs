@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class StasisTrigger : MonoBehaviour 
 {
-	public GameObject stasisableObject; 
-	IStasisable istasisable; 
+	public GameObject go; 
+	private RegisteredObject ro; 
 
-	List<GameObject> collidingStasisFields; 
+	private List<GameObject> collidingStasisFields; 
 
 	// Use this for initialization
 	void Start () 
 	{
 		collidingStasisFields = new List<GameObject> (); 
 
-		if (stasisableObject == null)
+		if (go == null)
 		{
-			Debug.LogError("Null stasisableObject. An object with an IStasisable-compatible script must be dragged into the stasisableObject field"); 
+			Debug.LogError("Null go. An object with an ro-compatible script must be dragged into the go field"); 
 		}
 
-		istasisable = (IStasisable)stasisableObject.GetComponent<IStasisable>(); 
+		ro = go.GetComponent<RegisteredObject>(); 
 
-		if (istasisable == null)
+		if (ro == null)
 		{
-			Debug.LogError("The gameObject in stasisableObject does not have an IStasisable-compatibile script attached"); 
+			Debug.LogError("The gameObject in go does not have an ro-compatibile script attached"); 
 		}
 	}
 	
@@ -80,11 +80,11 @@ public class StasisTrigger : MonoBehaviour
 
 	void ToggleStasis(bool turnOn)
 	{
-		if (istasisable != null)
+		if (ro != null)
 		{
-			if (istasisable.InStasis() != turnOn)
+			if (ro.getAllowReset() != turnOn)
 			{
-				istasisable.ToggleStasis(turnOn);
+				ro.setAllowReset(turnOn);
 			}
 		}
 	}

@@ -49,6 +49,13 @@ public class PushBlock : MonoBehaviour, ISavable
 	{
 		//TODO: get input keys from input module
 		_rb2d = gameObject.GetComponent<Rigidbody2D> ();
+
+		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
 	// Update is called once per frame
@@ -274,7 +281,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
 
 	// --- IStasisable Methods ---
-	public void ToggleStasis(bool turnOn)
+	private void ToggleStasis(bool turnOn)
 	{
 		inStasis = turnOn; 
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();

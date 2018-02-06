@@ -153,7 +153,7 @@ public class ButtonSwitch : Interactable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		SeedBase seed = new SeedBase (gameObject, false);
+		SeedBase seed = new SeedBase ();
 
 		return seed;
 	}
@@ -164,9 +164,6 @@ public class ButtonSwitch : Interactable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		if (s == null)
-			return;
-
 		_playerInRange = false;
 	}
 }

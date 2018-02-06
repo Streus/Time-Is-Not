@@ -170,7 +170,7 @@ public class RegisteredObject : MonoBehaviour
 		prefabPath = collection.prefabPath;
 
 		if(collection.size > 0)
-			collection.loadSeeds (holes);
+			collection.loadSeeds (gameObject, holes);
 	}
 
 	public void setAllowReset(bool val)
@@ -179,6 +179,11 @@ public class RegisteredObject : MonoBehaviour
 
 		if (allowResetChanged != null)
 			allowResetChanged (val);
+	}
+
+	public bool getAllowReset()
+	{
+		return allowReset;
 	}
 
 	public override string ToString ()
