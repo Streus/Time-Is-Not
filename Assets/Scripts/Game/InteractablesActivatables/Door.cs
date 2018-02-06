@@ -230,14 +230,11 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 
 		Seed seed = (Seed)s;
 
-		if(inStasis)
-		{
-			if (seed.isOpen)
-				Open ();
-			else
-				Close ();
-			return;
-		}
+		if (seed.isOpen)
+			Open ();
+		else
+			Close ();
+		return;
 
 		s.defaultLoad (gameObject);
 
@@ -249,7 +246,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// <returns><c>true</c>, if it should ignore it, <c>false</c> otherwise.</returns>
 	public bool shouldIgnoreReset() 
 	{ 
-		return !inStasis; 
+		return inStasis; 
 	}
 
 	/// <summary>

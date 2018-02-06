@@ -265,7 +265,7 @@ public class PushBlock : MonoBehaviour, ISavable, IStasisable
 
 	}
 		
-	public bool shouldIgnoreReset() { return !inStasis; }
+	public bool shouldIgnoreReset() { return inStasis; }
 
 	/// <summary>
 	/// The seed contains all required savable information for the object.
