@@ -26,6 +26,9 @@ public class RegisteredObject : MonoBehaviour
 	// Path to a prefab to which this RO is attached
 	private string prefabPath = "";
 
+	[SerializeField]
+	private bool stasisable = false;
+
 	private bool allowReset = true;
 
 	public delegate void SetBoolean(bool val);
