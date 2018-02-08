@@ -27,6 +27,7 @@ public class PressurePlate : Interactable
 			gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
 		else
 			gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
+		LevelStateManager.inst.stateLoaded += OnLoad;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +47,12 @@ public class PressurePlate : Interactable
 		}
 	}
 
+	void OnDestroy()
+	{
+		if(LevelStateManager != null)
+			LevelStateManager.inst.stateLoaded -= OnLoad;
+	}
+
 	//Draw lines to all linked activatables
 	void OnDrawGizmos()
 	{
@@ -58,6 +65,11 @@ public class PressurePlate : Interactable
 
 	}
 
+	void OnLoad(bool success)
+	{
+		if(success)
+			onInteract();
+	}
 
 	/// <summary>
 	/// Checks the area on top of the pressure plate for players or push blocks
@@ -89,4 +101,5 @@ public class PressurePlate : Interactable
 				activatable.GetComponent<IActivatable> ().onActivate (_pressed);
 		}
 	}
+
 }
