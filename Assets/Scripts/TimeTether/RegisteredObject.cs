@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class RegisteredObject : MonoBehaviour
@@ -13,6 +15,8 @@ public class RegisteredObject : MonoBehaviour
 	{ 
 		directory = new List<RegisteredObject>();
 	}
+
+	private const string DEFAULT_RID = "";
 	#endregion
 
 	#region INSTANCE_VARS
@@ -99,7 +103,8 @@ public class RegisteredObject : MonoBehaviour
 
 	private void generateID()
 	{
-		registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
+		if(registeredID == DEFAULT_RID)
+			registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
 	}
 
 	public void Awake()

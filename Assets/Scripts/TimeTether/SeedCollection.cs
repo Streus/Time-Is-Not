@@ -39,8 +39,8 @@ public class SeedCollection
 	{
 		destroyed = false;
 
-		tPosition = subject.transform.position;
-		tRotation = subject.transform.rotation;
+		tPosition = subject.transform.localPosition;
+		tRotation = subject.transform.localRotation;
 		Rigidbody2D rb2d = subject.GetComponent<Rigidbody2D> ();
 		if(rb2d != null)
 		{
@@ -89,8 +89,8 @@ public class SeedCollection
 		}
 
 		//-SeedBase values-
-		subject.transform.position = tPosition;
-		subject.transform.rotation = tRotation;
+		subject.transform.localPosition = tPosition;
+		subject.transform.localRotation = tRotation;
 
 		Rigidbody2D body = subject.GetComponent<Rigidbody2D> ();
 		if (body != null)
