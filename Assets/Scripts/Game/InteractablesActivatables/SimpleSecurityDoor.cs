@@ -56,7 +56,7 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		_isOpen = state; 
+		_isOpen = !state; 
 		return _isOpen; 
 	}
 
