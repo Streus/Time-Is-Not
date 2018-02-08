@@ -49,7 +49,7 @@ public class PressurePlate : Interactable
 
 	void OnDestroy()
 	{
-		if(LevelStateManager != null)
+		if(LevelStateManager.inst != null)
 			LevelStateManager.inst.stateLoaded -= OnLoad;
 	}
 
