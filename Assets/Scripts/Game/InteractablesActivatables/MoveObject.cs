@@ -37,18 +37,15 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	// Use this for initialization
 	void Start () 
 	{
-<<<<<<< HEAD
 		if (!Application.isPlaying)
 			return;
 		isInverted = !_active;
-=======
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 	}
 
 	public void OnDestroy()
 	{
 		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
->>>>>>> Rehaul more or less ready. Still need to figure out dumb stasis trigger stuff.
 	}
 	
 	// Update is called once per frame
