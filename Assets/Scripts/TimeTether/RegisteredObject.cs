@@ -32,7 +32,7 @@ public class RegisteredObject : MonoBehaviour
 
 	[Tooltip("Can this object be stasis'd?")]
 	[SerializeField]
-	private bool stasisable = false;
+	private bool stasisable = true;
 
 	// <= 0 == false; > 0 == true
 	[SerializeField] //DEBUG temp
@@ -209,8 +209,8 @@ public class RegisteredObject : MonoBehaviour
 		else
 			allowReset--;
 
-		if (allowReset < 0)
-			allowReset = 0;
+//		if (allowReset < 0)
+//			allowReset = 0;
 
 		if (allowResetChanged != null)
 			allowResetChanged (!val);
