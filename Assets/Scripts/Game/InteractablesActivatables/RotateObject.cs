@@ -19,10 +19,15 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
 
+	//is the object's default state inverted?
+	private bool isInverted = false;
+
 	// Use this for initialization
 	void Start () 
 	{
-		
+		if (!Application.isPlaying)
+			return;
+		isInverted = !_active;
 	}
 	
 	// Update is called once per frame
@@ -53,7 +58,11 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 
 	public bool onActivate (bool state)
 	{
-		_active = state;
+		//if inverted: 'true' state enables movement, otherwise it disables it
+		if (isInverted)
+			_active = state;
+		else
+			_active = !state;
 		return _active;
 	}
 

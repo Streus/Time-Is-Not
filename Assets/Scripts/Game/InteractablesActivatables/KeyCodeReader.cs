@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode] 
-public class KeyCodeReader : Interactable, IActivatable
+public class KeyCodeReader : Interactable
 {
 
 	[Tooltip("Interact button(TEMPORARY)")]
@@ -129,30 +129,6 @@ public class KeyCodeReader : Interactable, IActivatable
 			if(activatable.GetComponent<IActivatable>() != null)
 				activatable.GetComponent<IActivatable>().onActivate ();
 		}
-	}
-
-	/// <summary>
-	/// Locks/Unlocks the keycode reader.
-	/// </summary>
-	public bool onActivate()
-	{
-		if (isEnabled ())
-			disable ();
-		else
-			enable ();
-		return isEnabled();
-	}
-
-	/// <summary>
-	/// locks/Unlocks the keycode reader based on the given state.
-	/// </summary>
-	public bool onActivate(bool state)
-	{
-		if (state)
-			enable ();
-		else
-			disable ();
-		return isEnabled();
 	}
 
 	//Select the correct sprite

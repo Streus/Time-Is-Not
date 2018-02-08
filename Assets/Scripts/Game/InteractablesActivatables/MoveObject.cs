@@ -27,6 +27,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	//The current target Point
 	private int _nextPoint = 0;
 
+	//is the object's default state inverted?
+	private bool isInverted = false;
 
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
@@ -35,7 +37,9 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	// Use this for initialization
 	void Start () 
 	{
-		
+		if (!Application.isPlaying)
+			return;
+		isInverted = !_active;
 	}
 	
 	// Update is called once per frame
@@ -143,7 +147,11 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable, IStasisable
 	/// </summary>
 	public bool onActivate(bool state)
 	{
-		_active = state;
+		//if inverted: 'true' state enables movement, otherwise it disables it
+		if (isInverted)
+			_active = state;
+		else
+			_active = !state;
 		return _active;
 	}
 

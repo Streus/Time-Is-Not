@@ -29,18 +29,26 @@ public class Laser : Interactable, IActivatable, ISavable
 	//the line renderer for the laser
 	private LineRenderer _laserLine;
 
+	//is the object's default state inverted?
+	private bool isInverted = false;
+
 	enum LaserType {Death, Trigger};
 
 	// Use this for initialization
 	void Start()
 	{
+		if (!Application.isPlaying)
+			return;
 		_laserLine = gameObject.GetComponent<LineRenderer> ();
 		_laserLine.colorGradient = _laserColor;
+		isInverted = !isEnabled ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		if(_laserLine == null)
+			_laserLine = gameObject.GetComponent<LineRenderer> ();
 		if(isEnabled()) 
 		{
 			rayCast ();
@@ -141,10 +149,21 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// </summary>
 	public bool onActivate(bool state)
 	{
-		if (state)
-			enable ();
+		//if inverted: 'true' state enables movement, otherwise it disables it
+		if (isInverted) 
+		{
+			if (state)
+				enable ();
+			else
+				disable ();
+		}
 		else
-			disable ();
+		{
+			if (state)
+				disable();
+			else
+				enable();
+		}
 		return isEnabled();
 	}
 

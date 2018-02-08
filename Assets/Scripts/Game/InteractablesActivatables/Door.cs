@@ -39,6 +39,9 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	//Shows if the player is close enough to open the door
 	private bool _playerInRange = false;
 
+	//is the object's default state inverted?
+	private bool isInverted = false;
+
 	//collider of the door
 	private PolygonCollider2D _collider;
 
@@ -51,15 +54,21 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	// Use this for initialization
 	void Start () 
 	{
-		_playerInRange = false;
-		_collider = gameObject.GetComponent<PolygonCollider2D> ();
+		if (!Application.isPlaying)
+			return;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
-
+		_collider = gameObject.GetComponent<PolygonCollider2D> ();
+		_playerInRange = false;
+		isInverted = _isOpen;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+		if(_collider == null)
+			_collider = gameObject.GetComponent<PolygonCollider2D> ();
+		if(_sprite == null)
+			_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if(!Application.isPlaying) 
 		{
 			_sprite = gameObject.GetComponent<SpriteRenderer> ();
@@ -79,13 +88,11 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 		//if not in stasis, update collider and visuals
 		if(_isOpen && _collider.enabled)
 		{
-			Debug.Log ("Opening...");
 			_sprite.sprite = _openSprite;
 			_collider.enabled = false;
 		}
 		if(!_isOpen && !_collider.enabled)
 		{
-			Debug.Log ("Closing...");
 			_sprite.sprite = _closedSprite;
 			_collider.enabled = true;
 		}
@@ -182,13 +189,20 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	{
 		if (_type == DoorTypes.Manual || inStasis)
 			return _isOpen;
-		if(state)
+		//if the door is inverted, a true state closes the door
+		if(isInverted)
 		{
-			Open ();
+			if (state)
+				Close ();
+			else
+				Open ();
 		}
 		else
 		{
-			Close ();
+			if (state)
+				Open ();
+			else
+				Close ();
 		}
 		return _isOpen;
 	}
@@ -230,11 +244,12 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 
 		Seed seed = (Seed)s;
 
-		if (seed.isOpen)
+		if (seed.isOpen) {
 			Open ();
-		else
+		}
+		else {
 			Close ();
-		return;
+		}
 
 		s.defaultLoad (gameObject);
 
