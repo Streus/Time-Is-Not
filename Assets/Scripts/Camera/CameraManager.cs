@@ -12,18 +12,6 @@ public class CameraManager : MonoBehaviour
 	#endregion
 
 	#region INSTANCE_VARS
-	[Header("Zoom properties")]
-	[Tooltip("Hold this key to zoom out")]
-	public KeyCode zoomOutKey; 
-
-	public float zoomOutLerpSpeed; 
-	public float zoomInLerpSpeed; 
-	float regularSize; 
-	public float zoomOutSize; 
-
-	bool zoomOut; 
-
-	Vector2 panOffset; 
 
 	[Header("Basic Fields")]
 	[SerializeField]
@@ -50,6 +38,8 @@ public class CameraManager : MonoBehaviour
 		" to begin updating its position.")]
 	public float followRadius = 0f;
 
+	private Vector2 panOffset;
+
 	private float shakeDur, shakeInt, shakeDec;
 	#endregion
 
@@ -70,9 +60,6 @@ public class CameraManager : MonoBehaviour
 				gameObject.name + ".");
 			return;
 		}
-
-		regularSize = cam.orthographicSize; 
-
 		shakeDur = shakeInt = shakeDec = 0f;
 	}
 
@@ -108,7 +95,7 @@ public class CameraManager : MonoBehaviour
 			}
 		}
 
-		updateZoom(); 
+		updateZoomPan (false);
 	}
 
 	public void LateUpdate()
@@ -200,7 +187,6 @@ public class CameraManager : MonoBehaviour
 		shakeDec = decayRate;
 	}
 
-	/*
 	public void zoom(float target) //DEBUG for testing. remove this
 	{
 		zoom (target, 10);
@@ -222,18 +208,6 @@ public class CameraManager : MonoBehaviour
 			yield return null;
 		}
 	}
-	*/
-
-	public void zoomTo(float targetSize, float speed)
-	{
-		if (speed == 0)
-		{
-			cam.orthographicSize = targetSize; 
-			return; 
-		}
-
-		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, speed); 
-	}
 
 	public void recenter(float speed)
 	{
@@ -252,9 +226,7 @@ public class CameraManager : MonoBehaviour
 		smoothSpeed = profile.smoothSpeed;
 		followRadius = profile.followRadius;
 
-		// TODO see if this needs to be added back
-		//zoom (profile.zoomLevel);
-		zoomTo(profile.zoomLevel, 0); 
+		zoom (profile.zoomLevel);
 	}
 
 	public void OnDrawGizmos()
@@ -268,26 +240,6 @@ public class CameraManager : MonoBehaviour
 		//follow radius
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere (transform.position, followRadius);
-	}
-
-	/*
-	 * Zoom controls
-	 */ 
-
-	void updateZoom()
-	{
-		if (Input.GetKey(zoomOutKey))
-		{
-			zoomTo(zoomOutSize, zoomOutLerpSpeed);
-			zoomOut = true; 
-			updateZoomPan(false); 
-		}
-		else
-		{
-			zoomTo(regularSize, zoomInLerpSpeed); 
-			zoomOut = false; 
-			updateZoomPan(true);
-		}
 	}
 
 	void updateZoomPan(bool panToPlayer)
@@ -321,6 +273,5 @@ public class CameraManager : MonoBehaviour
 
 		cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
 	}
-
 	#endregion
 }
