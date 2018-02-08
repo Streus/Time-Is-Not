@@ -35,7 +35,6 @@ public class RegisteredObject : MonoBehaviour
 	private bool stasisable = true;
 
 	// <= 0 == false; > 0 == true
-	[SerializeField] //DEBUG temp
 	private int allowReset = 1;
 
 	public delegate void SetBoolean(bool val);
