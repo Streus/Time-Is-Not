@@ -11,7 +11,7 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 
 	[Tooltip("Shows if the door is open or not.")]
 	[SerializeField]
-	private bool _isOpen = false;
+ 	bool _isOpen = false;
 
 	[Tooltip("Is the door openable by hand or controled via interactable")]
 	[SerializeField]
@@ -187,8 +187,10 @@ public class Door : Interactable, IActivatable, ISavable, IStasisable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		if (_type == DoorTypes.Manual || inStasis)
+		if (_type == DoorTypes.Manual) {
+			Debug.Log("NOTE: This door cannot be opened remotely, please change it to an electronic door.");
 			return _isOpen;
+		}
 		//if the door is inverted, a true state closes the door
 		if(isInverted)
 		{
