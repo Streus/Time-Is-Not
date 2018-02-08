@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO Discuss changing this to a MonoBehavior
 public class LevelStateManager : Singleton<LevelStateManager> 
 {
 	// Events
@@ -149,6 +148,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			stateSeeds[m_curState].Remove (ro.rID);
 			stateSeeds[m_curState].Add (ro.rID, ro.reap ());
 		}
+
+		// Tell ScreenshotManager to take a screenshot
+		ScreenshotManager.createScreenshot(m_curState); 
 
 		if (stateAdded != null)
 		{
@@ -396,6 +398,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		}
 	}
 
+
+	/// <summary>
+	/// Removes a specific instance of a StasisBubble within the list of stasisBubble
+	/// </summary>
+	/// <returns><c>true</c>, if stasis bubble was removed, <c>false</c> otherwise.</returns>
 	public static bool removeStasisBubble(StasisBubble bubble)
 	{
 		// Error cases:

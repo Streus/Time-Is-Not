@@ -12,6 +12,18 @@ public class CameraManager : MonoBehaviour
 	#endregion
 
 	#region INSTANCE_VARS
+	[Header("Zoom properties")]
+	[Tooltip("Hold this key to zoom out")]
+	public KeyCode zoomOutKey; 
+
+	public float zoomOutLerpSpeed; 
+	public float zoomInLerpSpeed; 
+	float regularSize; 
+	public float zoomOutSize; 
+
+	bool zoomOut; 
+
+	Vector2 panOffset; 
 
 	[Header("Basic Fields")]
 	[SerializeField]
@@ -59,6 +71,8 @@ public class CameraManager : MonoBehaviour
 			return;
 		}
 
+		regularSize = cam.orthographicSize; 
+
 		shakeDur = shakeInt = shakeDec = 0f;
 	}
 
@@ -93,6 +107,8 @@ public class CameraManager : MonoBehaviour
 				fitToBounds ();
 			}
 		}
+
+		updateZoom(); 
 	}
 
 	public void LateUpdate()
@@ -184,6 +200,7 @@ public class CameraManager : MonoBehaviour
 		shakeDec = decayRate;
 	}
 
+	/*
 	public void zoom(float target) //DEBUG for testing. remove this
 	{
 		zoom (target, 10);
@@ -205,6 +222,18 @@ public class CameraManager : MonoBehaviour
 			yield return null;
 		}
 	}
+	*/
+
+	public void zoomTo(float targetSize, float speed)
+	{
+		if (speed == 0)
+		{
+			cam.orthographicSize = targetSize; 
+			return; 
+		}
+
+		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, speed); 
+	}
 
 	public void recenter(float speed)
 	{
@@ -222,7 +251,10 @@ public class CameraManager : MonoBehaviour
 		smoothFollow = profile.smoothFollow;
 		smoothSpeed = profile.smoothSpeed;
 		followRadius = profile.followRadius;
-		zoom (profile.zoomLevel);
+
+		// TODO see if this needs to be added back
+		//zoom (profile.zoomLevel);
+		zoomTo(profile.zoomLevel, 0); 
 	}
 
 	public void OnDrawGizmos()
@@ -237,5 +269,58 @@ public class CameraManager : MonoBehaviour
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere (transform.position, followRadius);
 	}
+
+	/*
+	 * Zoom controls
+	 */ 
+
+	void updateZoom()
+	{
+		if (Input.GetKey(zoomOutKey))
+		{
+			zoomTo(zoomOutSize, zoomOutLerpSpeed);
+			zoomOut = true; 
+			updateZoomPan(false); 
+		}
+		else
+		{
+			zoomTo(regularSize, zoomInLerpSpeed); 
+			zoomOut = false; 
+			updateZoomPan(true);
+		}
+	}
+
+	void updateZoomPan(bool panToPlayer)
+	{
+		if (panToPlayer)
+		{
+			panOffset = Vector2.Lerp(panOffset, Vector2.zero, 0.2f); 
+		}
+		else
+		{
+			// Horizontal pan
+			if (Input.mousePosition.x > Screen.width - Screen.width / 8)
+			{
+				panOffset += new Vector2 (20 * Time.deltaTime, 0); 
+			}
+			else if (Input.mousePosition.x < 0 + Screen.width / 8)
+			{
+				panOffset -= new Vector2 (20 * Time.deltaTime, 0); 
+			} 
+
+			// Vertical pan
+			if (Input.mousePosition.y > Screen.height - Screen.height / 6)
+			{
+				panOffset += new Vector2 (0, 20 * Time.deltaTime); 
+			}
+			else if (Input.mousePosition.y < 0 + Screen.width / 6)
+			{
+				panOffset -= new Vector2 (0, 20 * Time.deltaTime); 
+			} 
+		}
+
+		cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
+	}
+
 	#endregion
 }

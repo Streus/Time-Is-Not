@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Manages interaction with time tether systems in LevelStateManager and the time tether UI systems
 /// </summary>
-public class TetherManager : MonoBehaviour 
+public class TetherManager : Singleton<TetherManager> 
 {
 	[Header("Tether Key Bindings")]
 	[Tooltip("The key used to create a tether point.")]
@@ -79,12 +79,25 @@ public class TetherManager : MonoBehaviour
 	// An array holding all the timeTetherIndicators spawned in the scene. 
 	GameObject[] timeTetherIndicators; 
 
+	// UI screenshot
+	public GameObject screenshotParent; 
+	public GameObject screenshot; 
+	RawImage screenshotImage; 
+
+	public bool isHoveringOverButton; 
+	public int hoverButton; 
+
 
 	// Use this for initialization
 	void Start () 
 	{
 		fadeImage.gameObject.SetActive(true); 
 		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
+
+		if (screenshot != null)
+			screenshotImage = screenshot.GetComponent<RawImage>(); 
+		HideScreenshotParent();
+		HideScreenshot(); 
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
 	}
 
@@ -102,7 +115,6 @@ public class TetherManager : MonoBehaviour
 		}
 
 		UpdateTetherTimelineUI();
-    
 	}
 
 	/// <summary>
@@ -123,6 +135,7 @@ public class TetherManager : MonoBehaviour
 				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
 				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
 				fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.1f, true);
+				RevealScreenshotParent(); 
 			}
 			// Make the timeline zoom and move back to the corner
 			else
@@ -131,6 +144,7 @@ public class TetherManager : MonoBehaviour
 				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos0, tetherUIZoomDownSpeed); 
 				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale0, tetherUIZoomDownSpeed); 
 				fadeImage.CrossFadeAlpha(0, 0.1f, true);
+				HideScreenshotParent(); 
 			}
 		}
 		// If the player has just died, force the timeline to come up and don't let players exit out of it
@@ -140,6 +154,7 @@ public class TetherManager : MonoBehaviour
 			tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
 			tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
 			fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.15f, true);
+			RevealScreenshotParent(); 
 		}
 
 		// When the UI starts to minimize back to the corner, don't allow it to maximize again until the bringUpTetherUIKey has been released
@@ -268,5 +283,46 @@ public class TetherManager : MonoBehaviour
 				Destroy(timeTetherIndicators[i].gameObject);
 			}
 		}
+	}
+
+	// UI Screenshot stuff
+
+	public static void OnPointerEnter(int state)
+	{
+		inst.isHoveringOverButton = true;
+		inst.hoverButton = state; 
+		inst.screenshotImage.texture = ScreenshotManager.getScreenshot(state); 
+		inst.RevealScreenshot();
+	}
+
+	public static void OnPointerExit()
+	{
+		inst.isHoveringOverButton = false; 
+		inst.hoverButton = -1; 
+		inst.HideScreenshot(); 
+	}
+
+	void RevealScreenshot()
+	{
+		if (screenshot != null)
+			screenshot.SetActive(true); 
+	}
+
+	void HideScreenshot()
+	{
+		if (screenshot != null)
+			screenshot.SetActive(false); 
+	}
+
+	void RevealScreenshotParent()
+	{
+		if (screenshotParent != null)
+			screenshotParent.SetActive(true); 
+	}
+
+	void HideScreenshotParent()
+	{
+		if (screenshotParent != null)
+			screenshotParent.SetActive(false); 
 	}
 }
