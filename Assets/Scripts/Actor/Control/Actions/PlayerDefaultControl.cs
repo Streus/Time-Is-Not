@@ -12,18 +12,18 @@ public class PlayerDefaultControl : Action
 		Player p = State.cast<Player> (c);
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));
-		if (Input.GetKeyDown (KeyCode.Mouse0))
+		if (Input.GetKeyDown (PlayerControlManager.RH_FireStasis || PlayerControlManager.LH_FireStasis))
 			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
 
 		Vector2 movementVector = Vector2.zero;
 
-		if(Input.GetKey(KeyCode.W)) // UP
+		if(Input.GetKey(PlayerControlManager.RH_Up || PlayerControlManager.LH_UP)) // UP
 			movementVector += Vector2.up;
-		if (Input.GetKey (KeyCode.A)) // LEFT
+		if (Input.GetKey (PlayerControlManager.RH_Left || PlayerControlManager.LH_Left)) // LEFT
 			movementVector += Vector2.left;
-		if(Input.GetKey(KeyCode.S)) // DOWN
+		if(Input.GetKey(PlayerControlManager.RH_Down || PlayerControlManager.LH_Down)) // DOWN
 			movementVector += Vector2.down;
-		if (Input.GetKey (KeyCode.D)) // RIGHT
+		if (Input.GetKey (PlayerControlManager.RH_Right || PlayerControlManager.LH_Right)) // RIGHT
 			movementVector += Vector2.right;
 
 		movementVector = movementVector.normalized * p.getSelf().getMovespeed () * Time.deltaTime;
