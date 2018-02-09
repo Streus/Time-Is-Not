@@ -92,7 +92,7 @@ public class Timer : Interactable , ISavable, IActivatable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		Seed seed = new Seed (gameObject);
+		Seed seed = new Seed ();
 
 		seed.state = _state;
 
@@ -115,8 +115,6 @@ public class Timer : Interactable , ISavable, IActivatable
 		_state = seed.state;
 
 		_timer = seed.timer;
-
-		s.defaultLoad (gameObject);
 	}
 
 	/// <summary>
@@ -138,8 +136,6 @@ public class Timer : Interactable , ISavable, IActivatable
 
 		//current timer
 		public float timer;
-
-		public Seed(GameObject subject) : base(subject) {}
 
 	}
 
