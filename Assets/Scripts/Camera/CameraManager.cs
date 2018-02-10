@@ -38,6 +38,12 @@ public class CameraManager : MonoBehaviour
 		" to begin updating its position.")]
 	public float followRadius = 0f;
 
+	[Header("Zoom/pan properties")]
+	public float zoomOutLerpSpeed; 
+	public float zoomInLerpSpeed; 
+	float regularSize; 
+	public float zoomOutSize; 
+
 	private Vector2 panOffset;
 
 	private float shakeDur, shakeInt, shakeDec;
@@ -60,6 +66,9 @@ public class CameraManager : MonoBehaviour
 				gameObject.name + ".");
 			return;
 		}
+
+		regularSize = cam.orthographicSize; 
+
 		shakeDur = shakeInt = shakeDec = 0f;
 	}
 
@@ -95,7 +104,16 @@ public class CameraManager : MonoBehaviour
 			}
 		}
 
-		updateZoomPan (false);
+		if (Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut))
+		{
+			zoomTo(zoomOutSize, zoomOutLerpSpeed);
+			updateZoomPan(false);
+		}
+		else
+		{
+			zoomTo(regularSize, zoomInLerpSpeed);
+			updateZoomPan(true);
+		}
 	}
 
 	public void LateUpdate()
@@ -187,6 +205,7 @@ public class CameraManager : MonoBehaviour
 		shakeDec = decayRate;
 	}
 
+	/*
 	public void zoom(float target) //DEBUG for testing. remove this
 	{
 		zoom (target, 10);
@@ -208,6 +227,18 @@ public class CameraManager : MonoBehaviour
 			yield return null;
 		}
 	}
+	*/ 
+
+	public void zoomTo(float targetSize, float speed)
+	{
+		if (speed == 0)
+		{
+			cam.orthographicSize = targetSize; 
+			return; 
+		}
+
+		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, speed); 
+	}
 
 	public void recenter(float speed)
 	{
@@ -226,7 +257,7 @@ public class CameraManager : MonoBehaviour
 		smoothSpeed = profile.smoothSpeed;
 		followRadius = profile.followRadius;
 
-		zoom (profile.zoomLevel);
+		//zoom (profile.zoomLevel);
 	}
 
 	public void OnDrawGizmos()
@@ -241,10 +272,11 @@ public class CameraManager : MonoBehaviour
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere (transform.position, followRadius);
 	}
+		
 
-	void updateZoomPan(bool panToPlayer)
+	void updateZoomPan(bool panToTarget)
 	{
-		if (panToPlayer)
+		if (panToTarget)
 		{
 			panOffset = Vector2.Lerp(panOffset, Vector2.zero, 0.2f); 
 		}

@@ -983,7 +983,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672024216453400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 105.16634, y: 105.16634, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4354176451379616}
@@ -1554,7 +1554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: GOKYSpMv1kathrQ2WTOMyg
+  registeredID: SA87ERu+A02d+aDRaTaHmw
+  stasisable: 1
 --- !u!114 &114101396769798902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1821,8 +1822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rH_Up: 119
   rH_Down: 115
-  rH_Left: 100
-  rH_Right: 97
+  rH_Left: 97
+  rH_Right: 100
   rH_Interact: 101
   rH_DropTether: 32
   rH_TetherMenu: 304
@@ -2114,7 +2115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31687c5251fa3bd4186f2d89cd7efd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowReset: 1
   state: {fileID: 11400000, guid: ad7482bf0c7e45242a2fd1206500777d, type: 2}
   pushState: {fileID: 11400000, guid: 2b0e9096344ca18499a7abb6d117c9c6, type: 2}
 --- !u!114 &114441913414058136
@@ -2852,6 +2852,9 @@ MonoBehaviour:
   smoothFollow: 0
   smoothSpeed: 10
   followRadius: 0
+  zoomOutLerpSpeed: 0.2
+  zoomInLerpSpeed: 0.2
+  zoomOutSize: 10
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2863,7 +2866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: 4rwTDQ6970e9rb6Y3lfDbg
+  registeredID: 9ZkK+0Ua8kCzWLwh7gEydQ
+  stasisable: 1
 --- !u!124 &124559304230223202
 Behaviour:
   m_ObjectHideFlags: 1
