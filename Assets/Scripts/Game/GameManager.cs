@@ -20,6 +20,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	bool paused; 
 	bool pauseLock; 
 
+	// Ability setup
+	public bool canUseStasis; 
+	public bool canUseDash; 
+
 	// Death functionality
 	bool isDead; 
 
