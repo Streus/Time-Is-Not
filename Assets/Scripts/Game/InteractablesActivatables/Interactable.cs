@@ -8,6 +8,9 @@ public abstract class Interactable : MonoBehaviour
 	[SerializeField]
 	private bool _enabled = true;
 
+	[Tooltip("The interactable will close all security doors in the level when activated")]
+	public bool _triggersSecurityDoors = false;
+
 	/// <summary>
 	/// Trigger the Interactable.
 	/// </summary>
@@ -35,6 +38,19 @@ public abstract class Interactable : MonoBehaviour
 	public bool isEnabled()
 	{
 		return _enabled;
+	}
+
+	public bool ToggleSecurityDoors()
+	{
+		if (GameManager.inst.securityDoors == null || !_triggersSecurityDoors)
+			return false;
+		SimpleSecurityDoor[] doors = GameManager.inst.securityDoors.GetComponentsInChildren<SimpleSecurityDoor> ();
+
+		for(int i = 0; i < doors.Length; i++)
+		{
+			doors [i].onActivate (true);
+		}
+		return true;
 	}
 
 }

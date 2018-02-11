@@ -16,6 +16,9 @@ public enum CodeName
 [RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
+	[Tooltip("Empty gameobject containing all security doors in the level that should be tripped at once")]
+	public GameObject securityDoors;
+
 	// Pause functionality
 	bool paused; 
 	bool pauseLock; 
