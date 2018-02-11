@@ -138,10 +138,12 @@ public class RegisteredObject : MonoBehaviour
 	}
 	public void _OnColliderEnter2D(Collider2D col)
 	{
-		Debug.Log ("stasis'd!");
-		StasisBubble sb = col.GetComponent<StasisBubble> ();
-		if (sb != null && stasisable)
-			setAllowReset (false);
+		if (col.CompareTag("StasisField"))
+		{
+			Debug.Log("stasis'd!");
+			if (stasisable)
+				setAllowReset(false);
+		}
 	}
 	public void OnTriggerExit2D(Collider2D col)
 	{
@@ -149,10 +151,12 @@ public class RegisteredObject : MonoBehaviour
 	}
 	public void _OnColliderExit2D(Collider2D col)
 	{
-		Debug.Log ("unstasis'd!");
-		StasisBubble sb = col.GetComponent<StasisBubble> ();
-		if (sb != null && stasisable)
-			setAllowReset (true);
+		if (col.CompareTag("StasisField"))
+		{
+			Debug.Log("unstasis'd!");
+			if (stasisable)
+				setAllowReset(true);
+		}
 	}
 
 	#if UNITY_EDITOR
