@@ -91,6 +91,7 @@ public class StasisTrigger : MonoBehaviour
 	{
 		if (ro != null)
 		{
+			Debug.Log("STASIS TOGGLE");
 			if (ro.getAllowReset() != turnOn)
 			{
 				ro.setAllowReset(turnOn);

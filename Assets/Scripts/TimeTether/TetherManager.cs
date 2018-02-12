@@ -8,12 +8,6 @@ using UnityEngine.UI;
 /// </summary>
 public class TetherManager : Singleton<TetherManager> 
 {
-	[Header("Tether Key Bindings")]
-	[Tooltip("The key used to create a tether point.")]
-	public KeyCode createPointKey;
-	[Tooltip("The key that needs to be held to bring up the load tether point selection UI")]
-	public KeyCode bringUpTetherUIKey; 
-
 	[Header("UI Settings - better not to touch")]
 	// Time tether UI
 	[Tooltip("(Drag In) The GameObject with the tether UI that zooms between the corner and the screen center")]
@@ -85,8 +79,20 @@ public class TetherManager : Singleton<TetherManager>
 	RawImage screenshotImage; 
 
 	public bool isHoveringOverButton; 
-	public int hoverButton; 
+	int hoverButton; 
 
+	[Header("Keycode tray")]
+	[Tooltip("(Drag In) The keycode tray object")]
+	public Image keycodeDrawer; 
+
+	[Tooltip("The tray's starting position")]
+	public Vector2 keycodeTrayStartPos; 
+	[Tooltip("The step, in x rectTransform units, that the tray should move out per keyCode collected")]
+	public float trayXPosStep; 
+
+	[Header("Stasis UI")]
+	[Tooltip("(Drag In) The stasis UI piece of the time tether that displays stasis UI")]
+	public GameObject stasisPieceParent; 
 
 	// Use this for initialization
 	void Start () 
@@ -99,6 +105,8 @@ public class TetherManager : Singleton<TetherManager>
 		HideScreenshotParent();
 		HideScreenshot(); 
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
+
+		UpdateStasisDisplay(); 
 	}
 
     // Update is called once per frame
@@ -109,12 +117,24 @@ public class TetherManager : Singleton<TetherManager>
 		// This is where the game detects when the player wants to create a tether point
 		// Restrictions: player can't be dead, arrow can't be moving between points, and timeline must be in corner
 		// TODO: can't restrict while game is paused, but need to find another way to prevent creation when a pause menu is up
-		if (!GameManager.isPlayerDead() && Input.GetKeyDown(createPointKey) && arrowReachedPointTarget && tetherUINotZoomed)
+		if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
 		{
-			CreatePoint(); 
+			if (!GameManager.isPlayerDead() && arrowReachedPointTarget && tetherUINotZoomed)
+			{
+				CreatePoint(); 
+			}
 		}
 
 		UpdateTetherTimelineUI();
+
+		if (Input.GetKey(KeyCode.G))
+		{
+			RevealDrawer(); 
+		}
+		else
+		{
+			HideDrawer(); 
+		}
 	}
 
 	/// <summary>
@@ -129,7 +149,7 @@ public class TetherManager : Singleton<TetherManager>
 			// Can happen in two cases
 			// 		(a) The bringUpTetherUIKey is held down and the ability to bring up the UI isn't locked
 			//		(b) The arrow is moving back after loading a state, preventing the UI from minimizing in the else statement
-			if ((Input.GetKey(bringUpTetherUIKey) && !tetherZoomKeyLock) || arrowMovingBack)
+			if (((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !tetherZoomKeyLock) || arrowMovingBack)
 			{
 				GameManager.setPause(true);
 				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
@@ -158,7 +178,7 @@ public class TetherManager : Singleton<TetherManager>
 		}
 
 		// When the UI starts to minimize back to the corner, don't allow it to maximize again until the bringUpTetherUIKey has been released
-		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && !Input.GetKey(bringUpTetherUIKey))
+		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && (!Input.GetKey(PlayerControlManager.RH_TetherMenu) && Input.GetKey(PlayerControlManager.LH_TetherMenu)))
 		{
 			tetherZoomKeyLock = false; 
 		}
@@ -324,5 +344,45 @@ public class TetherManager : Singleton<TetherManager>
 	{
 		if (screenshotParent != null)
 			screenshotParent.SetActive(false); 
+	}
+
+	// UI Drawer 
+
+	void RevealDrawer()
+	{
+		Debug.Log("Reveal drawer: " + GameManager.HighestCodeFound()); 
+		keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, GetDrawerTargetPos(), 5 * Time.deltaTime); 
+	}
+
+	void HideDrawer()
+	{
+		//keycodeDrawer.rectTransform.position = keycodeTrayStartPos; 
+		keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, keycodeTrayStartPos, 5 * Time.deltaTime); 
+	}
+
+	Vector2 GetDrawerTargetPos()
+	{
+		Debug.Log("target pos: " + new Vector3(keycodeDrawer.rectTransform.anchoredPosition.x + (GameManager.HighestCodeFound() * trayXPosStep), keycodeDrawer.rectTransform.anchoredPosition.y)); 
+
+		return new Vector2(keycodeTrayStartPos.x + (GameManager.HighestCodeFound() * trayXPosStep), keycodeDrawer.rectTransform.anchoredPosition.y); 
+
+	}
+
+	// Stasis display
+	void UpdateStasisDisplay()
+	{
+		if (stasisPieceParent == null)
+		{
+			return; 
+		}
+
+		if (GameManager.inst.canUseStasis)
+		{
+			stasisPieceParent.SetActive(true); 
+		}
+		else
+		{
+			stasisPieceParent.SetActive(false); 
+		}
 	}
 }

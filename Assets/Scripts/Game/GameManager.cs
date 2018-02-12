@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System; 
 
 public enum CodeName
 {
@@ -44,6 +45,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	// Savable data
 	[SerializeField] List<CodeName> codes; 
+	private string[] codeEnumNames; 
 
 	// --- ISavable Methods ---
 	public SeedBase saveData()
@@ -77,6 +79,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			playerObj.GetComponent<Entity> ().died += killPlayer;
 		}
+		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
 	}
 
 	public static void setPause(bool state)
@@ -151,6 +154,25 @@ public class GameManager : Singleton<GameManager> , ISavable
 			return true; 
 		}
 		return false; 
+	}
+
+	/// <summary>
+	/// Returns an int representing the highest code found. This is useful for UI calculations
+	/// </summary>
+	public static int HighestCodeFound()
+	{
+		int result = 0; 
+		int i = 0; 
+
+		foreach(CodeName codeN in Enum.GetValues(typeof(CodeName)))
+		{
+			i++; 
+			if (inst.codes.Contains(codeN))
+			{
+				result = i; 
+			}
+		}
+		return result; 
 	}
 
 }
