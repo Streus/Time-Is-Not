@@ -157,6 +157,8 @@ public class Door : Interactable, IActivatable, ISavable
 
 	public override void onInteract ()
 	{
+		if (_type != DoorTypes.Manual)
+			return;
 		_isOpen = !_isOpen;
 
 		if(_isOpen)
