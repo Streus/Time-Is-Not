@@ -108,6 +108,7 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// </summary>
 	public override void onInteract ()
 	{
+		ToggleSecurityDoors ();
 		disable ();
 		foreach(GameObject activatable in _activatables)
 		{

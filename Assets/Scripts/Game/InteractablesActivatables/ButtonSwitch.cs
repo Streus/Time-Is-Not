@@ -130,6 +130,7 @@ public class ButtonSwitch : Interactable
 	/// </summary>
 	public override void onInteract ()
 	{
+		ToggleSecurityDoors ();
 		foreach(GameObject activatable in _activatables)
 		{
 			if(activatable.GetComponent<IActivatable>() != null)
