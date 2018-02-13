@@ -2263,7 +2263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   securityDoors: {fileID: 0}
   canUseStasis: 1
-  canUseDash: 0
+  canUseDash: 1
   playerObj: {fileID: 1062996858393866}
   codes: 
 --- !u!114 &114355522424921358
@@ -2425,6 +2425,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: ad7482bf0c7e45242a2fd1206500777d, type: 2}
   pushState: {fileID: 11400000, guid: 2b0e9096344ca18499a7abb6d117c9c6, type: 2}
+  dashState: {fileID: 11400000, guid: 1f9c4f4be5d084a43ae77dba1e7e5de1, type: 2}
+  moveMask:
+    serializedVersion: 2
+    m_Bits: 1
+  minJumpDist: 1
+  maxJumpDist: 2
 --- !u!114 &114441913414058136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3371,7 +3377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registeredID: 9ZkK+0Ua8kCzWLwh7gEydQ
-  instanceID: -1
+  instanceID: 87878
   stasisable: 1
 --- !u!124 &124559304230223202
 Behaviour:

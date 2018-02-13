@@ -11,13 +11,13 @@ public class PlayerTargeting : Action
         float jumpDistance = p.getMaxJumpDist;
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - p.transform.position;
 
-        float colliderRadius = p.GetComponent<CircleCollider2D>().radius;
+        Vector2 colliderSize = p.GetComponent<BoxCollider2D>().size;
         //replace these with a proper layer mask
         //	int layers = 1 << LayerMask.NameToLayer ("Wall"); 
         //	layers |= 1 << LayerMask.NameToLayer ("SpecialWall1");
 
         //do a circlecast from the player to the furthest possible jump position
-        RaycastHit2D[] pathCheck = Physics2D.CircleCastAll(p.transform.position, colliderRadius, dir, p.getMaxJumpDist, p.moveMask);
+        RaycastHit2D[] pathCheck = Physics2D.BoxCastAll(p.transform.position, colliderSize, 0.0f, dir, p.getMaxJumpDist, p.moveMask);
 
         if (pathCheck != null)
         {

@@ -19,7 +19,7 @@ public partial class Ability
             "Dash",
             "Dashes to mouse description",
             null,
-            .5f,
+            1f,
             0,
             isDashing));
 	}
@@ -43,7 +43,6 @@ public partial class Ability
     private static bool isDashing(Entity e, Vector2 tarPos)
     {
         e.GetComponent<Player>().enterDashState();
-        Debug.Log("entering Dash");
         return true;
     }
 	#endregion

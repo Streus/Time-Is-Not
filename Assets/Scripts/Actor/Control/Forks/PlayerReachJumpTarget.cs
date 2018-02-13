@@ -11,7 +11,7 @@ public class PlayerReachJumpTarget : Fork
 
         if (Vector2.Distance(p.transform.position, p.getJumpTargetPos) < 0.1f)
         {
-            Debug.Log("DashComplete");
+            p.gameObject.layer = 8;
             return true;
         }
         else
