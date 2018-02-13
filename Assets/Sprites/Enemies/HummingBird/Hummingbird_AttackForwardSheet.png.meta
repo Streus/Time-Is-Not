@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 29e2ddba034844c7eb5d3bc9035317f1
-timeCreated: 1518482942
+guid: 2f135bcd9897a4fc192e66557234cf5f
+timeCreated: 1518480431
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: HermitCrab_RightWalk_0
-    21300002: HermitCrab_RightWalk_1
-    21300004: HermitCrab_RightWalk_2
-    21300006: HermitCrab_RightWalk_3
-    21300008: HermitCrab_RightWalk_4
-    21300010: HermitCrab_RightWalk_5
-    21300012: HermitCrab_RightWalk_6
-    21300014: HermitCrab_RightWalk_7
+    21300000: Hummingbird_AttackForwardSheet_0
+    21300002: Hummingbird_AttackForwardSheet_1
+    21300004: Hummingbird_AttackForwardSheet_2
+    21300006: Hummingbird_AttackForwardSheet_3
+    21300008: Hummingbird_AttackForwardSheet_4
+    21300010: Hummingbird_AttackForwardSheet_5
+    21300012: Hummingbird_AttackForwardSheet_6
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -107,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HermitCrab_RightWalk_0
+      name: Hummingbird_AttackForwardSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,27 +120,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HermitCrab_RightWalk_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: HermitCrab_RightWalk_2
+      name: Hummingbird_AttackForwardSheet_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,27 +134,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HermitCrab_RightWalk_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: HermitCrab_RightWalk_4
+      name: Hummingbird_AttackForwardSheet_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,27 +148,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HermitCrab_RightWalk_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: HermitCrab_RightWalk_6
+      name: Hummingbird_AttackForwardSheet_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
-        width: 64
-        height: 64
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,13 +162,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: HermitCrab_RightWalk_7
+      name: Hummingbird_AttackForwardSheet_4
       rect:
         serializedVersion: 2
-        x: 448
+        x: 512
         y: 0
-        width: 64
-        height: 64
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hummingbird_AttackForwardSheet_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Hummingbird_AttackForwardSheet_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
