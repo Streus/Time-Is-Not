@@ -9,6 +9,8 @@ public class Player : Controller
 	private State pushState;
 
 	private State prePushState;
+
+    
 	#endregion
 
 	#region INSTANCE_METHODS
