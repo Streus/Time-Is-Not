@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _activatables: []
   _unpressedSprite: {fileID: 21300004, guid: dc6dbc5fdcc77442c9498659362ccde9, type: 3}
   _pressedSprite: {fileID: 21300006, guid: dc6dbc5fdcc77442c9498659362ccde9, type: 3}
@@ -93,7 +94,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.7777778, y: 1.7777778}
+  m_Size: {x: 0.8888889, y: 0.8888889}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
