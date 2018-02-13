@@ -15,6 +15,7 @@ public class Player : Controller
 	public void Start ()
 	{
 		getSelf ().addAbility (Ability.get ("Place Stasis"));
+        getSelf().addAbility(Ability.get("Dash"));
 	}
 
 	public override void FixedUpdate ()

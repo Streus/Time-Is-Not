@@ -15,6 +15,13 @@ public partial class Ability
 			1f,
 			0,
 			placeStasisBubble));
+        put(new Ability (
+            "Dash",
+            "Dashes to mouse description",
+            null,
+            .5f,
+            0,
+            isDashing));
 	}
 
 	#region PLAYER_ABILITIES
@@ -35,6 +42,11 @@ public partial class Ability
 
 		return true;
 	}
+    private static bool isDashing(Entity e, Vector2 tarPos)
+    {
+        Debug.Log("I dashed");
+        return true;
+    }
 	#endregion
 }
 

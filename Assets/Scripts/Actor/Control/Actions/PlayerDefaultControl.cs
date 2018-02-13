@@ -14,6 +14,10 @@ public class PlayerDefaultControl : Action
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));
 		if (Input.GetKeyDown (PlayerControlManager.RH_FireStasis) || Input.GetKeyDown(PlayerControlManager.LH_FireStasis))
 			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
+        if (Input.GetKeyDown(PlayerControlManager.RH_Dash) || Input.GetKeyDown(PlayerControlManager.LH_Dash))
+        {
+            p.getSelf().getAbility(1).use(p.getSelf(), mousePos);
+        }
 
 		Vector2 movementVector = Vector2.zero;
 

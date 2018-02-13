@@ -42,7 +42,7 @@ public sealed class Entity : MonoBehaviour
 
 	public void Awake()
 	{
-		abilities = new List<Ability> (1);
+		abilities = new List<Ability> (2);
 		statuses = new List<Status> ();
 	}
 
