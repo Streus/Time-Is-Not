@@ -9,15 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
-  m_Name: PlayerDefault
+  m_Name: PlayerTargeting
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  enterAction: {fileID: 0}
-  actions:
-  - {fileID: 11400000, guid: 2153d13b6bd3d5a45817c292ea6a2017, type: 2}
+  enterAction: {fileID: 11400000, guid: d8544867947195d4b9c91f5348f51b21, type: 2}
+  actions: []
   exitAction: {fileID: 0}
-  paths:
-  - name: DashTargeting
-    success: {fileID: 11400000, guid: 73243586f217e3d478dd239e002e6e25, type: 2}
-    failure: {fileID: 0}
-    decision: {fileID: 11400000, guid: 476176dc3cb1da2459ead56a4c1ad035, type: 2}
+  paths: []

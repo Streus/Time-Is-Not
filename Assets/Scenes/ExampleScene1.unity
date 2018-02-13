@@ -1806,6 +1806,26 @@ Transform:
   m_PrefabParentObject: {fileID: 4589421609257486, guid: 605a598435d174206a00a473010331a6,
     type: 2}
   m_PrefabInternal: {fileID: 1000101783}
+--- !u!1 &570349207 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1062996858393866, guid: 7653195774fee4b97af15a525bc1b140,
+    type: 2}
+  m_PrefabInternal: {fileID: 1234631512}
+--- !u!58 &570349216
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570349207}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.44444445
 --- !u!1001 &577705619
 Prefab:
   m_ObjectHideFlags: 0
@@ -3723,6 +3743,22 @@ Prefab:
       propertyPath: moveMask.m_Bits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114425224028334586, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: maxJumpDist
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114425224028334586, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: minJumpDist
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114425224028334586, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: dashState
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f9c4f4be5d084a43ae77dba1e7e5de1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0

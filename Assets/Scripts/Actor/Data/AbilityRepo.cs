@@ -43,6 +43,7 @@ public partial class Ability
     private static bool isDashing(Entity e, Vector2 tarPos)
     {
         e.GetComponent<Player>().enterDashState();
+        Debug.Log("entering Dash");
         return true;
     }
 	#endregion

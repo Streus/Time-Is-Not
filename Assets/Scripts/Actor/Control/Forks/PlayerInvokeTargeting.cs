@@ -7,9 +7,9 @@ public class PlayerInvokeTargeting : Fork
 {
     public override bool check(Controller c)
     {
+        Player p = State.cast<Player>(c);
         if ((Input.GetKeyDown(PlayerControlManager.RH_Dash)
-            || Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
-            GameManager.inst.canUseDash)
+            || Input.GetKeyDown(PlayerControlManager.LH_Dash)) && GameManager.inst.canUseDash == true)
         {
             return true;
         }
@@ -17,6 +17,5 @@ public class PlayerInvokeTargeting : Fork
         {
             return false;
         }
-        
     }
 }
