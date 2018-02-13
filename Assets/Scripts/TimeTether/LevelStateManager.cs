@@ -436,4 +436,16 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return true; 
 	}
 
+	public static bool StasisBubbleAtPos(Vector3 pos)
+	{
+		for (int i = 0; i < stasisBubbles.Count; i++)
+		{
+			if (stasisBubbles[i] != null && stasisBubbles[i].ColliderContainsPos(pos))
+			{
+				return true; 
+			}
+		}
+		return false; 
+	}
+
 }
