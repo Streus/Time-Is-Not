@@ -138,7 +138,6 @@ public class RegisteredObject : MonoBehaviour
 	{
 		if (col.CompareTag("StasisField"))
 		{
-			Debug.Log("stasis'd!");
 			if (stasisable)
 				setAllowReset(false);
 		}
@@ -151,7 +150,6 @@ public class RegisteredObject : MonoBehaviour
 	{
 		if (col.CompareTag("StasisField"))
 		{
-			Debug.Log("unstasis'd!");
 			if (stasisable)
 				setAllowReset(true);
 		}
