@@ -27,10 +27,13 @@ public class RegisteredObject : MonoBehaviour
 		get { return registeredID; }
 	}
 
+	// Used to check for duplication of objects
+	[SerializeField]
+	private int instanceID = -1;
+
 	// Path to a prefab to which this RO is attached
 	private string prefabPath = "";
 
-	[Tooltip("Can this object be stasis'd?")]
 	[SerializeField]
 	private bool stasisable = true;
 
@@ -102,20 +105,15 @@ public class RegisteredObject : MonoBehaviour
 
 	private void generateID()
 	{
-		if(registeredID == DEFAULT_RID)
+		if (instanceID == -1)
+			instanceID = gameObject.GetInstanceID ();
+
+		if(registeredID == DEFAULT_RID || instanceID != gameObject.GetInstanceID())
 			registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
 	}
 
 	public void Awake()
 	{
-		#if UNITY_EDITOR
-		if(!EditorApplication.isPlayingOrWillChangePlaymode)
-		{
-			Undo.RecordObject(this, "Generate ID");
-			generateID();
-			EditorUtility.SetDirty(this);
-		}
-		#endif
 		directory.Add (this);
 	}
 
@@ -161,7 +159,7 @@ public class RegisteredObject : MonoBehaviour
 
 	#if UNITY_EDITOR
 	bool isQuitting = false; 
-	void OnApplicationQuit()
+	public void OnApplicationQuit()
 	{ 
 		isQuitting = true; 
 	}
@@ -212,9 +210,6 @@ public class RegisteredObject : MonoBehaviour
 		else
 			allowReset--;
 
-//		if (allowReset < 0)
-//			allowReset = 0;
-
 		if (allowResetChanged != null)
 			allowResetChanged (!val);
 	}
@@ -222,6 +217,16 @@ public class RegisteredObject : MonoBehaviour
 	public bool getAllowReset()
 	{
 		return allowReset > 0;
+	}
+
+	public bool getStasisable()
+	{
+		return stasisable;
+	}
+
+	public void setStasisable(bool val)
+	{
+		stasisable = val;
 	}
 
 	public override string ToString ()

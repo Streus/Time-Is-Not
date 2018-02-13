@@ -193,6 +193,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114210800986143452, guid: 7071fe2caebe6574caf4f37dc7703000,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7071fe2caebe6574caf4f37dc7703000, type: 2}
   m_IsPrefabParent: 0
@@ -245,6 +250,10 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 600019330}
+    - target: {fileID: 1502329736445966, guid: d50f0a2dee319694e925ffedff227645, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d50f0a2dee319694e925ffedff227645, type: 2}
   m_IsPrefabParent: 0
@@ -585,6 +594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b552873464443eabb8cacbc87bd8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  securityDoors: {fileID: 0}
+  canUseStasis: 0
+  canUseDash: 0
   playerObj: {fileID: 477291226}
   codes: 
 --- !u!114 &1912440153
@@ -599,6 +611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registeredID: H9xDREo2i0G9wcZekYXFow
+  instanceID: 12816
+  stasisable: 1
 --- !u!4 &1912440154
 Transform:
   m_ObjectHideFlags: 0
@@ -656,6 +670,16 @@ Prefab:
       propertyPath: patrolStart
       value: 
       objectReference: {fileID: 1377638931}
+    - target: {fileID: 114470986161319358, guid: 1fad2fa7bd444e742a38e759036255f5,
+        type: 2}
+      propertyPath: registeredID
+      value: IC24vVTD+keFECrbt23hpQ
+      objectReference: {fileID: 0}
+    - target: {fileID: 114470986161319358, guid: 1fad2fa7bd444e742a38e759036255f5,
+        type: 2}
+      propertyPath: stasisable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fad2fa7bd444e742a38e759036255f5, type: 2}
   m_IsPrefabParent: 0

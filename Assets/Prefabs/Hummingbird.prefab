@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114368959777853864}
   - component: {fileID: 212830576024163304}
   - component: {fileID: 58345203332920472}
+  - component: {fileID: 114470986161319358}
   m_Layer: 9
   m_Name: Hummingbird
   m_TagString: Untagged
@@ -138,12 +139,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bd0f595229dab42b7f2ffbd86c21f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowReset: 1
   state: {fileID: 11400000, guid: 9db68cedf5d592945a351d7dc196544b, type: 2}
   patrolStart: {fileID: 0}
   turnSpeed: 90
   sightRange: 5
   fieldOfView: 45
+--- !u!114 &114470986161319358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177474285033522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registeredID: 
+  instanceID: -1
+  stasisable: 1
 --- !u!114 &114756349643120254
 MonoBehaviour:
   m_ObjectHideFlags: 1
