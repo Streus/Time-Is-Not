@@ -20,7 +20,9 @@ public class PlayerDefaultControl : Action
 			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
 
 		// Use Dash ability
-        if (Input.GetKeyDown(PlayerControlManager.RH_Dash) || Input.GetKeyDown(PlayerControlManager.LH_Dash))
+        if ((Input.GetKeyDown(PlayerControlManager.RH_Dash) 
+			|| Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
+			GameManager.inst.canUseStasis)
         {
             p.getSelf().getAbility(1).use(p.getSelf(), mousePos);
         }
