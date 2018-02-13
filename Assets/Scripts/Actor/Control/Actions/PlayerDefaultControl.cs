@@ -16,13 +16,13 @@ public class PlayerDefaultControl : Action
 		// Use Stasis Placement ablility
 		if ((Input.GetKeyDown (PlayerControlManager.RH_FireStasis) ||
 			Input.GetKeyDown(PlayerControlManager.LH_FireStasis)) && 
-			GameManager.inst.canUseDash)
+			GameManager.inst.canUseStasis)
 			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
 
 		// Use Dash ability
         if ((Input.GetKeyDown(PlayerControlManager.RH_Dash) 
 			|| Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
-			GameManager.inst.canUseStasis)
+			GameManager.inst.canUseDash)
         {
             p.getSelf().getAbility(1).use(p.getSelf(), mousePos);
         }
