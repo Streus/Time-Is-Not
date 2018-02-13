@@ -7,6 +7,16 @@ public class PlayerInvokeTargeting : Fork
 {
     public override bool check(Controller c)
     {
-        return true;
+        if ((Input.GetKeyDown(PlayerControlManager.RH_Dash)
+            || Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
+            GameManager.inst.canUseDash)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 }
