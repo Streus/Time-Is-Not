@@ -7,6 +7,8 @@ public class MovingPlatformWall : MonoBehaviour
 	//is the wall enabled or not
 	private bool isEnabled = true;
 
+
+	[SerializeField]
 	private LayerMask _pitLayer;
 
 	//radius of the pit check
@@ -38,8 +40,15 @@ public class MovingPlatformWall : MonoBehaviour
 	/// </summary>
 	bool CheckForPit()
 	{
-		LayerMask mask = 1 << LayerMask.NameToLayer("Pits");
-		Collider2D colHit = Physics2D.OverlapCircle(transform.position, checkSize, mask);
-		return (colHit != null);
+		Collider2D[] colsHit = Physics2D.OverlapCircleAll(transform.position, checkSize, _pitLayer);
+		bool seesPit = false;
+		for(int i = 0; i < colsHit.Length; i++)
+		{
+			if (colsHit [i].gameObject.layer == LayerMask.NameToLayer ("Pits"))
+				seesPit = true;
+			if (colsHit [i].gameObject.CompareTag("MovingPlatform"))
+				return false;
+		}
+		return seesPit;
 	}
 }
