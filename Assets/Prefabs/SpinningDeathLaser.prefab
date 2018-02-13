@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _distance: 25
   _layersToHit:
     serializedVersion: 2
@@ -416,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registeredID: WuUqJpC0A0yA8vqzpUjF7Q
+  instanceID: -1
   stasisable: 1
 --- !u!114 &114742703759694270
 MonoBehaviour:
@@ -440,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _distance: 50
   _layersToHit:
     serializedVersion: 2
@@ -498,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registeredID: ydun1GRZf0uSDEwvCkYXjQ
+  instanceID: -1
   stasisable: 1
 --- !u!114 &114986084590390596
 MonoBehaviour:
@@ -510,7 +514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: Mgww1rgcHk2mOS9rJPGiEQ
+  registeredID: x8S1mkCEEkGjE8lUln+MKg
+  instanceID: 10588
   stasisable: 1
 --- !u!120 &120274544241393510
 LineRenderer:

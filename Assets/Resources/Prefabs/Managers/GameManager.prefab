@@ -52,7 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: zqAI6jVRRUmhAdTgwPrLBg
+  registeredID: 9m2QLbWfD0yqdwNk45Ht3w
+  instanceID: 10192
+  stasisable: 1
 --- !u!114 &114240245151857794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b552873464443eabb8cacbc87bd8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
+  securityDoors: {fileID: 0}
+  canUseStasis: 0
+  canUseDash: 0
   playerObj: {fileID: 0}
   codes: 

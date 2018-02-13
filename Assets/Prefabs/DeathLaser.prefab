@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _distance: 50
   _layersToHit:
     serializedVersion: 2
@@ -188,7 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: ujPdQkCdxkmbABywRCHBng
+  registeredID: eg0EVZJ5Gk26IZXA3j2BZw
+  instanceID: 10328
+  stasisable: 1
 --- !u!114 &114458751387499110
 MonoBehaviour:
   m_ObjectHideFlags: 1

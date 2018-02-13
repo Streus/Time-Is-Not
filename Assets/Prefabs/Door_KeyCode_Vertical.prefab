@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _interactKey: 101
   _isOpen: 0
   _type: 1
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _interactKey: 101
   _activatables:
   - {fileID: 1759452745736010}
@@ -330,7 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: UU75w388z06isBrlFn8Bdw
+  registeredID: cmDG+dcVDUCOUICJ9m1Blw
+  instanceID: 10752
   stasisable: 1
 --- !u!212 &212089287028599284
 SpriteRenderer:

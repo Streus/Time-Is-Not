@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3195ec0059e284fd19937e7c7d65dccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stasisableObject: {fileID: 1610048438530062}
+  go: {fileID: 0}
 --- !u!114 &114806988014785946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,7 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: 0NtsyW/apE+F/gjuYb9qbA
+  registeredID: TlI9c0odUU6XHM8SADL6+A
+  instanceID: 10472
+  stasisable: 1
 --- !u!198 &198436326300559286
 ParticleSystem:
   m_ObjectHideFlags: 1
