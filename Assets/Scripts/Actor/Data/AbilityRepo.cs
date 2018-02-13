@@ -42,7 +42,7 @@ public partial class Ability
 	}
     private static bool isDashing(Entity e, Vector2 tarPos)
     {
-        Debug.Log("I dashed");
+        e.transform.position = Vector2.Lerp(e.transform.position, tarPos, 1);
         return true;
     }
 	#endregion

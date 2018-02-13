@@ -7,7 +7,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
     // UI //
 
 	public AudioClip uiButtonClick;
-
+    public AudioClip tetherMenuOpen;
+    public AudioClip tetherMenuClose;
     public AudioClip gameOver; // ---
 
     // Mechanics //
@@ -60,8 +61,18 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
 	public static void PlayUIButtonClick()
 	{
-		GlobalAudio.PlaySound(inst.uiButtonClick, 0.95f, 1.05f);
+		GlobalAudio.PlaySound(inst.uiButtonClick);
 	}
+
+    public static void PlayTetherMenuOpen()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuOpen);
+    }
+
+    public static void PlayTetherMenuClose()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuClose);
+    }
 
     public static void PlayTetherPlacementSound()
     {
