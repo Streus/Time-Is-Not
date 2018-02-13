@@ -42,7 +42,7 @@ public partial class Ability
 	}
     private static bool isDashing(Entity e, Vector2 tarPos)
     {
-        e.transform.position = Vector2.Lerp(e.transform.position, tarPos, 1);
+        e.GetComponent<Player>().enterDashState();
         return true;
     }
 	#endregion

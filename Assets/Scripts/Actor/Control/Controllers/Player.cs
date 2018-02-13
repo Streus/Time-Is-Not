@@ -4,13 +4,54 @@ using UnityEngine;
 
 public class Player : Controller
 {
-	#region INSTANCE_VARS
-	[SerializeField]
-	private State pushState;
+    #region INSTANCE_VARS
+    [SerializeField]
+    private State pushState;
 
-	private State prePushState;
+    private State prePushState;
 
-    
+    [SerializeField]
+    private State dashState;
+
+    private Vector3 jumpTargetPos;
+
+    public LayerMask moveMask;
+
+    [SerializeField]
+    private float minJumpDist;
+
+    public float getMinJumpDist
+    {
+        get
+        {
+            return minJumpDist;
+        }
+    }
+
+    [SerializeField]
+    private float maxJumpDist;
+
+    public float getMaxJumpDist
+    {
+        get
+        {
+            return maxJumpDist;
+        }
+    }
+
+    public void setJumpTargetPos(Vector3 jumpTarget)
+    {
+        jumpTargetPos = jumpTarget;
+    }
+
+    public Vector3 getJumpTargetPos
+    {
+        get
+        {
+            return jumpTargetPos;
+        }
+    }
+
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -41,6 +82,41 @@ public class Player : Controller
 		return (pushState == getState ());
 	}
 
+    public void enterDashState()
+    {
+        setState(dashState);
+    }
+
+    public bool dashing()
+    {
+        return (dashState == getState());
+    }
+
+    public void Movement()
+    {
+        // Movement
+        Vector2 movementVector = Vector2.zero;
+
+        if (Input.GetKey(PlayerControlManager.RH_Up) || Input.GetKey(PlayerControlManager.LH_UP)) // UP
+            movementVector += Vector2.up;
+        if (Input.GetKey(PlayerControlManager.RH_Left) || Input.GetKey(PlayerControlManager.LH_Left)) // LEFT
+            movementVector += Vector2.left;
+        if (Input.GetKey(PlayerControlManager.RH_Down) || Input.GetKey(PlayerControlManager.LH_Down)) // DOWN
+            movementVector += Vector2.down;
+        if (Input.GetKey(PlayerControlManager.RH_Right) || Input.GetKey(PlayerControlManager.LH_Right)) // RIGHT
+            movementVector += Vector2.right;
+
+        movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
+
+        // Wall check
+        RaycastHit2D[] hits = new RaycastHit2D[1];
+        int hitCount = 0;
+        ContactFilter2D cf = new ContactFilter2D();
+        cf.SetLayerMask(moveMask);
+        hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
+        if (hitCount <= 0)
+            transform.Translate((Vector3)movementVector);
+    }
 	#region ISAVABLE_METHODS
 	/*
 	public override SeedBase saveData ()
