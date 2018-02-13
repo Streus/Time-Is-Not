@@ -107,4 +107,14 @@ public class StasisBubble : MonoBehaviour
 	{
 		Destroy(gameObject); 
 	}
+
+	public bool ColliderContainsPos(Vector3 pos)
+	{
+		if (bubbleCollider.bounds.Contains(pos))
+		{
+			return true; 
+		}
+
+		return false; 
+	}
 }

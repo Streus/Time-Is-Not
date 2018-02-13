@@ -54,6 +54,9 @@ public class TetherManager : Singleton<TetherManager>
 	{
 		RemoveTimeTetherIndicator(state + 1); 
 		LevelStateManager.loadTetherPoint(state);
+
+		// Temporary fix!!!
+		GameManager.setPause(false);
 	}
 
 	void CreateTimeTetherIndicator(Vector3 pos, int state)
