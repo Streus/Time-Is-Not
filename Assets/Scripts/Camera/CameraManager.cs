@@ -44,6 +44,10 @@ public class CameraManager : MonoBehaviour
 	float regularSize; 
 	public float zoomOutSize; 
 
+	public float vertScrollPercDivisor;
+	public float horizScrollPercDivisor; 
+	public float panSpeed; 
+
 	private Vector2 panOffset;
 
 	private float shakeDur, shakeInt, shakeDec;
@@ -283,23 +287,23 @@ public class CameraManager : MonoBehaviour
 		else
 		{
 			// Horizontal pan
-			if (Input.mousePosition.x > Screen.width - Screen.width / 8)
+			if (Input.mousePosition.x > Screen.width - Screen.width / horizScrollPercDivisor)
 			{
-				panOffset += new Vector2 (20 * Time.deltaTime, 0); 
+				panOffset += new Vector2 (panSpeed * Time.deltaTime, 0); 
 			}
-			else if (Input.mousePosition.x < 0 + Screen.width / 8)
+			else if (Input.mousePosition.x < 0 + Screen.width / horizScrollPercDivisor)
 			{
-				panOffset -= new Vector2 (20 * Time.deltaTime, 0); 
+				panOffset -= new Vector2 (panSpeed * Time.deltaTime, 0); 
 			} 
 
 			// Vertical pan
-			if (Input.mousePosition.y > Screen.height - Screen.height / 6)
+			if (Input.mousePosition.y > Screen.height - Screen.height / vertScrollPercDivisor)
 			{
-				panOffset += new Vector2 (0, 20 * Time.deltaTime); 
+				panOffset += new Vector2 (0, panSpeed * Time.deltaTime); 
 			}
-			else if (Input.mousePosition.y < 0 + Screen.width / 6)
+			else if (Input.mousePosition.y < 0 + Screen.width / vertScrollPercDivisor)
 			{
-				panOffset -= new Vector2 (0, 20 * Time.deltaTime); 
+				panOffset -= new Vector2 (0, panSpeed * Time.deltaTime); 
 			} 
 		}
 

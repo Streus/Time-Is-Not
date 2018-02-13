@@ -8,16 +8,113 @@ using UnityEngine.UI;
 /// </summary>
 public class TetherManager : Singleton<TetherManager> 
 {
+	[Tooltip("(Drag In) The prefab for the object dropped at the player position each time a tether point is created.")]
+	public GameObject timeTetherIndicatorPrefab; 
+
+	// An array holding all the timeTetherIndicators spawned in the scene. 
+	GameObject[] timeTetherIndicators; 
+
+	// Use this for initialization
+	void Start () 
+	{
+		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
+		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
+		{ 
+			if (!GameManager.isPlayerDead())
+			{
+				CreatePoint(); 
+			}
+		}
+	}
+
+	public void CreatePoint()
+	{
+		if (LevelStateManager.canCreateTetherPoint())
+		{
+			Debug.Log("Create tether point"); 
+			LevelStateManager.createTetherPoint(); 
+			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
+		}
+		else
+		{
+			Debug.Log("Can't create tether point right now"); 
+		}
+	}
+
+	/// <summary>
+	/// Called via UI buttons in the timeline to load a state
+	/// </summary>
+	/// <param name="state">State, as determined in the button</param>
+	public void LoadPoint(int state)
+	{
+		RemoveTimeTetherIndicator(state + 1); 
+		LevelStateManager.loadTetherPoint(state);
+	}
+
+	void CreateTimeTetherIndicator(Vector3 pos, int state)
+	{
+		GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform); 
+		//timeTetherIndicators.Add(indicator); 
+		timeTetherIndicators[state] = indicator; 
+	}
+
+	// Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
+	void RemoveTimeTetherIndicator(int index)
+	{
+		//Debug.Log("Remove indicators starting at index " + index); 
+
+		for (int i = index; i < timeTetherIndicators.Length; i++)
+		{
+			if (timeTetherIndicators[i] != null)
+			{
+				Destroy(timeTetherIndicators[i].gameObject);
+			}
+		}
+	}
+
+	public static void OnPointerEnter(int state)
+	{
+		/*
+		inst.isHoveringOverButton = true;
+		inst.hoverButton = state; 
+		inst.screenshotImage.texture = ScreenshotManager.getScreenshot(state); 
+		inst.RevealScreenshot();
+		*/
+	}
+
+	public static void OnPointerExit()
+	{
+		/*
+		inst.isHoveringOverButton = false; 
+		inst.hoverButton = -1; 
+		inst.HideScreenshot(); 
+		*/ 
+	}
+
+
+
+
+
+
+
+
+
+	/*
 	[Header("UI Settings - better not to touch")]
 	// Time tether UI
 	[Tooltip("(Drag In) The GameObject with the tether UI that zooms between the corner and the screen center")]
-	public GameObject tetherUIParent; 
+	public RectTransform tetherUIParent; 
 
 	[Tooltip("The position of the tetherUIParent when at the bottom corner of the screen.")]
-	public Vector3 tetherUIPos0;
+	public Vector2 tetherUIPos0;
 
 	[Tooltip("The position of the tetherUIParent when zoomed in at the screen center")]
-	public Vector3 tetherUIPos1; 
+	public Vector2 tetherUIPos1; 
 
 	[Tooltip("The localScale of the tetherUIParent when at the bottom corner of the screen")]
 	public Vector3 tetherUIScale0;
@@ -118,7 +215,7 @@ public class TetherManager : Singleton<TetherManager>
 		// Restrictions: player can't be dead, arrow can't be moving between points, and timeline must be in corner
 		// TODO: can't restrict while game is paused, but need to find another way to prevent creation when a pause menu is up
 		if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
-		{
+		{ 
 			if (!GameManager.isPlayerDead() && arrowReachedPointTarget && tetherUINotZoomed)
 			{
 				CreatePoint(); 
@@ -152,7 +249,8 @@ public class TetherManager : Singleton<TetherManager>
 			if (((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !tetherZoomKeyLock) || arrowMovingBack)
 			{
 				GameManager.setPause(true);
-				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+				//tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+				tetherUIParent.anchoredPosition = Vector2.Lerp(tetherUIParent.anchoredPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
 				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
 				fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.1f, true);
 				RevealScreenshotParent(); 
@@ -161,7 +259,8 @@ public class TetherManager : Singleton<TetherManager>
 			else
 			{
 				GameManager.setPause(false);
-				tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos0, tetherUIZoomDownSpeed); 
+				//tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos0, tetherUIZoomDownSpeed); 
+				tetherUIParent.anchoredPosition = Vector2.Lerp(tetherUIParent.anchoredPosition, tetherUIPos0, tetherUIZoomDownSpeed); 
 				tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale0, tetherUIZoomDownSpeed); 
 				fadeImage.CrossFadeAlpha(0, 0.1f, true);
 				HideScreenshotParent(); 
@@ -171,14 +270,15 @@ public class TetherManager : Singleton<TetherManager>
 		else
 		{
 			GameManager.setPause(true);
-			tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+			//tetherUIParent.transform.localPosition = Vector3.Lerp(tetherUIParent.transform.localPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
+			tetherUIParent.anchoredPosition = Vector2.Lerp(tetherUIParent.anchoredPosition, tetherUIPos1, tetherUIZoomUpSpeed); 
 			tetherUIParent.transform.localScale = Vector3.Lerp(tetherUIParent.transform.localScale, tetherUIScale1, tetherUIZoomUpSpeed); 
 			fadeImage.CrossFadeAlpha(fadeImageMaxAlpha, 0.15f, true);
 			RevealScreenshotParent(); 
 		}
 
 		// When the UI starts to minimize back to the corner, don't allow it to maximize again until the bringUpTetherUIKey has been released
-		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && (!Input.GetKey(PlayerControlManager.RH_TetherMenu) && Input.GetKey(PlayerControlManager.LH_TetherMenu)))
+		if (!arrowMovingBack && arrowReachedPointTarget && tetherZoomKeyLock && (!Input.GetKey(PlayerControlManager.RH_TetherMenu) && !Input.GetKey(PlayerControlManager.LH_TetherMenu)))
 		{
 			tetherZoomKeyLock = false; 
 		}
@@ -224,13 +324,15 @@ public class TetherManager : Singleton<TetherManager>
 		if (!arrowReachedPointTarget)
 		{
 			// Initial x position is -11, with a spacing of 1.5 between each node
-			xTarget = -11 + (1.5f * LevelStateManager.curState);
+			//xTarget = -11 + (1.5f * LevelStateManager.curState);
+			xTarget = -95 + (45 * LevelStateManager.curState); 
 		}
 		// Arrow position is in between nodes
 		else
 		{
 			// Initial x position is -10.25, with a spacing of 1.5 between each node
-			xTarget = -10.25f + (1.5f * LevelStateManager.curState); 
+			//xTarget = -10.25f + (1.5f * LevelStateManager.curState); 
+			xTarget = -65 + (45 * LevelStateManager.curState); 
 		}
 
 		// Set the RectTransform's position, lerping to the target
@@ -351,13 +453,12 @@ public class TetherManager : Singleton<TetherManager>
 	void RevealDrawer()
 	{
 		Debug.Log("Reveal drawer: " + GameManager.HighestCodeFound()); 
-		keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, GetDrawerTargetPos(), 5 * Time.deltaTime); 
+		//keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, GetDrawerTargetPos(), 5 * Time.deltaTime); 
 	}
 
 	void HideDrawer()
-	{
-		//keycodeDrawer.rectTransform.position = keycodeTrayStartPos; 
-		keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, keycodeTrayStartPos, 5 * Time.deltaTime); 
+	{ 
+		//keycodeDrawer.rectTransform.anchoredPosition = Vector3.Lerp(keycodeDrawer.rectTransform.anchoredPosition, keycodeTrayStartPos, 5 * Time.deltaTime); 
 	}
 
 	Vector2 GetDrawerTargetPos()
@@ -385,4 +486,5 @@ public class TetherManager : Singleton<TetherManager>
 			stasisPieceParent.SetActive(false); 
 		}
 	}
+	*/ 
 }
