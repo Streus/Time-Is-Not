@@ -61,10 +61,13 @@ public class TetherManager : Singleton<TetherManager>
 	[SerializeField] float fadeImageFadeOutSpeed; 
 
 	// UI screenshot
-	[Header("Screenshot references")]
+	[Header("Screenshot settings")]
 	public RawImage screenshot; 
 	[HideInInspector] public bool isHoveringOverButton; 
 	int hoverButton; 
+	bool revealScreenshot; 
+	public float screenshotFadeInSpeed = 1; 
+	public float screenshotFadeOutSpeed = 1; 
 
 	// Use this for initialization
 	void Start () 
@@ -120,6 +123,7 @@ public class TetherManager : Singleton<TetherManager>
 		}
 
 		UpdateTimeArrowPos(); 
+		UpdateScreenshotState(); 
 	}
 
 	/// <summary>
@@ -443,12 +447,28 @@ public class TetherManager : Singleton<TetherManager>
 
 	void RevealScreenshot()
 	{
-		screenshot.color = new Color (1, 1, 1, 1); 
+		//screenshot.color = new Color (1, 1, 1, 1); 
+		revealScreenshot = true; 
 	}
 
 	void HideScreenshot()
 	{
-		screenshot.color = new Color (1, 1, 1, 0); 
+		//screenshot.color = new Color (1, 1, 1, 0); 
+		revealScreenshot = false; 
+	}
+
+	void UpdateScreenshotState()
+	{
+		// Screenshot fade in
+		if (revealScreenshot)
+		{
+			screenshot.color = new Color (1, 1, 1, Mathf.Lerp(screenshot.color.a, 1, screenshotFadeInSpeed * Time.deltaTime)); 
+		}
+		// Screenshot fade out
+		else
+		{
+			screenshot.color = new Color (1, 1, 1, Mathf.Lerp(screenshot.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime)); 
+		}
 	}
 		
 
