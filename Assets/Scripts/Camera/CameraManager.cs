@@ -108,15 +108,18 @@ public class CameraManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut))
+		if (Application.isPlaying)
 		{
-			zoomTo(zoomOutSize, zoomOutLerpSpeed);
-			updateZoomPan(false);
-		}
-		else
-		{
-			zoomTo(regularSize, zoomInLerpSpeed);
-			updateZoomPan(true);
+			if (Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut))
+			{
+				zoomTo(zoomOutSize, zoomOutLerpSpeed);
+				updateZoomPan(false);
+			}
+			else
+			{
+				zoomTo(regularSize, zoomInLerpSpeed);
+				updateZoomPan(true);
+			}
 		}
 	}
 

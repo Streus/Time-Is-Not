@@ -60,6 +60,12 @@ public class TetherManager : Singleton<TetherManager>
 	[SerializeField] float fadeImageFadeInSpeed; 
 	[SerializeField] float fadeImageFadeOutSpeed; 
 
+	// UI screenshot
+	[Header("Screenshot references")]
+	public RawImage screenshot; 
+	[HideInInspector] public bool isHoveringOverButton; 
+	int hoverButton; 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -418,23 +424,31 @@ public class TetherManager : Singleton<TetherManager>
 		}
 	}
 
+	// UI Screenshot stuff
+
 	public static void OnPointerEnter(int state)
 	{
-		/*
 		inst.isHoveringOverButton = true;
 		inst.hoverButton = state; 
-		inst.screenshotImage.texture = ScreenshotManager.getScreenshot(state); 
+		inst.screenshot.texture = ScreenshotManager.getScreenshot(state); 
 		inst.RevealScreenshot();
-		*/
 	}
 
 	public static void OnPointerExit()
 	{
-		/*
 		inst.isHoveringOverButton = false; 
 		inst.hoverButton = -1; 
 		inst.HideScreenshot(); 
-		*/ 
+	}
+
+	void RevealScreenshot()
+	{
+		screenshot.color = new Color (1, 1, 1, 1); 
+	}
+
+	void HideScreenshot()
+	{
+		screenshot.color = new Color (1, 1, 1, 0); 
 	}
 		
 
