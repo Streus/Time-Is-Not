@@ -15,7 +15,15 @@ public class TempPlayerScript : MonoBehaviour {
 
 		_animationController.SetFloat ("xSpeed", Input.GetAxis ("Horizontal"));
 		_animationController.SetFloat ("ySpeed", Input.GetAxis ("Vertical"));
-//		_animationController.SetTrigger ("ActivateTimeTether");
-//		_animationController.SetTrigger ("Reappear");
+	}
+
+	public void PlayTetherAnimation ()
+	{
+		_animationController.SetTrigger ("ActivateTimeTether");
+	}
+
+	public void PlayReappearAnimation ()
+	{
+		_animationController.SetTrigger ("Reappear");
 	}
 }

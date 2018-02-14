@@ -45,6 +45,10 @@ public class TetherManager : Singleton<TetherManager>
 
 	[SerializeField] TetherUIState tetherUIState; 
 
+	[SerializeField] TempPlayerScript tempTetherScript; 
+
+	[SerializeField] TetherTransition tetherTransition; 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -252,21 +256,27 @@ public class TetherManager : Singleton<TetherManager>
 
 		// Make Margot play her tether animation
 		// start animation
+		tempTetherScript.PlayTetherAnimation();
+
+		// Temporary way of delaying; should eventually have the animation controller tell this script that Margot's animation has finished
+		yield return new WaitForSeconds(0.5f); 
+
+		/*
 		while (false)
 		{
-			// Wait for Margot's animation to finish
+			// 	Wait for Margot's animation to finish
 			yield return null; 
 		}
+		*/ 
 
 		// Next, start two simultaneous actions
 		// 	(1) Make the screen transition play
-		// TODO
+		tetherTransition.SetFadeOut(); 
 
 		//	(2) Make the timeline arrow move directly above the previous tether point
 		SetArrowTarget(stateToLoad, false, false); 
 
-		// TODO need compound boolean
-		while (!ArrowReachedTarget())
+		while (!ArrowReachedTarget() || tetherTransition.TransitionInProgress())
 		{
 			// Wait for both conditions to finish
 			yield return null; 
@@ -276,16 +286,24 @@ public class TetherManager : Singleton<TetherManager>
 		RemoveTimeTetherIndicator(stateToLoad + 1); 
 		LevelStateManager.loadTetherPoint(stateToLoad);
 
+		// How long to wait on the black screen
+		yield return new WaitForSeconds (0.3f);
+
 		// Now that the state has been loaded, make the transition fade back in
-		while (false)
+		tempTetherScript.PlayReappearAnimation();
+		yield return new WaitForSeconds (0.1f);
+		tetherTransition.SetFadeIn(); 
+
+		while (tetherTransition.TransitionInProgress())
 		{
 			// Wait for the transition in to finish
 			yield return null; 
 		}
-
+			
 		// When the transition is done, start two simultaneous actions
 		// 	(1) Make Margot play her appear animation
-		// TODO
+
+		yield return new WaitForSeconds(0.2f); 
 
 		//	(2) Move the timeline arrow to the middle position in front of the tether point we just reverted to
 		SetArrowTarget(stateToLoad, true, false);
@@ -296,6 +314,8 @@ public class TetherManager : Singleton<TetherManager>
 			// Wait for both conditions to finish
 			yield return null; 
 		}
+
+		yield return new WaitForSeconds(1.2f);
 
 		// Now that the process has finished, restore control to the player
 		// TODO
