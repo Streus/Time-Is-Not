@@ -84,7 +84,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
 
-		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+		// The second parameter should be half of the cursor's size so that is is centered
+		Cursor.SetCursor(cursorTexture, new Vector2(32, 32), CursorMode.Auto);
 	}
 
 	public static void setPause(bool state)
