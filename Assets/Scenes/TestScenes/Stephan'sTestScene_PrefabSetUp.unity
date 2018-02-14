@@ -447,11 +447,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4523842952303830, guid: 7d9b22c548328414892130d5a06696c1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7.339757
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 4523842952303830, guid: 7d9b22c548328414892130d5a06696c1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.4107491
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 4523842952303830, guid: 7d9b22c548328414892130d5a06696c1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -480,12 +480,22 @@ Prefab:
     - target: {fileID: 120172540584172846, guid: 7d9b22c548328414892130d5a06696c1,
         type: 2}
       propertyPath: m_Positions.Array.data[0].x
-      value: 7.9400005
+      value: 1.4702433
       objectReference: {fileID: 0}
     - target: {fileID: 120172540584172846, guid: 7d9b22c548328414892130d5a06696c1,
         type: 2}
       propertyPath: m_Positions.Array.data[1].x
-      value: 7.9400005
+      value: 1.4702433
+      objectReference: {fileID: 0}
+    - target: {fileID: 120172540584172846, guid: 7d9b22c548328414892130d5a06696c1,
+        type: 2}
+      propertyPath: m_Positions.Array.data[0].y
+      value: -0.47074908
+      objectReference: {fileID: 0}
+    - target: {fileID: 120172540584172846, guid: 7d9b22c548328414892130d5a06696c1,
+        type: 2}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 9.529251
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d9b22c548328414892130d5a06696c1, type: 2}
@@ -711,6 +721,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114341280222162284, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: cursorTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 7e38a05d5c3e24ced92fcf05d69e0f45, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0
