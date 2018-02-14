@@ -9,30 +9,36 @@ public class PressurePlate : Interactable
 	[SerializeField]
 	private GameObject[] _activatables;
 
-	[Tooltip("Unpressed state sprite.")]
-	[SerializeField]
-	private Sprite _unpressedSprite;
-
-	[Tooltip("Pressed state sprite.")]
-	[SerializeField]
-	private Sprite _pressedSprite;
+//	[Tooltip("Unpressed state sprite.")]
+//	[SerializeField]
+//	private Sprite _unpressedSprite;
+//
+//	[Tooltip("Pressed state sprite.")]
+//	[SerializeField]
+//	private Sprite _pressedSprite;
 
 	//is the button pressed?
 	private bool _pressed = false;
 
+	Animator _animationControl;
+
 	// Use this for initialization
 	void Start () 
 	{
-		if (_pressed)
-			gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
-		else
-			gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
+		_animationControl = GetComponent<Animator> ();
+
+//		if (_pressed)
+//			gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
+//		else
+//			gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
 		LevelStateManager.inst.stateLoaded += OnLoad;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		_animationControl.SetBool ("pressed", _pressed);
+
 		//Check the area for push blocks or a player
 		bool checkTest = CircleCheck ();
 		//if it does not match the state, update the state and trigger activatables and update sprite
@@ -40,10 +46,10 @@ public class PressurePlate : Interactable
 		{
 			_pressed = checkTest;
 			onInteract ();
-			if (_pressed)
-				gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
-			else
-				gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
+//			if (_pressed)
+//				gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
+//			else
+//				gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
 		}
 	}
 
