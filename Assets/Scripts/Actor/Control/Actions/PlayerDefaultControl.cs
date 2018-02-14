@@ -17,7 +17,6 @@ public class PlayerDefaultControl : Action
 			GameManager.inst.canUseStasis)
 			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
 
-
         //Movement
         p.Movement();
 	}
