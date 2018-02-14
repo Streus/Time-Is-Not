@@ -34,19 +34,29 @@ public class Laser : Interactable, IActivatable, ISavable
 
 	enum LaserType {Death, Trigger};
 
+	private Animator anim;
+
 	// Use this for initialization
 	void Start()
 	{
+		if(anim == null)
+			anim = gameObject.GetComponentInParent<Animator> ();
 		if (!Application.isPlaying)
 			return;
 		_laserLine = gameObject.GetComponent<LineRenderer> ();
 		_laserLine.colorGradient = _laserColor;
 		isInverted = !isEnabled ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		//control laser sprite direction
+		if (anim != null)
+			anim.SetFloat ("ZRotation", transform.eulerAngles.z);
+
+
 		if(_laserLine == null)
 			_laserLine = gameObject.GetComponent<LineRenderer> ();
 		if(isEnabled()) 

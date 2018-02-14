@@ -20,6 +20,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 	[Tooltip("Empty gameobject containing all security doors in the level that should be tripped at once")]
 	public GameObject securityDoors;
 
+	[Tooltip("Image for the default game cursor")]
+	public Texture2D cursorTexture;
+
 	// Pause functionality
 	bool paused; 
 	bool pauseLock; 
@@ -80,6 +83,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 			playerObj.GetComponent<Entity> ().died += killPlayer;
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
+
+		Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
 	}
 
 	public static void setPause(bool state)
