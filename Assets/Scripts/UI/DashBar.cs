@@ -14,11 +14,12 @@ public class DashBar : MonoBehaviour
     {
         player = GameManager.GetPlayer();
         dashBar = this.GetComponent<Image>();
+        dashBar.fillAmount = 0;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        dashBar.fillAmount = player.GetComponent<Player>().getSelf().getAbility(1).cooldownCurrent / player.GetComponent<Player>().getSelf().getAbility(1).cooldownMax;
+        dashBar.fillAmount = 1 - player.GetComponent<Player>().getSelf().getAbility(1).cooldownPercentage();
     }
 }
