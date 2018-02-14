@@ -1644,7 +1644,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114943343035333598}
-        m_MethodName: LoadPoint
+        m_MethodName: OnTetherGameplayButtonClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1854,7 +1854,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114943343035333598}
-        m_MethodName: LoadPoint
+        m_MethodName: OnTetherGameplayButtonClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3264,7 +3264,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114943343035333598}
-        m_MethodName: LoadPoint
+        m_MethodName: OnTetherGameplayButtonClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3445,7 +3445,7 @@ MonoBehaviour:
   - {fileID: 224002942189334078}
   - {fileID: 224803159933432920}
   - {fileID: 224082471328899474}
-  arrowLerpSpeed: 0.7
+  arrowLerpSpeed: 0.9
   tetherUIState: 0
 --- !u!114 &114945625588728024
 MonoBehaviour:
@@ -3569,7 +3569,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114943343035333598}
-        m_MethodName: LoadPoint
+        m_MethodName: OnTetherGameplayButtonClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

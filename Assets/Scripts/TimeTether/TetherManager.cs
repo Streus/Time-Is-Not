@@ -170,6 +170,9 @@ public class TetherManager : Singleton<TetherManager>
 		arrowLerpBetween = _arrowLerpBetween; 
 		arrowMoveProgress = 0; 
 
+		// Redundant b/c of same line in UpdateTimeArrowPos(), but used to prevent a order of operations error with ArrowReachedTarget
+		arrowXTarget = tetherPoints[arrowLerpStateIndex].anchoredPosition.x;
+
 		if (_arrowLerpBetween == true && continueToLerpBetween == true)
 		{
 			Debug.LogWarning("Set arrow target parameters issue: You shouldn't set _continueToLerpBetween = true if _arrowLerpBetween is also true"); 
@@ -203,9 +206,10 @@ public class TetherManager : Singleton<TetherManager>
 		}
 			
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
+		GameManager.setPause(true); 
 
 		// Start the animation coroutine that jumps directly into the tether animation code
-		StartCoroutine("TetherBackAnimation"); 
+		StartCoroutine("TetherBackAnimation", stateToLoad); 
 	}
 
 	/// <summary>
@@ -221,9 +225,10 @@ public class TetherManager : Singleton<TetherManager>
 		}
 
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
+		GameManager.setPause(true); 
 
 		// Start the animation coroutine that begins with the hide menu code
-		StartCoroutine("TetherBackAnimation_HideMenu"); 
+		StartCoroutine("TetherBackAnimation_HideMenu", stateToLoad); 
 	}
 
 	IEnumerator TetherBackAnimation_HideMenu(int stateToLoad)
@@ -238,10 +243,10 @@ public class TetherManager : Singleton<TetherManager>
 		}
 
 		// Once the tether menu is hidden, go to the second part of the tether animation
-		yield return StartCoroutine("TetherBackAnimation"); 
+		yield return StartCoroutine("TetherBackAnimation", stateToLoad); 
 	}
 
-	IEnumerator TetherBackAnimation(bool includeMenu)
+	IEnumerator TetherBackAnimation(int stateToLoad)
 	{
 		// The tether menu should be gone by this point
 
@@ -255,14 +260,21 @@ public class TetherManager : Singleton<TetherManager>
 
 		// Next, start two simultaneous actions
 		// 	(1) Make the screen transition play
+		// TODO
+
 		//	(2) Make the timeline arrow move directly above the previous tether point
-		while (false)
+		SetArrowTarget(stateToLoad, false, false); 
+
+		// TODO need compound boolean
+		while (!ArrowReachedTarget())
 		{
 			// Wait for both conditions to finish
 			yield return null; 
 		}
 
 		// Load the desired state via LevelStateManager
+		RemoveTimeTetherIndicator(stateToLoad + 1); 
+		LevelStateManager.loadTetherPoint(stateToLoad);
 
 		// Now that the state has been loaded, make the transition fade back in
 		while (false)
@@ -273,8 +285,13 @@ public class TetherManager : Singleton<TetherManager>
 
 		// When the transition is done, start two simultaneous actions
 		// 	(1) Make Margot play her appear animation
+		// TODO
+
 		//	(2) Move the timeline arrow to the middle position in front of the tether point we just reverted to
-		while (false)
+		SetArrowTarget(stateToLoad, true, false);
+
+		// TODO need compound boolean
+		while (!ArrowReachedTarget())
 		{
 			// Wait for both conditions to finish
 			yield return null; 
@@ -283,6 +300,7 @@ public class TetherManager : Singleton<TetherManager>
 		// Now that the process has finished, restore control to the player
 		// TODO
 		tetherUIState = TetherUIState.GAMEPLAY; 
+		GameManager.setPause(false); 
 	}
 
 
@@ -308,6 +326,7 @@ public class TetherManager : Singleton<TetherManager>
 	/// Called via UI buttons in the timeline to load a state
 	/// </summary>
 	/// <param name="state">State, as determined in the button</param>
+	/*
 	public void LoadPoint(int state)
 	{
 		RemoveTimeTetherIndicator(state + 1); 
@@ -316,6 +335,7 @@ public class TetherManager : Singleton<TetherManager>
 		// Temporary fix!!!
 		GameManager.setPause(false);
 	}
+	*/ 
 
 	void CreateTimeTetherIndicator(Vector3 pos, int state)
 	{
