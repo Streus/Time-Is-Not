@@ -365,7 +365,7 @@ public class TetherManager : Singleton<TetherManager>
 			yield return null; 
 		}
 
-		yield return new WaitForSeconds(1.2f);
+		yield return new WaitForSeconds(0.5f);
 
 		// Now that the process has finished, restore control to the player
 		// TODO
