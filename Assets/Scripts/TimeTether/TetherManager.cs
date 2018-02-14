@@ -18,6 +18,28 @@ public class TetherManager : Singleton<TetherManager>
 	[Tooltip("(Drag In) The prefab for the object dropped at the player position each time a tether point is created.")]
 	public GameObject timeTetherIndicatorPrefab; 
 
+	[Tooltip("(Drag In) The arrow that moves along the timeline")]
+	public RectTransform curTimeArrow; 
+	public RectTransform[] tetherPoints; 
+
+	// A normalized value between 0 and 1 that tells the arrow how close it should be to its target position
+	float arrowMoveProgress; 
+
+	// The target position the arrow is lerping towards
+	float arrowXTarget;
+
+	[Tooltip("How fast the arrow lerps.")]
+	public float arrowLerpSpeed; 
+
+	// Which tetherPoint is the arrow lerping to
+	int arrowLerpStateIndex; 
+
+	// If true, the arrow lerps to a position in front of the arrowLerpStateIndex (halfway to the next tether point)
+	bool arrowLerpBetween; 
+
+	// If true, once the arrow reaches a position directly above a tether point, it will continue to the next position between the current and next point
+	bool continueToLerpBetween;
+
 	// An array holding all the timeTetherIndicators spawned in the scene. 
 	GameObject[] timeTetherIndicators;  
 
@@ -28,6 +50,8 @@ public class TetherManager : Singleton<TetherManager>
 	{
 		timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates]; 
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
+
+		arrowLerpBetween = true; 
 	}
 
 	void Update()
@@ -67,6 +91,8 @@ public class TetherManager : Singleton<TetherManager>
 				ShowTetherMenu();
 			}
 		}
+
+		UpdateTimeArrowPos(); 
 	}
 
 	/// <summary>
@@ -83,6 +109,85 @@ public class TetherManager : Singleton<TetherManager>
 	void HideTetherMenu()
 	{
 		// TODO
+	}
+
+	/// <summary>
+	/// Called continuously to choose where the time arrow should lerp
+	/// </summary>
+	void UpdateTimeArrowPos()
+	{
+		// Error checking
+		if (arrowLerpStateIndex >= tetherPoints.Length || arrowLerpStateIndex < 0)
+		{
+			Debug.LogError("Invalid arrowLerpStateIndex of " + arrowLerpStateIndex + ". tetherPoints.Length = " + tetherPoints.Length); 
+			return; 
+		}
+
+		if (tetherPoints.Length < 2 || tetherPoints[0] == null || tetherPoints[1] == null )
+		{
+			Debug.LogError("tetherPoints has null values or is an incorrect length. tetherPoints.Length = " + tetherPoints.Length); 
+			return; 
+		}
+
+		arrowXTarget = tetherPoints[arrowLerpStateIndex].anchoredPosition.x;
+
+		// If the arrow should move between tether points, add an x offset from calculating the distance between the first two tether points 
+		//	 (the distance should be constant between all points)
+		if (arrowLerpBetween)
+		{
+			arrowXTarget += Mathf.Abs(tetherPoints[0].anchoredPosition.x - tetherPoints[1].anchoredPosition.x) / 2; 
+		}
+
+		// Lerp the arrow to its target anchored position
+		// Set the RectTransform's position, lerping to the target
+		float xLerp = Mathf.Lerp(curTimeArrow.anchoredPosition.x, arrowXTarget, arrowMoveProgress); 
+		curTimeArrow.anchoredPosition = new Vector2 (xLerp, curTimeArrow.anchoredPosition.y);
+
+		// Lerp the arrowMoveprogress
+		if (arrowMoveProgress < 1)
+		{
+			arrowMoveProgress = Mathf.Lerp(arrowMoveProgress, 1, arrowLerpSpeed * Time.deltaTime); 
+
+			if (ArrowReachedTarget())
+			{
+				arrowMoveProgress = 1; 
+			}
+		}
+		else if (continueToLerpBetween)
+		{
+			continueToLerpBetween = false; 
+			SetArrowTarget(arrowLerpStateIndex, true, false); 
+		}
+	}
+
+	/// <summary>
+	/// You should explicitly call this function to set a new arrow target. It takes care of resetting all the arrow properties
+	/// _continueToLerpBetween should be false UNLESS _arrowLerpBetween = false AND the arrow should move on to the middle once it reaches the target tether point pos
+	/// </summary>
+	void SetArrowTarget(int _arrowLerpStateIndex, bool _arrowLerpBetween, bool _continueToLerpBetween)
+	{
+		arrowLerpStateIndex = _arrowLerpStateIndex; 
+		arrowLerpBetween = _arrowLerpBetween; 
+		arrowMoveProgress = 0; 
+
+		if (_arrowLerpBetween == true && continueToLerpBetween == true)
+		{
+			Debug.LogWarning("Set arrow target parameters issue: You shouldn't set _continueToLerpBetween = true if _arrowLerpBetween is also true"); 
+		}
+		continueToLerpBetween = _continueToLerpBetween; 
+	}
+		
+
+	/// <summary>
+	/// Returns true if the timeline arrow has approximately reached the target x position.
+	/// </summary>
+	bool ArrowReachedTarget()
+	{
+		if (Mathf.Abs(curTimeArrow.anchoredPosition.x - arrowXTarget) < 0.01f)
+		{
+			return true; 
+		}
+		return false; 
 	}
 
 	/// <summary>
@@ -189,6 +294,9 @@ public class TetherManager : Singleton<TetherManager>
 			Debug.Log("Create tether point"); 
 			LevelStateManager.createTetherPoint(); 
 			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
+
+			// Timeline arrow
+			SetArrowTarget(LevelStateManager.curState, false, true); 
 		}
 		else
 		{
