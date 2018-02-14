@@ -10,11 +10,8 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	Button button; 
 
-	[Tooltip("The color of ui_tetherPoints when holding a state")]
-	public Color ui_pointActiveColor; 
-
-	[Tooltip("The color of ui_tetherPoints when not holding a state")]
-	public Color ui_pointInactiveColor;
+	//public Sprite activeSprite;
+	//public Sprite inactiveSprite; 
 
 	Image image; 
 
@@ -25,17 +22,17 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		//if (LevelStateManager.canLoadTetherPoint(state) && GameManager.isPaused())
+	void Update () 
+	{
 		if (LevelStateManager.canLoadTetherPoint(state))
         {
-            this.GetComponent<Button>().interactable = true;
-			image.color = ui_pointActiveColor; 
+            button.interactable = true;
+			//image.sprite = activeSprite;  
         }
         else
         {
-            this.GetComponent<Button>().interactable = false;
-			image.color = ui_pointInactiveColor; 
+            button.interactable = false;
+			//image.sprite = inactiveSprite; 
         }
 	}
 

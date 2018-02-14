@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+public enum TetherUIState
+{
+	GAMEPLAY,
+	TETHER_MENU,
+	TETHER_ANIMATION
+}; 
+
 /// <summary>
 /// Manages interaction with time tether systems in LevelStateManager and the time tether UI systems
 /// </summary>
@@ -12,7 +19,9 @@ public class TetherManager : Singleton<TetherManager>
 	public GameObject timeTetherIndicatorPrefab; 
 
 	// An array holding all the timeTetherIndicators spawned in the scene. 
-	GameObject[] timeTetherIndicators; 
+	GameObject[] timeTetherIndicators;  
+
+	[SerializeField] TetherUIState tetherUIState; 
 
 	// Use this for initialization
 	void Start () 
@@ -23,14 +32,155 @@ public class TetherManager : Singleton<TetherManager>
 
 	void Update()
 	{
-		if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
-		{ 
-			if (!GameManager.isPlayerDead())
-			{
+		// Creating a tether point
+		if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead())
+		{
+			if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
+			{ 
 				CreatePoint(); 
 			}
 		}
+
+		// Bringing up the tether menu
+		if (tetherUIState == TetherUIState.GAMEPLAY || tetherUIState == TetherUIState.TETHER_MENU)
+		{
+			// Test for bringing up the menu, while alive
+			if (!GameManager.isPlayerDead())
+			{
+			
+				if (Input.GetKeyDown(PlayerControlManager.RH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.LH_TetherMenu))
+				{
+					tetherUIState = TetherUIState.TETHER_MENU; 
+					ShowTetherMenu(); 
+				}
+				else
+				{
+					tetherUIState = TetherUIState.GAMEPLAY; 
+					HideTetherMenu(); 
+				}
+
+			}
+			// If the player is dead, force the menu to come up
+			else
+			{
+				tetherUIState = TetherUIState.TETHER_MENU; 
+				ShowTetherMenu();
+			}
+		}
 	}
+
+	/// <summary>
+	/// Called continuously to make sure the tether menu is revealed
+	/// </summary>
+	void ShowTetherMenu()
+	{
+		// TODO
+	}
+
+	/// <summary>
+	/// Called continuously to make sure the tether menu is hidden
+	/// </summary>
+	void HideTetherMenu()
+	{
+		// TODO
+	}
+
+	/// <summary>
+	/// Tether Button click for tether buttons in the bottom left tether UI
+	/// </summary>
+	/// <param name="stateToLoad">LevelStateManager state to load, starting at 0.</param>
+	public void OnTetherGameplayButtonClick(int stateToLoad)
+	{
+		if (tetherUIState != TetherUIState.GAMEPLAY)
+		{
+			Debug.LogError("Shouldn't be able to click gameplay tether button when not in TetherUIState.GAMEPLAY. Currently in TetherUIState." + tetherUIState); 
+			return; 
+		}
+			
+		tetherUIState = TetherUIState.TETHER_ANIMATION; 
+
+		// Start the animation coroutine that jumps directly into the tether animation code
+		StartCoroutine("TetherBackAnimation"); 
+	}
+
+	/// <summary>
+	/// Tether Button click for tether buttons in pop up menu
+	/// </summary>
+	/// <param name="stateToLoad">LevelStateManager state to load, starting at 0.</param>
+	public void OnTetherMenuButtonClick(int stateToLoad)
+	{
+		if (tetherUIState != TetherUIState.TETHER_MENU)
+		{
+			Debug.LogError("Shouldn't be able to click menu tether button when not in TetherUIState.TETHER_MENU. Currently in TetherUIState." + tetherUIState); 
+			return; 
+		}
+
+		tetherUIState = TetherUIState.TETHER_ANIMATION; 
+
+		// Start the animation coroutine that begins with the hide menu code
+		StartCoroutine("TetherBackAnimation_HideMenu"); 
+	}
+
+	IEnumerator TetherBackAnimation_HideMenu(int stateToLoad)
+	{
+		// If clicking the button from the tether menu, we first need to take care of making the menu disappear
+
+		// Wait for the menu to finish disappearing
+		while (false)
+		{
+			// Make the menu disappear once the button click has lasted long enough
+			yield return null; 
+		}
+
+		// Once the tether menu is hidden, go to the second part of the tether animation
+		yield return StartCoroutine("TetherBackAnimation"); 
+	}
+
+	IEnumerator TetherBackAnimation(bool includeMenu)
+	{
+		// The tether menu should be gone by this point
+
+		// Make Margot play her tether animation
+		// start animation
+		while (false)
+		{
+			// Wait for Margot's animation to finish
+			yield return null; 
+		}
+
+		// Next, start two simultaneous actions
+		// 	(1) Make the screen transition play
+		//	(2) Make the timeline arrow move directly above the previous tether point
+		while (false)
+		{
+			// Wait for both conditions to finish
+			yield return null; 
+		}
+
+		// Load the desired state via LevelStateManager
+
+		// Now that the state has been loaded, make the transition fade back in
+		while (false)
+		{
+			// Wait for the transition in to finish
+			yield return null; 
+		}
+
+		// When the transition is done, start two simultaneous actions
+		// 	(1) Make Margot play her appear animation
+		//	(2) Move the timeline arrow to the middle position in front of the tether point we just reverted to
+		while (false)
+		{
+			// Wait for both conditions to finish
+			yield return null; 
+		}
+
+		// Now that the process has finished, restore control to the player
+		// TODO
+		tetherUIState = TetherUIState.GAMEPLAY; 
+	}
+
+
 
 	public void CreatePoint()
 	{
@@ -98,6 +248,11 @@ public class TetherManager : Singleton<TetherManager>
 		inst.HideScreenshot(); 
 		*/ 
 	}
+		
+
+
+
+
 
 
 
