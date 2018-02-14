@@ -49,6 +49,17 @@ public class TetherManager : Singleton<TetherManager>
 
 	[SerializeField] TetherTransition tetherTransition; 
 
+	[Tooltip("The CanvasGroup for the pop up tether menu. Used to fade the entire group in/out")]
+	[SerializeField] CanvasGroup tetherMenuGroup; 
+	[SerializeField] float tetherMenuFadeInSpeed = 1; 
+	[SerializeField] float tetherMenuFadeOutSpeed = 1; 
+
+	[Tooltip("(Drag In) The background image that darkens the background when the tether UI is up")]
+	[SerializeField] Image fadeImage; 
+	[SerializeField] float fadeImageMaxAlpha;
+	[SerializeField] float fadeImageFadeInSpeed; 
+	[SerializeField] float fadeImageFadeOutSpeed; 
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -56,6 +67,9 @@ public class TetherManager : Singleton<TetherManager>
 		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0); 
 
 		arrowLerpBetween = true; 
+		tetherMenuGroup.alpha = 0; 
+		fadeImage.gameObject.SetActive(true); 
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0); 
 	}
 
 	void Update()
@@ -76,14 +90,16 @@ public class TetherManager : Singleton<TetherManager>
 			if (!GameManager.isPlayerDead())
 			{
 			
-				if (Input.GetKeyDown(PlayerControlManager.RH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.LH_TetherMenu))
+				if (Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu))
 				{
 					tetherUIState = TetherUIState.TETHER_MENU; 
-					ShowTetherMenu(); 
+					GameManager.setPause(true); 
+					ShowTetherMenu();
 				}
 				else
 				{
 					tetherUIState = TetherUIState.GAMEPLAY; 
+					GameManager.setPause(false); 
 					HideTetherMenu(); 
 				}
 
@@ -92,6 +108,7 @@ public class TetherManager : Singleton<TetherManager>
 			else
 			{
 				tetherUIState = TetherUIState.TETHER_MENU; 
+				GameManager.setPause(true); 
 				ShowTetherMenu();
 			}
 		}
@@ -101,18 +118,38 @@ public class TetherManager : Singleton<TetherManager>
 
 	/// <summary>
 	/// Called continuously to make sure the tether menu is revealed
+	/// Returns true if the menu is (nearly) completely visible
 	/// </summary>
-	void ShowTetherMenu()
+	bool ShowTetherMenu()
 	{
-		// TODO
+		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 1, tetherMenuFadeInSpeed * Time.deltaTime); 
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, fadeImageMaxAlpha, fadeImageFadeInSpeed * Time.deltaTime)); 
+
+		if (tetherMenuGroup.alpha > 0.99f && fadeImage.color.a >= fadeImageMaxAlpha - 0.01f)
+		{
+			tetherMenuGroup.alpha = 1;
+			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, fadeImageMaxAlpha); 
+			return true;
+		}
+		return false; 
 	}
 
 	/// <summary>
 	/// Called continuously to make sure the tether menu is hidden
+	/// Returns true if the menu is (nearly) hidden
 	/// </summary>
-	void HideTetherMenu()
+	bool HideTetherMenu()
 	{
-		// TODO
+		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 0, tetherMenuFadeOutSpeed * Time.deltaTime);
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, 0, fadeImageFadeOutSpeed * Time.deltaTime)); 
+
+		if (tetherMenuGroup.alpha < 0.01f && fadeImage.color.a < 0.01f)
+		{
+			tetherMenuGroup.alpha = 0;
+			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0); 
+			return true;
+		}
+		return false; 
 	}
 
 	/// <summary>
@@ -237,12 +274,13 @@ public class TetherManager : Singleton<TetherManager>
 
 	IEnumerator TetherBackAnimation_HideMenu(int stateToLoad)
 	{
+		//Debug.Log("TetherBackAnimation_HideMenu coroutine started");
+
 		// If clicking the button from the tether menu, we first need to take care of making the menu disappear
 
 		// Wait for the menu to finish disappearing
-		while (false)
+		while (!HideTetherMenu())
 		{
-			// Make the menu disappear once the button click has lasted long enough
 			yield return null; 
 		}
 
@@ -252,6 +290,8 @@ public class TetherManager : Singleton<TetherManager>
 
 	IEnumerator TetherBackAnimation(int stateToLoad)
 	{
+		//Debug.Log("TetherBackAnimation coroutine started"); 
+
 		// The tether menu should be gone by this point
 
 		// Make Margot play her tether animation
