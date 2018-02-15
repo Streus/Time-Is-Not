@@ -6,7 +6,7 @@ using System;
 using UnityEditor;
 #endif
 
-[ExecuteInEditMode]
+[DisallowMultipleComponent]
 public class RegisteredObject : MonoBehaviour
 {
 	#region STATIC_VARS

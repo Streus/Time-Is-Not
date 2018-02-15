@@ -92,9 +92,8 @@ public class Player : Controller
         return (dashState == getState());
     }
 
-    public void Movement()
+    public void move()
     {
-        // Movement
         Vector2 movementVector = Vector2.zero;
 
         if (Input.GetKey(PlayerControlManager.RH_Up) || Input.GetKey(PlayerControlManager.LH_UP)) // UP
