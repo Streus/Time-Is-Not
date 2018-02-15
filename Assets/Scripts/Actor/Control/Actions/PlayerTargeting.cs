@@ -14,7 +14,7 @@ public class PlayerTargeting : Action
         Vector2 colliderSize = p.GetComponent<BoxCollider2D>().size;
 
         //do a circlecast from the player to the furthest possible jump position
-        RaycastHit2D[] pathCheck = Physics2D.BoxCastAll(p.transform.position, colliderSize, 0.0f, dir, p.getMaxJumpDist, p.moveMask);
+		RaycastHit2D[] pathCheck = Physics2D.BoxCastAll(p.transform.position, colliderSize, 0.0f, dir, jumpDistance, p.moveMask.value);
 
         if (pathCheck != null)
         {
