@@ -12,14 +12,16 @@ public class StasisBullet : MonoBehaviour
 	[SerializeField]
 	private float tolerance = 0.1f;
 
-	private Vector3 targetPos;
+	private Vector3 startPos;
+	private float travelDist;
 
 	public static StasisBullet create(Vector3 position, Quaternion direction, Vector3 targetPos)
 	{
 		GameObject pref = Resources.Load<GameObject> ("Prefabs/StasisBullet");
 		GameObject inst = Instantiate<GameObject> (pref, position, direction);
 		StasisBullet sb = inst.GetComponent<StasisBullet> ();
-		sb.targetPos = targetPos;
+		sb.travelDist = Vector2.Distance(targetPos, sb.transform.position);
+		sb.startPos = sb.transform.position;
 		return sb;
 	}
 
@@ -33,7 +35,7 @@ public class StasisBullet : MonoBehaviour
 	{
 		GetComponent<Rigidbody2D> ().simulated = !GameManager.isPaused ();
 
-		if (Vector3.Distance (transform.position, targetPos) < tolerance)
+		if (Vector3.Distance (transform.position, startPos) > travelDist)
 			OnTriggerEnter2D (null);
 	}
 
