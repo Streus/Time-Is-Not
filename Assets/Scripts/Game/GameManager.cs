@@ -66,8 +66,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public Texture2D cursorTexture_UI_HOVER; 
 	public Texture2D cursorTexture_DEACTIVATED;
 
-	//[Tooltip("Image for the default game cursor")]
-	//public Texture2D cursorTexture;
+	// Dynamically keeps track of any ui bounds that the cursor is currently within
+	List<CursorBoundsCollider> collidingCursorBounds; 
+
+	// When true, bounds interaction will not change the cursor type
+	public bool lockCursorType;
 
 	// --- ISavable Methods ---
 	public SeedBase saveData()
@@ -102,6 +105,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 			playerObj.GetComponent<Entity> ().died += killPlayer;
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
+
+		collidingCursorBounds = new List<CursorBoundsCollider> (); 
 
 		RefreshCursorType(); 
 	}
@@ -237,6 +242,49 @@ public class GameManager : Singleton<GameManager> , ISavable
 			}
 		}
 		return result; 
+	}
+
+
+	/*
+	 *  Cursor functionality
+	 */
+
+	public void AddCursorBound(CursorBoundsCollider boundCol)
+	{
+		if (collidingCursorBounds.Contains(boundCol))
+		{
+			return; 
+		}
+
+		collidingCursorBounds.Add(boundCol); 
+		OnCursorBoundsUpdated();
+	}
+
+	public void RemoveCursorBound(CursorBoundsCollider boundCol)
+	{
+		if (!collidingCursorBounds.Contains(boundCol))
+		{
+			return; 
+		}
+		collidingCursorBounds.Remove(boundCol); 
+		OnCursorBoundsUpdated(); 
+	}
+
+	public void OnCursorBoundsUpdated()
+	{
+		if (lockCursorType)
+		{
+			return; 
+		}
+
+		if (collidingCursorBounds.Count == 0)
+		{
+			cursorType = CursorType.GAMEPLAY;
+		}
+		else
+		{
+			cursorType = CursorType.UI_HOVER; 
+		}
 	}
 
 }
