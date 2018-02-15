@@ -11,9 +11,11 @@ public class PlayerTargeting : Action
         float jumpDistance = p.getMaxJumpDist;
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - p.transform.position;
 
-        Vector2 colliderSize = p.GetComponent<BoxCollider2D>().size * 1.5f;
+		BoxCollider2D collider = p.GetComponent<BoxCollider2D> ();
+        Vector2 colliderSize = collider.size;
+		Vector2 colliderOffset = collider.offset;
 
-        //do a circlecast from the player to the furthest possible jump position
+        //do a boxcast from the player to the furthest possible jump position
 		RaycastHit2D[] pathCheck = Physics2D.BoxCastAll(p.transform.position, colliderSize, 0.0f, dir, jumpDistance, p.moveMask.value);
 
         if (pathCheck != null)

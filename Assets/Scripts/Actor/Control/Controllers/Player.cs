@@ -113,8 +113,22 @@ public class Player : Controller
         ContactFilter2D cf = new ContactFilter2D();
         cf.SetLayerMask(moveMask);
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
-        if (hitCount <= 0)
+		Collider2D[] colsHit = Physics2D.OverlapCircleAll(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, movementVector.magnitude + 0.5f, 1 << LayerMask.NameToLayer("SkyEnts"));
+		bool seesMP = false;
+		Debug.Log (colsHit.Length);
+		for(int i = 0; i < colsHit.Length; i++)
+		{
+			if (colsHit [i].gameObject.CompareTag ("MovingPlatform"))
+			{
+				gameObject.layer = LayerMask.NameToLayer ("MPPassenger");
+				seesMP = true;
+				break;
+			}
+		}
+		if (hitCount <= 0 || seesMP)
             transform.Translate((Vector3)movementVector);
+		if(!seesMP)
+			gameObject.layer = LayerMask.NameToLayer ("GroundEnts");
     }
 	#region ISAVABLE_METHODS
 	/*
