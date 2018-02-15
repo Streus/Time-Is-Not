@@ -33,8 +33,8 @@ public class PlayerTargeting : Action
                 jumpDistance = nearest.distance;
         }
 
-        Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float dist = Vector2.Distance(mp, p.transform.position);
+		Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		float dist = Vector2.Distance(mp, p.transform.position);
         if (dist > jumpDistance) //if the distance to the mouse is greater than our max jump distance, limit the target position to our max jump distance
             p.setJumpTargetPos((Vector2)p.transform.position + (mp - (Vector2)p.transform.position).normalized * jumpDistance);
         else if (dist < p.getMinJumpDist) // if there's no concept of a minimum distance, cut this line out as well as the line with the if statement
@@ -42,6 +42,7 @@ public class PlayerTargeting : Action
         else //mouse is within the max distance, no need to limit
             p.setJumpTargetPos(mp);
 
-        p.getSelf().getAbility(1).use(p.getSelf(), p.getJumpTargetPos);            
+		if(Input.GetKeyUp(PlayerControlManager.LH_Dash) || Input.GetKeyUp(PlayerControlManager.RH_Dash))
+			p.getSelf().getAbility(1).use(p.getSelf(), p.getJumpTargetPos);            
     }
 }
