@@ -83,7 +83,7 @@ public class StasisBubble : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("Not in bubble. mouseWorldPos: " + mouseWorldPos); 
+					//Debug.Log("Not in bubble. mouseWorldPos: " + mouseWorldPos); 
 				}
 			}
 		}

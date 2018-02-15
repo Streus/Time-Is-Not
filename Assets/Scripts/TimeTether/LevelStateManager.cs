@@ -438,13 +438,17 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	public static bool StasisBubbleAtPos(Vector3 pos)
 	{
+		pos = new Vector3 (pos.x, pos.y, 0); 
+
 		for (int i = 0; i < stasisBubbles.Count; i++)
 		{
 			if (stasisBubbles[i] != null && stasisBubbles[i].ColliderContainsPos(pos))
 			{
+				//Debug.Log("There is a stasis bubble at " + pos); 
 				return true; 
 			}
 		}
+		//Debug.Log("There is NOT a stasis bubble at " + pos); 
 		return false; 
 	}
 
