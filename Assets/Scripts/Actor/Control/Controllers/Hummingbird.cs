@@ -24,12 +24,18 @@ public class Hummingbird : Controller
 
 	private Transform pursuitTarget;
 
+	private Animator _anim;
+	private Rigidbody2D _rigidBody;
+
 	#endregion
 
 	#region INSTANCE_METHODS
 
 	public override void Awake()
 	{
+		_anim = GetComponent<Animator> ();
+		_rigidBody = GetComponent<Rigidbody2D> ();
+
 		base.Awake ();
 
 		defaultState = getState();
