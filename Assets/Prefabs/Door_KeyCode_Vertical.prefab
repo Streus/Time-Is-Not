@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1759452745736010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10.195192, y: -9.825452, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children:
   - {fileID: 4129795123989908}
@@ -265,7 +265,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 0.8888889, y: 0.8888889}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -312,13 +312,14 @@ MonoBehaviour:
   - {fileID: 1759452745736010}
   _codeName: 0
   codeSprites:
-  - {fileID: 21300000, guid: b0916f2c5749d4ceaac891ea0f486d62, type: 3}
-  - {fileID: 21300000, guid: 1b89b82410d6e44d4abbfb0b37391ac3, type: 3}
-  - {fileID: 21300000, guid: cfd4a8825a2ff481f858e4b34614fd85, type: 3}
-  - {fileID: 21300000, guid: 1ccb86e8485fc4815a620339eb7ff60c, type: 3}
-  - {fileID: 21300000, guid: 709abb633d6064df2b72b623b4a647c7, type: 3}
-  - {fileID: 21300000, guid: 3c8c4b718734e45f9a89c5a292c40209, type: 3}
-  - {fileID: 21300000, guid: deae9bdd414b14ef9a898e2f24a10335, type: 3}
+  - {fileID: 21300000, guid: 120f7c544f6994da38e9960c834f0765, type: 3}
+  - {fileID: 21300000, guid: de32a83a4869d446b91d2f45ccb396a7, type: 3}
+  - {fileID: 21300000, guid: b2ed49f8cd4284acca463915e6d3b41a, type: 3}
+  - {fileID: 21300000, guid: 7c3fe85cf981d4b829a11dc333a91808, type: 3}
+  - {fileID: 21300000, guid: b8c72eb9bad944cca8ba7a6ed8326622, type: 3}
+  - {fileID: 21300000, guid: 3d5c7a82488c049b49ac2758d7e55a9c, type: 3}
+  - {fileID: 21300000, guid: e787f741f0a6b4c4c8985465d856ffb0, type: 3}
+  - {fileID: 21300000, guid: b5990cd76958444f59802e126945c9f7, type: 3}
   _buttonPrompt: {fileID: 1347769603031766}
   _negativePrompt: {fileID: 1680256299069432}
 --- !u!114 &114463531896381738
@@ -332,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: If1w67tDik+xmvTWkWoC1Q
+  registeredID: N+o2XUHGJkip3nKLePPR+Q
   instanceID: 10752
   stasisable: 1
 --- !u!212 &212089287028599284
@@ -493,7 +494,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b0916f2c5749d4ceaac891ea0f486d62, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 120f7c544f6994da38e9960c834f0765, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

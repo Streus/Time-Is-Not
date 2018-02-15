@@ -148,6 +148,8 @@ public class KeyCodeReader : Interactable
 			_sprite.sprite = codeSprites[5]; 
 		else if (_codeName == CodeName.CODE_7)
 			_sprite.sprite = codeSprites[6]; 
+		else if (_codeName == CodeName.CODE_8)
+			_sprite.sprite = codeSprites[7]; 
 	}
 
 }
