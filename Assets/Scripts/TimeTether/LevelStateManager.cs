@@ -337,7 +337,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		{
 			return true; 
 		}
-		return false; 
+        else
+        {
+            AudioLibrary.PlayStasisErrorSound();
+            return false;
+        }
 	}
 
 	public static bool canRemoveStasisBubble()

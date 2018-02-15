@@ -89,7 +89,7 @@ public class TetherManager : Singleton<TetherManager>
 		{
 			if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
 			{ 
-				CreatePoint(); 
+				CreatePoint();
 			}
 		}
 
@@ -318,6 +318,7 @@ public class TetherManager : Singleton<TetherManager>
 		// Make Margot play her tether animation
 		// start animation
 		tempTetherScript.PlayTetherAnimation();
+        AudioLibrary.PlayTetherRewindSound();
 
 		// Temporary way of delaying; should eventually have the animation controller tell this script that Margot's animation has finished
 		yield return new WaitForSeconds(0.5f); 
@@ -395,12 +396,13 @@ public class TetherManager : Singleton<TetherManager>
 			Debug.Log("Create tether point"); 
 			LevelStateManager.createTetherPoint(); 
 			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
-
-			// Timeline arrow
-			SetArrowTarget(LevelStateManager.curState, false, true); 
+            AudioLibrary.PlayTetherPlacementSound();
+            // Timeline arrow
+            SetArrowTarget(LevelStateManager.curState, false, true); 
 		}
 		else
 		{
+            AudioLibrary.PlayTetherErrorSound();
 			Debug.Log("Can't create tether point right now"); 
 		}
 	}

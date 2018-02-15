@@ -40,7 +40,8 @@ public class StasisBubble : MonoBehaviour
 		{
 			maxBubbleAlpha = spriteRend.color.a; 
 		}
-		stasisParticles = GetComponent<ParticleSystem>(); 
+		stasisParticles = GetComponent<ParticleSystem>();
+        AudioLibrary.PlayStasisHumSound();
 	}
 	
 	// Update is called once per frame
