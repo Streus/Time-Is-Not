@@ -26,7 +26,6 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 	// Update is called once per frame
 	void Update () 
 	{
-		#if UNITY_EDITOR
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		_collider = gameObject.GetComponent<Collider2D>(); 
 		if(_isOpen)
@@ -39,7 +38,6 @@ public class SimpleSecurityDoor : MonoBehaviour, IActivatable, ISavable
 			_sprite.enabled = true; 
 			_collider.enabled = true; 
 		}
-		#endif
 	}
 
 	/// <summary>
