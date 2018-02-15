@@ -67,5 +67,7 @@ public class CodePickup : MonoBehaviour
 			rend.sprite = codeSprites[5]; 
 		else if (codeName == CodeName.CODE_7)
 			rend.sprite = codeSprites[6]; 
+		else if (codeName == CodeName.CODE_8)
+			rend.sprite = codeSprites[7]; 
 	}
 }
