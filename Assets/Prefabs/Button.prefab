@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4166126779886000}
   - component: {fileID: 212218372576849516}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: input_prompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 61273386841036766}
   - component: {fileID: 114690237429984820}
   - component: {fileID: 61458750282760150}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4924853096999640}
   - component: {fileID: 212799786121447994}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: deny_prompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _triggersSecurityDoors: 0
   _timer: 0
   _interactKey: 101
   _activatables: []

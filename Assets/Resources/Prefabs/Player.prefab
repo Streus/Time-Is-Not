@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991302296576302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -121,6 +121,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: ad7482bf0c7e45242a2fd1206500777d, type: 2}
   pushState: {fileID: 11400000, guid: 2b0e9096344ca18499a7abb6d117c9c6, type: 2}
+  dashState: {fileID: 11400000, guid: 1f9c4f4be5d084a43ae77dba1e7e5de1, type: 2}
+  moveMask:
+    serializedVersion: 2
+    m_Bits: 49152
+  minJumpDist: 0
+  maxJumpDist: 2
 --- !u!114 &114445996024478426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   registeredID: wJXzhglBwUWcIl5Fq2akeg
-  instanceID: -1
+  instanceID: 11346
   stasisable: 1
 --- !u!212 &212006608494778506
 SpriteRenderer:
