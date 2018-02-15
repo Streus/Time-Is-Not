@@ -10,7 +10,7 @@ public class PlayerDashing : Action
     public override void perform(Controller c)
     {
         Player p = State.cast<Player>(c);
-        p.gameObject.layer = 9;
+		p.gameObject.layer = LayerMask.NameToLayer("MPPassenger");
 		p.transform.position = Vector2.Lerp(p.transform.position, p.getJumpTargetPos, dashSpeed * Time.deltaTime);
     }
 }
