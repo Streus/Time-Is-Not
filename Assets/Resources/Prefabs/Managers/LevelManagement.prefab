@@ -2152,7 +2152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: gqZzcHv3FkOqjdU4kP08VA
+  registeredID: aElIEw23ME+pbPCl0Mv0Fg
   instanceID: -508556
   stasisable: 1
 --- !u!114 &114082134429903110
@@ -3427,9 +3427,10 @@ MonoBehaviour:
   tetherRewind: {fileID: 0}
   tetherError: {fileID: 0}
   stasisShoot: {fileID: 0}
-  stasisCollision: {fileID: 0}
+  stasisHum: {fileID: 0}
   stasisError: {fileID: 0}
   dashForward: {fileID: 0}
+  dashRecharge: {fileID: 0}
   dashError: {fileID: 0}
   pushBlockMoving: {fileID: 0}
   normalSwitch: {fileID: 0}
@@ -4421,7 +4422,7 @@ MonoBehaviour:
   followRadius: 0
   zoomOutLerpSpeed: 0.2
   zoomInLerpSpeed: 0.2
-  zoomOutSize: 5
+  zoomOutSize: 10
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 16
   panSpeed: 15
