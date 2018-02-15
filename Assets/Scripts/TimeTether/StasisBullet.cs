@@ -28,6 +28,7 @@ public class StasisBullet : MonoBehaviour
 	public void Awake()
 	{
 		GetComponent<Rigidbody2D> ().AddForce (transform.up * speed, ForceMode2D.Impulse);
+        AudioLibrary.PlayStasisShootSound();
 		LevelStateManager.inst.stateLoaded += cleanUp;
 	}
 

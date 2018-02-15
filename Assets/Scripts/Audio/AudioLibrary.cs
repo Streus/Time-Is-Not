@@ -18,10 +18,11 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip tetherError;
 
     public AudioClip stasisShoot;
-    public AudioClip stasisCollision;
+    public AudioClip stasisHum;
     public AudioClip stasisError;
 
     public AudioClip dashForward;
+    public AudioClip dashRecharge;
     public AudioClip dashError;
 
     // Environment // 
@@ -94,9 +95,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.stasisShoot);
     }
 
-    public static void PlayStasisCollisionSound()
+    public static void PlayStasisHumSound()
     {
-        GlobalAudio.PlaySound(inst.stasisCollision);
+        GlobalAudio.PlaySound(inst.stasisHum);
     }
 
     public static void PlayStasisErrorSound()
@@ -107,6 +108,11 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public static void PlayDashForwardSound()
     {
         GlobalAudio.PlaySound(inst.dashForward);
+    }
+
+    public static void PlayDashRechargeSound()
+    {
+        GlobalAudio.PlaySound(inst.dashRecharge);
     }
 
     public static void PlayDashErrorSound()
