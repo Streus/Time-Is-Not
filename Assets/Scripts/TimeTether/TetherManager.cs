@@ -78,7 +78,8 @@ public class TetherManager : Singleton<TetherManager>
 		arrowLerpBetween = true; 
 		tetherMenuGroup.alpha = 0; 
 		fadeImage.gameObject.SetActive(true); 
-		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0); 
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+		screenshot.gameObject.SetActive(true); 
 	}
 
 	void Update()

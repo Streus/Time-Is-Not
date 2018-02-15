@@ -14,14 +14,21 @@ public enum CodeName
 	CODE_7
 };
 
+public enum CursorType
+{
+	GAMEPLAY,
+	UI_HOVER,
+	DEACTIVATED,
+	DEFAULT
+}
+
 [RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
 	[Tooltip("Empty gameobject containing all security doors in the level that should be tripped at once")]
 	public GameObject securityDoors;
 
-	[Tooltip("Image for the default game cursor")]
-	public Texture2D cursorTexture;
+
 
 	// Pause functionality
 	bool paused; 
@@ -49,6 +56,18 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// Savable data
 	[SerializeField] List<CodeName> codes; 
 	private string[] codeEnumNames; 
+
+	[Header("Cursor functionality")]
+	[Tooltip("The current state of the cursor")]
+	public CursorType cursorType; 
+	CursorType lastCursorType; 
+
+	public Texture2D cursorTexture_GAMEPLAY;
+	public Texture2D cursorTexture_UI_HOVER; 
+	public Texture2D cursorTexture_DEACTIVATED;
+
+	//[Tooltip("Image for the default game cursor")]
+	//public Texture2D cursorTexture;
 
 	// --- ISavable Methods ---
 	public SeedBase saveData()
@@ -84,8 +103,47 @@ public class GameManager : Singleton<GameManager> , ISavable
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
 
+		RefreshCursorType(); 
+	}
+
+	void Update()
+	{
+		// Update cursor type if it has changed (detected via lastCursorType)
+		if (cursorType != lastCursorType)
+		{
+			RefreshCursorType(); 
+		}
+	}
+
+	void RefreshCursorType()
+	{
+		lastCursorType = cursorType; 
+
 		// The second parameter should be half of the cursor's size so that is is centered
-		Cursor.SetCursor(cursorTexture, new Vector2(32, 32), CursorMode.Auto);
+		switch (cursorType)
+		{
+			case CursorType.GAMEPLAY:
+			Cursor.SetCursor(cursorTexture_GAMEPLAY, new Vector2 (cursorTexture_GAMEPLAY.width/2, cursorTexture_GAMEPLAY.height/2), CursorMode.Auto);
+				break; 
+			case CursorType.UI_HOVER:
+			Cursor.SetCursor(cursorTexture_UI_HOVER, new Vector2 (cursorTexture_UI_HOVER.width/2, cursorTexture_UI_HOVER.height/2), CursorMode.Auto);
+				break;
+			case CursorType.DEACTIVATED:
+			Cursor.SetCursor(cursorTexture_DEACTIVATED, new Vector2 (cursorTexture_DEACTIVATED.width/2, cursorTexture_DEACTIVATED.height), CursorMode.Auto);
+				break;
+			default:
+				Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+			break;
+		}
+	}
+
+	public static bool CursorInGameplayState()
+	{
+		if (inst.cursorType == CursorType.GAMEPLAY)
+		{
+			return true; 
+		}
+		return false; 
 	}
 
 	public static void setPause(bool state)
