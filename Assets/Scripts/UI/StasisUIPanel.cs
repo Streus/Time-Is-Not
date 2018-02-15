@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StasisUIPanel : MonoBehaviour 
 {
+	[Tooltip("(Drag In) The stasis UI piece of the time tether that displays stasis UI")]
 	public GameObject stasisPanel; 
 
 	// Use this for initialization

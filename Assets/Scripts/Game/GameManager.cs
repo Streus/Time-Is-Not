@@ -11,7 +11,8 @@ public enum CodeName
 	CODE_4,
 	CODE_5,
 	CODE_6,
-	CODE_7
+	CODE_7,
+	CODE_8
 };
 
 public enum CursorType
@@ -54,7 +55,14 @@ public class GameManager : Singleton<GameManager> , ISavable
 	[SerializeField] private GameObject playerObj; 
 
 	// Savable data
-	[SerializeField] List<CodeName> codes; 
+	[SerializeField] List<CodeName> m_codes; 
+	public List<CodeName> codes
+	{
+		get{
+			return m_codes; 
+		}
+	}
+
 	private string[] codeEnumNames; 
 
 	[Header("Cursor functionality")]
@@ -77,7 +85,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		//SeedBase seed = new SeedBase (gameObject);
 		Seed seed = new Seed ();
-		seed.codes = codes; 
+		seed.codes = m_codes; 
 
 		return seed;
 	}
@@ -85,7 +93,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		Seed seed = (Seed)s;
 
-		codes = seed.codes;
+		m_codes = seed.codes;
 
 		if (isDead)
 			isDead = false; 
@@ -201,12 +209,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public static bool AddCode(CodeName codeName)
 	{
-		if (inst.codes.Contains(codeName))
+		if (inst.m_codes.Contains(codeName))
 		{
 			return false; 
 		}
 
-		inst.codes.Add(codeName); 
+		inst.m_codes.Add(codeName); 
 
 		if (inst.codesUpdated != null)
 		{
@@ -218,7 +226,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public static bool HasCode(CodeName codeName)
 	{
-		if (inst.codes.Contains(codeName))
+		if (inst.m_codes.Contains(codeName))
 		{
 			return true; 
 		}
@@ -236,12 +244,17 @@ public class GameManager : Singleton<GameManager> , ISavable
 		foreach(CodeName codeN in Enum.GetValues(typeof(CodeName)))
 		{
 			i++; 
-			if (inst.codes.Contains(codeN))
+			if (inst.m_codes.Contains(codeN))
 			{
 				result = i; 
 			}
 		}
 		return result; 
+	}
+
+	public static int NumCodesFound()
+	{
+		return inst.m_codes.Count; 
 	}
 
 
