@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114310012341477740}
   - component: {fileID: 114655647816564754}
   m_Layer: 5
-  m_Name: UIBadge (1)
+  m_Name: KeyCodeSlot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 114305937808956666}
   - component: {fileID: 114622462733650060}
   m_Layer: 5
-  m_Name: UIBadge (7)
+  m_Name: KeyCodeSlot (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 114547365358470606}
   - component: {fileID: 114615452339518338}
   m_Layer: 5
-  m_Name: UIBadge (4)
+  m_Name: KeyCodeSlot (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 114149537029289330}
   - component: {fileID: 114563233257395034}
   m_Layer: 5
-  m_Name: UIBadge (5)
+  m_Name: KeyCodeSlot (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 114281200217044382}
   - component: {fileID: 114049801387715364}
   m_Layer: 5
-  m_Name: UIBadge (2)
+  m_Name: KeyCodeSlot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 114007980023714406}
   - component: {fileID: 114747899213507132}
   m_Layer: 5
-  m_Name: UIBadge (6)
+  m_Name: KeyCodeSlot (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,6 +838,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224624751828691504}
   - component: {fileID: 114871749541244768}
+  - component: {fileID: 114863026904575286}
   m_Layer: 5
   m_Name: TimeTetherUI
   m_TagString: Untagged
@@ -872,6 +873,7 @@ GameObject:
   - component: {fileID: 224898341343648848}
   - component: {fileID: 222385345877899568}
   - component: {fileID: 114693692403219144}
+  - component: {fileID: 114251760214911200}
   m_Layer: 5
   m_Name: KeycodePanel
   m_TagString: Untagged
@@ -1256,7 +1258,7 @@ GameObject:
   - component: {fileID: 114870916158489888}
   - component: {fileID: 114519182627191286}
   m_Layer: 5
-  m_Name: UIBadge (3)
+  m_Name: KeyCodeSlot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2132,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: YfK6oHunGk+aWaKYyrgdoQ
+  registeredID: gqZzcHv3FkOqjdU4kP08VA
   instanceID: -508556
   stasisable: 1
 --- !u!114 &114082134429903110
@@ -2507,6 +2509,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyCode: 2
+--- !u!114 &114251760214911200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606558880427576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21cbd6d0a8c7442f98ab13fb2f4315f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keycodeSlots: []
 --- !u!114 &114260569426200248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2773,7 +2787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   securityDoors: {fileID: 0}
   canUseStasis: 1
-  canUseDash: 0
+  canUseDash: 1
   playerObj: {fileID: 1062996858393866}
   codes: 
   cursorType: 0
@@ -3719,6 +3733,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114863026904575286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572182276454684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596fd6118d85d47249bf37374e185d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashPanel: {fileID: 1231925551976090}
 --- !u!114 &114870788946020606
 MonoBehaviour:
   m_ObjectHideFlags: 1
