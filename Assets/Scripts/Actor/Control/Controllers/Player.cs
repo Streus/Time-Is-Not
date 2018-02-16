@@ -107,7 +107,7 @@ public class Player : Controller
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
 
-        // Wall check
+        // Wall check / check for moving platforms
         RaycastHit2D[] hits = new RaycastHit2D[1];
         int hitCount = 0;
         ContactFilter2D cf = new ContactFilter2D();
@@ -115,7 +115,6 @@ public class Player : Controller
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
 		Collider2D[] colsHit = Physics2D.OverlapCircleAll(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, movementVector.magnitude + 0.5f, 1 << LayerMask.NameToLayer("SkyEnts"));
 		bool seesMP = false;
-		Debug.Log (colsHit.Length);
 		for(int i = 0; i < colsHit.Length; i++)
 		{
 			if (colsHit [i].gameObject.CompareTag ("MovingPlatform"))
@@ -130,32 +129,46 @@ public class Player : Controller
 		if(!seesMP)
 			gameObject.layer = LayerMask.NameToLayer ("GroundEnts");
     }
+
+	public void OnDrawGizmos()
+	{
+		// Dash debug
+		if (jumpTargetPos != Vector3.zero)
+		{
+			Gizmos.color = Color.green;
+			Vector2 csize = GetComponent<BoxCollider2D> ().size;
+			Vector3 actualSize = new Vector3 (csize.x * transform.localScale.x, csize.y * transform.localScale.y);
+			Gizmos.DrawWireCube (jumpTargetPos, actualSize);
+		}
+	}
 	#region ISAVABLE_METHODS
-	/*
+
 	public override SeedBase saveData ()
 	{
-		return base.saveData ();
+		return new PSeed (this);
 	}
 
 	public override void loadData (SeedBase seed)
 	{
 		base.loadData (seed);
+		PSeed p = (PSeed)seed;
+		jumpTargetPos = p.jumpTargetPos;
 	}
-	*/
+
 	#endregion
 
 	#endregion
 
 	#region INTERNAL_TYPES
-	/*
 	private class PSeed : Seed
 	{
+		public Vector3 jumpTargetPos;
 
-		public PSeed(GameObject g) : base(g)
+		public PSeed(Controller c) : base(c)
 		{
-
+			Player p = State.cast<Player>(c);
+			jumpTargetPos = p.jumpTargetPos;
 		}
 	}
-	*/
 	#endregion
 }

@@ -47,7 +47,7 @@ public class Hummingbird : Controller
 	{
 		//calculate sprite direction
 		anim = transform.GetChild(1).GetComponent<Animator>();
-		Debug.Log ("" + anim.gameObject.name);
+		Debug.Log (anim.gameObject.name);
 		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
 		{
 			Debug.Log ("up");
