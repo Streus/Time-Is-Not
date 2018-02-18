@@ -18,6 +18,11 @@ public class Laser : Interactable, IActivatable, ISavable
 	[SerializeField]
 	private Gradient _laserColor;
 
+	[Tooltip("Distance between each dash in the laser line.")]
+	[SerializeField]
+	[Range(0,1)]
+	private float _dashPadding = 0.5f;
+
 	[Tooltip("Is the laser a death laser or a trigger?")]
 	[SerializeField]
 	private LaserType _type;
@@ -101,8 +106,11 @@ public class Laser : Interactable, IActivatable, ISavable
 		{
 			_laserLine.SetPosition (1, hit.point);
 		}
+			
 		if (!Application.isPlaying)
 			return;
+		float dist = Vector3.Distance (_laserLine.GetPosition (0), _laserLine.GetPosition (1));
+		_laserLine.materials [0].mainTextureScale = new Vector3 (dist, 1, 1);
 		if (hit.collider.gameObject.GetComponent<Entity> () != null) 
 		{
 			Entity entityHit = hit.collider.gameObject.GetComponent<Entity> ();
