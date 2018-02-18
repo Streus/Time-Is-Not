@@ -1321,7 +1321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.063, y: -0.1, z: 0}
+  m_LocalPosition: {x: -1.063, y: -5.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396684429741562}
@@ -1348,7 +1348,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0629997, y: -0.099999905, z: 0}
+  m_LocalPosition: {x: -1.063, y: -5.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -1433,8 +1433,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.4, y: -5.4, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -4415,17 +4415,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20336826354465066}
   target: {fileID: 4213511411776624}
-  min: {x: 0, y: 0}
-  max: {x: 0, y: 0}
+  b_origin: {x: 0, y: 0}
+  b_min: {x: -10, y: -10}
+  b_max: {x: 10, y: 10}
   smoothFollow: 0
   smoothSpeed: 10
   followRadius: 0
   zoomOutLerpSpeed: 0.2
   zoomInLerpSpeed: 0.2
-  zoomOutSize: 8
+  zoomOutSize: 5
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 16
-  panSpeed: 15
+  panSpeed: 10
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4437,7 +4438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: /wwTAtxuikCxKjIgyK4Riw
+  registeredID: A3xQa088KkicGuQOByvPRQ
   instanceID: -508494
   stasisable: 1
 --- !u!124 &124559304230223202

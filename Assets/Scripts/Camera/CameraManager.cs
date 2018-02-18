@@ -22,9 +22,16 @@ public class CameraManager : MonoBehaviour
 
 	[Header("Bounds")]
 	[SerializeField]
-	private Vector2 min = Vector2.zero;
+	private Vector2 b_origin = Vector2.zero;
 	[SerializeField]
+	private Vector2 b_min = Vector2.zero;
+	[SerializeField]
+	private Vector2 b_max = Vector2.zero;
+
+	// Calculated bounds, with origin offset
+	private Vector2 min = Vector2.zero;
 	private Vector2 max = Vector2.zero;
+
 
 	[Header("Target Following")]
 	[Tooltip("Choose whether the camera should gently follow its target, or stay locked to" +
@@ -137,8 +144,12 @@ public class CameraManager : MonoBehaviour
 
 	private void fitToBounds()
 	{
+		// Update calculated bounds
+		min = b_min + b_origin; 
+		max = b_max + b_origin; 
+
 		//if min and max are not set, do not apply bounds
-		if (min == Vector2.zero && max == Vector2.zero)
+		if (b_min == Vector2.zero && b_max == Vector2.zero)
 			return;
 
 		//camera dimensions
@@ -196,12 +207,17 @@ public class CameraManager : MonoBehaviour
 	/// Sets the bounds for this camera. If the bounds were valid, returns true, else
 	/// returns false.
 	/// </summary>
-	public bool setBounds(Vector2 min, Vector2 max)
+	public bool setBounds(Vector2 min, Vector2 max, Vector2 origin)
 	{
 		if (min.x > max.x || min.y > max.y)
 			return false;
-		this.min = min;
-		this.max = max;
+
+		this.b_min = min; 
+		this.b_max = max; 
+		this.b_origin = origin; 
+
+		this.min = b_min + origin;
+		this.max = b_max + origin;
 		return true;
 	}
 
