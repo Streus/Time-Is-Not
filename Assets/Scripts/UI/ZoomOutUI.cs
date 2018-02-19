@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class ZoomOutUI : MonoBehaviour 
+public class ZoomOutUI : Singleton<ZoomOutUI> 
 {
 	CameraManager cameraManager; 
 
@@ -21,6 +21,14 @@ public class ZoomOutUI : MonoBehaviour
 	CanvasGroup rightArrow; 
 	CanvasGroup upArrow; 
 	CanvasGroup downArrow; 
+
+	[SerializeField] Color m_linkLineColor; 
+	public static Color linkLineColor
+	{
+		get{
+			return inst.m_linkLineColor; 
+		}
+	}
 
 
 	// Use this for initialization
@@ -68,5 +76,10 @@ public class ZoomOutUI : MonoBehaviour
 		{
 			arrow.alpha = Mathf.Lerp(arrow.alpha, 0, arrowFadeSpeed * Time.deltaTime); 
 		}
+	}
+
+	public static float GetCanvasGroupAlpha()
+	{
+		return inst.canvasGroup.alpha; 
 	}
 }

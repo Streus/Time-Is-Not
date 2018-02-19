@@ -430,7 +430,7 @@ public class CameraManager : MonoBehaviour
 			} 
 		}
 
-		Debug.Log("panOffset: " + panOffset); 
+		//Debug.Log("panOffset: " + panOffset); 
 		//cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
 		cam.transform.localPosition = new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z); 
 	}
