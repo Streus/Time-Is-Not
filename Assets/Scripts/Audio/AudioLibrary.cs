@@ -6,7 +6,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
 {
     // UI //
 
-	public AudioClip uiButtonClick;
+	public AudioClip tetherSelect;
     public AudioClip tetherMenuOpen;
     public AudioClip tetherMenuClose;
     public AudioClip gameOver; // ---
@@ -56,13 +56,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip gulperEelEating;
 
     public AudioClip hummingBirdMoving;
+    public AudioClip hummingBirdSpotting;
     public AudioClip hummingBirdAttacking;
 
     // Methods to play the audio clips // 
 
-	public static void PlayUIButtonClick()
+	public static void PlayTetherSelect()
 	{
-		GlobalAudio.PlaySound(inst.uiButtonClick);
+		GlobalAudio.PlaySound(inst.tetherSelect);
 	}
 
     public static void PlayTetherMenuOpen()
@@ -198,6 +199,11 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public static void PlayHummingBirdMovingSound()
     {
         GlobalAudio.PlaySound(inst.hummingBirdMoving);
+    }
+
+    public static void PlayHummingBirdSpottingSound()
+    {
+        GlobalAudio.PlaySound(inst.hummingBirdSpotting);
     }
 
     public static void PlayHummingBirdAttackingSound()
