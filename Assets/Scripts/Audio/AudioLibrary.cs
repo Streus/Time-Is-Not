@@ -26,16 +26,18 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip dashError;
 
     // Environment // 
+    public AudioClip wires; //--
+    public AudioClip pressurePlate;
 
     public AudioClip pushBlockMoving;
 
     public AudioClip normalSwitch;
     public AudioClip timedSwitch;
 
-    public AudioClip laserSecurityMoving;
+    public AudioClip laserSecurity;
     public AudioClip laserSecurityCollisiion;
 
-    public AudioClip laserDeathMoving;
+    public AudioClip laserDeath;
     public AudioClip laserDeathCollisiion;
 
     public AudioClip alarmTriggered; //---
@@ -43,7 +45,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip codePickup;
 
     public AudioClip codeDoorUnlock;
-    public AudioClip DoorUnlock;
+    public AudioClip doorClosed;
+    public AudioClip doorOpen;
+
 
     // Character and Enemies //
 
@@ -136,9 +140,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.timedSwitch);
     }
 
-    public static void PlayLaserSecurityMovingSound()
+    public static void PlayLaserSecuritySound()
     {
-        GlobalAudio.PlaySound(inst.laserSecurityMoving);
+        GlobalAudio.PlaySound(inst.laserSecurity);
     }
 
     public static void PlayLaserSecurityCollisionSound()
@@ -146,9 +150,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.laserSecurityCollisiion);
     }
 
-    public static void PlayLaserDeathMovingSound()
+    public static void PlayLaserDeathSound()
     {
-        GlobalAudio.PlaySound(inst.laserDeathMoving);
+        GlobalAudio.PlaySound(inst.laserDeath);
     }
 
     public static void PlayLaserDeathCollisionSound()
@@ -166,9 +170,19 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.codeDoorUnlock);
     }
 
-    public static void PlayKeyDoorUnlockSound()
+    public static void PlayPressurePlateSound()
     {
-        GlobalAudio.PlaySound(inst.DoorUnlock);
+        GlobalAudio.PlaySound(inst.pressurePlate);
+    }
+
+    public static void PlayDoorOpenSound()
+    {
+        GlobalAudio.PlaySound(inst.doorOpen);
+    }
+
+    public static void PlayDoorClosedSound()
+    {
+        GlobalAudio.PlaySound(inst.doorClosed);
     }
 
     public static void PlayPlayerWalkingSound()
