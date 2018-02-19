@@ -1321,7 +1321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.063, y: -5.84, z: 0}
+  m_LocalPosition: {x: 10.9, y: 14.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396684429741562}
@@ -1348,7 +1348,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.063, y: -5.84, z: 0}
+  m_LocalPosition: {x: 10.9, y: 14.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -4416,8 +4416,8 @@ MonoBehaviour:
   cam: {fileID: 20336826354465066}
   target: {fileID: 4213511411776624}
   b_origin: {x: 0, y: 0}
-  b_min: {x: -10, y: -10}
-  b_max: {x: 10, y: 10}
+  b_min: {x: 0, y: 0}
+  b_max: {x: 0, y: 0}
   smoothFollow: 0
   smoothSpeed: 10
   followRadius: 0
@@ -4425,7 +4425,7 @@ MonoBehaviour:
   zoomInLerpSpeed: 0.2
   zoomOutSize: 5
   vertScrollPercDivisor: 12
-  horizScrollPercDivisor: 16
+  horizScrollPercDivisor: 12
   panSpeed: 10
 --- !u!114 &114998644300738530
 MonoBehaviour:
