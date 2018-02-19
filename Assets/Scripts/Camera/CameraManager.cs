@@ -197,6 +197,16 @@ public class CameraManager : MonoBehaviour
 
 	void updateAtBounds()
 	{
+		//if min and max are not set, do not apply bounds
+		if (b_min == Vector2.zero && b_max == Vector2.zero)
+		{
+			atLeftBound = false;
+			atRightBound = false;
+			atTopBound = false; 
+			atBottomBound = false; 
+			return; 
+		}
+
 		//camera dimensions
 		updateCamWidthHeight(); 
 
