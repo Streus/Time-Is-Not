@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	// Reference variables
 	[SerializeField] private GameObject playerObj; 
+	[SerializeField] private CameraManager cameraManager; 
 
 	// Savable data
 	[SerializeField] List<CodeName> m_codes; 
@@ -205,6 +206,16 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public static GameObject GetPlayer()
 	{
 		return inst.playerObj; 
+	}
+		
+	public static CameraManager GetCameraManager()
+	{
+		return inst.cameraManager; 
+	} 
+
+	public static bool CameraIsZoomedOut()
+	{
+		return inst.cameraManager.zoomState; 
 	}
 
 	public static bool AddCode(CodeName codeName)

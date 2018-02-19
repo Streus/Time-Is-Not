@@ -21,12 +21,9 @@ public class CameraManager : MonoBehaviour
 	private Transform target;
 
 	[Header("Bounds")]
-	[SerializeField]
-	private Vector2 b_origin = Vector2.zero;
-	[SerializeField]
-	private Vector2 b_min = Vector2.zero;
-	[SerializeField]
-	private Vector2 b_max = Vector2.zero;
+	[SerializeField] private Vector2 b_origin = Vector2.zero;
+	[SerializeField] private Vector2 b_min = Vector2.zero;
+	[SerializeField] private Vector2 b_max = Vector2.zero;
 
 	// Calculated bounds, with origin offset
 	private Vector2 min = Vector2.zero;
@@ -55,6 +52,15 @@ public class CameraManager : MonoBehaviour
 	float regularSize; 
 	public float zoomOutSize; 
 
+	// True if the camera is zooming out or has finished zooming out; false if zooming back in or not zoomed
+	private bool m_zoomState;
+	public bool zoomState
+	{
+		get{
+			return m_zoomState; 
+		}
+	}
+
 	public float vertScrollPercDivisor;
 	public float horizScrollPercDivisor; 
 	public float panSpeed; 
@@ -63,10 +69,10 @@ public class CameraManager : MonoBehaviour
 
 	// Camera at bounds booleans
 	[Header("Camera at bounds? (Read only)")]
-	[SerializeField] bool atLeftBound; 
-	[SerializeField] bool atRightBound; 
-	[SerializeField] bool atTopBound;
-	[SerializeField] bool atBottomBound;
+	public bool atLeftBound; 
+	public bool atRightBound; 
+	public bool atTopBound;
+	public bool atBottomBound;
 
 	private float shakeDur, shakeInt, shakeDec;
 	#endregion
@@ -130,11 +136,13 @@ public class CameraManager : MonoBehaviour
 		{
 			if (Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut))
 			{
+				m_zoomState = true; 
 				zoomTo(zoomOutSize, zoomOutLerpSpeed);
 				updateZoomPan(false);
 			}
 			else
 			{
+				m_zoomState = false; 
 				zoomTo(regularSize, zoomInLerpSpeed);
 				updateZoomPan(true);
 			}
