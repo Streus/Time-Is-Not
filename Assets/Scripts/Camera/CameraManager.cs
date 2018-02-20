@@ -21,10 +21,18 @@ public class CameraManager : MonoBehaviour
 	private Transform target;
 
 	[Header("Bounds")]
-	[SerializeField]
+	[SerializeField] private Vector2 b_origin = Vector2.zero;
+	[SerializeField] private Vector2 b_min = Vector2.zero;
+	[SerializeField] private Vector2 b_max = Vector2.zero;
+
+	// Calculated bounds, with origin offset
 	private Vector2 min = Vector2.zero;
-	[SerializeField]
 	private Vector2 max = Vector2.zero;
+
+	// Calculated camera width and height
+	float cHeight;
+	float cWidth;
+
 
 	[Header("Target Following")]
 	[Tooltip("Choose whether the camera should gently follow its target, or stay locked to" +
@@ -44,11 +52,27 @@ public class CameraManager : MonoBehaviour
 	float regularSize; 
 	public float zoomOutSize; 
 
+	// True if the camera is zooming out or has finished zooming out; false if zooming back in or not zoomed
+	private bool m_zoomState;
+	public bool zoomState
+	{
+		get{
+			return m_zoomState; 
+		}
+	}
+
 	public float vertScrollPercDivisor;
 	public float horizScrollPercDivisor; 
 	public float panSpeed; 
 
 	private Vector2 panOffset;
+
+	// Camera at bounds booleans
+	[Header("Camera at bounds? (Read only)")]
+	public bool atLeftBound; 
+	public bool atRightBound; 
+	public bool atTopBound;
+	public bool atBottomBound;
 
 	private float shakeDur, shakeInt, shakeDec;
 	#endregion
@@ -104,23 +128,27 @@ public class CameraManager : MonoBehaviour
 			{
 				tarPos += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
 				transform.position = Vector3.Lerp (transform.position, tarPos, Time.deltaTime * smoothSpeed);
-				fitToBounds ();
+				fitToBounds (transform);
 			}
 		}
 
 		if (Application.isPlaying)
 		{
-			if (Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut))
+			if ((Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut)) && TetherManager.ZoomOutAllowed())
 			{
+				m_zoomState = true; 
 				zoomTo(zoomOutSize, zoomOutLerpSpeed);
 				updateZoomPan(false);
 			}
 			else
 			{
+				m_zoomState = false; 
 				zoomTo(regularSize, zoomInLerpSpeed);
 				updateZoomPan(true);
 			}
 		}
+
+		updateAtBounds(); 
 	}
 
 	public void LateUpdate()
@@ -128,58 +156,143 @@ public class CameraManager : MonoBehaviour
 		//tight follow
 		if (target != null && !smoothFollow)
 		{
+			// dtt = distance to target?
 			Vector2 dtt = target.position - transform.position;
 			if (dtt.magnitude > followRadius)
 				transform.position += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
-			fitToBounds ();
+			fitToBounds (transform);
+		}
+
+		fitToBounds(cam.transform); 
+	}
+
+	void updateCamWidthHeight()
+	{
+		cHeight = cam.orthographicSize * 2;
+		cWidth = cHeight * cam.aspect;
+	}
+
+	// sideIndex values:
+	// 0 = cMinX
+	// 1 = cMaxX
+	// 2 = cMinY
+	// 3 = cMaxY
+	private float getCamSidePos(int sideIndex, Transform t)
+	{
+		switch (sideIndex)
+		{
+			// cMinX
+			case 0:
+				return t.position.x - (cWidth / 2f);
+				break; 
+			// cMaxX
+			case 1:
+				return t.position.x + (cWidth / 2f);
+				break;
+			// cMinY
+			case 2:
+				return t.position.y - (cHeight / 2f);
+				break;
+			// cMaxY
+			case 3:
+				return t.position.y + (cHeight / 2f);
+				break;
+			default:
+				return 0;
+				break;
 		}
 	}
 
-	private void fitToBounds()
+	void updateAtBounds()
 	{
 		//if min and max are not set, do not apply bounds
-		if (min == Vector2.zero && max == Vector2.zero)
+		if (b_min == Vector2.zero && b_max == Vector2.zero)
+		{
+			atLeftBound = false;
+			atRightBound = false;
+			atTopBound = false; 
+			atBottomBound = false; 
+			return; 
+		}
+
+		//camera dimensions
+		updateCamWidthHeight(); 
+
+		//sides of the camera view
+		float cMinX = getCamSidePos(0, cam.transform);
+		float cMaxX = getCamSidePos(1, cam.transform);
+		float cMinY = getCamSidePos(2, cam.transform);
+		float cMaxY = getCamSidePos(3, cam.transform);
+
+		// Update at bounds
+		// Left bound
+		if (cam.transform.position.x - (cWidth / 2f) <= min.x)
+			atLeftBound = true;
+		else
+			atLeftBound = false; 
+
+		// Right bound
+		if (cam.transform.position.x + (cWidth / 2f) >= max.x)
+			atRightBound = true;
+		else
+			atRightBound = false; 
+
+		// Top bound
+		if (cam.transform.position.y + (cHeight / 2f) >= max.y)
+			atTopBound = true;
+		else
+			atTopBound = false; 
+
+		// Bottom bound
+		if (cam.transform.position.y - (cHeight / 2f) <= min.y)
+			atBottomBound = true;
+		else
+			atBottomBound = false; 
+	}
+
+	private void fitToBounds(Transform t)
+	{
+		// Update calculated bounds
+		min = b_min + b_origin; 
+		max = b_max + b_origin; 
+
+		//if min and max are not set, do not apply bounds
+		if (b_min == Vector2.zero && b_max == Vector2.zero)
 			return;
 
 		//camera dimensions
-		float cHeight = cam.orthographicSize * 2;
-		float cWidth = cHeight * cam.aspect;
+		updateCamWidthHeight(); 
 
-		//corners of the camera view
-		float cMinX = transform.position.x - (cWidth / 2f);
-		float cMaxX = transform.position.x + (cWidth / 2f);
-		float cMinY = transform.position.y - (cHeight / 2f);
-		float cMaxY = transform.position.y + (cHeight / 2f);
+		//sides of the camera view
+		float cMinX = getCamSidePos(0, t);
+		float cMaxX = getCamSidePos(1, t);
+		float cMinY = getCamSidePos(2, t);
+		float cMaxY = getCamSidePos(3, t);
 
 		//x clamping
+		// Reached the left boundary
 		if (cMinX < min.x)
 		{
+			// If the right boundary doesn't fit within the max
 			if (cMaxX > max.x)
-				transform.position = new Vector3 ((min.x + max.x) / 2f, transform.position.y);
+				t.position = new Vector3 ((min.x + max.x) / 2f, t.position.y, t.position.z);
 			else
-				transform.position = new Vector3(
-					transform.position.x + min.x - cMinX,
-					transform.position.y);
+				t.position = new Vector3(t.position.x + min.x - cMinX, t.position.y, t.position.z);
 		}
 		else if (cMaxX > max.x)
-			transform.position = new Vector3(
-				transform.position.x + max.x - cMaxX,
-				transform.position.y);
+			t.position = new Vector3(t.position.x + max.x - cMaxX, t.position.y, t.position.z);
 
 		//y claming
 		if (cMinY < min.y)
 		{
 			if (cMaxY > max.y)
-				transform.position = new Vector3 ((min.y + max.y) / 2f, transform.position.y);
+				t.position = new Vector3 ((min.y + max.y) / 2f, t.position.y, t.position.z);
 			else
-				transform.position = new Vector3(
-					transform.position.x,
-					transform.position.y + min.y - cMinY);
+				t.position = new Vector3(
+					t.position.x, t.position.y + min.y - cMinY, t.position.z);
 		}
 		else if (cMaxY > max.y)
-			transform.position = new Vector3(
-				transform.position.x,
-				transform.position.y + max.y - cMaxY);
+			t.position = new Vector3(t.position.x, t.position.y + max.y - cMaxY, t.position.z);
 	}
 
 	public Transform getTarget()
@@ -196,12 +309,17 @@ public class CameraManager : MonoBehaviour
 	/// Sets the bounds for this camera. If the bounds were valid, returns true, else
 	/// returns false.
 	/// </summary>
-	public bool setBounds(Vector2 min, Vector2 max)
+	public bool setBounds(Vector2 min, Vector2 max, Vector2 origin)
 	{
 		if (min.x > max.x || min.y > max.y)
 			return false;
-		this.min = min;
-		this.max = max;
+
+		this.b_min = min; 
+		this.b_max = max; 
+		this.b_origin = origin; 
+
+		this.min = b_min + origin;
+		this.max = b_max + origin;
 		return true;
 	}
 
@@ -290,27 +408,31 @@ public class CameraManager : MonoBehaviour
 		else
 		{
 			// Horizontal pan
-			if (Input.mousePosition.x > Screen.width - Screen.width / horizScrollPercDivisor)
+			// Right side
+			if (!atRightBound && Input.mousePosition.x > Screen.width - Screen.width / horizScrollPercDivisor)
 			{
-				panOffset += new Vector2 (panSpeed * Time.deltaTime, 0); 
+				panOffset += new Vector2 (panSpeed * Time.deltaTime, 0);
 			}
-			else if (Input.mousePosition.x < 0 + Screen.width / horizScrollPercDivisor)
+			// Left side
+			else if (!atLeftBound && Input.mousePosition.x < 0 + Screen.width / horizScrollPercDivisor)
 			{
 				panOffset -= new Vector2 (panSpeed * Time.deltaTime, 0); 
 			} 
 
 			// Vertical pan
-			if (Input.mousePosition.y > Screen.height - Screen.height / vertScrollPercDivisor)
+			if (!atTopBound && Input.mousePosition.y > Screen.height - Screen.height / vertScrollPercDivisor)
 			{
 				panOffset += new Vector2 (0, panSpeed * Time.deltaTime); 
 			}
-			else if (Input.mousePosition.y < 0 + Screen.width / vertScrollPercDivisor)
+			else if (!atBottomBound && Input.mousePosition.y < 0 + Screen.width / vertScrollPercDivisor)
 			{
 				panOffset -= new Vector2 (0, panSpeed * Time.deltaTime); 
 			} 
 		}
 
-		cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
+		//Debug.Log("panOffset: " + panOffset); 
+		//cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
+		cam.transform.localPosition = new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z); 
 	}
 	#endregion
 }

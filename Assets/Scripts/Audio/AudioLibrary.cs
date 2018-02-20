@@ -4,65 +4,72 @@ using UnityEngine;
 
 public class AudioLibrary : Singleton<AudioLibrary> 
 {
+
     // UI //
 
-	public AudioClip uiButtonClick;
-    public AudioClip tetherMenuOpen;
-    public AudioClip tetherMenuClose;
-    public AudioClip gameOver; // ---
+	public AudioClip tetherSelect; // -- waiting
+    public AudioClip tetherMenuOpen; // --  waiting
+    public AudioClip tetherMenuClose; // -- waiting
+    public AudioClip gameOver; // -- question
 
     // Mechanics //
 
-    public AudioClip tetherPlacement;
-    public AudioClip tetherRewind;
-    public AudioClip tetherError;
+    public AudioClip tetherPlacement; // -- done : Location - TetherManager script
+    public AudioClip tetherRewind; // -- done : Location - TetherManager script
+    public AudioClip tetherError; // -- done : Location - TetherManger script
 
-    public AudioClip stasisShoot;
-    public AudioClip stasisHum;
-    public AudioClip stasisError;
+    public AudioClip stasisShoot; // -- done : Location - StasisBullet script
+    public AudioClip stasisHum; // -- done : Location - StasisBubble script
+    public AudioClip stasisError; // -- done : Location - LevelState Manager script
 
-    public AudioClip dashForward;
-    public AudioClip dashRecharge;
-    public AudioClip dashError;
+    public AudioClip dashForward; // -- waiting
+    public AudioClip dashRecharge; // -- waiting
+    public AudioClip dashError; // -- waiting
 
     // Environment // 
+    public AudioClip wires; //-- question
+    public AudioClip pressurePlate; // -- done : Location - pressure plate script
+    public AudioClip pressurePlateOff; // -- doesn't exist but is probably needed
 
-    public AudioClip pushBlockMoving;
+    public AudioClip pushBlockMoving; // -- waiting
 
     public AudioClip normalSwitch;
     public AudioClip timedSwitch;
 
-    public AudioClip laserSecurityMoving;
-    public AudioClip laserSecurityCollisiion;
+    public AudioClip laserSecurity; 
+    public AudioClip laserSecurityCollisiion; // -- done : Location - Laser script
 
-    public AudioClip laserDeathMoving;
-    public AudioClip laserDeathCollisiion;
+    public AudioClip laserDeath;
+    public AudioClip laserDeathCollisiion; // -- done :  Location - laser script // PROBLEM
 
-    public AudioClip alarmTriggered; //---
+    public AudioClip alarmTriggered; //-- question
 
-    public AudioClip codePickup;
+    public AudioClip codePickup; // -- done : Location - CodePickup script
 
-    public AudioClip codeDoorUnlock;
-    public AudioClip DoorUnlock;
+    public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
+    public AudioClip doorClosed; // -- done : Location - Door script
+    public AudioClip doorOpen; // -- done : Location - Door script
+
 
     // Character and Enemies //
 
-    public AudioClip playerWalking;
+    public AudioClip playerWalking; // -- questions
 
-    public AudioClip hermitCrabDigging;
-    public AudioClip hermitCrabField;
+    public AudioClip hermitCrabDigging; // -- waiting
+    public AudioClip hermitCrabField; // -- waiting
 
-    public AudioClip gulperEelMoving;
-    public AudioClip gulperEelEating;
+    public AudioClip gulperEelMoving; // -- waiting
+    public AudioClip gulperEelEating; // -- waiting
 
-    public AudioClip hummingBirdMoving;
-    public AudioClip hummingBirdAttacking;
+    public AudioClip hummingBirdMoving; // -- waiting
+    public AudioClip hummingBirdSpotting; // -- waiting
+    public AudioClip hummingBirdAttacking; // -- waiting
 
     // Methods to play the audio clips // 
 
-	public static void PlayUIButtonClick()
+	public static void PlayTetherSelect()
 	{
-		GlobalAudio.PlaySound(inst.uiButtonClick);
+		GlobalAudio.PlaySound(inst.tetherSelect);
 	}
 
     public static void PlayTetherMenuOpen()
@@ -135,9 +142,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.timedSwitch);
     }
 
-    public static void PlayLaserSecurityMovingSound()
+    public static void PlayLaserSecuritySound()
     {
-        GlobalAudio.PlaySound(inst.laserSecurityMoving);
+        GlobalAudio.PlaySound(inst.laserSecurity);
     }
 
     public static void PlayLaserSecurityCollisionSound()
@@ -145,9 +152,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.laserSecurityCollisiion);
     }
 
-    public static void PlayLaserDeathMovingSound()
+    public static void PlayLaserDeathSound()
     {
-        GlobalAudio.PlaySound(inst.laserDeathMoving);
+        GlobalAudio.PlaySound(inst.laserDeath);
     }
 
     public static void PlayLaserDeathCollisionSound()
@@ -165,9 +172,19 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.codeDoorUnlock);
     }
 
-    public static void PlayKeyDoorUnlockSound()
+    public static void PlayPressurePlateSound()
     {
-        GlobalAudio.PlaySound(inst.DoorUnlock);
+        GlobalAudio.PlaySound(inst.pressurePlate);
+    }
+
+    public static void PlayDoorOpenSound()
+    {
+        GlobalAudio.PlaySound(inst.doorOpen);
+    }
+
+    public static void PlayDoorClosedSound()
+    {
+        GlobalAudio.PlaySound(inst.doorClosed);
     }
 
     public static void PlayPlayerWalkingSound()
@@ -198,6 +215,11 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public static void PlayHummingBirdMovingSound()
     {
         GlobalAudio.PlaySound(inst.hummingBirdMoving);
+    }
+
+    public static void PlayHummingBirdSpottingSound()
+    {
+        GlobalAudio.PlaySound(inst.hummingBirdSpotting);
     }
 
     public static void PlayHummingBirdAttackingSound()

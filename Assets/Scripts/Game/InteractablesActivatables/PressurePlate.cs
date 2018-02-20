@@ -20,6 +20,8 @@ public class PressurePlate : Interactable
 	//is the button pressed?
 	private bool _pressed = false;
 
+    private bool playSound = true;
+
 	Animator _animationControl;
 
 	// Use this for initialization
@@ -51,6 +53,17 @@ public class PressurePlate : Interactable
 //			else
 //				gameObject.GetComponent<SpriteRenderer> ().sprite = _unpressedSprite;
 		}
+
+        if(_pressed && playSound)
+        {
+            AudioLibrary.PlayPressurePlateSound();
+            playSound = false;
+        }
+        if(!_pressed && !playSound)
+        {
+            //play off pressureplate sound
+            playSound = true;
+        }
 	}
 
 	void OnDestroy()
@@ -87,10 +100,14 @@ public class PressurePlate : Interactable
 		Collider2D[] colsHit = Physics2D.OverlapCircleAll (transform.position, transform.localScale.x / 2);
 		foreach(Collider2D col in colsHit)
 		{
-			if (col.gameObject.GetComponent<Player> () != null)
-				state = true;
-			else if (col.gameObject.GetComponent<PushBlock> () != null)
-				state = true;
+            if (col.gameObject.GetComponent<Player>() != null)
+            {
+                state = true;
+            }
+            else if (col.gameObject.GetComponent<PushBlock>() != null)
+            {
+                state = true;
+            }
 		}
 		return state;
 	}

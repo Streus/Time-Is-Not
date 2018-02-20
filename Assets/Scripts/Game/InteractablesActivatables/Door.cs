@@ -20,14 +20,6 @@ public class Door : Interactable, IActivatable, ISavable
 	//the door's sprite
 	private SpriteRenderer _sprite;
 
-	[Tooltip("The open sprite")]
-	[SerializeField]
-	private Sprite _openSprite;
-
-	[Tooltip("The closed sprite")]
-	[SerializeField]
-	private Sprite _closedSprite;
-
 	[Tooltip("Button prompt sprite")]
 	[SerializeField]
 	private GameObject _buttonPrompt;
@@ -50,6 +42,7 @@ public class Door : Interactable, IActivatable, ISavable
 
 	public enum DoorTypes {Manual, Electronic};
 
+	private Animator _anim;
 
 	// Use this for initialization
 	void Start () 
@@ -58,6 +51,7 @@ public class Door : Interactable, IActivatable, ISavable
 			return;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		_collider = gameObject.GetComponent<PolygonCollider2D> ();
+		_anim = gameObject.GetComponent <Animator> ();
 		_playerInRange = false;
 		isInverted = _isOpen;
 
@@ -71,33 +65,12 @@ public class Door : Interactable, IActivatable, ISavable
 			_collider = gameObject.GetComponent<PolygonCollider2D> ();
 		if(_sprite == null)
 			_sprite = gameObject.GetComponent<SpriteRenderer> ();
-		if(!Application.isPlaying) 
-		{
-			_sprite = gameObject.GetComponent<SpriteRenderer> ();
-			if (_isOpen && _sprite.sprite != _openSprite) {
-				_sprite.sprite = _openSprite;
-				_collider.enabled = false;
-			}
-			if (!_isOpen && _sprite.sprite != _closedSprite) {
-				_sprite.sprite = _closedSprite;
-				_collider.enabled = true;
-			}
-		}
+		if(_anim == null)
+			_anim = gameObject.GetComponent <Animator> ();
+		_anim.SetBool ("isOpen", _isOpen);
+		_anim.SetBool ("isStasised", inStasis);
 		getInput ();
 
-		if (inStasis)
-			return;
-		//if not in stasis, update collider and visuals
-		if(_isOpen && _collider.enabled)
-		{
-			_sprite.sprite = _openSprite;
-			_collider.enabled = false;
-		}
-		if(!_isOpen && !_collider.enabled)
-		{
-			_sprite.sprite = _closedSprite;
-			_collider.enabled = true;
-		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
@@ -164,11 +137,13 @@ public class Door : Interactable, IActivatable, ISavable
 		if(_isOpen)
 		{
 			Open ();
-		}
-		else
+            AudioLibrary.PlayDoorOpenSound();
+        }
+        else
 		{
 			Close ();
-		}
+            AudioLibrary.PlayDoorClosedSound();
+        }
 	}
 
 	/// <summary>
@@ -183,11 +158,13 @@ public class Door : Interactable, IActivatable, ISavable
 		if(!_isOpen)
 		{
 			Open ();
-		}
+            AudioLibrary.PlayDoorOpenSound();
+        }
 		else
 		{
 			Close ();
-		}
+            AudioLibrary.PlayDoorClosedSound();
+        }
 		return _isOpen;
 	}
 
@@ -221,12 +198,12 @@ public class Door : Interactable, IActivatable, ISavable
 	void Open()
 	{
 		_isOpen = true;
-	}
+    }
 
 	void Close()
 	{
 		_isOpen = false;
-	}
+    }
 
 
 	//****Savable Object Functions****
