@@ -136,8 +136,6 @@ public class TetherManager : Singleton<TetherManager>
 				// If the menu button is released before the timer has reached zero, call a fast tether back
 				if (Input.GetKeyUp(PlayerControlManager.LH_TetherMenu) || Input.GetKeyUp(PlayerControlManager.RH_TetherMenu))
 				{
-					//Debug.Log("fast tether back (TODO)"); 
-					//LoadTetherPoint(LevelStateManager.curState); 
 					OnFastTetherStart(LevelStateManager.curState); 
 				}
 			}
@@ -195,6 +193,27 @@ public class TetherManager : Singleton<TetherManager>
 				ShowTetherMenu();
 			}
 		}
+
+
+		/*
+		 * Tether Corner HUD fading when zooming out
+		 */
+
+		// When zooming/zoomed out, hide the bottom left time tether HUD
+		if (GameManager.CameraIsZoomedOut())
+		{
+			tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 0, tetherHUDFadeOutSpeed * Time.deltaTime); 
+		}
+		// When zooming back in or not zoomed, reveal the bottom left time tether HUD
+		else
+		{
+			tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 1, tetherHUDFadeInSpeed * Time.deltaTime); 
+		}
+
+
+		/*
+		 * Other Update Stuff
+		 */ 
 
 		UpdateTimeArrowPos(); 
 		UpdateScreenshotState(); 
