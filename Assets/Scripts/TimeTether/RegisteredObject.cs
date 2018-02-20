@@ -29,15 +29,17 @@ public class RegisteredObject : MonoBehaviour
 
 	// Used to check for duplication of objects
 	[SerializeField]
-	private int instanceID = -1;
+	private int instanceID = 0;
 
 	// Path to a prefab to which this RO is attached
+	[SerializeField]
 	private string prefabPath = "";
 
 	[SerializeField]
 	private bool stasisable = true;
 
 	// <= 0 == false; > 0 == true
+	[SerializeField]
 	private int allowReset = 1;
 
 	public delegate void SetBoolean(bool val);
@@ -100,16 +102,24 @@ public class RegisteredObject : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Reset()
 	{
+		Debug.LogWarning ("Resetting " + instanceID + ", " + registeredID);
 		generateID ();
 	}
 
 	private void generateID()
 	{
-		if (instanceID == -1)
+		if (instanceID == 0)
+		{
 			instanceID = gameObject.GetInstanceID ();
+			Debug.Log ("[RO] New instance: " + instanceID); //DEBUG
+		}
 
-		if(registeredID == DEFAULT_RID || instanceID != gameObject.GetInstanceID())
+		Debug.Log (instanceID + " | " + gameObject.GetInstanceID()); //DEBUG
+		if(registeredID == DEFAULT_RID || instanceID != this.GetInstanceID())
+		{
 			registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
+			Debug.Log ("[RO] " + instanceID + " has a new ID: " + registeredID); //DEBUG
+		}
 	}
 
 	public void Awake()

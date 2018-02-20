@@ -12,7 +12,9 @@ public class ROInspector : Editor
 	public void OnEnable()
 	{
 		ro = (RegisteredObject)target;
-		ro.Reset ();
+		if(!EditorApplication.isPlayingOrWillChangePlaymode)
+			ro.Reset ();
+		
 		try
 		{
 			so = new SerializedObject(ro);
@@ -25,6 +27,8 @@ public class ROInspector : Editor
 	public override void OnInspectorGUI ()
 	{
 		so.Update ();
+
+		Debug.Log (ro.GetInstanceID () + " | " + ro.rID); //DEBUG
 
 		GUILayout.Label (ro.rID, EditorStyles.largeLabel);
 
