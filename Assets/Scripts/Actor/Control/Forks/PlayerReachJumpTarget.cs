@@ -19,6 +19,7 @@ public class PlayerReachJumpTarget : Fork
 			p.getSelf ().getAbility (1).active = true;
 			return true;
 		}
+        
 		return false;
     }
 }
