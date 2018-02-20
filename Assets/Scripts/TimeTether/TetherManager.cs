@@ -225,6 +225,9 @@ public class TetherManager : Singleton<TetherManager>
 	/// </summary>
 	bool ShowTetherMenu()
 	{
+		// Only allow clicking on tether menu buttons when it's faded in
+		tetherMenuGroup.blocksRaycasts = true; 
+
 		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 1, tetherMenuFadeInSpeed * Time.deltaTime); 
 		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, fadeImageMaxAlpha, fadeImageFadeInSpeed * Time.deltaTime)); 
 
@@ -243,6 +246,9 @@ public class TetherManager : Singleton<TetherManager>
 	/// </summary>
 	bool HideTetherMenu()
 	{
+		// Only allow clicking on tether menu buttons when it's faded in
+		tetherMenuGroup.blocksRaycasts = false; 
+
 		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 0, tetherMenuFadeOutSpeed * Time.deltaTime);
 		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, 0, fadeImageFadeOutSpeed * Time.deltaTime)); 
 
