@@ -21,7 +21,8 @@ public class CodePickup : MonoBehaviour
 		{
 			if (col.CompareTag("Player"))
 			{
-				AddCode(); 
+				AddCode();
+                AudioLibrary.PlayCodePickupSound();
 			}
 		}
 	}

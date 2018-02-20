@@ -4,64 +4,66 @@ using UnityEngine;
 
 public class AudioLibrary : Singleton<AudioLibrary> 
 {
+
     // UI //
 
-	public AudioClip tetherSelect;
-    public AudioClip tetherMenuOpen;
-    public AudioClip tetherMenuClose;
-    public AudioClip gameOver; // ---
+	public AudioClip tetherSelect; // -- waiting
+    public AudioClip tetherMenuOpen; // --  waiting
+    public AudioClip tetherMenuClose; // -- waiting
+    public AudioClip gameOver; // -- question
 
     // Mechanics //
 
-    public AudioClip tetherPlacement;
-    public AudioClip tetherRewind;
-    public AudioClip tetherError;
+    public AudioClip tetherPlacement; // -- done : Location - TetherManager script
+    public AudioClip tetherRewind; // -- done : Location - TetherManager script
+    public AudioClip tetherError; // -- done : Location - TetherManger script
 
-    public AudioClip stasisShoot;
-    public AudioClip stasisHum;
-    public AudioClip stasisError;
+    public AudioClip stasisShoot; // -- done : Location - StasisBullet script
+    public AudioClip stasisHum; // -- done : Location - StasisBubble script
+    public AudioClip stasisError; // -- done : Location - LevelState Manager script
 
-    public AudioClip dashForward;
-    public AudioClip dashRecharge;
-    public AudioClip dashError;
+    public AudioClip dashForward; // -- waiting
+    public AudioClip dashRecharge; // -- waiting
+    public AudioClip dashError; // -- waiting
 
     // Environment // 
-    public AudioClip wires; //--
-    public AudioClip pressurePlate;
+    public AudioClip wires; //-- question
+    public AudioClip pressurePlate; // -- done : Location - pressure plate script
+    public AudioClip pressurePlateOff; // -- doesn't exist but is probably needed
 
-    public AudioClip pushBlockMoving;
+    public AudioClip pushBlockMoving; // -- waiting
 
     public AudioClip normalSwitch;
     public AudioClip timedSwitch;
 
-    public AudioClip laserSecurity;
-    public AudioClip laserSecurityCollisiion;
+    public AudioClip laserSecurity; 
+    public AudioClip laserSecurityCollisiion; // -- done : Location - Laser script
 
     public AudioClip laserDeath;
-    public AudioClip laserDeathCollisiion;
+    public AudioClip laserDeathCollisiion; // -- done :  Location - laser script // PROBLEM
 
-    public AudioClip alarmTriggered; //---
+    public AudioClip alarmTriggered; //-- question
 
-    public AudioClip codePickup;
+    public AudioClip codePickup; // -- done : Location - CodePickup script
 
-    public AudioClip codeDoorUnlock;
-    public AudioClip doorClosed;
-    public AudioClip doorOpen;
+    public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
+    public AudioClip doorClosed; // -- done : Location - Door script
+    public AudioClip doorOpen; // -- done : Location - Door script
 
 
     // Character and Enemies //
 
-    public AudioClip playerWalking;
+    public AudioClip playerWalking; // -- questions
 
-    public AudioClip hermitCrabDigging;
-    public AudioClip hermitCrabField;
+    public AudioClip hermitCrabDigging; // -- waiting
+    public AudioClip hermitCrabField; // -- waiting
 
-    public AudioClip gulperEelMoving;
-    public AudioClip gulperEelEating;
+    public AudioClip gulperEelMoving; // -- waiting
+    public AudioClip gulperEelEating; // -- waiting
 
-    public AudioClip hummingBirdMoving;
-    public AudioClip hummingBirdSpotting;
-    public AudioClip hummingBirdAttacking;
+    public AudioClip hummingBirdMoving; // -- waiting
+    public AudioClip hummingBirdSpotting; // -- waiting
+    public AudioClip hummingBirdAttacking; // -- waiting
 
     // Methods to play the audio clips // 
 

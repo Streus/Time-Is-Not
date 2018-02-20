@@ -116,6 +116,7 @@ public class KeyCodeReader : Interactable
 		if(_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
+            AudioLibrary.PlayCodeDoorUnlockSound();
 		}
 	}
 

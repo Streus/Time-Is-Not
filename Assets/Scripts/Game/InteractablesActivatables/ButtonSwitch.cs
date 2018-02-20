@@ -131,6 +131,7 @@ public class ButtonSwitch : Interactable
 	public override void onInteract ()
 	{
 		ToggleSecurityDoors ();
+        AudioLibrary.PlayNormalSwitchSound();
 		foreach(GameObject activatable in _activatables)
 		{
 			if(activatable.GetComponent<IActivatable>() != null)

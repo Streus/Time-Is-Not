@@ -137,11 +137,13 @@ public class Door : Interactable, IActivatable, ISavable
 		if(_isOpen)
 		{
 			Open ();
-		}
-		else
+            AudioLibrary.PlayDoorOpenSound();
+        }
+        else
 		{
 			Close ();
-		}
+            AudioLibrary.PlayDoorClosedSound();
+        }
 	}
 
 	/// <summary>
@@ -156,11 +158,13 @@ public class Door : Interactable, IActivatable, ISavable
 		if(!_isOpen)
 		{
 			Open ();
-		}
+            AudioLibrary.PlayDoorOpenSound();
+        }
 		else
 		{
 			Close ();
-		}
+            AudioLibrary.PlayDoorClosedSound();
+        }
 		return _isOpen;
 	}
 
@@ -194,12 +198,12 @@ public class Door : Interactable, IActivatable, ISavable
 	void Open()
 	{
 		_isOpen = true;
-	}
+    }
 
 	void Close()
 	{
 		_isOpen = false;
-	}
+    }
 
 
 	//****Savable Object Functions****

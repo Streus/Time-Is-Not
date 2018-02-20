@@ -71,7 +71,7 @@ public class PushBlock : MonoBehaviour, ISavable
 			case Direction.Up:
 				transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
-				break;
+                    break;
 			case Direction.Right:
 				transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
@@ -105,7 +105,7 @@ public class PushBlock : MonoBehaviour, ISavable
 			case Direction.Up:
 				if (Input.GetKey (_upKey))
 					move (_moveDirection);
-				break;
+                    break;
 			case Direction.Right:
 				if (Input.GetKey (_rightKey))
 					move (_moveDirection);
