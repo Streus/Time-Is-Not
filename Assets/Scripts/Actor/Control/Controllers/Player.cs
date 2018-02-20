@@ -10,6 +10,11 @@ public class Player : Controller
 
     private State prePushState;
 
+    
+
+    [SerializeField]
+    private State playerDefault;
+
     [SerializeField]
     private State dashState;
 
@@ -59,12 +64,26 @@ public class Player : Controller
 	{
 		getSelf ().addAbility (Ability.get ("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
-	}
+        getSelf().died += deathReset;
+    }
 
 	public override void FixedUpdate ()
 	{
 		base.FixedUpdate ();
 	}
+
+    private void OnDestroy()
+    {
+        getSelf().died -= deathReset;
+        
+    }
+    private void deathReset()
+    {
+        Debug.Log("I reset");
+        setState(playerDefault);
+        getSelf().getAbility(1).active = true;
+        
+    }
 
 	public void enterPushState()
 	{

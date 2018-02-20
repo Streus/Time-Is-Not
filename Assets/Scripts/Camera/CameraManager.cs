@@ -184,22 +184,17 @@ public class CameraManager : MonoBehaviour
 			// cMinX
 			case 0:
 				return t.position.x - (cWidth / 2f);
-				break; 
 			// cMaxX
 			case 1:
 				return t.position.x + (cWidth / 2f);
-				break;
 			// cMinY
 			case 2:
 				return t.position.y - (cHeight / 2f);
-				break;
 			// cMaxY
 			case 3:
 				return t.position.y + (cHeight / 2f);
-				break;
 			default:
 				return 0;
-				break;
 		}
 	}
 
