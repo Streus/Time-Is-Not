@@ -34,15 +34,19 @@ public class KeyCodeReader : Interactable
 	private bool _playerInRange = false;
 
 	//the spriterenderer for the object
-	SpriteRenderer _sprite; 
+	SpriteRenderer _sprite;
 
+    AudioSource source;
+    [SerializeField]
+    AudioClip keyCodeUse;
 
 	// Use this for initialization
 	void Start () 
 	{
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		chooseCodeSprite();
-		//TODO: get input button from input module
+        //TODO: get input button from input module
+        source = this.GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -116,8 +120,9 @@ public class KeyCodeReader : Interactable
 		if(_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
-            AudioLibrary.PlayCodeDoorUnlockSound();
-		}
+            source.clip = keyCodeUse;
+            source.Play();
+        }
 	}
 
 	/// <summary>

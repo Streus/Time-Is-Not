@@ -29,6 +29,11 @@ public class StasisBubble : MonoBehaviour
 
 	ParticleSystem stasisParticles;
 
+    AudioSource source;
+
+    [SerializeField]
+    AudioClip stasisHum;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -41,7 +46,10 @@ public class StasisBubble : MonoBehaviour
 			maxBubbleAlpha = spriteRend.color.a; 
 		}
 		stasisParticles = GetComponent<ParticleSystem>();
-        AudioLibrary.PlayStasisHumSound();
+
+        source = this.GetComponent<AudioSource>();
+        source.clip = stasisHum;
+        source.Play();
 	}
 	
 	// Update is called once per frame

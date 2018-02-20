@@ -44,6 +44,13 @@ public class Door : Interactable, IActivatable, ISavable
 
 	private Animator _anim;
 
+    AudioSource source;
+
+    [SerializeField]
+    AudioClip openDoor;
+    [SerializeField]
+    AudioClip closeDoor;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -56,6 +63,8 @@ public class Door : Interactable, IActivatable, ISavable
 		isInverted = _isOpen;
 
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+
+        source = this.GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -137,12 +146,14 @@ public class Door : Interactable, IActivatable, ISavable
 		if(_isOpen)
 		{
 			Open ();
-            AudioLibrary.PlayDoorOpenSound();
+            source.clip = openDoor;
+            source.Play();
         }
         else
 		{
 			Close ();
-            AudioLibrary.PlayDoorClosedSound();
+            source.clip = closeDoor;
+            source.Play();
         }
 	}
 
@@ -158,12 +169,14 @@ public class Door : Interactable, IActivatable, ISavable
 		if(!_isOpen)
 		{
 			Open ();
-            AudioLibrary.PlayDoorOpenSound();
+            source.clip = openDoor;
+            source.Play();
         }
 		else
 		{
 			Close ();
-            AudioLibrary.PlayDoorClosedSound();
+            source.clip = closeDoor;
+            source.Play();
         }
 		return _isOpen;
 	}
@@ -180,17 +193,33 @@ public class Door : Interactable, IActivatable, ISavable
 		//if the door is inverted, a true state closes the door
 		if(isInverted)
 		{
-			if (state)
-				Close ();
-			else
-				Open ();
+            if (state)
+            {
+                Close();
+                source.clip = closeDoor;
+                source.Play();
+            }
+            else
+            {
+                Open();
+                source.clip = openDoor;
+                source.Play();
+            }
 		}
 		else
 		{
-			if (state)
-				Open ();
-			else
-				Close ();
+            if (state)
+            {
+                Open();
+                source.clip = openDoor;
+                source.Play();
+            }
+            else
+            {
+                Close();
+                source.clip = closeDoor;
+                source.Play();
+            }
 		}
 		return _isOpen;
 	}

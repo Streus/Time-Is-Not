@@ -41,8 +41,10 @@ public class Laser : Interactable, IActivatable, ISavable
 
 	private Animator anim;
 
-	// Use this for initialization
-	void Start()
+    public static bool playSound = true;
+
+    // Use this for initialization
+    void Start()
 	{
 		if(anim == null)
 			anim = gameObject.GetComponentInParent<Animator> ();
@@ -148,15 +150,19 @@ public class Laser : Interactable, IActivatable, ISavable
 			break;
 		case LaserType.Death:
 			entity.onDeath ();
-                //AudioLibrary.PlayLaserDeathCollisionSound();
-			break;
+                if (playSound)
+                {
+                    AudioLibrary.PlayLaserDeathCollisionSound();
+                    playSound = false;
+                }
+                break;
 		}
 	}
 
-	/// <summary>
-	/// Toggles the laser's state and returns it.
-	/// </summary>
-	public bool onActivate()
+    /// <summary>
+    /// Toggles the laser's state and returns it.
+    /// </summary>
+    public bool onActivate()
 	{
 		if (isEnabled ())
 			disable ();

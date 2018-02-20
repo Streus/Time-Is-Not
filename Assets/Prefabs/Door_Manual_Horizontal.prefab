@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 60725167556704788}
   - component: {fileID: 114398261622542536}
   - component: {fileID: 95711411351732762}
+  - component: {fileID: 82440376398718374}
+  - component: {fileID: 114110865913273266}
   m_Layer: 0
   m_Name: Door_Manual_Horizontal
   m_TagString: Untagged
@@ -158,6 +160,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.39, y: 1.07}
   m_EdgeRadius: 0
+--- !u!82 &82440376398718374
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254064773021776}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95711411351732762
 Animator:
   serializedVersion: 3
@@ -175,6 +257,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114110865913273266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254064773021776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1002160353, guid: f7b54ff4a43d4fcf81b4538b678e0bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RoomSize: 0
 --- !u!114 &114130792621982314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,6 +287,8 @@ MonoBehaviour:
   _type: 0
   _buttonPrompt: {fileID: 1392062002614634}
   _negativePrompt: {fileID: 1482625830581318}
+  openDoor: {fileID: 8300000, guid: a75efa2855b69ef43b1da712ee3ff533, type: 3}
+  closeDoor: {fileID: 8300000, guid: 445dc2b5c6cede4479105020b10c3a4b, type: 3}
 --- !u!114 &114398261622542536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: xhoxcXUGIkGgMMqCypVK1Q
+  registeredID: Rkx2jiQV2kStELRqZomeHw
   instanceID: 10126
   stasisable: 1
 --- !u!212 &212032947895703994
