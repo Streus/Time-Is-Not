@@ -15,6 +15,7 @@ public enum TetherUIState
 /// </summary>
 public class TetherManager : Singleton<TetherManager> 
 {
+	[Header("Tether UI references")]
 	[Tooltip("(Drag In) The prefab for the object dropped at the player position each time a tether point is created.")]
 	public GameObject timeTetherIndicatorPrefab; 
 
@@ -28,6 +29,7 @@ public class TetherManager : Singleton<TetherManager>
 	// The target position the arrow is lerping towards
 	float arrowXTarget;
 
+	[Header("Misc settings/refs")]
 	[Tooltip("How fast the arrow lerps.")]
 	public float arrowLerpSpeed; 
 
@@ -49,11 +51,21 @@ public class TetherManager : Singleton<TetherManager>
 
 	[SerializeField] TetherTransition tetherTransition; 
 
+	[Header("Fast tether back settings")]
+	[Tooltip("If true, the player can tap the tether menu key to instantly go back to the last tether point.")]
+	[SerializeField] bool allowFastTether; 
+	[Tooltip("How long does the tether menu key have to be held for the menu to come up, rather than doing fast tether back on release")]
+	[SerializeField] float fastTetherKeyTime; 
+	// The timer that keeps track of how long the tether menu key is held
+	float fastTetherKeyTimer; 
+
+	[Header("Tether menu fading")]
 	[Tooltip("The CanvasGroup for the pop up tether menu. Used to fade the entire group in/out")]
 	[SerializeField] CanvasGroup tetherMenuGroup; 
 	[SerializeField] float tetherMenuFadeInSpeed = 1; 
 	[SerializeField] float tetherMenuFadeOutSpeed = 1; 
 
+	[Header("Fade image settings")]
 	[Tooltip("(Drag In) The background image that darkens the background when the tether UI is up")]
 	[SerializeField] Image fadeImage; 
 	[SerializeField] float fadeImageMaxAlpha;
@@ -91,6 +103,10 @@ public class TetherManager : Singleton<TetherManager>
 
 	void Update()
 	{
+		/*
+		 * Create tether point functionality
+		 */ 
+
 		// Creating a tether point
 		if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead())
 		{
@@ -100,14 +116,58 @@ public class TetherManager : Singleton<TetherManager>
 			}
 		}
 
+
+		/*
+		 * Fast tethering functionality 
+		 */ 
+
+		// Keep track of the fast tether back key
+		if (allowFastTether)
+		{
+			// These conditions determine whether tethering is allowed
+			if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut())
+			{
+				// If the player presses the menu key, start the timer
+				if (Input.GetKeyDown(PlayerControlManager.LH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.RH_TetherMenu))
+				{
+					fastTetherKeyTimer = fastTetherKeyTime; 
+				}
+
+				// If the menu button is released before the timer has reached zero, call a fast tether back
+				if (Input.GetKeyUp(PlayerControlManager.LH_TetherMenu) || Input.GetKeyUp(PlayerControlManager.RH_TetherMenu))
+				{
+					//Debug.Log("fast tether back (TODO)"); 
+					//LoadTetherPoint(LevelStateManager.curState); 
+					OnFastTetherStart(LevelStateManager.curState); 
+				}
+			}
+		}
+		else
+		{
+			fastTetherKeyTimer = 0; 
+		}
+
+		// Update fastTetherKeyTimer
+		if (fastTetherKeyTimer > 0)
+		{
+			fastTetherKeyTimer -= Time.deltaTime;
+			if (fastTetherKeyTimer < 0)
+				fastTetherKeyTimer = 0; 
+		}
+
+
+		/*
+		 * Tether menu functionality 
+		 */ 
+
 		// Bringing up the tether menu
 		if (tetherUIState == TetherUIState.GAMEPLAY || tetherUIState == TetherUIState.TETHER_MENU)
 		{
 			// Test for bringing up the menu, while alive
 			if (!GameManager.isPlayerDead())
 			{
-			
-				if ((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !GameManager.CameraIsZoomedOut())
+				// If the tether menu key is held down
+				if ((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0)
 				{
 					tetherUIState = TetherUIState.TETHER_MENU; 
 					GameManager.setPause(true); 
@@ -262,6 +322,7 @@ public class TetherManager : Singleton<TetherManager>
 	/// Tether Button click for tether buttons in the bottom left tether UI
 	/// </summary>
 	/// <param name="stateToLoad">LevelStateManager state to load, starting at 0.</param>
+	[System.Obsolete("Not used anymore b/c you can no longer click the buttons on the bottom left TimeTetherUI")]
 	public void OnTetherGameplayButtonClick(int stateToLoad)
 	{
 		if (tetherUIState != TetherUIState.GAMEPLAY)
@@ -270,6 +331,27 @@ public class TetherManager : Singleton<TetherManager>
 			return; 
 		}
 			
+		tetherUIState = TetherUIState.TETHER_ANIMATION; 
+		GameManager.setPause(true);
+		GameManager.inst.lockCursorType = true; 
+		GameManager.inst.cursorType = CursorType.DEACTIVATED; 
+
+		// Start the animation coroutine that jumps directly into the tether animation code
+		StartCoroutine("TetherBackAnimation", stateToLoad); 
+	}
+
+	/// <summary>
+	/// Begins the tether back sequence, skipping the tether menu animation part of the coroutine
+	/// Essentially the same as OnTetherGameplayButtonClick(int stateToLoad), but repurposed for tapping the tether menu key instead of pressing a tether button in the bottom left UI
+	/// </summary>
+	void OnFastTetherStart(int stateToLoad)
+	{
+		if (tetherUIState != TetherUIState.GAMEPLAY)
+		{
+			Debug.LogError("Shouldn't be able to fast load tether point when not in TetherUIState.GAMEPLAY. Currently in TetherUIState." + tetherUIState); 
+			return; 
+		}
+
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true);
 		GameManager.inst.lockCursorType = true; 
@@ -352,8 +434,9 @@ public class TetherManager : Singleton<TetherManager>
 		}
 
 		// Load the desired state via LevelStateManager
-		RemoveTimeTetherIndicator(stateToLoad + 1); 
-		LevelStateManager.loadTetherPoint(stateToLoad);
+		LoadTetherPoint(stateToLoad); 
+		//RemoveTimeTetherIndicator(stateToLoad + 1); 
+		//LevelStateManager.loadTetherPoint(stateToLoad);
 
 		// How long to wait on the black screen
 		yield return new WaitForSeconds (0.3f);
@@ -428,6 +511,12 @@ public class TetherManager : Singleton<TetherManager>
 		GameManager.setPause(false);
 	}
 	*/ 
+
+	void LoadTetherPoint(int state)
+	{
+		RemoveTimeTetherIndicator(state + 1); 
+		LevelStateManager.loadTetherPoint(state);
+	}
 
 	void CreateTimeTetherIndicator(Vector3 pos, int state)
 	{

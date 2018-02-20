@@ -29,7 +29,8 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	// If pointA represents the last save state made, pointB represents the next available save state, and the arrow 
 	// 		in between represents the player's current pos in the timeline, then curState equals pointA
 
-	private int m_curState;
+	[Header("Cur state display (READ ONLY)")] 
+	[SerializeField] private int m_curState;
 	public static int curState
 	{
 		get{
