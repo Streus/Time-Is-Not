@@ -67,6 +67,16 @@ public class Player : Controller
         getSelf().died += deathReset;
     }
 
+	public override void Update()
+	{
+		// Conditions for stopping the Player from updating
+		// (a) If the camera is not zoomed out 
+		if (!GameManager.CameraIsZoomedOut())
+		{
+			base.Update(); 
+		}
+	}
+
 	public override void FixedUpdate ()
 	{
 		base.FixedUpdate ();
