@@ -157,7 +157,7 @@ public class Player : Controller
 			gameObject.layer = LayerMask.NameToLayer ("GroundEnts");
     }
 
-	public void OnDrawGizmos()
+	public override void OnDrawGizmos()
 	{
 		// Dash debug
 		if (jumpTargetPos != Vector3.zero)
