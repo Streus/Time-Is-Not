@@ -125,7 +125,7 @@ public class TetherManager : Singleton<TetherManager>
 		if (allowFastTether)
 		{
 			// These conditions determine whether tethering is allowed
-			if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut())
+			if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPlayerDashing())
 			{
 				// If the player presses the menu key, start the timer
 				if (Input.GetKeyDown(PlayerControlManager.LH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.RH_TetherMenu))
@@ -165,7 +165,7 @@ public class TetherManager : Singleton<TetherManager>
 			if (!GameManager.isPlayerDead())
 			{
 				// If the tether menu key is held down
-				if ((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0)
+				if ((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
 				{
 					tetherUIState = TetherUIState.TETHER_MENU; 
 					GameManager.setPause(true); 

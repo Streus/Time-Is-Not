@@ -134,7 +134,7 @@ public class CameraManager : MonoBehaviour
 
 		if (Application.isPlaying)
 		{
-			if ((Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut)) && TetherManager.ZoomOutAllowed())
+			if ((Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut)) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
 			{
 				m_zoomState = true; 
 				zoomTo(zoomOutSize, zoomOutLerpSpeed);

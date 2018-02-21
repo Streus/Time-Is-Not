@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	// Reference variables
 	[SerializeField] private GameObject playerObj; 
+	private Player playerScript; 
 	[SerializeField] private CameraManager cameraManager; 
 
 	// Savable data
@@ -112,6 +113,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		if (playerObj != null)
 		{
 			playerObj.GetComponent<Entity> ().died += killPlayer;
+			playerScript = playerObj.GetComponent<Player>(); 
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
 
@@ -206,6 +208,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public static GameObject GetPlayer()
 	{
 		return inst.playerObj; 
+	}
+
+	public static bool isPlayerDashing()
+	{
+		return inst.playerScript.dashing(); 
 	}
 		
 	public static CameraManager GetCameraManager()
