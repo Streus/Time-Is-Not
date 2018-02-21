@@ -31,7 +31,6 @@ public class StasisBubble : MonoBehaviour
 
     AudioSource source;
 
-    [SerializeField]
     AudioClip stasisHum;
 
 	// Use this for initialization
@@ -48,6 +47,7 @@ public class StasisBubble : MonoBehaviour
 		stasisParticles = GetComponent<ParticleSystem>();
 
         source = this.GetComponent<AudioSource>();
+        stasisHum = AudioLibrary.inst.stasisHum;
         source.clip = stasisHum;
         source.Play();
 	}

@@ -1491,7 +1491,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8, y: -0.78, z: 0}
+  m_LocalPosition: {x: -5.42, y: 15.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396684429741562}
@@ -1531,7 +1531,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7999992, y: -0.7800002, z: 0}
+  m_LocalPosition: {x: -5.419998, y: 15.939999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -1629,8 +1629,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 51.4, y: -5.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -3471,7 +3471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dc534beae3c5b4a8190c9093833260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashRecharge: {fileID: 8300000, guid: 33b22aa34d3698e4584522dabed4c093, type: 3}
 --- !u!114 &114425224028334586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3911,7 +3910,6 @@ MonoBehaviour:
   tetherSelect: {fileID: 8300000, guid: 34312f4d3305d8a49bcc1c4a520e65c3, type: 3}
   tetherMenuOpen: {fileID: 8300000, guid: f18e83f9aa6525242a52268a0f68035a, type: 3}
   tetherMenuClose: {fileID: 8300000, guid: f18e83f9aa6525242a52268a0f68035a, type: 3}
-  gameOver: {fileID: 0}
   tetherPlacement: {fileID: 8300000, guid: da142e1fd2b1cb14cbb09083586eabab, type: 3}
   tetherRewind: {fileID: 8300000, guid: 036243f4f447fe9458493067aa32c096, type: 3}
   tetherError: {fileID: 8300000, guid: c1e6076e0e3b93b46bfbf7043381b668, type: 3}
@@ -3926,7 +3924,18 @@ MonoBehaviour:
   alarmTriggered: {fileID: 8300000, guid: 0678a7a32dc69f24ab4f980f57aef120, type: 3}
   codePickup: {fileID: 8300000, guid: 99755bafda13a3347b49bdbf580cbb42, type: 3}
   normalSwitch: {fileID: 8300000, guid: 1f0e3228a8fd7044691d2278e37673e9, type: 3}
-  playerWalking: {fileID: 0}
+  playerWalking1: {fileID: 8300000, guid: 598616cacc324204b9c78d7d7d091e34, type: 3}
+  playerWalking2: {fileID: 8300000, guid: 5381e74ca895a3848bfda77df3cf93a2, type: 3}
+  playerWalking3: {fileID: 8300000, guid: ba3fe9b4e1432f04d82b7ce60b2d5fe1, type: 3}
+  playerWalking4: {fileID: 8300000, guid: a650191fdefd9124e9484c20fece50c3, type: 3}
+  dashRecharge: {fileID: 8300000, guid: 33b22aa34d3698e4584522dabed4c093, type: 3}
+  stasisHum: {fileID: 8300000, guid: 08e58085562b0154582dcfe10296ace9, type: 3}
+  pushBlockMoving: {fileID: 8300000, guid: f45ef389f5708864f981bfe18d42c67f, type: 3}
+  pressurePlateOn: {fileID: 8300000, guid: c3d3bdf96fe8d2e4fb172e550c2772e0, type: 3}
+  pressurePlateOff: {fileID: 8300000, guid: c3d3bdf96fe8d2e4fb172e550c2772e0, type: 3}
+  codeDoorUnlock: {fileID: 8300000, guid: 739082ac0be789b41b9c4c53e945588a, type: 3}
+  doorClosed: {fileID: 8300000, guid: 445dc2b5c6cede4479105020b10c3a4b, type: 3}
+  doorOpen: {fileID: 8300000, guid: a75efa2855b69ef43b1da712ee3ff533, type: 3}
 --- !u!114 &114676048049763710
 MonoBehaviour:
   m_ObjectHideFlags: 1

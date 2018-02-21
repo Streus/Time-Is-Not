@@ -46,7 +46,6 @@ public class PushBlock : MonoBehaviour, ISavable
 
     AudioSource source;
 
-    [SerializeField]
     AudioClip pushBlockSound;
 
 	// Use this for initialization
@@ -58,6 +57,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 
         source = this.GetComponent<AudioSource>();
+        pushBlockSound = AudioLibrary.inst.pushBlockMoving;
 	}
 
 	public void OnDestroy()

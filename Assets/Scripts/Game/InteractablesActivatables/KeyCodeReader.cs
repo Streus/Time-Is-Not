@@ -37,7 +37,7 @@ public class KeyCodeReader : Interactable
 	SpriteRenderer _sprite;
 
     AudioSource source;
-    [SerializeField]
+   
     AudioClip keyCodeUse;
 
 	// Use this for initialization
@@ -47,6 +47,7 @@ public class KeyCodeReader : Interactable
 		chooseCodeSprite();
         //TODO: get input button from input module
         source = this.GetComponent<AudioSource>();
+        keyCodeUse = AudioLibrary.inst.codeDoorUnlock;
 	}
 
 	// Update is called once per frame

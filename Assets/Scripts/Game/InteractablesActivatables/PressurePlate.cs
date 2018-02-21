@@ -26,9 +26,8 @@ public class PressurePlate : Interactable
 
     AudioSource _source;
 
-    [SerializeField]
     AudioClip pressurePlateOnSound;
-    [SerializeField]
+
     AudioClip pressurePlateOffSound;
 
     // Use this for initialization
@@ -37,6 +36,9 @@ public class PressurePlate : Interactable
 		_animationControl = GetComponent<Animator> ();
 
         _source = this.GetComponent<AudioSource>();
+
+        pressurePlateOnSound = AudioLibrary.inst.pressurePlateOn;
+        pressurePlateOffSound = AudioLibrary.inst.pressurePlateOff;
 
 //		if (_pressed)
 //			gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;

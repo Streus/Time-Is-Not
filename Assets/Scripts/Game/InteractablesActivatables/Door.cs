@@ -46,9 +46,7 @@ public class Door : Interactable, IActivatable, ISavable
 
     AudioSource source;
 
-    [SerializeField]
     AudioClip openDoor;
-    [SerializeField]
     AudioClip closeDoor;
 
 	// Use this for initialization
@@ -65,6 +63,8 @@ public class Door : Interactable, IActivatable, ISavable
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 
         source = this.GetComponent<AudioSource>();
+        openDoor = AudioLibrary.inst.doorOpen;
+        closeDoor = AudioLibrary.inst.doorClosed;
 	}
 
 	// Update is called once per frame

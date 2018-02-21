@@ -71,14 +71,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.stasisError);
     }
 
-    public AudioClip dashForward; // -- done : Location - PlayerTargeting script
+    public AudioClip dashForward; // -- done : Location - PlayerInvokeTargeting script
 
     public static void PlayDashForwardSound()
     {
         GlobalAudio.PlaySound(inst.dashForward);
     }
 
-    public AudioClip dashError; // -- waiting : question - Not sure where to apply
+    public AudioClip dashError; // -- done : Location - PlayerInvokeTargeting script
 
     public static void PlayDashErrorSound()
     {
@@ -103,7 +103,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.laserDeathCollisiion);
     }
 
-    public AudioClip alarmTriggered; //-- question - WIll it be constant or just a few moments?
+    public AudioClip alarmTriggered; //-- question - Will it be constant or just a few moments and will it be location based?
 
     public AudioClip codePickup; // -- done : Location - CodePickup script
 
@@ -123,12 +123,51 @@ public class AudioLibrary : Singleton<AudioLibrary>
 #region Character Sounds
     // Character //
 
-    public AudioClip playerWalking; // -- questions : Need mltiple or change pitch?
+    public AudioClip playerWalking1; // -- questions : Need mltiple or change pitch?
+    public AudioClip playerWalking2;
+    public AudioClip playerWalking3;
+    public AudioClip playerWalking4;
 
-    public static void PlayPlayerWalkingSound()
+    public static void RandomPlayerWalkingSound()
     {
-        GlobalAudio.PlaySound(inst.playerWalking);
+        int sound = Random.Range(0, 4);
+        switch(sound)
+        {
+            case 0:
+                GlobalAudio.PlaySound(inst.playerWalking1);
+                break;
+            case 1:
+                GlobalAudio.PlaySound(inst.playerWalking2);
+                break;
+            case 2:
+                GlobalAudio.PlaySound(inst.playerWalking3);
+                break;
+            case 3:
+                GlobalAudio.PlaySound(inst.playerWalking4);
+                break;
+        }
     }
+    #endregion
+
+
+    //This is for spatial sounds only
+
+#region Mechanic Sounds
+
+    public AudioClip dashRecharge; // -- done : Location - DashBar script
+    public AudioClip stasisHum; // -- done : Location - StasisBubble script
+
+    #endregion
+
+#region Environment Sounds
+
+    public AudioClip pushBlockMoving; // -- done : Location - PushBlock script - Problem - Stop and running into walls sound bad
+    public AudioClip pressurePlateOn; // -- done : Location - pressure plate script
+    public AudioClip pressurePlateOff; // -- doesn't exist but is probably needed : Location - pressure plate script - currently using pressureplateon sound
+    public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
+    public AudioClip doorClosed; // -- done : Location - Door script
+    public AudioClip doorOpen; // -- done : Location - Door script 
+
     #endregion
 
 
@@ -138,18 +177,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
 
 
-    // Spatial sounds - could hold the clips here and reference them in the locations
 
-    //pressurePlateOn // -- done : Location - pressure plate script
-    //pressurePlateOff // -- doesn't exist but is probably needed : Location - pressure plate script - currently using pressureplateon sound
-    //stasisHum // -- done : Location - StasisBubble script
-    //codeDoorUnlock // -- done : Location - Keycode reader script
-    //doorClosed // -- done : Location - Door script
-    //doorOpen // -- done : Location - Door script 
-    //pushBlockMoving // -- done : Location - PushBlock script - Problem 
-    //laserSecurity // -- waiting : Location - Manually applied to audiosource on Security Laser Laser child in Prefab - PROBLEM
-    //laserDeath // -- waiting : Location - Manually applied to audiosource on Death Laser Prefab - PROBLEM
-    //dashRecharge // -- done : Location - DashBar script
+
 
     // Not yet implemented
     /*
@@ -165,5 +194,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public AudioClip wires; //-- question
     public AudioClip timedSwitch;
+
+        //laserSecurity // -- waiting : Location - Manually applied to audiosource on Security Laser Laser child in Prefab - PROBLEM
+    //laserDeath // -- waiting : Location - Manually applied to audiosource on Death Laser Prefab - PROBLEM
     */
 }

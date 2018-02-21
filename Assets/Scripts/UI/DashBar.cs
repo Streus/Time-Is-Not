@@ -11,7 +11,6 @@ public class DashBar : MonoBehaviour
 
     AudioSource source;
 
-    [SerializeField]
     AudioClip dashRecharge;
 
     bool playSound = true;
@@ -23,6 +22,7 @@ public class DashBar : MonoBehaviour
         dashBar = this.GetComponent<Image>();
         dashBar.fillAmount = 0;
         source = this.GetComponent<AudioSource>();
+        dashRecharge = AudioLibrary.inst.dashRecharge;
 	}
 	
 	// Update is called once per frame
