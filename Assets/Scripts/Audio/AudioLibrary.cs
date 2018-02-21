@@ -71,7 +71,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.stasisError);
     }
 
-    public AudioClip dashForward; // -- waiting
+    public AudioClip dashForward; // -- done : Location - PlayerTargeting script
 
     public static void PlayDashForwardSound()
     {
