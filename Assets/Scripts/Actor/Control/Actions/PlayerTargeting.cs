@@ -51,6 +51,5 @@ public class PlayerTargeting : Action
 		//TODO figure out how to get this working
 //		if(Input.GetKeyUp(PlayerControlManager.LH_Dash) || Input.GetKeyUp(PlayerControlManager.RH_Dash))
 			p.getSelf().getAbility(1).use(p.getSelf(), p.getJumpTargetPos);
-        AudioLibrary.PlayDashForwardSound();
     }
 }

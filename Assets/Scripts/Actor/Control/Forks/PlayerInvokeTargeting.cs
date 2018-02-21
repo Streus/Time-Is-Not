@@ -9,12 +9,21 @@ public class PlayerInvokeTargeting : Fork
     {
         Player p = State.cast<Player>(c);
         if ((Input.GetKeyDown(PlayerControlManager.RH_Dash) ||
-			Input.GetKeyDown(PlayerControlManager.LH_Dash)) && 
-			p.getSelf().getAbility(1).isReady() &&
-			GameManager.CursorInGameplayState())
+            Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
+            GameManager.CursorInGameplayState())
         {
-            return true;
+            if(p.getSelf().getAbility(1).isReady())
+            {
+                AudioLibrary.PlayDashForwardSound();
+                return true;
+            }
+            else
+            {
+                AudioLibrary.PlayDashErrorSound();
+                return false;
+            }
         }
-		return false;
+        return false;
     }
 }
+            

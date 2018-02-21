@@ -30,7 +30,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherMenuClose);
     }
 
-    public AudioClip gameOver; // -- question : Do we have a sound for this?
+    //public AudioClip gameOver; // -- question : Do we have a sound for this?
 #endregion
 
 #region Mechanic Sounds
@@ -141,7 +141,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
     // Spatial sounds - could hold the clips here and reference them in the locations
 
     //pressurePlateOn // -- done : Location - pressure plate script
-    //pressurePlateOff // -- doesn't exist but is probably needed
+    //pressurePlateOff // -- doesn't exist but is probably needed : Location - pressure plate script - currently using pressureplateon sound
     //stasisHum // -- done : Location - StasisBubble script
     //codeDoorUnlock // -- done : Location - Keycode reader script
     //doorClosed // -- done : Location - Door script
