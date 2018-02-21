@@ -20,13 +20,13 @@ public class Door : Interactable, IActivatable, ISavable
 	//the door's sprite
 	private SpriteRenderer _sprite;
 
-	[Tooltip("Button prompt sprite")]
+	[Tooltip("Check area for the door.")]
 	[SerializeField]
-	private GameObject _buttonPrompt;
+	private Vector2 _checkSize;
 
-	[Tooltip("Negative button prompt sprite.")]
+	[Tooltip("Layers that the door should check for the player.")]
 	[SerializeField]
-	private GameObject _negativePrompt;
+	private LayerMask _playerLayers;
 
 	//Shows if the player is close enough to open the door
 	private bool _playerInRange = false;
@@ -35,7 +35,7 @@ public class Door : Interactable, IActivatable, ISavable
 	private bool isInverted = false;
 
 	//collider of the door
-	private PolygonCollider2D _collider;
+	private Collider2D _collider;
 
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
@@ -57,7 +57,7 @@ public class Door : Interactable, IActivatable, ISavable
 		if (!Application.isPlaying)
 			return;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
-		_collider = gameObject.GetComponent<PolygonCollider2D> ();
+		_collider = gameObject.GetComponent<Collider2D> ();
 		_anim = gameObject.GetComponent <Animator> ();
 		_playerInRange = false;
 		isInverted = _isOpen;
@@ -71,70 +71,52 @@ public class Door : Interactable, IActivatable, ISavable
 	void Update () 
 	{
 		if(_collider == null)
-			_collider = gameObject.GetComponent<PolygonCollider2D> ();
+			_collider = gameObject.GetComponent<Collider2D> ();
 		if(_sprite == null)
 			_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if(_anim == null)
 			_anim = gameObject.GetComponent <Animator> ();
 		_anim.SetBool ("isOpen", _isOpen);
 		_anim.SetBool ("isStasised", inStasis);
-		getInput ();
-
-	}
-
-	void OnTriggerEnter2D(Collider2D col)
-	{
-		if (col.gameObject.GetComponent<Entity> () != null) 
+		_playerInRange = CheckForPlayer();
+		if((_type == DoorTypes.Manual) && isEnabled())
 		{
-			//Check if 
-			Entity entityHit = col.gameObject.GetComponent<Entity> ();
-			if (entityHit.getFaction () == Entity.Faction.player) 
-			{
-				_playerInRange = true;
-				if(_type == DoorTypes.Manual && isEnabled())
-				{
-					_buttonPrompt.SetActive (true);
-					_negativePrompt.SetActive (false);
-				}
-				else
-				{
-					_negativePrompt.SetActive (true);
-					_buttonPrompt.SetActive (false);
-				}
-
-			}
+			if (_isOpen != _playerInRange)
+				onInteract ();
 		}
 
 	}
 
-	void OnTriggerExit2D(Collider2D col)
+	void OnDrawGizmos()
 	{
-		if (col.gameObject.GetComponent<Entity> () != null) 
+		float xdist = _checkSize.x / 2;
+		float ydist = _checkSize.y / 2;
+		Vector2 center = (transform.position + (Vector3)(_collider.offset));
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawLine (center + new Vector2(-xdist, ydist), center + new Vector2(xdist, ydist));
+		Gizmos.DrawLine (center + new Vector2(xdist, -ydist), center + new Vector2(xdist, ydist));
+		Gizmos.DrawLine (center + new Vector2(-xdist, -ydist), center + new Vector2(xdist, -ydist));
+		Gizmos.DrawLine (center + new Vector2(-xdist, ydist), center + new Vector2(-xdist, -ydist));
+	}
+
+	bool CheckForPlayer()
+	{
+		Collider2D[] colsHit = Physics2D.OverlapBoxAll ((new Vector2 (transform.position.x, transform.position.y) + _collider.offset), _checkSize, 0.0f, _playerLayers);
+		bool seesPlayer = false;
+		for(int i = 0; i < colsHit.Length; i++)
 		{
-			Entity entityHit = col.gameObject.GetComponent<Entity> ();
+			Entity entityHit = colsHit[i].gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
-				_playerInRange = false;
-				_buttonPrompt.SetActive (false);
-				_negativePrompt.SetActive (false);
+				seesPlayer = true;
 			}
 		}
+		return seesPlayer;
 	}
 
 	public void OnDestroy()
 	{
 		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
-	}
-
-	/// <summary>
-	/// Checks the keyboard for input.
-	/// </summary>
-	void getInput()
-	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey) && (_type == DoorTypes.Manual) && isEnabled() && !inStasis && !GameManager.isPaused())
-		{
-			onInteract ();
-		}
 	}
 
 	public override void onInteract ()
@@ -227,11 +209,13 @@ public class Door : Interactable, IActivatable, ISavable
 	void Open()
 	{
 		_isOpen = true;
+		_collider.enabled = false;
     }
 
 	void Close()
 	{
 		_isOpen = false;
+		_collider.enabled = true;
     }
 
 

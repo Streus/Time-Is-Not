@@ -133,7 +133,7 @@ public class KeyCodeReader : Interactable
 		foreach(GameObject activatable in _activatables)
 		{
 			if(activatable.GetComponent<IActivatable>() != null)
-				activatable.GetComponent<IActivatable>().onActivate ();
+				activatable.GetComponent<IActivatable>().onActivate (true);
 		}
 	}
 
