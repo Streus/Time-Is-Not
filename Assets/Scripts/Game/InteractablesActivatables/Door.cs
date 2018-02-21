@@ -128,14 +128,20 @@ public class Door : Interactable, IActivatable, ISavable
 		if(_isOpen)
 		{
 			Open ();
-            source.clip = openDoor;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = openDoor;
+                source.Play();
+            }
         }
         else
 		{
 			Close ();
-            source.clip = closeDoor;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = closeDoor;
+                source.Play();
+            }
         }
 	}
 
@@ -151,14 +157,20 @@ public class Door : Interactable, IActivatable, ISavable
 		if(!_isOpen)
 		{
 			Open ();
-            source.clip = openDoor;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = openDoor;
+                source.Play();
+            }
         }
 		else
 		{
 			Close ();
-            source.clip = closeDoor;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = closeDoor;
+                source.Play();
+            }
         }
 		return _isOpen;
 	}
@@ -178,14 +190,20 @@ public class Door : Interactable, IActivatable, ISavable
             if (state)
             {
                 Close();
-                source.clip = closeDoor;
-                source.Play();
+                if (source != null)
+                {
+                    source.clip = closeDoor;
+                    source.Play();
+                }
             }
             else
             {
                 Open();
-                source.clip = openDoor;
-                source.Play();
+                if (source != null)
+                {
+                    source.clip = openDoor;
+                    source.Play();
+                }
             }
 		}
 		else
@@ -193,14 +211,20 @@ public class Door : Interactable, IActivatable, ISavable
             if (state)
             {
                 Open();
-                source.clip = openDoor;
-                source.Play();
+                if (source != null)
+                {
+                    source.clip = openDoor;
+                    source.Play();
+                }
             }
             else
             {
                 Close();
-                source.clip = closeDoor;
-                source.Play();
+                if (source != null)
+                {
+                    source.clip = closeDoor;
+                    source.Play();
+                }
             }
 		}
 		return _isOpen;

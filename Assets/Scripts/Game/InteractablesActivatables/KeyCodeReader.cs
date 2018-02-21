@@ -121,8 +121,11 @@ public class KeyCodeReader : Interactable
 		if(_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
-            source.clip = keyCodeUse;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = keyCodeUse;
+                source.Play();
+            }
         }
 	}
 

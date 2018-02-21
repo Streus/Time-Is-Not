@@ -212,8 +212,11 @@ public class PushBlock : MonoBehaviour, ISavable
 		if (!_player.pushing ())
 			_player.enterPushState ();
 		_beingPushed = true;
-        source.clip = pushBlockSound;
-        source.Play();
+        if (source != null)
+        {
+            source.clip = pushBlockSound;
+            source.Play();
+        }
         //TODO: put player in push mode and move with block;
     }
 
@@ -226,7 +229,10 @@ public class PushBlock : MonoBehaviour, ISavable
 			_player.exitPushState ();
 		_rb2d.velocity = Vector2.zero;
 		_beingPushed = false;
-        source.Stop();
+        if (source != null)
+        {
+            source.Stop();
+        }
 		//TODO: put player out of push mode and move on its own;
 	}
 

@@ -32,13 +32,19 @@ public class DashBar : MonoBehaviour
 
         if(dashBar.fillAmount != 1 && playSound)
         {
-            source.clip = dashRecharge;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = dashRecharge;
+                source.Play();
+            }
             playSound = false;
         }
         else if (dashBar.fillAmount == 1 && !playSound)
         {
-            source.Stop();
+            if (source != null)
+            {
+                source.Stop();
+            }
             playSound = true;
         }
     }

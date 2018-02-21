@@ -48,8 +48,11 @@ public class StasisBubble : MonoBehaviour
 
         source = this.GetComponent<AudioSource>();
         stasisHum = AudioLibrary.inst.stasisHum;
-        source.clip = stasisHum;
-        source.Play();
+        if(source != null)
+        {
+            source.clip = stasisHum;
+            source.Play();
+        }
 	}
 	
 	// Update is called once per frame

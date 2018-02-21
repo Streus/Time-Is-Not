@@ -67,14 +67,20 @@ public class PressurePlate : Interactable
 
         if(_pressed && playSound)
         {
-            _source.clip = pressurePlateOnSound;
-            _source.Play();
+            if (_source != null)
+            {
+                _source.clip = pressurePlateOnSound;
+                _source.Play();
+            }
             playSound = false;
         }
         if(!_pressed && !playSound)
         {
-            _source.clip = pressurePlateOffSound;
-            _source.Play();
+            if (_source != null)
+            {
+                _source.clip = pressurePlateOffSound;
+                _source.Play();
+            }
             playSound = true;
         }
 	}
