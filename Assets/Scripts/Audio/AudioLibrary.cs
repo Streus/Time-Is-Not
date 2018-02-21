@@ -78,7 +78,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.dashForward);
     }
 
-    public AudioClip dashError; // -- waiting
+    public AudioClip dashError; // -- waiting : question - Not sure where to apply
 
     public static void PlayDashErrorSound()
     {
@@ -138,7 +138,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
 
 
-    // spatial sounds
+    // Spatial sounds - could hold the clips here and reference them in the locations
 
     //pressurePlateOn // -- done : Location - pressure plate script
     //pressurePlateOff // -- doesn't exist but is probably needed
@@ -151,6 +151,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
     //laserDeath // -- waiting : Location - Manually applied to audiosource on Death Laser Prefab - PROBLEM
     //dashRecharge // -- done : Location - DashBar script
 
+    // Not yet implemented
+    /*
     public AudioClip hermitCrabDigging; // -- waiting
     public AudioClip hermitCrabField; // -- waiting
 
@@ -163,4 +165,5 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public AudioClip wires; //-- question
     public AudioClip timedSwitch;
+    */
 }
