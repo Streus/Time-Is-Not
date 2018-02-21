@@ -50,26 +50,26 @@ public class Hummingbird : Controller
 		Debug.Log (anim.gameObject.name);
 		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
 		{
-			Debug.Log ("up");
+			//Debug.Log ("up");
 			anim.SetInteger ("Direction", 1);
 		}
 		if(transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
 		{
-			Debug.Log ("left");
+			//Debug.Log ("left");
 			anim.SetInteger ("Direction", 4);
 		}
 		if(transform.eulerAngles.z > 135 && transform.eulerAngles.z < 225)
 		{
-			Debug.Log ("down");
+			//Debug.Log ("down");
 			anim.SetInteger ("Direction", 3);
 		}
 		if(transform.eulerAngles.z > 225 && transform.eulerAngles.z < 315)
 		{
-			Debug.Log ("right");
+			//Debug.Log ("right");
 			anim.SetInteger ("Direction", 2);
 		}
 		//TODO: check if hummingbird is moving
-		anim.SetBool("isMoving", true);
+		anim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
 		base.Update();
 	}

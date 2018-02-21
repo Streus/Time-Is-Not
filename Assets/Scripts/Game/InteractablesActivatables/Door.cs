@@ -35,7 +35,7 @@ public class Door : Interactable, IActivatable, ISavable
 	private bool isInverted = false;
 
 	//collider of the door
-	private Collider2D _collider;
+	private BoxCollider2D _collider;
 
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
@@ -57,7 +57,7 @@ public class Door : Interactable, IActivatable, ISavable
 		if (!Application.isPlaying)
 			return;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
-		_collider = gameObject.GetComponent<Collider2D> ();
+		_collider = gameObject.GetComponent<BoxCollider2D> ();
 		_anim = gameObject.GetComponent <Animator> ();
 		_playerInRange = false;
 		isInverted = _isOpen;
@@ -71,7 +71,7 @@ public class Door : Interactable, IActivatable, ISavable
 	void Update () 
 	{
 		if(_collider == null)
-			_collider = gameObject.GetComponent<Collider2D> ();
+			_collider = gameObject.GetComponent<BoxCollider2D> ();
 		if(_sprite == null)
 			_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if(_anim == null)
@@ -209,13 +209,11 @@ public class Door : Interactable, IActivatable, ISavable
 	void Open()
 	{
 		_isOpen = true;
-		_collider.enabled = false;
     }
 
 	void Close()
 	{
 		_isOpen = false;
-		_collider.enabled = true;
     }
 
 
@@ -268,6 +266,7 @@ public class Door : Interactable, IActivatable, ISavable
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
 	private void ToggleStasis(bool turnOn)
 	{
+		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
 		if (inStasis)
 			_sprite.color = Color.yellow;

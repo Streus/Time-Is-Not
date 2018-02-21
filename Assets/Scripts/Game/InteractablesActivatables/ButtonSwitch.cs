@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ButtonSwitch : Interactable 
 {
-	[Tooltip("Time before the button triggers again (if 0 or infinity, will have no timer.")]
-	[SerializeField]
+	/*[Tooltip("Time before the button triggers again (if 0 or infinity, will have no timer.")]
+	[SerializeField]*/
 	private float _timer = 0;
 
 	[Tooltip("Interact button(TEMPORARY)")]
@@ -43,6 +43,8 @@ public class ButtonSwitch : Interactable
 	// Use this for initialization
 	void Start () 
 	{
+		//TODO: fix timed switch functionality
+		_timer = 0;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		//TODO: get input button from input module
 	}

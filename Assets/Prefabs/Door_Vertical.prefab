@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114149239296918464}
   - component: {fileID: 95571231445879580}
   - component: {fileID: 82467460848352146}
+  - component: {fileID: 60623800391030850}
+  - component: {fileID: 60863737635351408}
   m_Layer: 14
   m_Name: Door_Vertical
   m_TagString: Untagged
@@ -39,12 +41,68 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314776284007492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.144508, y: -11.060593, z: 0}
+  m_LocalPosition: {x: -4.438848, y: -4.215125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &60623800391030850
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1314776284007492}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.47, y: -1.87}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.7777778, y: 7.111111}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.25, y: -0.15}
+      - {x: -1.25, y: -1.05}
+      - {x: -1.7, y: -1.05}
+      - {x: -1.7, y: -0.15}
+--- !u!60 &60863737635351408
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1314776284007492}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.47, y: 2.3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.7777778, y: 7.111111}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.25, y: -0.15}
+      - {x: -1.25, y: -1.05}
+      - {x: -1.7, y: -1.05}
+      - {x: -1.7, y: -0.15}
 --- !u!61 &61429601198465672
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -178,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: AhbxPWU5A0qKRJZQZyzwKA
+  registeredID: X75K8bpndk6NVJZ0wo+6Cw
   instanceID: 10374
   prefabPath: 
   stasisable: 1

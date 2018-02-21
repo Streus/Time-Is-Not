@@ -64,7 +64,6 @@ public class MovingPlatform : MoveObject
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
-				//col.gameObject.layer = LayerMask.NameToLayer ("MPPassenger");
 				_player = entityHit.transform;
 			}
 		}
@@ -77,7 +76,6 @@ public class MovingPlatform : MoveObject
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
-				//col.gameObject.layer = LayerMask.NameToLayer ("GroundEnts");
 				_player = null;
 			}
 		}
