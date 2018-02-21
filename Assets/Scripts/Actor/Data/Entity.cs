@@ -48,6 +48,9 @@ public sealed class Entity : MonoBehaviour
 
 	public void Update()
 	{
+		if (GameManager.isPaused ())
+			return;
+
 		int i;
 
 		//update all statuses
