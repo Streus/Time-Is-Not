@@ -2191,25 +2191,30 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4213511411776624, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.9
+      value: -0.78
       objectReference: {fileID: 0}
     - target: {fileID: 4354176451379616, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.9
+      value: -0.7800002
       objectReference: {fileID: 0}
     - target: {fileID: 4213511411776624, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.87
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4354176451379616, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.869999
+      value: -1.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
         type: 2}
       propertyPath: normalSwitch
       value: 
       objectReference: {fileID: 8300000, guid: 1f0e3228a8fd7044691d2278e37673e9, type: 3}
+    - target: {fileID: 114423961294315062, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: dashRecharge
+      value: 
+      objectReference: {fileID: 8300000, guid: 33b22aa34d3698e4584522dabed4c093, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0
@@ -2394,6 +2399,11 @@ Prefab:
       propertyPath: _activatables.Array.data[0]
       value: 
       objectReference: {fileID: 1974578328}
+    - target: {fileID: 82002748846123556, guid: e141ac039160b4448870a4189ca312bb,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e141ac039160b4448870a4189ca312bb, type: 2}
   m_IsPrefabParent: 0
@@ -3104,7 +3114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: pdlAGnkOzUWvdDs9Wh+qBg
+  registeredID: S5rkkTrAUUu5iAttCBdhDw
   instanceID: -1767476
   stasisable: 1
 --- !u!4 &825754426 stripped
@@ -3180,6 +3190,91 @@ Transform:
   m_PrefabParentObject: {fileID: 4512554670599864, guid: 61a40f94fe8804930a24603dd133e7c0,
     type: 2}
   m_PrefabInternal: {fileID: 1082082633}
+--- !u!1 &873107391 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1312677400015364, guid: 7653195774fee4b97af15a525bc1b140,
+    type: 2}
+  m_PrefabInternal: {fileID: 457961641}
+--- !u!82 &873107396
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 873107391}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &884426221
 Prefab:
   m_ObjectHideFlags: 0
@@ -4022,7 +4117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: Q6JGGY6R8kmRlP3YmCIZsg
+  registeredID: NqNRiFKT/0KgejBsC4vc3A
   instanceID: -713836
   stasisable: 1
 --- !u!4 &1318468381 stripped
@@ -4843,7 +4938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: gpXhgU9CUk62fBR+nqNk+A
+  registeredID: J/mjB7BAMEu6lzuqBFD7xQ
   instanceID: -982364
   stasisable: 1
 --- !u!1001 &1640245458
@@ -5369,6 +5464,18 @@ Prefab:
       propertyPath: _activatables.Array.data[0]
       value: 
       objectReference: {fileID: 666523470}
+    - target: {fileID: 0}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f0502edb86045bc40a3e5b5cf9b0c8e2, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d9b22c548328414892130d5a06696c1, type: 2}
   m_IsPrefabParent: 0
@@ -5398,7 +5505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: 3pELs0z5nkiQlX8n7Mxp0Q
+  registeredID: wGiESXBOtkqiUPNKVFRrYA
   instanceID: -1931352
   stasisable: 1
 --- !u!1001 &1761535080
@@ -5936,6 +6043,11 @@ Prefab:
       propertyPath: _activatables.Array.data[0]
       value: 
       objectReference: {fileID: 1926443812}
+    - target: {fileID: 114904125132699518, guid: e141ac039160b4448870a4189ca312bb,
+        type: 2}
+      propertyPath: pressurePlateOnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c3d3bdf96fe8d2e4fb172e550c2772e0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e141ac039160b4448870a4189ca312bb, type: 2}
   m_IsPrefabParent: 0

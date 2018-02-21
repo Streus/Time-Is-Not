@@ -44,6 +44,11 @@ public class PushBlock : MonoBehaviour, ISavable
 	[SerializeField]
 	private KeyCode _leftKey = KeyCode.A;
 
+    AudioSource source;
+
+    [SerializeField]
+    AudioClip pushBlockSound;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -51,6 +56,8 @@ public class PushBlock : MonoBehaviour, ISavable
 		_rb2d = gameObject.GetComponent<Rigidbody2D> ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+
+        source = this.GetComponent<AudioSource>();
 	}
 
 	public void OnDestroy()
@@ -205,8 +212,10 @@ public class PushBlock : MonoBehaviour, ISavable
 		if (!_player.pushing ())
 			_player.enterPushState ();
 		_beingPushed = true;
-		//TODO: put player in push mode and move with block;
-	}
+        source.clip = pushBlockSound;
+        source.Play();
+        //TODO: put player in push mode and move with block;
+    }
 
 	/// <summary>
 	/// Stops the box's movement.
@@ -217,6 +226,7 @@ public class PushBlock : MonoBehaviour, ISavable
 			_player.exitPushState ();
 		_rb2d.velocity = Vector2.zero;
 		_beingPushed = false;
+        source.Stop();
 		//TODO: put player out of push mode and move on its own;
 	}
 

@@ -85,9 +85,9 @@ public class TetherManager : Singleton<TetherManager>
 	[Header("Corner HUD fading")]
 	[SerializeField] CanvasGroup tetherHUDGroup; 
 	[SerializeField] float tetherHUDFadeInSpeed; 
-	[SerializeField] float tetherHUDFadeOutSpeed; 
+	[SerializeField] float tetherHUDFadeOutSpeed;
 
-
+    bool playTMenuOpen = true;
 	// Use this for initialization
 	void Start () 
 	{
@@ -172,15 +172,25 @@ public class TetherManager : Singleton<TetherManager>
 					GameManager.inst.lockCursorType = true; 
 					GameManager.inst.cursorType = CursorType.UI_HOVER; 
 					ShowTetherMenu();
-				}
+                    if (playTMenuOpen)
+                    {
+                        AudioLibrary.PlayTetherMenuOpen();
+                        playTMenuOpen = false;
+                    }
+                }
 				else
 				{
 					tetherUIState = TetherUIState.GAMEPLAY; 
 					GameManager.setPause(false); 
 					GameManager.inst.lockCursorType = false; 
 					GameManager.inst.OnCursorBoundsUpdated(); 
-					HideTetherMenu(); 
-				}
+					HideTetherMenu();
+                    if (!playTMenuOpen)
+                    {
+                        AudioLibrary.PlayTetherMenuClose();
+                        playTMenuOpen = true;
+                    }
+                }
 
 			}
 			// If the player is dead, force the menu to come up
@@ -191,7 +201,12 @@ public class TetherManager : Singleton<TetherManager>
 				GameManager.inst.lockCursorType = true; 
 				GameManager.inst.cursorType = CursorType.UI_HOVER; 
 				ShowTetherMenu();
-			}
+                if (playTMenuOpen)
+                {
+                    AudioLibrary.PlayTetherMenuOpen();
+                    playTMenuOpen = false;
+                }
+            }
 		}
 
 
@@ -234,8 +249,8 @@ public class TetherManager : Singleton<TetherManager>
 		if (tetherMenuGroup.alpha > 0.99f && fadeImage.color.a >= fadeImageMaxAlpha - 0.01f)
 		{
 			tetherMenuGroup.alpha = 1;
-			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, fadeImageMaxAlpha); 
-			return true;
+			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, fadeImageMaxAlpha);
+            return true;
 		}
 		return false; 
 	}
@@ -255,8 +270,8 @@ public class TetherManager : Singleton<TetherManager>
 		if (tetherMenuGroup.alpha < 0.01f && fadeImage.color.a < 0.01f)
 		{
 			tetherMenuGroup.alpha = 0;
-			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0); 
-			return true;
+			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+            return true;
 		}
 		return false; 
 	}
@@ -397,7 +412,7 @@ public class TetherManager : Singleton<TetherManager>
 			Debug.LogError("Shouldn't be able to click menu tether button when not in TetherUIState.TETHER_MENU. Currently in TetherUIState." + tetherUIState); 
 			return; 
 		}
-
+        AudioLibrary.PlayTetherSelect();
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true); 
 		GameManager.inst.lockCursorType = true; 

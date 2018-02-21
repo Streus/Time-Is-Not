@@ -4,57 +4,155 @@ using UnityEngine;
 
 public class AudioLibrary : Singleton<AudioLibrary> 
 {
+    //This is for non spatial sounds only
 
+#region UI Sounds
     // UI //
 
-	public AudioClip tetherSelect; // -- waiting
-    public AudioClip tetherMenuOpen; // --  waiting
-    public AudioClip tetherMenuClose; // -- waiting
-    public AudioClip gameOver; // -- question
+    public AudioClip tetherSelect; // -- waiting
 
+    public static void PlayTetherSelect()
+    {
+        GlobalAudio.PlaySound(inst.tetherSelect);
+    }
+
+    public AudioClip tetherMenuOpen; // --  waiting
+
+    public static void PlayTetherMenuOpen()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuOpen);
+    }
+
+    public AudioClip tetherMenuClose; // -- question : repeat open sound or new sound?
+
+    public static void PlayTetherMenuClose()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuClose);
+    }
+
+    public AudioClip gameOver; // -- question : Do we have a sound for this?
+#endregion
+
+#region Mechanic Sounds
     // Mechanics //
 
     public AudioClip tetherPlacement; // -- done : Location - TetherManager script
+
+    public static void PlayTetherPlacementSound()
+    {
+        GlobalAudio.PlaySound(inst.tetherPlacement);
+    }
+
     public AudioClip tetherRewind; // -- done : Location - TetherManager script
+
+    public static void PlayTetherRewindSound()
+    {
+        GlobalAudio.PlaySound(inst.tetherRewind);
+    }
+
     public AudioClip tetherError; // -- done : Location - TetherManger script
 
+    public static void PlayTetherErrorSound()
+    {
+        GlobalAudio.PlaySound(inst.tetherError);
+    }
+
     public AudioClip stasisShoot; // -- done : Location - StasisBullet script
-    public AudioClip stasisHum; // -- done : Location - StasisBubble script
+
+    public static void PlayStasisShootSound()
+    {
+        GlobalAudio.PlaySound(inst.stasisShoot);
+    }
+
     public AudioClip stasisError; // -- done : Location - LevelState Manager script
 
-    public AudioClip dashForward; // -- waiting
-    public AudioClip dashRecharge; // -- waiting
-    public AudioClip dashError; // -- waiting
+    public static void PlayStasisErrorSound()
+    {
+        GlobalAudio.PlaySound(inst.stasisError);
+    }
 
+    public AudioClip dashForward; // -- done : Location - PlayerTargeting script
+
+    public static void PlayDashForwardSound()
+    {
+        GlobalAudio.PlaySound(inst.dashForward);
+    }
+
+    public AudioClip dashError; // -- waiting : question - Not sure where to apply
+
+    public static void PlayDashErrorSound()
+    {
+        GlobalAudio.PlaySound(inst.dashError);
+    }
+    #endregion
+
+#region Environment Sounds
     // Environment // 
-    public AudioClip wires; //-- question
-    public AudioClip pressurePlate; // -- done : Location - pressure plate script
-    public AudioClip pressurePlateOff; // -- doesn't exist but is probably needed
 
-    public AudioClip pushBlockMoving; // -- waiting
-
-    public AudioClip normalSwitch;
-    public AudioClip timedSwitch;
-
-    public AudioClip laserSecurity; 
     public AudioClip laserSecurityCollisiion; // -- done : Location - Laser script
 
-    public AudioClip laserDeath;
-    public AudioClip laserDeathCollisiion; // -- done :  Location - laser script // PROBLEM
+    public static void PlayLaserSecurityCollisionSound()
+    {
+        GlobalAudio.PlaySound(inst.laserSecurityCollisiion);
+    }
 
-    public AudioClip alarmTriggered; //-- question
+    public AudioClip laserDeathCollisiion; // -- done :  Location - laser script // PROBLEM WITH COLLISION AND TETHERING
+
+    public static void PlayLaserDeathCollisionSound()
+    {
+        GlobalAudio.PlaySound(inst.laserDeathCollisiion);
+    }
+
+    public AudioClip alarmTriggered; //-- question - WIll it be constant or just a few moments?
 
     public AudioClip codePickup; // -- done : Location - CodePickup script
 
-    public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
-    public AudioClip doorClosed; // -- done : Location - Door script
-    public AudioClip doorOpen; // -- done : Location - Door script
+    public static void PlayCodePickupSound()
+    {
+        GlobalAudio.PlaySound(inst.codePickup);
+    }
+
+    public AudioClip normalSwitch; // -- done : ButtonSwitch Script
+
+    public static void PlayNormalSwitchSound()
+    {
+        GlobalAudio.PlaySound(inst.normalSwitch);
+    }
+    #endregion
+
+#region Character Sounds
+    // Character //
+
+    public AudioClip playerWalking; // -- questions : Need mltiple or change pitch?
+
+    public static void PlayPlayerWalkingSound()
+    {
+        GlobalAudio.PlaySound(inst.playerWalking);
+    }
+    #endregion
 
 
-    // Character and Enemies //
 
-    public AudioClip playerWalking; // -- questions
 
+
+
+
+
+    // Spatial sounds - could hold the clips here and reference them in the locations
+
+    //pressurePlateOn // -- done : Location - pressure plate script
+    //pressurePlateOff // -- doesn't exist but is probably needed
+    //stasisHum // -- done : Location - StasisBubble script
+    //codeDoorUnlock // -- done : Location - Keycode reader script
+    //doorClosed // -- done : Location - Door script
+    //doorOpen // -- done : Location - Door script 
+    //pushBlockMoving // -- done : Location - PushBlock script - Problem 
+    //laserSecurity // -- waiting : Location - Manually applied to audiosource on Security Laser Laser child in Prefab - PROBLEM
+    //laserDeath // -- waiting : Location - Manually applied to audiosource on Death Laser Prefab - PROBLEM
+    //dashRecharge // -- done : Location - DashBar script
+
+    // Not yet implemented
+    /*
     public AudioClip hermitCrabDigging; // -- waiting
     public AudioClip hermitCrabField; // -- waiting
 
@@ -65,165 +163,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip hummingBirdSpotting; // -- waiting
     public AudioClip hummingBirdAttacking; // -- waiting
 
-    // Methods to play the audio clips // 
-
-	public static void PlayTetherSelect()
-	{
-		GlobalAudio.PlaySound(inst.tetherSelect);
-	}
-
-    public static void PlayTetherMenuOpen()
-    {
-        GlobalAudio.PlaySound(inst.tetherMenuOpen);
-    }
-
-    public static void PlayTetherMenuClose()
-    {
-        GlobalAudio.PlaySound(inst.tetherMenuClose);
-    }
-
-    public static void PlayTetherPlacementSound()
-    {
-        GlobalAudio.PlaySound(inst.tetherPlacement);
-    }
-
-    public static void PlayTetherRewindSound()
-    {
-        GlobalAudio.PlaySound(inst.tetherRewind);
-    }
-
-    public static void PlayTetherErrorSound()
-    {
-        GlobalAudio.PlaySound(inst.tetherError);
-    }
-
-    public static void PlayStasisShootSound()
-    {
-        GlobalAudio.PlaySound(inst.stasisShoot);
-    }
-
-    public static void PlayStasisHumSound()
-    {
-        GlobalAudio.PlaySound(inst.stasisHum);
-    }
-
-    public static void PlayStasisErrorSound()
-    {
-        GlobalAudio.PlaySound(inst.stasisError);
-    }
-
-    public static void PlayDashForwardSound()
-    {
-        GlobalAudio.PlaySound(inst.dashForward);
-    }
-
-    public static void PlayDashRechargeSound()
-    {
-        GlobalAudio.PlaySound(inst.dashRecharge);
-    }
-
-    public static void PlayDashErrorSound()
-    {
-        GlobalAudio.PlaySound(inst.dashError);
-    }
-
-    public static void PlayPushBlockMovingSound()
-    {
-        GlobalAudio.PlaySound(inst.pushBlockMoving);
-    }
-
-    public static void PlayNormalSwitchSound()
-    {
-        GlobalAudio.PlaySound(inst.normalSwitch);
-    }
-
-    public static void PlayTimedSwitchSound()
-    {
-        GlobalAudio.PlaySound(inst.timedSwitch);
-    }
-
-    public static void PlayLaserSecuritySound()
-    {
-        GlobalAudio.PlaySound(inst.laserSecurity);
-    }
-
-    public static void PlayLaserSecurityCollisionSound()
-    {
-        GlobalAudio.PlaySound(inst.laserSecurityCollisiion);
-    }
-
-    public static void PlayLaserDeathSound()
-    {
-        GlobalAudio.PlaySound(inst.laserDeath);
-    }
-
-    public static void PlayLaserDeathCollisionSound()
-    {
-        GlobalAudio.PlaySound(inst.laserDeathCollisiion);
-    }
-
-    public static void PlayCodePickupSound()
-    {
-        GlobalAudio.PlaySound(inst.codePickup);
-    }
-
-    public static void PlayCodeDoorUnlockSound()
-    {
-        GlobalAudio.PlaySound(inst.codeDoorUnlock);
-    }
-
-    public static void PlayPressurePlateSound()
-    {
-        GlobalAudio.PlaySound(inst.pressurePlate);
-    }
-
-    public static void PlayDoorOpenSound()
-    {
-        GlobalAudio.PlaySound(inst.doorOpen);
-    }
-
-    public static void PlayDoorClosedSound()
-    {
-        GlobalAudio.PlaySound(inst.doorClosed);
-    }
-
-    public static void PlayPlayerWalkingSound()
-    {
-        GlobalAudio.PlaySound(inst.playerWalking);
-    }
-
-    public static void PlayHermitCrabDiggingSound()
-    {
-        GlobalAudio.PlaySound(inst.hermitCrabDigging);
-    }
-
-    public static void PlayHermitCrabFieldSound()
-    {
-        GlobalAudio.PlaySound(inst.hermitCrabField);
-    }
-
-    public static void PlayGulperEelMovingSound()
-    {
-        GlobalAudio.PlaySound(inst.gulperEelMoving);
-    }
-
-    public static void PlayGulperEelEatingSound()
-    {
-        GlobalAudio.PlaySound(inst.gulperEelEating);
-    }
-
-    public static void PlayHummingBirdMovingSound()
-    {
-        GlobalAudio.PlaySound(inst.hummingBirdMoving);
-    }
-
-    public static void PlayHummingBirdSpottingSound()
-    {
-        GlobalAudio.PlaySound(inst.hummingBirdSpotting);
-    }
-
-    public static void PlayHummingBirdAttackingSound()
-    {
-        GlobalAudio.PlaySound(inst.hummingBirdAttacking);
-    }
+    public AudioClip wires; //-- question
+    public AudioClip timedSwitch;
+    */
 }

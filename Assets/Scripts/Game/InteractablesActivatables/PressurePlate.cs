@@ -24,10 +24,18 @@ public class PressurePlate : Interactable
 
 	Animator _animationControl;
 
-	// Use this for initialization
-	void Start () 
+    AudioSource _source;
+
+    [SerializeField]
+    AudioClip pressurePlateOnSound;
+    AudioClip pressurePlateOffSound;
+
+    // Use this for initialization
+    void Start () 
 	{
 		_animationControl = GetComponent<Animator> ();
+
+        _source = this.GetComponent<AudioSource>();
 
 //		if (_pressed)
 //			gameObject.GetComponent<SpriteRenderer> ().sprite = _pressedSprite;
@@ -56,12 +64,14 @@ public class PressurePlate : Interactable
 
         if(_pressed && playSound)
         {
-            AudioLibrary.PlayPressurePlateSound();
+            _source.clip = pressurePlateOnSound;
+            _source.Play();
             playSound = false;
         }
         if(!_pressed && !playSound)
         {
-            //play off pressureplate sound
+            _source.clip = pressurePlateOffSound;
+            _source.Play();
             playSound = true;
         }
 	}
