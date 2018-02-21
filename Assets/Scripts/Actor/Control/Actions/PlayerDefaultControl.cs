@@ -19,7 +19,7 @@ public class PlayerDefaultControl : Action
 			GameManager.inst.canUseStasis && 
 			!inSBBounds &&
 			GameManager.CursorInGameplayState())
-			p.getSelf ().getAbility (0).use (p.getSelf (), mousePos);
+			c.getSelf ().getAbility (0).use (c.getSelf (), mousePos);
 
         p.move();
 	}

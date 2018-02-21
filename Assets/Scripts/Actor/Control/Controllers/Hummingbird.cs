@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hummingbird : Controller
+public class Hummingbird : PatrollingEnemy
 {
 	#region INSTANCE_VARS
-	[SerializeField]
-	private PatrolNode patrolStart;
-
-	[SerializeField]
-	[Range(1f, 360f)]
-	private float turnSpeed = 90f;
 
 	[SerializeField]
 	[Range(1f, 100f)]
@@ -23,7 +17,6 @@ public class Hummingbird : Controller
 	private State defaultState;
 
 	private Transform pursuitTarget;
-
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -35,7 +28,7 @@ public class Hummingbird : Controller
 		base.Awake ();
 
 		defaultState = getState();
-		if (patrolStart == null && getState().name == "HBPatrol")
+		if (patrolStart == null)
 		{
 			Debug.LogError ("A patrol path must be defined for the patrol state!" +
 				"\n" + gameObject.name + " does not have a defined patrol path.");
@@ -47,25 +40,25 @@ public class Hummingbird : Controller
 	{
 		//calculate sprite direction
 //		anim = transform.GetChild(1).GetComponent<Animator>();
-		Debug.Log (anim.gameObject.name);
+//		Debug.Log (anim.gameObject.name);
 		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
 		{
-			Debug.Log ("up");
+//			Debug.Log ("up");
 			anim.SetInteger ("Direction", 1);
 		}
 		if(transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
 		{
-			Debug.Log ("left");
+//			Debug.Log ("left");
 			anim.SetInteger ("Direction", 4);
 		}
 		if(transform.eulerAngles.z > 135 && transform.eulerAngles.z < 225)
 		{
-			Debug.Log ("down");
+//			Debug.Log ("down");
 			anim.SetInteger ("Direction", 3);
 		}
 		if(transform.eulerAngles.z > 225 && transform.eulerAngles.z < 315)
 		{
-			Debug.Log ("right");
+//			Debug.Log ("right");
 			anim.SetInteger ("Direction", 2);
 		}
 		//TODO: check if hummingbird is moving
@@ -75,20 +68,6 @@ public class Hummingbird : Controller
 	}
 
 	#region GETTERS_SETTERS
-	public PatrolNode getPatrolTarget()
-	{
-		return patrolStart;
-	}
-
-	public PatrolNode nextPatrolNode()
-	{
-		return patrolStart = patrolStart.getNext();
-	}
-
-	public float getTurnSpeed()
-	{
-		return turnSpeed;
-	}
 
 	public float getSightRange()
 	{
@@ -131,6 +110,8 @@ public class Hummingbird : Controller
 
 	public override void OnDrawGizmos()
 	{
+		base.OnDrawGizmos ();
+
 		Gizmos.color = getState().color;
 
 		Vector3 fwd = transform.up;

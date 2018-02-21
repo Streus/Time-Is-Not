@@ -10,8 +10,6 @@ public class Player : Controller
 
     private State prePushState;
 
-    
-
     [SerializeField]
     private State playerDefault;
 

@@ -10,6 +10,9 @@ public sealed class State : ScriptableObject
 {
 	#region STATIC_METHODS
 
+	/// <summary>
+	/// Cast a general-use Controller into a more specific type.
+	/// </summary>
 	public static T cast<T>(Controller c) where T : Controller
 	{
 		T t = default(T);

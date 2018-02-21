@@ -11,14 +11,14 @@ public class HBPursue : Action
 	{
 		Hummingbird bird = State.cast<Hummingbird> (c);
 
-		bird.facePoint (bird.getPursuitTarget().position, bird.getTurnSpeed() * Time.deltaTime);
+		c.facePoint (bird.getPursuitTarget().position, bird.getTurnSpeed() * Time.deltaTime);
 
-		float moveDist = bird.getSelf ().getMovespeed () * Time.deltaTime;
-		bird.transform.Translate (
-			(bird.getPursuitTarget().position - bird.transform.position).normalized *
+		float moveDist = c.getSelf ().getMovespeed () * Time.deltaTime;
+		c.transform.Translate (
+			(bird.getPursuitTarget().position - c.transform.position).normalized *
 			moveDist, Space.World);
 
-		if (Vector3.Distance (bird.transform.position, bird.getPursuitTarget ().position) < killDistance)
+		if (Vector3.Distance (c.transform.position, bird.getPursuitTarget ().position) < killDistance)
 			bird.getPursuitTarget ().GetComponent<Entity> ().onDeath ();
 	}
 }

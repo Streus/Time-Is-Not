@@ -9,18 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
-  m_Name: HBPatrolRotate
+  m_Name: HBPatrol
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0, a: 1}
   enterAction: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: 21e31496a97f2984a9ad777c44e3ea68, type: 2}
+  - {fileID: 11400000, guid: d627db702bd6d564e9d302bd8d2268d9, type: 2}
   exitAction: {fileID: 0}
   paths:
-  - name: Complete Rotation
-    success: {fileID: 11400000, guid: 908c9b0d006182140a016c19bc6d061a, type: 2}
-    failure: {fileID: 0}
-    decision: {fileID: 11400000, guid: d0a84695e5661c64db65933b89d9767f, type: 2}
   - name: Encounter Player
     success: {fileID: 11400000, guid: bdc5773fc29f5f6428428d672d17bdfa, type: 2}
     failure: {fileID: 0}

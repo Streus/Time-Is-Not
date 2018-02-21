@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AI/Forks/Hummingbird/HBReachedPP")]
+[System.Obsolete("Has been merged into the HB Patrol Action")]
 public class HBReachedPP : Fork
 {
 	public override bool check (Controller c)
 	{
-		Hummingbird bird = State.cast<Hummingbird> (c);
+		PatrollingEnemy p = State.cast<PatrollingEnemy> (c);
 
-		PatrolNode n = bird.getPatrolTarget ();
-		float dist = Vector2.Distance (bird.transform.position, n.transform.position);
-		float moveDist = bird.getSelf ().getMovespeed () * Time.deltaTime;
+		PatrolNode n = p.getPatrolTarget ();
+		float dist = Vector2.Distance (c.transform.position, n.transform.position);
+		float moveDist = c.getSelf ().getMovespeed () * Time.deltaTime;
 
 		return dist < moveDist;
 	}
