@@ -759,6 +759,53 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!1001 &1813483451
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4369949651003056, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114619298949479476, guid: 42a391895c42da749adcc083d1f19b65,
+        type: 2}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 260871739}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &2015892839
 Prefab:
   m_ObjectHideFlags: 0
@@ -55456,12 +55503,12 @@ Prefab:
     - target: {fileID: 114491189694549730, guid: 63a90592f1f3c2c46919deab6a245c94,
         type: 2}
       propertyPath: gizmoNodes
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114491189694549730, guid: 63a90592f1f3c2c46919deab6a245c94,
         type: 2}
       propertyPath: gizmoGrid
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114491189694549730, guid: 63a90592f1f3c2c46919deab6a245c94,
         type: 2}
@@ -55912,6 +55959,10 @@ Prefab:
         type: 2}
       propertyPath: graph.graph.Array.data[19].links.Array.data[7].y
       value: -0.20000029
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690901851834084, guid: 63a90592f1f3c2c46919deab6a245c94, type: 2}
+      propertyPath: m_Name
+      value: HBAtlas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63a90592f1f3c2c46919deab6a245c94, type: 2}
