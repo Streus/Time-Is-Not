@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AI/Actions/Hummingbird/HBRotate")]
+[System.Obsolete("Has been merged into the HB Patrol Action")]
 public class HBRotate : Action 
 {
 	public override void perform (Controller c)

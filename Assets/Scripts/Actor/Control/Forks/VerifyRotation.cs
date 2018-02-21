@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AI/Forks/Hummingbird/VerifyRotation")]
+[System.Obsolete("Has been merged into the HB Patrol Action")]
 public class VerifyRotation : Fork
 {
 	public float tolerance = 0.1f;

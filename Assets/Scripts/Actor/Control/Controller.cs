@@ -13,6 +13,10 @@ public class Controller : MonoBehaviour, ISavable
 	[SerializeField]
 	private State state;
 
+	[Tooltip("The graph data this Actor will use to navigate the scene.")]
+	[SerializeField]
+	private Atlas map;
+
 	protected Entity self;
 	protected Animator anim;
 	protected Rigidbody2D physbody;
@@ -49,6 +53,12 @@ public class Controller : MonoBehaviour, ISavable
 
 	public void setState(State s)
 	{
+		if (s == null)
+		{
+			Debug.LogError ("Attempted to transition to a null state from " + state.name + "!");
+			return;
+		}
+
 		state.exit (this);
 		state = s;
 		state.enter (this);
@@ -59,9 +69,20 @@ public class Controller : MonoBehaviour, ISavable
 		return self;
 	}
 
+	public Atlas getMap()
+	{
+		return map;
+	}
+
 	public void setPath(Vector3 target)
 	{
-		if (!Atlas.instance.findPath (transform.position, target, out path))
+		if (map == null)
+		{
+			Debug.LogError (gameObject.name + " is trying to navigate without an Atlas!");
+			return;
+		}
+
+		if (!map.findPath (transform.position, target, out path))
 			Debug.LogError ("Could not find path to " + target.ToString () + ".");
 	}
 

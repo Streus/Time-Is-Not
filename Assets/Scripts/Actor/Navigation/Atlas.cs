@@ -8,8 +8,6 @@ public class Atlas : MonoBehaviour
 {
 	#region STATIC_VARS
 
-	private static Atlas _instance;
-	public static Atlas instance { get { return _instance; } }
 	#endregion
 
 	#region INSTANCE_VARS
@@ -33,7 +31,7 @@ public class Atlas : MonoBehaviour
 	[SerializeField]
 	private GraphMap graph;
 
-	private float cellDimension
+	public float cellDimension
 	{
 		get
 		{
@@ -48,13 +46,7 @@ public class Atlas : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Awake()
 	{
-		if (_instance == null)
-			_instance = this;
-		else
-		{
-			Debug.LogError ("More than one Atlas in a scene is not supported!");
-			Destroy (gameObject);
-		}
+		
 	}
 
 	public void Update()

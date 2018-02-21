@@ -45,16 +45,14 @@ public class AtlasInspector : Editor
 
 		GUILayout.BeginHorizontal ();
 		EditorGUILayout.PrefixLabel ("Layer Mask");
-		List<string> layers = new List<string> ();
+		string[] layers = new string[32];
 		for (int i = 0; i < 32; i++)
 		{
 			string s = LayerMask.LayerToName (i);
 			if (s.Length > 0)
-				layers.Add (s);
-			else
-				break;
+				layers [i] = s;
 		}
-		map.setMask ((LayerMask)EditorGUILayout.MaskField(map.getMask().value, layers.ToArray()));
+		map.setMask ((LayerMask)EditorGUILayout.MaskField(map.getMask().value, layers));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.Label ("Graph Options", EditorStyles.boldLabel);
