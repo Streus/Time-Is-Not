@@ -41,7 +41,7 @@ public class Laser : Interactable, IActivatable, ISavable
 
 	private Animator anim;
 
-    public static bool playSound = true;
+    private bool playSound = true;
 
     // Use this for initialization
     void Start()
@@ -77,6 +77,10 @@ public class Laser : Interactable, IActivatable, ISavable
 			if (_laserLine.enabled)
 				_laserLine.enabled = false;
 		}
+        if(!GameManager.isPlayerDead())
+        {
+            playSound = true;
+        }
 	}
 
 	//Draw lines to all linked activatables
