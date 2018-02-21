@@ -140,6 +140,11 @@ public sealed partial class Ability
 		}
 	}
 
+	public void resetCooldown()
+	{
+		_cooldownCurrent = 0f;
+	}
+
 	public bool use(Entity sub, Vector2 targetPosition)
 	{
 		if (!isReady ())
