@@ -28,6 +28,7 @@ public class PressurePlate : Interactable
 
     [SerializeField]
     AudioClip pressurePlateOnSound;
+    [SerializeField]
     AudioClip pressurePlateOffSound;
 
     // Use this for initialization
