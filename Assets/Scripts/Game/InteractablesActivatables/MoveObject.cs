@@ -21,6 +21,12 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	[Tooltip("What does the object do when it reaches the last point?")]
 	public EndStyle _endBehavior = EndStyle.TeleportToStart;
 
+	[Tooltip("How long the platform will wait at all waypoints")]
+	public float delayPerPoint = 0;
+
+	[Tooltip("How long the platform will wait at ending waypoints (if delayPerPoint is higher, that will be used instead)")]
+	public float delayAtEnds = 0;
+
 	//if true, the object will move backwards through the points
 	private bool _reverseMovement = false;
 
@@ -32,6 +38,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
+
+	public float _waitTimer = 0;
 
 
 	// Use this for initialization
@@ -51,7 +59,13 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	// Update is called once per frame
 	void Update () 
 	{
-		MoveToPoint (_points[_nextPoint]);
+		if (_waitTimer > 0)
+			_waitTimer -= Time.deltaTime;
+		else
+		{
+			MoveToPoint (_points[_nextPoint]);
+			_waitTimer = 0;
+		}
 		setNextPoint ();
 	}
 
@@ -86,11 +100,15 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	/// </summary>
 	public void setNextPoint()
 	{
-		if(Vector2.Distance(transform.position, _points[_nextPoint]) < 0.1f)
+		if(Vector2.Distance(transform.position, _points[_nextPoint]) < 0.01f)
 		{
 			//get next point
 			if(_nextPoint == _points.Length -1 || (_reverseMovement && _nextPoint == 0))
 			{
+				if (delayPerPoint > delayAtEnds)
+					_waitTimer = delayPerPoint;
+				else
+					_waitTimer = delayAtEnds;
 				//the platform is at the last point
 				switch(_endBehavior)
 				{
@@ -125,6 +143,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 			}
 			else
 			{
+				_waitTimer = delayPerPoint;
 				//incriment the target point
 				if (_reverseMovement)
 					_nextPoint--;
@@ -182,6 +201,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 
 		seed.nextPoint = _nextPoint;
 
+		seed.waitingTime = _waitTimer;
+
 		return seed;
 	}
 
@@ -198,6 +219,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		_reverseMovement = seed.isReversed;
 
 		_nextPoint = seed.nextPoint;
+
+		_waitTimer = seed.waitingTime;
 	}
 
 	/// <summary>
@@ -213,6 +236,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 
 		//which point should it move toward?
 		public int nextPoint;
+
+		public float waitingTime;
 	}
 
 

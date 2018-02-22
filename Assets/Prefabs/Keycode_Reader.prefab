@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114530427250478526}
   - component: {fileID: 61730616994929274}
   - component: {fileID: 82977405004269652}
+  - component: {fileID: 114734828843474144}
   m_Layer: 0
   m_Name: Keycode_Reader
   m_TagString: Untagged
@@ -234,7 +235,22 @@ MonoBehaviour:
   - {fileID: 21300014, guid: bbd034fd404c54166b02d266b99edfc8, type: 3}
   _buttonPrompt: {fileID: 1620233204029702}
   _negativePrompt: {fileID: 1197430223518714}
-  keyCodeUse: {fileID: 8300000, guid: 739082ac0be789b41b9c4c53e945588a, type: 3}
+--- !u!114 &114734828843474144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1852468808184596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registeredID: PX/Xub9FpUiP67rEGrqchg
+  instanceID: 10060
+  prefabPath: 
+  stasisable: 0
+  allowReset: 1
 --- !u!212 &212301619013363124
 SpriteRenderer:
   m_ObjectHideFlags: 1

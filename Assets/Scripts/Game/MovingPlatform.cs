@@ -6,14 +6,20 @@ public class MovingPlatform : MoveObject
 {
 
 	//the offest vector between the platform center and the player
-	public Vector2 _offset = Vector2.zero;
+	private Vector2 _offset = Vector2.zero;
 
 	private Transform _player = null;
 
 	// Update is called once per frame
 	void Update () 
 	{
-		MoveToPoint (getNextPoint());
+		if (_waitTimer > 0)
+			_waitTimer -= Time.deltaTime;
+		else
+		{
+			MoveToPoint (getNextPoint());
+			_waitTimer = 0;
+		}
 		setNextPoint ();
 	}
 

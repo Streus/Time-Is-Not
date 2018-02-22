@@ -116,7 +116,7 @@ public class PressurePlate : Interactable
 	bool CircleCheck()
 	{
 		bool state = false;
-		Collider2D[] colsHit = Physics2D.OverlapCircleAll (transform.position, transform.localScale.x / 2);
+		Collider2D[] colsHit = Physics2D.OverlapCircleAll (transform.position, transform.localScale.x * 0.3f);
 		foreach(Collider2D col in colsHit)
 		{
             if (col.gameObject.GetComponent<Player>() != null)

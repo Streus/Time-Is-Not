@@ -21,7 +21,14 @@ public class Player : Controller
     public LayerMask moveMask;
 
     [SerializeField]
-    private float minJumpDist;
+	private bool isOverPit;
+
+	[SerializeField]
+	private bool isOnPlatform;
+
+	[SerializeField]
+	private float minJumpDist;
+
 
     public float getMinJumpDist
     {
@@ -73,6 +80,7 @@ public class Player : Controller
 		{
 			base.Update(); 
 		}
+		CheckForGround ();
 	}
 
 	public override void FixedUpdate ()
@@ -140,22 +148,36 @@ public class Player : Controller
         ContactFilter2D cf = new ContactFilter2D();
         cf.SetLayerMask(moveMask);
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
-		Collider2D[] colsHit = Physics2D.OverlapCircleAll(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, movementVector.magnitude + 0.5f, 1 << LayerMask.NameToLayer("SkyEnts"));
+		if (hitCount <= 0)
+            transform.Translate((Vector3)movementVector);
+    }
+
+	//checks for pits and moving platforms under the players feet
+	public void CheckForGround()
+	{
+		Collider2D[] colsHit = Physics2D.OverlapPointAll (transform.position + (Vector3)GetComponent<BoxCollider2D> ().offset, 1 << LayerMask.NameToLayer ("SkyEnts") | 1 << LayerMask.NameToLayer ("Pits"));
 		bool seesMP = false;
+		bool seesPit = false;
 		for(int i = 0; i < colsHit.Length; i++)
 		{
 			if (colsHit [i].gameObject.CompareTag ("MovingPlatform"))
 			{
-				gameObject.layer = LayerMask.NameToLayer ("MPPassenger");
 				seesMP = true;
-				break;
+			}
+			if (colsHit [i].gameObject.CompareTag ("Pit"))
+			{
+				seesPit = true;
 			}
 		}
-		if (hitCount <= 0 || seesMP)
-            transform.Translate((Vector3)movementVector);
-		if(!seesMP)
-			gameObject.layer = LayerMask.NameToLayer ("GroundEnts");
-    }
+		isOnPlatform = seesMP;
+		isOverPit = seesPit;
+		if(isOverPit && !isOnPlatform)
+		{
+			Entity ent = gameObject.GetComponent<Entity> ();
+			if (ent != null)
+				ent.onDeath ();
+		}
+	}
 
 	public override void OnDrawGizmos()
 	{

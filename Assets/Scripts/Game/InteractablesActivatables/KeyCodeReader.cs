@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode] 
-public class KeyCodeReader : Interactable
+public class KeyCodeReader : Interactable, ISavable
 {
 
 	[Tooltip("Interact button(TEMPORARY)")]
@@ -33,6 +33,9 @@ public class KeyCodeReader : Interactable
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
+	//has the reader been activated?
+	private bool isTriggered = false;
+
 	//the spriterenderer for the object
 	SpriteRenderer _sprite;
 
@@ -48,6 +51,10 @@ public class KeyCodeReader : Interactable
         //TODO: get input button from input module
         source = this.GetComponent<AudioSource>();
         keyCodeUse = AudioLibrary.inst.codeDoorUnlock;
+		if (_buttonPrompt != null)
+			_buttonPrompt.SetActive (false);
+		if (_negativePrompt != null)
+			_negativePrompt.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -82,6 +89,8 @@ public class KeyCodeReader : Interactable
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
+				if (isTriggered)
+					return;
 				_playerInRange = true;
 				//show button prompts
 				if(isEnabled() && GameManager.HasCode(_codeName))
@@ -121,6 +130,9 @@ public class KeyCodeReader : Interactable
 		if(_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
+			_buttonPrompt.SetActive (false);
+			_negativePrompt.SetActive (false);
+			isTriggered = true;
             if (source != null)
             {
                 source.clip = keyCodeUse;
@@ -160,6 +172,51 @@ public class KeyCodeReader : Interactable
 			_sprite.sprite = codeSprites[6]; 
 		else if (_codeName == CodeName.CODE_8)
 			_sprite.sprite = codeSprites[7]; 
+	}
+
+	//****Savable Object Functions****
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		Seed seed = new Seed ();
+
+		seed.isEnabled = isEnabled ();
+		seed.triggered = isTriggered;
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		if (s == null)
+			return;
+
+		Seed seed = (Seed)s;
+
+		isTriggered = seed.triggered;
+
+		if (seed.isEnabled)
+			enable ();
+		else
+			disable ();
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//has the reader been used?
+		public bool triggered;
+		public bool isEnabled;
 	}
 
 }
