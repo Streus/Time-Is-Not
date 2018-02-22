@@ -134,6 +134,8 @@ public class ButtonSwitch : Interactable
 	{
 		ToggleSecurityDoors ();
         AudioLibrary.PlayNormalSwitchSound();
+		if (_activatables.Length == 0)
+			return;
 		foreach(GameObject activatable in _activatables)
 		{
 			if(activatable.GetComponent<IActivatable>() != null)

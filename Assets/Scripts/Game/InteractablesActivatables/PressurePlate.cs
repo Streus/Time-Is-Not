@@ -138,6 +138,8 @@ public class PressurePlate : Interactable
 	public override void onInteract ()
 	{
 		ToggleSecurityDoors ();
+		if (_activatables.Length == 0)
+			return;
 		foreach(GameObject activatable in _activatables)
 		{
 			if(activatable.GetComponent<IActivatable>() != null)
