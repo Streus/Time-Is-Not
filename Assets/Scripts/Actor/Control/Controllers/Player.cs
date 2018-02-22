@@ -171,7 +171,7 @@ public class Player : Controller
 		}
 		isOnPlatform = seesMP;
 		isOverPit = seesPit;
-		if(isOverPit && !isOnPlatform)
+		if(isOverPit && !isOnPlatform && !dashing())
 		{
 			Entity ent = gameObject.GetComponent<Entity> ();
 			if (ent != null)
