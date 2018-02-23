@@ -128,20 +128,10 @@ public class Door : Interactable, IActivatable, ISavable
 		if(_isOpen)
 		{
 			Open ();
-            if (source != null)
-            {
-                source.clip = openDoor;
-                source.Play();
-            }
         }
         else
 		{
 			Close ();
-            if (source != null)
-            {
-                source.clip = closeDoor;
-                source.Play();
-            }
         }
 	}
 
@@ -157,20 +147,10 @@ public class Door : Interactable, IActivatable, ISavable
 		if(!_isOpen)
 		{
 			Open ();
-            if (source != null)
-            {
-                source.clip = openDoor;
-                source.Play();
-            }
         }
 		else
 		{
 			Close ();
-            if (source != null)
-            {
-                source.clip = closeDoor;
-                source.Play();
-            }
         }
 		return _isOpen;
 	}
@@ -190,20 +170,10 @@ public class Door : Interactable, IActivatable, ISavable
             if (state)
             {
                 Close();
-                if (source != null)
-                {
-                    source.clip = closeDoor;
-                    source.Play();
-                }
             }
             else
             {
                 Open();
-                if (source != null)
-                {
-                    source.clip = openDoor;
-                    source.Play();
-                }
             }
 		}
 		else
@@ -211,20 +181,10 @@ public class Door : Interactable, IActivatable, ISavable
             if (state)
             {
                 Open();
-                if (source != null)
-                {
-                    source.clip = openDoor;
-                    source.Play();
-                }
             }
             else
             {
                 Close();
-                if (source != null)
-                {
-                    source.clip = closeDoor;
-                    source.Play();
-                }
             }
 		}
 		return _isOpen;
@@ -240,7 +200,23 @@ public class Door : Interactable, IActivatable, ISavable
 		_isOpen = false;
     }
 
+    public void PlayOpenSound()
+    {
+        if (source != null)
+        {
+            source.clip = openDoor;
+            source.Play();
+        }
+    }
 
+    public void PlayCloseSound()
+    {
+        if (source != null)
+        {
+            source.clip = closeDoor;
+            source.Play();
+        }
+    }
 	//****Savable Object Functions****
 
 	/// <summary>
