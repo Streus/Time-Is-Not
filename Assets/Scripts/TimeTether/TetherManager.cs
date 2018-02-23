@@ -128,13 +128,15 @@ public class TetherManager : Singleton<TetherManager>
 			if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPlayerDashing())
 			{
 				// If the player presses the menu key, start the timer
-				if (Input.GetKeyDown(PlayerControlManager.LH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.RH_TetherMenu))
+				//if (Input.GetKeyDown(PlayerControlManager.LH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.RH_TetherMenu))
+				if (PlayerControlManager.GetKeyDown(ControlInput.TETHER_MENU))
 				{
 					fastTetherKeyTimer = fastTetherKeyTime; 
 				}
 
 				// If the menu button is released before the timer has reached zero, call a fast tether back
-				if (Input.GetKeyUp(PlayerControlManager.LH_TetherMenu) || Input.GetKeyUp(PlayerControlManager.RH_TetherMenu))
+				//if (Input.GetKeyUp(PlayerControlManager.LH_TetherMenu) || Input.GetKeyUp(PlayerControlManager.RH_TetherMenu))
+				if (PlayerControlManager.GetKeyUp(ControlInput.TETHER_MENU))
 				{
 					OnFastTetherStart(LevelStateManager.curState); 
 				}

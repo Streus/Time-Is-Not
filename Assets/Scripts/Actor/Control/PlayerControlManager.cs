@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ControlInput
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	INTERACT,
+	DROP_TETHER,
+	TETHER_MENU,
+	DASH,
+	FIRE_STASIS,
+	ZOOM_OUT
+};
+
 public class PlayerControlManager : Singleton<PlayerControlManager>
 {
     [Header("Right Hand Controls: This controls what key the player presses to move the player up")]
@@ -96,7 +110,7 @@ public class PlayerControlManager : Singleton<PlayerControlManager>
     }
     [Header("Left Hand Controls: This controls what key the player presses to move the player up")]
     [SerializeField] private KeyCode lH_Up;
-    public static KeyCode LH_UP
+    public static KeyCode LH_Up
     {
         get
         {
@@ -184,4 +198,75 @@ public class PlayerControlManager : Singleton<PlayerControlManager>
             return inst.lH_ZoomOut;
         }
     }
+
+
+	/*
+	 * Get key functions
+	 */ 
+
+	public static bool GetKey(ControlInput inputType)
+	{
+		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
+
+		if (Input.GetKey(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		{
+			return true; 
+		}
+
+		return false; 
+
+	}
+
+	public static bool GetKeyDown(ControlInput inputType)
+	{
+		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
+
+		if (Input.GetKeyDown(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		{
+			return true; 
+		}
+
+		return false; 
+	}
+
+	public static bool GetKeyUp(ControlInput inputType)
+	{
+		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
+
+		if (Input.GetKeyUp(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		{
+			return true; 
+		}
+
+		return false; 
+	}
+
+	static KeyCode[] GetKeyCodesFor(ControlInput inputType)
+	{
+		switch (inputType)
+		{
+			case ControlInput.UP:
+				return new KeyCode[]{RH_Up, LH_Up}; 
+			case ControlInput.DOWN:
+				return new KeyCode[]{RH_Down, LH_Down};
+			case ControlInput.LEFT:
+				return new KeyCode[]{RH_Left, LH_Left};
+			case ControlInput.RIGHT:
+				return new KeyCode[]{RH_Right, LH_Right};
+			case ControlInput.INTERACT:
+				return new KeyCode[]{RH_Interact, LH_Interact};
+			case ControlInput.DROP_TETHER:
+				return new KeyCode[]{RH_DropTether, LH_DropTether};
+			case ControlInput.TETHER_MENU:
+				return new KeyCode[]{RH_TetherMenu, LH_TetherMenu};
+			case ControlInput.DASH:
+				return new KeyCode[]{RH_Dash, LH_Dash};
+			case ControlInput.FIRE_STASIS:
+				return new KeyCode[]{RH_FireStasis, LH_FireStasis};
+			case ControlInput.ZOOM_OUT:
+				return new KeyCode[]{RH_ZoomOut, LH_ZoomOut};
+			default:
+				return null; 
+		}
+	}
 }

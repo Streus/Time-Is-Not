@@ -131,7 +131,7 @@ public class Player : Controller
     {
         Vector2 movementVector = Vector2.zero;
 
-        if (Input.GetKey(PlayerControlManager.RH_Up) || Input.GetKey(PlayerControlManager.LH_UP)) // UP
+        if (Input.GetKey(PlayerControlManager.RH_Up) || Input.GetKey(PlayerControlManager.LH_Up)) // UP
             movementVector += Vector2.up;
         if (Input.GetKey(PlayerControlManager.RH_Left) || Input.GetKey(PlayerControlManager.LH_Left)) // LEFT
             movementVector += Vector2.left;
