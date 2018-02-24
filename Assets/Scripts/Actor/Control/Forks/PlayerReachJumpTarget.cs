@@ -13,8 +13,8 @@ public class PlayerReachJumpTarget : Fork
 		Collider2D col = p.GetComponent<Collider2D> ();
 
 		p.getSelf ().getAbility (1).active = false;
-
-		if (Vector2.Distance (p.transform.position + (Vector3)col.offset, p.getJumpTargetPos) < threshold)
+	
+		if (Vector2.Distance (p.transform.position, p.getJumpTargetPos) < threshold)
 		{
 			p.gameObject.layer = LayerMask.NameToLayer("GroundEnts");
 			p.getSelf ().getAbility (1).active = true;
