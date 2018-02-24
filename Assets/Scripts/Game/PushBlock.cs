@@ -10,7 +10,7 @@ public class PushBlock : MonoBehaviour, ISavable
 	private Direction _moveDirection = Direction.None;
 
 	//Check to see if the box is currently being pushed or not.
-	private bool _beingPushed = false;
+	public bool _beingPushed = false;
 
 	//Rigidbody component of the object.
 	private Rigidbody2D _rb2d;
@@ -25,6 +25,8 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	//move speed
 	private float _moveSpeed = 2; 
+
+	private Dictionary<Direction, bool> canMoveInDirection;
 
 	[Tooltip("Push speed Multiplier.")]
 	[SerializeField]
@@ -152,6 +154,30 @@ public class PushBlock : MonoBehaviour, ISavable
 				break;
 			}
 		}
+
+	}
+
+	void CheckPath()
+	{
+		Vector2 moveDir;
+		switch(_moveDirection)
+		{
+		case Direction.Up:
+			moveDir = Vector2.up;
+			break;
+		case Direction.Right:
+			moveDir = Vector2.right;
+			break;
+		case Direction.Down:
+			moveDir = Vector2.down;
+			break;
+		case Direction.Left:
+			moveDir = Vector2.left;
+			break;
+		}
+		RaycastHit2D[] hits = new RaycastHit2D [1];
+		GetComponent<Collider2D>().Cast(Vector2.up, hits, transform.localScale.x, true);
+		//, cf, hits, getSelf().getMovespeed()
 
 	}
 

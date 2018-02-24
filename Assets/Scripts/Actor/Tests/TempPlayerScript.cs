@@ -6,7 +6,8 @@ public class TempPlayerScript : MonoBehaviour {
 
 	private Animator _animationController;
 
-	void Start () {
+	void Start () 
+	{
 		_animationController = GetComponent<Animator> ();
 	}
 
