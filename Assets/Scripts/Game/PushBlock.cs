@@ -159,7 +159,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	bool CheckPath()
 	{
-		Vector2 moveDir;
+		/*Vector2 moveDir;
 		float dist;
 		switch(_moveDirection)
 		{
@@ -191,7 +191,8 @@ public class PushBlock : MonoBehaviour, ISavable
 				seesArea = true;
 		}
 
-		return seesArea;
+		return seesArea;*/
+		return true;
 
 	}
 
