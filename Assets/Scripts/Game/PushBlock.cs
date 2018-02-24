@@ -157,27 +157,41 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	}
 
-	void CheckPath()
+	bool CheckPath()
 	{
 		Vector2 moveDir;
+		float dist;
 		switch(_moveDirection)
 		{
 		case Direction.Up:
 			moveDir = Vector2.up;
+			dist = transform.localScale.y;
 			break;
 		case Direction.Right:
 			moveDir = Vector2.right;
+			dist = transform.localScale.x;
 			break;
 		case Direction.Down:
 			moveDir = Vector2.down;
+			dist = transform.localScale.y;
 			break;
 		case Direction.Left:
 			moveDir = Vector2.left;
+			dist = transform.localScale.x;
 			break;
 		}
 		RaycastHit2D[] hits = new RaycastHit2D [1];
-		GetComponent<Collider2D>().Cast(Vector2.up, hits, transform.localScale.x, true);
-		//, cf, hits, getSelf().getMovespeed()
+		GetComponent<Collider2D>().Cast(moveDir, hits, dist, true);
+
+		bool seesArea;
+
+		for(int i = 0; i < hits.Length; i++)
+		{
+			if (hits [i].collider.gameObject.layer == LayerMask.NameToLayer ("PushBlockArea"))
+				seesArea = true;
+		}
+
+		return seesArea;
 
 	}
 

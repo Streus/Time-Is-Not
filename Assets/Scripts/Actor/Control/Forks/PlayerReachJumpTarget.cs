@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI/Forks/Player/StopDashing")]
 public class PlayerReachJumpTarget : Fork
 {
-	public float threshold = 0.5f;
+	public float threshold = 0.25f;
 
     public override bool check(Controller c)
     {
