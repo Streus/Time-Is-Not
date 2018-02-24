@@ -171,8 +171,8 @@ public class TetherManager : Singleton<TetherManager>
 				{
 					tetherUIState = TetherUIState.TETHER_MENU; 
 					GameManager.setPause(true); 
-					GameManager.inst.lockCursorType = true; 
-					GameManager.inst.cursorType = CursorType.UI_HOVER; 
+					CursorManager.inst.lockCursorType = true; 
+					CursorManager.inst.cursorType = CursorType.UI_HOVER; 
 					ShowTetherMenu();
                     if (playTMenuOpen)
                     {
@@ -184,8 +184,8 @@ public class TetherManager : Singleton<TetherManager>
 				{
 					tetherUIState = TetherUIState.GAMEPLAY; 
 					GameManager.setPause(false); 
-					GameManager.inst.lockCursorType = false; 
-					GameManager.inst.OnCursorBoundsUpdated(); 
+					CursorManager.inst.lockCursorType = false; 
+					CursorManager.inst.OnCursorBoundsUpdated(); 
 					HideTetherMenu();
                     if (!playTMenuOpen)
                     {
@@ -200,8 +200,8 @@ public class TetherManager : Singleton<TetherManager>
 			{
 				tetherUIState = TetherUIState.TETHER_MENU; 
 				GameManager.setPause(true); 
-				GameManager.inst.lockCursorType = true; 
-				GameManager.inst.cursorType = CursorType.UI_HOVER; 
+				CursorManager.inst.lockCursorType = true; 
+				CursorManager.inst.cursorType = CursorType.UI_HOVER; 
 				ShowTetherMenu();
                 if (playTMenuOpen)
                 {
@@ -375,8 +375,8 @@ public class TetherManager : Singleton<TetherManager>
 			
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true);
-		GameManager.inst.lockCursorType = true; 
-		GameManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.lockCursorType = true; 
+		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
 
 		// Start the animation coroutine that jumps directly into the tether animation code
 		StartCoroutine("TetherBackAnimation", stateToLoad); 
@@ -396,8 +396,8 @@ public class TetherManager : Singleton<TetherManager>
 
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true);
-		GameManager.inst.lockCursorType = true; 
-		GameManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.lockCursorType = true; 
+		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
 
 		// Start the animation coroutine that jumps directly into the tether animation code
 		StartCoroutine("TetherBackAnimation", stateToLoad); 
@@ -417,8 +417,8 @@ public class TetherManager : Singleton<TetherManager>
         AudioLibrary.PlayTetherSelect();
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true); 
-		GameManager.inst.lockCursorType = true; 
-		GameManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.lockCursorType = true; 
+		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
 
 		// Start the animation coroutine that begins with the hide menu code
 		StartCoroutine("TetherBackAnimation_HideMenu", stateToLoad); 
@@ -515,8 +515,8 @@ public class TetherManager : Singleton<TetherManager>
 		// TODO
 		tetherUIState = TetherUIState.GAMEPLAY; 
 		GameManager.setPause(false); 
-		GameManager.inst.lockCursorType = false; 
-		GameManager.inst.OnCursorBoundsUpdated();
+		CursorManager.inst.lockCursorType = false; 
+		CursorManager.inst.OnCursorBoundsUpdated();
 	}
 
 

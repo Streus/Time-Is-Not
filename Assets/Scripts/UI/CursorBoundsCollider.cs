@@ -11,12 +11,12 @@ public class CursorBoundsCollider : MonoBehaviour
 	void OnMouseEnter() 
 	{
 		isOver = true;
-		GameManager.inst.AddCursorBound(this);
+		CursorManager.inst.AddCursorBound(this);
 	}
 
 	void OnMouseExit() 
 	{
 		isOver = false;
-		GameManager.inst.RemoveCursorBound(this);
+		CursorManager.inst.RemoveCursorBound(this);
 	}
 }

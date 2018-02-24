@@ -10,7 +10,7 @@ public class PlayerInvokeTargeting : Fork
         Player p = State.cast<Player>(c);
         if ((Input.GetKeyDown(PlayerControlManager.RH_Dash) ||
             Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
-            GameManager.CursorInGameplayState())
+			CursorManager.CursorInGameplayState())
         {
             if(p.getSelf().getAbility(1).isReady())
             {

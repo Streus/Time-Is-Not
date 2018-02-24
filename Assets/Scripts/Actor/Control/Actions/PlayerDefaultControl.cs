@@ -18,7 +18,7 @@ public class PlayerDefaultControl : Action
 			Input.GetKeyDown(PlayerControlManager.LH_FireStasis)) && 
 			GameManager.inst.canUseStasis && 
 			!inSBBounds &&
-			GameManager.CursorInGameplayState())
+			CursorManager.CursorInGameplayState())
 			c.getSelf ().getAbility (0).use (c.getSelf (), mousePos);
 
         p.move();
