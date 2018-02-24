@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 1f11ea4c1aeb1491b8605777dc8691e2
-timeCreated: 1518604946
+guid: 242c6c31bb02048df89fcf6a7d3aa66b
+timeCreated: 1519293596
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_0
-    21300002: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_1
-    21300004: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_2
-    21300006: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_3
-    21300008: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_4
-    21300010: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_5
-    21300012: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_6
+    21300000: Vertical_SecurityDoor_0
+    21300002: Vertical_SecurityDoor_1
+    21300004: Vertical_SecurityDoor_2
+    21300006: Vertical_SecurityDoor_3
+    21300008: Vertical_SecurityDoor_4
+    21300010: Vertical_SecurityDoor_5
+    21300012: Vertical_SecurityDoor_6
+    21300014: Vertical_SecurityDoor_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -106,13 +107,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_0
+      name: Vertical_SecurityDoor_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 256
-        height: 128
+        y: 256
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,13 +121,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_1
+      name: Vertical_SecurityDoor_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_SecurityDoor_2
       rect:
         serializedVersion: 2
         x: 256
-        y: 128
-        width: 256
-        height: 128
+        y: 256
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,13 +149,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_2
+      name: Vertical_SecurityDoor_3
       rect:
         serializedVersion: 2
-        x: 512
-        y: 128
-        width: 256
-        height: 128
+        x: 384
+        y: 256
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,27 +163,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_3
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 128
-        width: 256
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_4
+      name: Vertical_SecurityDoor_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,13 +177,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_5
+      name: Vertical_SecurityDoor_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_SecurityDoor_6
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,13 +205,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_OpeningDoorAnimation_Cantero_2-14-18_6
+      name: Vertical_SecurityDoor_7
       rect:
         serializedVersion: 2
-        x: 512
+        x: 384
         y: 0
-        width: 256
-        height: 128
+        width: 128
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

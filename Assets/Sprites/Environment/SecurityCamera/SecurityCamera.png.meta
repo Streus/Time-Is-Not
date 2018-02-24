@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 02dcced743402422f89803602780b4b1
-timeCreated: 1518581095
+timeCreated: 1519288092
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,14 @@ TextureImporter:
     21300010: Art_Env_Props_Cameras_Cantero_2-8-18_5
     21300012: Art_Env_Props_Cameras_Cantero_2-8-18_6
     21300014: Art_Env_Props_Cameras_Cantero_2-8-18_7
+    21300016: SecurityCamera_0
+    21300018: SecurityCamera_1
+    21300020: SecurityCamera_2
+    21300022: SecurityCamera_3
+    21300024: SecurityCamera_4
+    21300026: SecurityCamera_5
+    21300028: SecurityCamera_6
+    21300030: SecurityCamera_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -107,63 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_4
+      name: SecurityCamera_0
       rect:
         serializedVersion: 2
         x: 0
@@ -177,7 +129,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_5
+      name: SecurityCamera_1
       rect:
         serializedVersion: 2
         x: 64
@@ -191,7 +143,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_6
+      name: SecurityCamera_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SecurityCamera_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SecurityCamera_4
       rect:
         serializedVersion: 2
         x: 0
@@ -205,10 +185,38 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Art_Env_Props_Cameras_Cantero_2-8-18_7
+      name: SecurityCamera_5
       rect:
         serializedVersion: 2
         x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SecurityCamera_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SecurityCamera_7
+      rect:
+        serializedVersion: 2
+        x: 192
         y: 0
         width: 64
         height: 64
