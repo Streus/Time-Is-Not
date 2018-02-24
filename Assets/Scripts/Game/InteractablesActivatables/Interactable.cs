@@ -44,7 +44,7 @@ public abstract class Interactable : MonoBehaviour
 	{
 		if (GameManager.inst.securityDoors == null || !_triggersSecurityDoors)
 			return false;
-		SimpleSecurityDoor[] doors = GameManager.inst.securityDoors.GetComponentsInChildren<SimpleSecurityDoor> ();
+		IActivatable[] doors = GameManager.inst.securityDoors.GetComponentsInChildren<IActivatable> ();
 
 		for(int i = 0; i < doors.Length; i++)
 		{

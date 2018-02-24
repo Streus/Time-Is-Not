@@ -17,6 +17,8 @@ public class Hummingbird : PatrollingEnemy
 	private State defaultState;
 
 	private Transform pursuitTarget;
+
+	private Animator hummingAnim;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -33,6 +35,10 @@ public class Hummingbird : PatrollingEnemy
 			Debug.LogError ("A patrol path must be defined for the patrol state!" +
 				"\n" + gameObject.name + " does not have a defined patrol path.");
 		}
+
+		Transform spriteChild = transform.Find ("Sprite");
+		hummingAnim = spriteChild.GetComponent<Animator> ();
+
 	}
 
 
@@ -44,25 +50,25 @@ public class Hummingbird : PatrollingEnemy
 		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
 		{
 //			Debug.Log ("up");
-			anim.SetInteger ("Direction", 1);
+			hummingAnim.SetInteger ("Direction", 1);
 		}
 		if(transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
 		{
 //			Debug.Log ("left");
-			anim.SetInteger ("Direction", 4);
+			hummingAnim.SetInteger ("Direction", 4);
 		}
 		if(transform.eulerAngles.z > 135 && transform.eulerAngles.z < 225)
 		{
 //			Debug.Log ("down");
-			anim.SetInteger ("Direction", 3);
+			hummingAnim.SetInteger ("Direction", 3);
 		}
 		if(transform.eulerAngles.z > 225 && transform.eulerAngles.z < 315)
 		{
 //			Debug.Log ("right");
-			anim.SetInteger ("Direction", 2);
+			hummingAnim.SetInteger ("Direction", 2);
 		}
 		//TODO: check if hummingbird is moving
-		anim.SetBool("isMoving", false);
+		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
 		base.Update();
 	}
