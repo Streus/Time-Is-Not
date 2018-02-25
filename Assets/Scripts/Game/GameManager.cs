@@ -15,14 +15,6 @@ public enum CodeName
 	CODE_8
 };
 
-public enum CursorType
-{
-	GAMEPLAY,
-	UI_HOVER,
-	DEACTIVATED,
-	DEFAULT
-}
-
 [RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
@@ -165,6 +157,15 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public static bool isPlayerDashing()
 	{
 		return inst.playerScript.dashing(); 
+	}
+
+	public static bool dashIsCharged()
+	{
+		if (inst.playerScript.getSelf().getAbility(1).cooldownPercentage() == 0)
+		{
+			return true;
+		}
+		return false; 
 	}
 		
 	public static CameraManager GetCameraManager()

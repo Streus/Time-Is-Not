@@ -172,7 +172,7 @@ public class TetherManager : Singleton<TetherManager>
 					tetherUIState = TetherUIState.TETHER_MENU; 
 					GameManager.setPause(true); 
 					CursorManager.inst.lockCursorType = true; 
-					CursorManager.inst.cursorType = CursorType.UI_HOVER; 
+					CursorManager.inst.cursorState = CursorState.MENU; 
 					ShowTetherMenu();
                     if (playTMenuOpen)
                     {
@@ -201,7 +201,7 @@ public class TetherManager : Singleton<TetherManager>
 				tetherUIState = TetherUIState.TETHER_MENU; 
 				GameManager.setPause(true); 
 				CursorManager.inst.lockCursorType = true; 
-				CursorManager.inst.cursorType = CursorType.UI_HOVER; 
+				CursorManager.inst.cursorState = CursorState.MENU; 
 				ShowTetherMenu();
                 if (playTMenuOpen)
                 {
@@ -376,7 +376,7 @@ public class TetherManager : Singleton<TetherManager>
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true);
 		CursorManager.inst.lockCursorType = true; 
-		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.cursorState = CursorState.DEACTIVATED; 
 
 		// Start the animation coroutine that jumps directly into the tether animation code
 		StartCoroutine("TetherBackAnimation", stateToLoad); 
@@ -397,7 +397,7 @@ public class TetherManager : Singleton<TetherManager>
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true);
 		CursorManager.inst.lockCursorType = true; 
-		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.cursorState = CursorState.DEACTIVATED; 
 
 		// Start the animation coroutine that jumps directly into the tether animation code
 		StartCoroutine("TetherBackAnimation", stateToLoad); 
@@ -418,7 +418,7 @@ public class TetherManager : Singleton<TetherManager>
 		tetherUIState = TetherUIState.TETHER_ANIMATION; 
 		GameManager.setPause(true); 
 		CursorManager.inst.lockCursorType = true; 
-		CursorManager.inst.cursorType = CursorType.DEACTIVATED; 
+		CursorManager.inst.cursorState = CursorState.DEACTIVATED; 
 
 		// Start the animation coroutine that begins with the hide menu code
 		StartCoroutine("TetherBackAnimation_HideMenu", stateToLoad); 
