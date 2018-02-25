@@ -174,12 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c60fdc1be0ec4f77af94ac1ea1c2676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _beingPushed: 0
   _speedMult: 1
   _canMove: 1
   _upKey: 119
   _rightKey: 100
   _downKey: 115
   _leftKey: 97
+  isInArea: 0
 --- !u!114 &114804344943749318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: nIBTveyw3Ey1UNFXMReytw
-  instanceID: -7354
+  registeredID: fr570M/+0UmTPvt/3xTB6g
+  instanceID: 11192
   prefabPath: 
   stasisable: 1
   allowReset: 1
