@@ -14,8 +14,37 @@ public class TempPlayerScript : MonoBehaviour {
 	void Update () {
 //		print ();
 
-		_animationController.SetFloat ("xSpeed", Input.GetAxis ("Horizontal"));
-		_animationController.SetFloat ("ySpeed", Input.GetAxis ("Vertical"));
+		if (Input.GetKeyDown (KeyCode.W))
+		{
+			_animationController.SetInteger ("Direction", 1);
+		}
+		if (Input.GetKeyDown (KeyCode.D))
+		{
+			_animationController.SetInteger ("Direction", 2);
+		}
+		if (Input.GetKeyDown (KeyCode.S))
+		{
+			_animationController.SetInteger ("Direction", 3);
+		}
+		if (Input.GetKeyDown (KeyCode.A))
+		{
+			_animationController.SetInteger ("Direction", 4);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Mouse1))
+		{
+			_animationController.SetTrigger ("StasisBubble");
+		}
+
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+			_animationController.SetTrigger ("PlaceAnchor");
+		}
+
+		if (Input.GetKeyDown (KeyCode.Mouse0))
+		{
+			_animationController.SetTrigger ("Dash");
+		}
 	}
 
 	public void PlayTetherAnimation ()
