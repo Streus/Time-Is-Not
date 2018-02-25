@@ -389,6 +389,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  _dashPadding: 0.5
   _type: 0
   _activatables: []
 --- !u!114 &114021830419504684
@@ -418,7 +419,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   registeredID: x5YJDXMtGEaFcfbKRwnNmA
   instanceID: -58078
+  prefabPath: 
   stasisable: 1
+  allowReset: 1
 --- !u!114 &114742703759694270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -476,6 +479,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  _dashPadding: 0.5
   _type: 0
   _activatables: []
 --- !u!114 &114893206186554480
@@ -502,7 +506,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   registeredID: wKO1PAN+hU+0T9AXBv/QKw
   instanceID: -58076
+  prefabPath: 
   stasisable: 1
+  allowReset: 1
 --- !u!114 &114986084590390596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,9 +520,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: FMJCK9S5FEqvHWwoktJE2Q
-  instanceID: 10588
+  registeredID: 5DZN2WnvF0ewTw9B9a4WAQ
+  instanceID: 11568
+  prefabPath: 
   stasisable: 1
+  allowReset: 1
 --- !u!120 &120274544241393510
 LineRenderer:
   m_ObjectHideFlags: 1

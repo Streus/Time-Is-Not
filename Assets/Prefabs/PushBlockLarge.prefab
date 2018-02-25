@@ -218,9 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: un2jPOhfDk2d8NMIF3p6jg
-  instanceID: 10172
+  registeredID: zc5zWzOLwEqLtr09v1ou9Q
+  instanceID: 10298
+  prefabPath: 
   stasisable: 1
+  allowReset: 1
 --- !u!114 &114616393919312304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,13 +234,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c60fdc1be0ec4f77af94ac1ea1c2676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _beingPushed: 0
   _speedMult: 1
   _canMove: 1
   _upKey: 119
   _rightKey: 100
   _downKey: 115
   _leftKey: 97
-  pushBlockSound: {fileID: 8300000, guid: f45ef389f5708864f981bfe18d42c67f, type: 3}
+  isInArea: 0
 --- !u!212 &212918637611002356
 SpriteRenderer:
   m_ObjectHideFlags: 1

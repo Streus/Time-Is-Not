@@ -52,9 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: UHGCrekF2UCKYXAQs0HH7w
-  instanceID: 10542
+  registeredID: dIRH8X9SIUmOfz76i1+B3w
+  instanceID: 11444
+  prefabPath: 
   stasisable: 1
+  allowReset: 1
 --- !u!114 &114912452631026392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,3 +74,6 @@ MonoBehaviour:
   _active: 1
   _moveSpeed: 1
   _endBehavior: 0
+  delayPerPoint: 0
+  delayAtEnds: 0
+  _waitTimer: 0
