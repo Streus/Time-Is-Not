@@ -120,13 +120,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: ad7482bf0c7e45242a2fd1206500777d, type: 2}
+  map: {fileID: 0}
   pushState: {fileID: 11400000, guid: 2b0e9096344ca18499a7abb6d117c9c6, type: 2}
   playerDefault: {fileID: 11400000, guid: ad7482bf0c7e45242a2fd1206500777d, type: 2}
   dashState: {fileID: 11400000, guid: 1f9c4f4be5d084a43ae77dba1e7e5de1, type: 2}
   moveMask:
     serializedVersion: 2
     m_Bits: 49152
+  isOverPit: 0
+  isOnPlatform: 0
   minJumpDist: 0
+  sprite: {fileID: 0}
   maxJumpDist: 2
 --- !u!114 &114445996024478426
 MonoBehaviour:
@@ -140,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: 0
-  movespeed: 4
+  movespeed: 3
 --- !u!114 &114879508998875472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: sD06vfvYEkODzrbf5gMiow
-  instanceID: 11346
+  registeredID: MxR2fwAinUyVdMYVXxf6JQ
+  instanceID: 11266
   prefabPath: 
   stasisable: 1
   allowReset: 1
@@ -166,7 +170,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -182,7 +185,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
