@@ -11,10 +11,6 @@ public class ROInspector : Editor
 
 	public void OnEnable()
 	{
-		ro = (RegisteredObject)target;
-		if(!EditorApplication.isPlayingOrWillChangePlaymode)
-			ro.Reset ();
-		
 		try
 		{
 			so = new SerializedObject(ro);
@@ -24,11 +20,16 @@ public class ROInspector : Editor
 		#pragma warning restore 0168
 	}
 
+	public void Awake()
+	{
+		ro = (RegisteredObject)target;
+		if(!EditorApplication.isPlayingOrWillChangePlaymode)
+			ro.generateID ();
+	}
+
 	public override void OnInspectorGUI ()
 	{
 		so.Update ();
-
-		Debug.Log (ro.GetInstanceID () + " | " + ro.rID); //DEBUG
 
 		GUILayout.Label (ro.rID, EditorStyles.largeLabel);
 

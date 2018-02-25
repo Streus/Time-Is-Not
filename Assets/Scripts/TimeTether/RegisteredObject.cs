@@ -15,8 +15,6 @@ public class RegisteredObject : MonoBehaviour
 	{ 
 		directory = new List<RegisteredObject>();
 	}
-
-	private const string DEFAULT_RID = "";
 	#endregion
 
 	#region INSTANCE_VARS
@@ -102,23 +100,23 @@ public class RegisteredObject : MonoBehaviour
 	#region INSTANCE_METHODS
 	public void Reset()
 	{
-		Debug.LogWarning ("Resetting " + instanceID + ", " + registeredID);
+		Debug.LogWarning ("Resetting " + gameObject.name + " (" + registeredID + ")");
 		generateID ();
 	}
 
-	private void generateID()
+	public void generateID()
 	{
 		if (instanceID == 0)
 		{
 			instanceID = gameObject.GetInstanceID ();
 			Debug.Log ("[RO] New instance: " + instanceID); //DEBUG
 		}
-
-		Debug.Log (instanceID + " | " + gameObject.GetInstanceID()); //DEBUG
-		if(registeredID == DEFAULT_RID || instanceID != this.GetInstanceID())
+			
+		if(registeredID == "" || instanceID != gameObject.GetInstanceID())
 		{
 			registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
-			Debug.Log ("[RO] " + instanceID + " has a new ID: " + registeredID); //DEBUG
+			instanceID = gameObject.GetInstanceID ();
+			Debug.Log ("[RO] " + gameObject.name + " has a new ID: " + registeredID); //DEBUG
 		}
 	}
 
