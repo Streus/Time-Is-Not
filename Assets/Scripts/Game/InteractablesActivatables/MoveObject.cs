@@ -100,6 +100,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	/// </summary>
 	public void setNextPoint()
 	{
+		if (_nextPoint >= _points.Length || _nextPoint < 0)
+			return;
 		if(Vector2.Distance(transform.position, _points[_nextPoint]) < 0.01f)
 		{
 			//get next point
@@ -155,6 +157,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 
 	public Vector2 getNextPoint()
 	{
+		if (_nextPoint >= _points.Length || _nextPoint < 0)
+			return (Vector2)transform.position;
 		return _points[_nextPoint];
 	}
 
