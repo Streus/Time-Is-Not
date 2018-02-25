@@ -259,8 +259,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		*/ 
 
 		//iterate over the list of ROs and pass them data
-		foreach (RegisteredObject ro in RegisteredObject.getObjects())
+		foreach (RegisteredObject ro in registeredObjects)
 		{
+			Debug.Log (ro.name + " (" + ro.rID + ")"); //DEBUG
 			SeedCollection data;
 			if (stateSeeds[state].TryGetValue (ro.rID, out data))
 				ro.sow (data);
