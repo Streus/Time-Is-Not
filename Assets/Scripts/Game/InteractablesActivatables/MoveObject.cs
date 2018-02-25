@@ -39,12 +39,14 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
 
+
 	public float _waitTimer = 0;
 
 
 	// Use this for initialization
 	void Start () 
 	{
+		_waitTimer = 0;
 		if (!Application.isPlaying)
 			return;
 		isInverted = !_active;
@@ -107,11 +109,14 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 			//get next point
 			if(_nextPoint == _points.Length -1 || (_reverseMovement && _nextPoint == 0))
 			{
-				if (delayPerPoint > delayAtEnds)
-					_waitTimer = delayPerPoint;
-				else
-					_waitTimer = delayAtEnds;
 				//the platform is at the last point
+				if(_endBehavior != EndStyle.LoopToStart)
+				{
+					if (delayPerPoint > delayAtEnds)
+						_waitTimer = delayPerPoint;
+					else
+						_waitTimer = delayAtEnds;
+				}
 				switch(_endBehavior)
 				{
 				case EndStyle.Stop:
@@ -145,7 +150,15 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 			}
 			else
 			{
-				_waitTimer = delayPerPoint;
+				if((_endBehavior == EndStyle.LoopToStart && _nextPoint == 0))
+				{
+					if (delayPerPoint > delayAtEnds)
+						_waitTimer = delayPerPoint;
+					else
+						_waitTimer = delayAtEnds;
+				}
+				else
+					_waitTimer = delayPerPoint;
 				//incriment the target point
 				if (_reverseMovement)
 					_nextPoint--;
