@@ -29,6 +29,8 @@ public class Player : Controller
 	[SerializeField]
 	private float minJumpDist;
 
+	public SpriteRenderer sprite;
+
 
     public float getMinJumpDist
     {
@@ -67,6 +69,7 @@ public class Player : Controller
 	#region INSTANCE_METHODS
 	public void Start ()
 	{
+		sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
 		getSelf ().addAbility (Ability.get ("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
@@ -81,6 +84,7 @@ public class Player : Controller
 			base.Update(); 
 		}
 		CheckForGround ();
+		sprite.sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
 	public override void FixedUpdate ()

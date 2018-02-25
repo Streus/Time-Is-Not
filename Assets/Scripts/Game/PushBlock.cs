@@ -50,6 +50,10 @@ public class PushBlock : MonoBehaviour, ISavable
 
     AudioClip pushBlockSound;
 
+	public bool isInArea;
+
+
+	private BoxCollider2D _col;
 	// Use this for initialization
 	void Start ()
 	{
@@ -60,6 +64,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
         source = this.GetComponent<AudioSource>();
         pushBlockSound = AudioLibrary.inst.pushBlockMoving;
+		_col = gameObject.GetComponent<BoxCollider2D> ();
 	}
 
 	public void OnDestroy()
@@ -131,7 +136,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		}
 		if(_beingPushed)
 		{
-			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis)
+			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis || CheckPath())
 				stop ();
 			//stop moving when key is released
 			switch(_moveDirection)
@@ -157,42 +162,61 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	}
 
-	bool CheckPath()
+	void OnDrawGizmos()
 	{
-		/*Vector2 moveDir;
-		float dist;
+		if (_col == null)
+			_col = gameObject.GetComponent<BoxCollider2D> ();
+		Vector2 moveDir = Vector2.zero;
 		switch(_moveDirection)
 		{
 		case Direction.Up:
-			moveDir = Vector2.up;
-			dist = transform.localScale.y;
+			moveDir = Vector2.up * _col.size.y;
 			break;
 		case Direction.Right:
-			moveDir = Vector2.right;
-			dist = transform.localScale.x;
+			moveDir = Vector2.right * _col.size.x;
 			break;
 		case Direction.Down:
-			moveDir = Vector2.down;
-			dist = transform.localScale.y;
+			moveDir = Vector2.down * _col.size.y;
 			break;
 		case Direction.Left:
-			moveDir = Vector2.left;
-			dist = transform.localScale.x;
+			moveDir = Vector2.left * _col.size.x;
 			break;
 		}
-		RaycastHit2D[] hits = new RaycastHit2D [1];
-		GetComponent<Collider2D>().Cast(moveDir, hits, dist, true);
 
-		bool seesArea;
+		moveDir *= 0.1f;
+		Gizmos.DrawCube ((Vector2)transform.position + moveDir + _col.offset, _col.size);
 
-		for(int i = 0; i < hits.Length; i++)
+
+	}
+
+	bool CheckPath()
+	{
+		float dist = 0f;
+		Vector2 moveDir = Vector2.zero;
+		switch(_moveDirection)
 		{
-			if (hits [i].collider.gameObject.layer == LayerMask.NameToLayer ("PushBlockArea"))
-				seesArea = true;
+		case Direction.Up:
+			moveDir = Vector2.up * _col.size.y;
+			break;
+		case Direction.Right:
+			moveDir = Vector2.right * _col.size.x;
+			break;
+		case Direction.Down:
+			moveDir = Vector2.down * _col.size.y;
+			break;
+		case Direction.Left:
+			moveDir = Vector2.left * _col.size.x;
+			break;
 		}
+		RaycastHit2D[] hits = Physics2D.BoxCastAll((Vector2)transform.position + _col.offset, _col.size, 0, moveDir, 0.1f, 1 << LayerMask.NameToLayer("PushBlockArea") | 1 << LayerMask.NameToLayer("Wall"));
+		//GetComponent<Collider2D>().Cast(moveDir, hits, dist, true);
 
-		return seesArea;*/
-		return true;
+		bool seesArea = false;
+
+		if (hits.Length > 0)
+			seesArea = true;
+
+		return seesArea;
 
 	}
 
@@ -208,8 +232,8 @@ public class PushBlock : MonoBehaviour, ISavable
 					_player = entityHit.GetComponent<Player> ();
 				_moveSpeed = (entityHit.getMovespeed () * _speedMult);
 				_playerInRange = true;
-				float xDist = col.transform.position.x - transform.position.x;
-				float yDist = col.transform.position.y - transform.position.y;
+				float xDist = (col.transform.position.x + col.offset.x) - (transform.position.x + _col.offset.x);
+				float yDist = (col.transform.position.y + col.offset.y) - (transform.position.y + _col.offset.y);
 
 				//Calculate which direction to move
 				if(Mathf.Abs(xDist) > Mathf.Abs(yDist))
