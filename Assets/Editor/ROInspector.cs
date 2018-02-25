@@ -23,8 +23,12 @@ public class ROInspector : Editor
 	public void Awake()
 	{
 		ro = (RegisteredObject)target;
-		if(!EditorApplication.isPlayingOrWillChangePlaymode)
+		if (!EditorApplication.isPlayingOrWillChangePlaymode)
+		{
+			Undo.RecordObject (ro, "Generate ID");
 			ro.generateID ();
+			EditorUtility.SetDirty (ro);
+		}
 	}
 
 	public override void OnInspectorGUI ()
@@ -35,6 +39,7 @@ public class ROInspector : Editor
 
 		GUILayout.BeginHorizontal ();
 		EditorGUILayout.PrefixLabel ("Stasisable");
+		Undo.RecordObject (ro, "Toggle Stasisable");
 		ro.setStasisable ((bool)EditorGUILayout.Toggle (ro.getStasisable ()));
 		GUILayout.EndHorizontal ();
 
