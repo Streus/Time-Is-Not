@@ -125,6 +125,8 @@ public class CursorManager : Singleton<CursorManager>
 			{
 				// Determine the jump distance
 				float finalDist = GameManager.getPlayerMaxJumpDist(); 
+
+				// If within the radius of the dash, the final distance is determined by the distance between the dash cursor and the player foot position
 				if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
 				{
 					finalDist = Vector2.Distance((Vector2)mouseWorldPos, pPos); 
