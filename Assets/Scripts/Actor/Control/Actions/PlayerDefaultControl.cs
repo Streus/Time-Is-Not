@@ -21,6 +21,12 @@ public class PlayerDefaultControl : Action
 			CursorManager.CursorInGameplayState())
 			c.getSelf ().getAbility (0).use (c.getSelf (), mousePos);
 
+        if((Input.GetKeyDown(PlayerControlManager.RH_FireStasis) ||
+            Input.GetKeyDown(PlayerControlManager.LH_FireStasis)) && !LevelStateManager.canAddStasisBubble())
+        {
+            AudioLibrary.PlayStasisErrorSound();
+        }
+
         p.move();
 	}
 }
