@@ -104,6 +104,10 @@ public class PushBlock : MonoBehaviour, ISavable
 		{
 			_rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 		}
+		SpriteRenderer rend = gameObject.GetComponent<SpriteRenderer> ();
+		if(rend != null)
+
+			rend.sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
 	/// <summary>

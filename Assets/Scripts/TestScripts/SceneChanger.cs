@@ -33,6 +33,7 @@ public class SceneChanger : MonoBehaviour
 	public IEnumerator Load(float time)
 	{
 		yield return new WaitForSeconds (time);
-		SceneManager.LoadScene (sceneToLoad);
+		if(sceneToLoad != null)
+			SceneManager.LoadScene (sceneToLoad);
 	}
 }
