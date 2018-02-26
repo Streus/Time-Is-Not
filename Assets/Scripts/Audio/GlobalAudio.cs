@@ -78,7 +78,7 @@ public class GlobalAudio : Singleton<GlobalAudio>
 	{
 		for (int i = 0; i < inst.sfxAudioSources.Count; i++)
 		{
-			if (inst.sfxAudioSources[i].clip == clip)
+			if (inst.sfxAudioSources[i].clip == clip && inst.sfxAudioSources[i].isPlaying)
 			{
 				return true;  
 			}
