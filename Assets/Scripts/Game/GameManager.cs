@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System; 
+using UnityEngine.SceneManagement; 
 
 public enum CodeName
 {
@@ -104,7 +105,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 		
 	}
 
-
+	/*
+	 * Pause functionality
+	 */ 
 
 	public static void setPause(bool state)
 	{
@@ -137,6 +140,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 			inst.pauseLockedToggled(state); 
 		}
 	}
+
+	/*
+	 * Player information getters
+	 */ 
 
 	public static bool isPlayerDead()
 	{
@@ -182,6 +189,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		return inst.playerScript.getSelf().getAbility(1).cooldownPercentage(); 
 	}
+
+	/*
+	 * Camera information getters
+	 */ 
 		
 	public static CameraManager GetCameraManager()
 	{
@@ -192,6 +203,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		return inst.cameraManager.zoomState; 
 	}
+
+	/*
+	 * Keycode functionality
+	 */ 
 
 	public static bool AddCode(CodeName codeName)
 	{
@@ -222,6 +237,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	/// <summary>
 	/// Returns an int representing the highest code found. This is useful for UI calculations
 	/// </summary>
+	[System.Obsolete("Keycodes are no longer numbered")]
 	public static int HighestCodeFound()
 	{
 		int result = 0; 
@@ -242,5 +258,23 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		return inst.m_codes.Count; 
 	}
+
+	/*
+	 * Temp Scene loading functionality
+	 */ 
+
+	/*
+	public static void LoadScene(string name)
+	{
+		if (SceneManager.GetSceneByName(name) != null)
+		{
+			SceneManager.LoadScene(name); 
+		}
+		else
+		{
+			Debug.LogError("Scene name " + name + " cannot be loaded"); 
+		}
+	}
+	*/ 
 
 }
