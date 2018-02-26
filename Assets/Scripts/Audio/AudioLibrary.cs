@@ -9,21 +9,21 @@ public class AudioLibrary : Singleton<AudioLibrary>
 #region UI Sounds
     // UI //
 
-    public AudioClip tetherSelect; // -- waiting
+    public AudioClip tetherSelect; // --  done : Location - TetherManager script
 
     public static void PlayTetherSelect()
     {
         GlobalAudio.PlaySound(inst.tetherSelect);
     }
 
-    public AudioClip tetherMenuOpen; // --  waiting
+    public AudioClip tetherMenuOpen; // --  done : Location - TetherManager script
 
     public static void PlayTetherMenuOpen()
     {
         GlobalAudio.PlaySound(inst.tetherMenuOpen);
     }
 
-    public AudioClip tetherMenuClose; // -- question : repeat open sound or new sound?
+    public AudioClip tetherMenuClose; // -- done : Location - TetherManager script
 
     public static void PlayTetherMenuClose()
     {
