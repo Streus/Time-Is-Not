@@ -74,6 +74,18 @@ public class GlobalAudio : Singleton<GlobalAudio>
 		PlaySound(clip, false, 128, 1, Random.Range(minPitch, maxPitch), 0); 
 	}
 
+	public static bool ClipIsPlaying(AudioClip clip)
+	{
+		for (int i = 0; i < inst.sfxAudioSources.Count; i++)
+		{
+			if (inst.sfxAudioSources[i].clip == clip)
+			{
+				return true;  
+			}
+		}
+		return false; 
+	}
+
 	/*
 	 * Helper methods
 	 */
