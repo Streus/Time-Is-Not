@@ -174,11 +174,6 @@ public class TetherManager : Singleton<TetherManager>
 					CursorManager.inst.lockCursorType = true; 
 					CursorManager.inst.cursorState = CursorState.MENU; 
 					ShowTetherMenu();
-                    if (playTMenuOpen)
-                    {
-                        AudioLibrary.PlayTetherMenuOpen();
-                        playTMenuOpen = false;
-                    }
                 }
 				else
 				{
@@ -187,11 +182,6 @@ public class TetherManager : Singleton<TetherManager>
 					CursorManager.inst.lockCursorType = false; 
 					CursorManager.inst.OnCursorBoundsUpdated(); 
 					HideTetherMenu();
-                    if (!playTMenuOpen)
-                    {
-                        AudioLibrary.PlayTetherMenuClose();
-                        playTMenuOpen = true;
-                    }
                 }
 
 			}
@@ -203,11 +193,6 @@ public class TetherManager : Singleton<TetherManager>
 				CursorManager.inst.lockCursorType = true; 
 				CursorManager.inst.cursorState = CursorState.MENU; 
 				ShowTetherMenu();
-                if (playTMenuOpen)
-                {
-                    AudioLibrary.PlayTetherMenuOpen();
-                    playTMenuOpen = false;
-                }
             }
 		}
 
@@ -246,9 +231,13 @@ public class TetherManager : Singleton<TetherManager>
 		tetherMenuGroup.blocksRaycasts = true; 
 
 		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 1, tetherMenuFadeInSpeed * Time.deltaTime); 
-		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, fadeImageMaxAlpha, fadeImageFadeInSpeed * Time.deltaTime)); 
-
-		if (tetherMenuGroup.alpha > 0.99f && fadeImage.color.a >= fadeImageMaxAlpha - 0.01f)
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, fadeImageMaxAlpha, fadeImageFadeInSpeed * Time.deltaTime));
+        if (playTMenuOpen)
+        {
+            AudioLibrary.PlayTetherMenuOpen();
+            playTMenuOpen = false;
+        }
+        if (tetherMenuGroup.alpha > 0.99f && fadeImage.color.a >= fadeImageMaxAlpha - 0.01f)
 		{
 			tetherMenuGroup.alpha = 1;
 			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, fadeImageMaxAlpha);
@@ -267,9 +256,13 @@ public class TetherManager : Singleton<TetherManager>
 		tetherMenuGroup.blocksRaycasts = false; 
 
 		tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 0, tetherMenuFadeOutSpeed * Time.deltaTime);
-		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, 0, fadeImageFadeOutSpeed * Time.deltaTime)); 
-
-		if (tetherMenuGroup.alpha < 0.01f && fadeImage.color.a < 0.01f)
+		fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, 0, fadeImageFadeOutSpeed * Time.deltaTime));
+        if (!playTMenuOpen)
+        {
+            AudioLibrary.PlayTetherMenuClose();
+            playTMenuOpen = true;
+        }
+        if (tetherMenuGroup.alpha < 0.01f && fadeImage.color.a < 0.01f)
 		{
 			tetherMenuGroup.alpha = 0;
 			fadeImage.color = new Color (fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
