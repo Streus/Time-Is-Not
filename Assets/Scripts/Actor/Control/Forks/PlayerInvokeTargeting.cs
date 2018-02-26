@@ -19,7 +19,10 @@ public class PlayerInvokeTargeting : Fork
             }
             else
             {
-                AudioLibrary.PlayDashErrorSound();
+                if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashError))
+                {
+                    AudioLibrary.PlayDashErrorSound();
+                }
                 return false;
             }
         }

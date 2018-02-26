@@ -49,6 +49,11 @@ public class DashUIPanel : MonoBehaviour
 
 			dashImg.fillAmount = Mathf.Lerp(dashImg.fillAmount, fillTarget, fillLerpSpeed * Time.deltaTime); 
 
+            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashRecharge))
+            {
+                AudioLibrary.PlayDashRechargeSound();
+            }
+
 			//dashImg.fillAmount = 1 - GameManager.dashChargePercNormalized(); 
 		}
 

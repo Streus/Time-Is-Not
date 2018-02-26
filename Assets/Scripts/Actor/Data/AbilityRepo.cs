@@ -19,7 +19,7 @@ public partial class Ability
             "Dash",
             "Dashes to mouse description",
             null,
-            2,
+            1,
             0,
             isDashing));
 	}

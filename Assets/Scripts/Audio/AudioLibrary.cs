@@ -84,9 +84,16 @@ public class AudioLibrary : Singleton<AudioLibrary>
     {
         GlobalAudio.PlaySound(inst.dashError);
     }
+
+    public AudioClip dashRecharge; // -- done : Location - DashUIPanel script
+
+    public static void PlayDashRechargeSound()
+    {
+        GlobalAudio.PlaySound(inst.dashRecharge);
+    }
     #endregion
 
-#region Environment Sounds
+    #region Environment Sounds
     // Environment // 
 
     public AudioClip laserSecurityCollisiion; // -- done : Location - Laser script
@@ -154,7 +161,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
 #region Mechanic Sounds
 
-    public AudioClip dashRecharge; // -- done : Location - DashBar script
+     
     public AudioClip stasisHum; // -- done : Location - StasisBubble script
 
     #endregion
