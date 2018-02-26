@@ -534,7 +534,10 @@ public class TetherManager : Singleton<TetherManager>
 		}
 		else
 		{
-            AudioLibrary.PlayTetherErrorSound();
+            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.tetherError))
+            {
+                AudioLibrary.PlayTetherErrorSound();
+            }
 			Debug.Log("Can't create tether point right now"); 
 		}
 	}
