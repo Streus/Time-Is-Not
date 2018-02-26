@@ -114,23 +114,59 @@ public class CursorManager : Singleton<CursorManager>
 				dashCursor.transform.position = dashTargetLockPos; 
 			}
 			// If the dash cursor is within the radius of the dash
-			//else if (Vector3.Distance(mouseWorldPos, GameManager.GetPlayer().transform.position) < GameManager.getPlayerMaxJumpDist())
+			/*
 			else if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
 			{
 				dashCursor.transform.position = mouseWorldPos; 
 			}
+			*/ 
 			// If the dash cursor is outside the dash radius
 			else
 			{
-				// TODO
-				//Vector2 mouseDir = ((Vector2)mouseWorldPos - (Vector2)p.transform.position + pcol.offset).normalized;
-				//dashCursor.transform.position = (Vector2)p.transform.position + pcol.offset + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
+				// Determine the jump distance
+				float finalDist = GameManager.getPlayerMaxJumpDist(); 
+				if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
+				{
+					finalDist = Vector2.Distance((Vector2)mouseWorldPos, pPos); 
+				}
 
+				// Get the radius of the dash cursor, assuming uniform size
+				float dashCursorRadius = dashCursorRend.bounds.extents.x; 
+
+				// Get the direction from the player position to the mouse
 				Vector3 mouseDir = (mouseWorldPos - pPos).normalized; 
-				dashCursor.transform.position = pPos + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
+
+				// Raycast to find any colliders in between the player position and the endpoint of the dash cursor
+				RaycastHit2D[] hits = Physics2D.RaycastAll((Vector2)pPos, mouseDir, finalDist + dashCursorRadius, GameManager.getPlayerMoveMask()); 
+
+				// Keep track of the nearest RaycastHit
+				RaycastHit2D nearest = default(RaycastHit2D);
+
+				// Find the nearest RaycastHit
+				for (int i = 0; i < hits.Length; i++)
+				{
+					if (hits[i].collider.isTrigger)
+						continue; 
+
+					if (nearest == default(RaycastHit2D))
+						nearest = hits[i];
+					else if (hits[i].distance < nearest.distance)
+						nearest = hits[i];
+				}
+
+				// If a RaycastHit was found, the distance to it replaces the default finalDist
+				if (nearest != default(RaycastHit2D))
+				{
+					Debug.Log("Has nearest. Dist: " + nearest.distance); 
+					finalDist = nearest.distance - dashCursorRadius; 
+				}
+
+				dashCursor.transform.position = pPos + (mouseDir * finalDist);
+				//dashCursor.transform.position = pPos + (mouseDir * GameManager.getPlayerMaxJumpDist());
 			}
 		}
 	}
+		
 
 	#if UNITY_EDITOR
 	void OnDrawGizmos()

@@ -154,6 +154,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return inst.playerObj; 
 	}
 
+	public static int getPlayerMoveMask()
+	{
+		return inst.playerScript.moveMask.value; 
+	}
+
 	public static float getPlayerMaxJumpDist()
 	{
 		return inst.playerScript.getMaxJumpDist; 
