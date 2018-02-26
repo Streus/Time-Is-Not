@@ -24,7 +24,10 @@ public class PlayerDefaultControl : Action
         if((Input.GetKeyDown(PlayerControlManager.RH_FireStasis) ||
             Input.GetKeyDown(PlayerControlManager.LH_FireStasis)) && !LevelStateManager.canAddStasisBubble())
         {
-            AudioLibrary.PlayStasisErrorSound();
+            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.stasisError))
+            {
+                AudioLibrary.PlayStasisErrorSound();
+            }
         }
 
         p.move();
