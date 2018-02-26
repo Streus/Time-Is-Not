@@ -107,7 +107,7 @@ public class CursorManager : Singleton<CursorManager>
 			{
 				dashCursor.transform.position = dashTargetLockPos; 
 			}
-			else if (Vector3.Distance(mouseWorldPos, GameManager.GetPlayer().transform.position) < 3)
+			else if (Vector3.Distance(mouseWorldPos, GameManager.GetPlayer().transform.position) < GameManager.getPlayerMaxJumpDist())
 			{
 				dashCursor.transform.position = mouseWorldPos; 
 			}
@@ -115,7 +115,7 @@ public class CursorManager : Singleton<CursorManager>
 			{
 				// TODO
 				Vector3 mouseDir = (mouseWorldPos - GameManager.GetPlayer().transform.position).normalized; 
-				dashCursor.transform.position = GameManager.GetPlayer().transform.position + (mouseDir * 3); 
+				dashCursor.transform.position = GameManager.GetPlayer().transform.position + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
 			}
 		}
 	}
