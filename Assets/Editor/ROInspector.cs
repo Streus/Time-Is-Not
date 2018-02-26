@@ -4,8 +4,23 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(RegisteredObject))]
+[InitializeOnLoad]
 public class ROInspector : Editor
 {
+	static ROInspector()
+	{
+		// Tell all ROs to attempt regeneration
+		// This is to account for instance IDs being inconsistent between loads of the Unity Editor.
+		Object[] ros = Resources.FindObjectsOfTypeAll (typeof(RegisteredObject));
+		Debug.Log ("Regenerating " + ros.Length + " ROIDs.");
+		for (int i = 0; i < ros.Length; i++)
+		{
+			((RegisteredObject)ros [i]).generateID ();
+			EditorUtility.SetDirty (ros [i]);
+		}
+		Debug.Log ("Done regenerating ROIDs");
+	}
+
 	RegisteredObject ro;
 	SerializedObject so;
 
