@@ -7,9 +7,15 @@ public class PlayerTargeting : Action
 {
     public override void perform(Controller c)
     {
+        //HOW TO GET COLLIDER OFFSET
+        Collider2D hitbox = c.gameObject.GetComponent<Collider2D>();
+        Vector2 trueCenter = (Vector2)c.transform.position + hitbox.offset;
+
+
+
         Player p = State.cast<Player>(c);
 		BoxCollider2D collider = p.GetComponent<BoxCollider2D> ();
-		Vector2 colliderSize = new Vector2(collider.size.x * p.transform.localScale.x, collider.size.y * p.transform.localScale.y);
+        Vector2 colliderSize = new Vector2(collider.size.x * p.transform.localScale.x, collider.size.y * p.transform.localScale.y) * .5f;
 		Vector2 colliderOffset = collider.offset;
 		Vector3 pospoff = p.transform.position + (Vector3)colliderOffset;
 
@@ -42,9 +48,9 @@ public class PlayerTargeting : Action
 		Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		float dist = Vector2.Distance(mp, pospoff);
         if (dist > jumpDistance) //if the distance to the mouse is greater than our max jump distance, limit the target position to our max jump distance
-			p.setJumpTargetPos((Vector2)p.transform.position + colliderOffset + (mp - (Vector2)p.transform.position).normalized * jumpDistance);
+			p.setJumpTargetPos((Vector2)p.transform.position + colliderOffset + (mp - (Vector2)p.transform.position + colliderOffset).normalized * jumpDistance);
         else if (dist < p.getMinJumpDist) // if there's no concept of a minimum distance, cut this line out as well as the line with the if statement
-			p.setJumpTargetPos((Vector2)p.transform.position + colliderOffset + (mp - (Vector2)p.transform.position).normalized * Mathf.Min(jumpDistance, p.getMinJumpDist));
+			p.setJumpTargetPos((Vector2)p.transform.position + colliderOffset + (mp - (Vector2)p.transform.position + colliderOffset).normalized * Mathf.Min(jumpDistance, p.getMinJumpDist));
         else //mouse is within the max distance, no need to limit
             p.setJumpTargetPos(mp);
 
