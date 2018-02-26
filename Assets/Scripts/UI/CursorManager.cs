@@ -103,22 +103,54 @@ public class CursorManager : Singleton<CursorManager>
 		// If in gameplay state, update the position of the dash cursor
 		if (cursorState == CursorState.GAMEPLAY)
 		{
+			GameObject p = GameManager.GetPlayer();
+			Collider2D pcol = p.GetComponent<Collider2D>();
+			Vector3 pPos = p.transform.position + (Vector3)pcol.offset; 
+			pPos = new Vector3 (pPos.x, pPos.y, 0); 
+
+			// If the player is dashing to a spot, the dash cursor remains fixed
 			if (dashTargetLock)
 			{
 				dashCursor.transform.position = dashTargetLockPos; 
 			}
-			else if (Vector3.Distance(mouseWorldPos, GameManager.GetPlayer().transform.position) < GameManager.getPlayerMaxJumpDist())
+			// If the dash cursor is within the radius of the dash
+			//else if (Vector3.Distance(mouseWorldPos, GameManager.GetPlayer().transform.position) < GameManager.getPlayerMaxJumpDist())
+			else if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
 			{
 				dashCursor.transform.position = mouseWorldPos; 
 			}
+			// If the dash cursor is outside the dash radius
 			else
 			{
 				// TODO
-				Vector3 mouseDir = (mouseWorldPos - GameManager.GetPlayer().transform.position).normalized; 
-				dashCursor.transform.position = GameManager.GetPlayer().transform.position + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
+				//Vector2 mouseDir = ((Vector2)mouseWorldPos - (Vector2)p.transform.position + pcol.offset).normalized;
+				//dashCursor.transform.position = (Vector2)p.transform.position + pcol.offset + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
+
+				Vector3 mouseDir = (mouseWorldPos - pPos).normalized; 
+				dashCursor.transform.position = pPos + (mouseDir * GameManager.getPlayerMaxJumpDist()); 
 			}
 		}
 	}
+
+	#if UNITY_EDITOR
+	void OnDrawGizmos()
+	{
+		if (Application.isPlaying)
+		{
+			GameObject p = GameManager.GetPlayer();
+			Collider2D pcol = p.GetComponent<Collider2D>();
+			Vector3 pPos = p.transform.position + (Vector3)pcol.offset; 
+			pPos = new Vector3 (pPos.x, pPos.y, 0); 
+			Gizmos.color = Color.yellow; 
+			Gizmos.DrawWireSphere(pPos, GameManager.getPlayerMaxJumpDist()); 
+
+			//TEMPORARY MOUSE GIZMO SHIT
+			Gizmos.color = Color.white; 
+			Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Gizmos.DrawLine(transform.position + (Vector3)pcol.offset, mouseWorldPos);
+		}
+	}
+	#endif
 
 	void RefreshCursorType()
 	{
