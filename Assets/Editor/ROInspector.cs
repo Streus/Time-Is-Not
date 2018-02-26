@@ -7,25 +7,12 @@ using UnityEditor;
 [InitializeOnLoad]
 public class ROInspector : Editor
 {
-	static ROInspector()
-	{
-		// Tell all ROs to attempt regeneration
-		// This is to account for instance IDs being inconsistent between loads of the Unity Editor.
-		Object[] ros = Resources.FindObjectsOfTypeAll (typeof(RegisteredObject));
-		Debug.Log ("Regenerating " + ros.Length + " ROIDs.");
-		for (int i = 0; i < ros.Length; i++)
-		{
-			((RegisteredObject)ros [i]).generateID ();
-			EditorUtility.SetDirty (ros [i]);
-		}
-		Debug.Log ("Done regenerating ROIDs");
-	}
-
-	RegisteredObject ro;
-	SerializedObject so;
+	public RegisteredObject ro;
+	public SerializedObject so;
 
 	public void OnEnable()
 	{
+		ro = (RegisteredObject)target;
 		try
 		{
 			so = new SerializedObject(ro);
@@ -35,22 +22,12 @@ public class ROInspector : Editor
 		#pragma warning restore 0168
 	}
 
-	public void Awake()
-	{
-		ro = (RegisteredObject)target;
-		if (!EditorApplication.isPlayingOrWillChangePlaymode)
-		{
-			Undo.RecordObject (ro, "Generate ID");
-			ro.generateID ();
-			EditorUtility.SetDirty (ro);
-		}
-	}
-
 	public override void OnInspectorGUI ()
 	{
 		so.Update ();
 
-		GUILayout.Label (ro.rID, EditorStyles.largeLabel);
+		string id = ro.rID == default(string) ? "(ID will be generated in Playmode)" : ro.rID;
+		GUILayout.Label (id, EditorStyles.largeLabel);
 
 		GUILayout.BeginHorizontal ();
 		EditorGUILayout.PrefixLabel ("Stasisable");

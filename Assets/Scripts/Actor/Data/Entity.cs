@@ -228,8 +228,6 @@ public sealed class Entity : MonoBehaviour
 
 		if (died != null)
 			died ();
-
-		//TODO maybe play death animation?
 	}
 
 	#endregion

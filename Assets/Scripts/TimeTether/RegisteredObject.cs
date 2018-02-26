@@ -18,16 +18,11 @@ public class RegisteredObject : MonoBehaviour
 	#endregion
 
 	#region INSTANCE_VARS
-	[SerializeField]
 	private string registeredID;
 	public string rID
 	{
 		get { return registeredID; }
 	}
-
-	// Used to check for duplication of objects
-	[SerializeField]
-	private int instanceID = 0;
 
 	// Path to a prefab to which this RO is attached
 	[SerializeField]
@@ -71,7 +66,7 @@ public class RegisteredObject : MonoBehaviour
 		else
 			inst = Instantiate (go, position, rotation, parent);
 		RegisteredObject ro = inst.GetComponent<RegisteredObject> ();
-		ro.Reset ();
+		ro.generateID ();
 		ro.prefabPath = prefabPath;
 		return inst;
 	}
@@ -98,30 +93,18 @@ public class RegisteredObject : MonoBehaviour
 	#endregion
 
 	#region INSTANCE_METHODS
-	public void Reset()
-	{
-		Debug.LogWarning ("Resetting " + gameObject.name + " (" + registeredID + ")");
-		generateID ();
-	}
-
 	public void generateID()
 	{
-		if (instanceID == 0)
-		{
-			instanceID = gameObject.GetInstanceID ();
-			Debug.Log ("[RO] New instance: " + instanceID); //DEBUG
-		}
-			
-		if(registeredID == "" || instanceID != gameObject.GetInstanceID())
-		{
-			registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
-			instanceID = gameObject.GetInstanceID ();
-			Debug.Log ("[RO] " + gameObject.name + " has a new ID: " + registeredID); //DEBUG
-		}
+		#if UNITY_EDITOR
+		if(!EditorApplication.isPlayingOrWillChangePlaymode)
+			return;
+		#endif
+		registeredID = Convert.ToBase64String (Guid.NewGuid ().ToByteArray ()).TrimEnd('=');
 	}
 
 	public void Awake()
 	{
+		generateID ();
 		directory.Add (this);
 	}
 

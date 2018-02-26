@@ -167,7 +167,6 @@ public class Atlas : MonoBehaviour
 		int width = Mathf.FloorToInt ((maxpoint.transform.position.x - transform.position.x) / cd);
 		int height = Mathf.FloorToInt ((maxpoint.transform.position.y - transform.position.y) / cd);
 		graph = new GraphMap (transform.position, maxpoint.transform.position, cd, width, height);
-		Debug.Log (graph.ToString ()); //DEBUG graph toString
 
 		Profiler.BeginSample ("Atlas Generate", this);
 
