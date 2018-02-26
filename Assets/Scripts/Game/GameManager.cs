@@ -154,6 +154,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return inst.playerObj; 
 	}
 
+	public static float getPlayerMaxJumpDist()
+	{
+		return inst.playerScript.getMaxJumpDist; 
+	}
+
 	public static bool isPlayerDashing()
 	{
 		return inst.playerScript.dashing(); 
@@ -166,6 +171,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 			return true;
 		}
 		return false; 
+	}
+
+	public static float dashChargePercNormalized()
+	{
+		return inst.playerScript.getSelf().getAbility(1).cooldownPercentage(); 
 	}
 		
 	public static CameraManager GetCameraManager()
