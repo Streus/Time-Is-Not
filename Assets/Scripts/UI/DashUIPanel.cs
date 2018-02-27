@@ -20,9 +20,9 @@ public class DashUIPanel : MonoBehaviour
 	public float colorLerpSpeed = 1; 
 
 	[Tooltip("The speed that the fill of the dashImg changes. NOT the same as dash recharge speed.")]
-	public float fillLerpSpeed = 1; 
+	public float fillLerpSpeed = 1;
 
-
+    bool charged = true;
 
 	// Use this for initialization
 	void Start () 
@@ -37,8 +37,16 @@ public class DashUIPanel : MonoBehaviour
 
 		if (GameManager.dashIsCharged())
 		{
-			dashImg.color = Color.Lerp(dashImg.color, Color.white, colorLerpSpeed * Time.deltaTime); 
-		}
+			dashImg.color = Color.Lerp(dashImg.color, Color.white, colorLerpSpeed * Time.deltaTime);
+            if (!charged)
+            {
+                if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashRecharge))
+                {
+                    AudioLibrary.PlayDashRechargeSound();
+                }
+                charged = true;
+            }
+        }
 		// If charging
 		else
 		{
@@ -47,14 +55,9 @@ public class DashUIPanel : MonoBehaviour
 			// TODO set image fill
 			float fillTarget = 1 - GameManager.dashChargePercNormalized(); 
 
-			dashImg.fillAmount = Mathf.Lerp(dashImg.fillAmount, fillTarget, fillLerpSpeed * Time.deltaTime); 
-
-            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashRecharge))
-            {
-                AudioLibrary.PlayDashRechargeSound();
-            }
-
-			//dashImg.fillAmount = 1 - GameManager.dashChargePercNormalized(); 
+			dashImg.fillAmount = Mathf.Lerp(dashImg.fillAmount, fillTarget, fillLerpSpeed * Time.deltaTime);
+            //dashImg.fillAmount = 1 - GameManager.dashChargePercNormalized(); 
+            charged = false;
 		}
 
 		/*
