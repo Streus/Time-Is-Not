@@ -6,7 +6,6 @@ using UnityEditor;
 [CustomEditor(typeof(SpriteOrderer))]
 public class SpriteOrdererEditor : Editor 
 {
-
 	public override void OnInspectorGUI()
 	{
 		DrawDefaultInspector ();

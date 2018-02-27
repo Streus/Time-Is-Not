@@ -46,11 +46,13 @@ public class Door : Interactable, IActivatable, ISavable
 
     AudioSource source;
 
-    AudioClip openDoor;
-    AudioClip closeDoor;
+    AudioClip openFieldDoor;
+    AudioClip closeFieldDoor;
+    AudioClip openMetalDoor;
+    AudioClip closeMetalDoor;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start () 
 	{
 		if (!Application.isPlaying)
 			return;
@@ -63,8 +65,10 @@ public class Door : Interactable, IActivatable, ISavable
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 
         source = this.GetComponent<AudioSource>();
-        openDoor = AudioLibrary.inst.doorOpen;
-        closeDoor = AudioLibrary.inst.doorClosed;
+        openFieldDoor = AudioLibrary.inst.doorFieldOpen;
+        closeFieldDoor = AudioLibrary.inst.doorFieldClosed;
+        openMetalDoor = AudioLibrary.inst.doorMetalOpen;
+        closeMetalDoor = AudioLibrary.inst.doorMetalClose;
 	}
 
 	// Update is called once per frame
@@ -200,30 +204,48 @@ public class Door : Interactable, IActivatable, ISavable
 		_isOpen = false;
     }
 
-    public void PlayOpenSound()
+    public void PlayFieldOpenSound()
     {
         if (source != null)
         {
-            source.clip = openDoor;
+            source.clip = openFieldDoor;
             source.Play();
         }
     }
 
-    public void PlayCloseSound()
+    public void PlayFieldCloseSound()
     {
         if (source != null)
         {
-            source.clip = closeDoor;
+            source.clip = closeFieldDoor;
             source.Play();
         }
     }
-	//****Savable Object Functions****
 
-	/// <summary>
-	/// Saves the data into a seed.
-	/// </summary>
-	/// <returns>The seed.</returns>
-	public SeedBase saveData()
+    public void PlayMetalOpenSound()
+    {
+        if (source != null)
+        {
+            source.clip = openMetalDoor;
+            source.Play();
+        }
+    }
+
+    public void PlayMetalCloseSound()
+    {
+        if (source != null)
+        {
+            source.clip = closeMetalDoor;
+            source.Play();
+        }
+    }
+    //****Savable Object Functions****
+
+    /// <summary>
+    /// Saves the data into a seed.
+    /// </summary>
+    /// <returns>The seed.</returns>
+    public SeedBase saveData()
 	{
 		Seed seed = new Seed ();
 
