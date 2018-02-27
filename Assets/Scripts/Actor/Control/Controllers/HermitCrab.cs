@@ -54,7 +54,7 @@ public class HermitCrab : Controller
 	private void onStasised(bool val)
 	{
 		sitMod = val ? slowedMultiplier : 1f;
-
+		
 		//TODO some visual effect for HC stasis'd?
 	}
 

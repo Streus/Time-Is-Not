@@ -14,6 +14,10 @@ public class Hummingbird : PatrollingEnemy
 	[Range(1f, 360f)]
 	private float fieldOfView = 90f;
 
+	[Tooltip("The amount speed is slowed by stasis bubbles")]
+	[SerializeField]
+	private float slowedMultiplier = 2f;
+
 	private State defaultState;
 
 	private Transform pursuitTarget;
@@ -39,8 +43,21 @@ public class Hummingbird : PatrollingEnemy
 		Transform spriteChild = transform.Find ("Sprite");
 		hummingAnim = spriteChild.GetComponent<Animator> ();
 
+		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 	}
 
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= onStasised;
+	}
+
+	private void onStasised(bool val)
+	{
+		if (val)
+			getSelf ().modMovespeed (1 / slowedMultiplier);
+		else
+			getSelf ().modMovespeed (slowedMultiplier);
+	}
 
 	public override void Update()
 	{
