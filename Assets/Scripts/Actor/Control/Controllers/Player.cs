@@ -73,6 +73,7 @@ public class Player : Controller
 		getSelf ().addAbility (Ability.get ("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
+        getSelf().getAbility(1).resetCooldown();
     }
 
 	public override void Update()

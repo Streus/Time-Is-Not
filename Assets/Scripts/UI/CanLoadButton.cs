@@ -13,7 +13,9 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	//public Sprite activeSprite;
 	//public Sprite inactiveSprite; 
 
-	Image image; 
+	Image image;
+
+    bool hover = false;
 
 	void Start()
 	{
@@ -42,7 +44,15 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (button.interactable)
 		{
 			//Debug.Log("Mouse is over button for state " + state);
-			TetherManager.OnPointerEnter(state); 
+			TetherManager.OnPointerEnter(state);
+            if (!hover)
+            {
+                //if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.tetherMenuHover))
+                //{
+                    AudioLibrary.PlayTetherMenuHover();
+                //}
+                hover = true;
+            }
 		}
 	}
 
@@ -52,7 +62,8 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (button.interactable)
 		{
 			//Debug.Log("Mouse is no longer over button for state " + state);
-			TetherManager.OnPointerExit(); 
+			TetherManager.OnPointerExit();
+            hover = false;
 		}
 	}
 }

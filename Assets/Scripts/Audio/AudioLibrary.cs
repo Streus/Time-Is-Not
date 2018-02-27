@@ -16,18 +16,11 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherSelect);
     }
 
-    public AudioClip tetherMenuOpen; // --  done : Location - TetherManager script
+    public AudioClip tetherMenuHover; // --  done : Location - TetherManager script
 
-    public static void PlayTetherMenuOpen()
+    public static void PlayTetherMenuHover()
     {
-        GlobalAudio.PlaySound(inst.tetherMenuOpen);
-    }
-
-    public AudioClip tetherMenuClose; // -- done : Location - TetherManager script
-
-    public static void PlayTetherMenuClose()
-    {
-        GlobalAudio.PlaySound(inst.tetherMenuClose);
+        GlobalAudio.PlaySound(inst.tetherMenuHover);
     }
 
     //public AudioClip gameOver; // -- question : Do we have a sound for this?
