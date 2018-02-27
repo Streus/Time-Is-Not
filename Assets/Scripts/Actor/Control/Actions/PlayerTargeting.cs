@@ -31,7 +31,7 @@ public class PlayerTargeting : Action
             RaycastHit2D nearest = default(RaycastHit2D);
             foreach (RaycastHit2D hit in pathCheck)
             {
-				if (hit.collider.isTrigger)
+				if (hit.collider.isTrigger || hit.collider == c.GetComponent<Collider2D>())
 					continue;
 
                 if (nearest == default(RaycastHit2D))

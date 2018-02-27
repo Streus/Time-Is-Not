@@ -1817,7 +1817,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.09, y: 0, z: 0}
+  m_LocalPosition: {x: -8.64, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -3943,7 +3943,7 @@ MonoBehaviour:
   dashState: {fileID: 11400000, guid: 1f9c4f4be5d084a43ae77dba1e7e5de1, type: 2}
   moveMask:
     serializedVersion: 2
-    m_Bits: 49156
+    m_Bits: 49408
   isOverPit: 0
   isOnPlatform: 0
   minJumpDist: 1
@@ -4443,8 +4443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetherSelect: {fileID: 8300000, guid: 34312f4d3305d8a49bcc1c4a520e65c3, type: 3}
-  tetherMenuOpen: {fileID: 8300000, guid: f18e83f9aa6525242a52268a0f68035a, type: 3}
-  tetherMenuClose: {fileID: 8300000, guid: f18e83f9aa6525242a52268a0f68035a, type: 3}
+  tetherMenuHover: {fileID: 0}
   tetherPlacement: {fileID: 8300000, guid: da142e1fd2b1cb14cbb09083586eabab, type: 3}
   tetherRewind: {fileID: 8300000, guid: 036243f4f447fe9458493067aa32c096, type: 3}
   tetherError: {fileID: 8300000, guid: c1e6076e0e3b93b46bfbf7043381b668, type: 3}
@@ -8981,7 +8980,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -697953311
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 10000
   m_Sprite: {fileID: 21300000, guid: 3e00e7b67a7c045ab8664d079b3195a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9023,7 +9022,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -697953311
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 10000
   m_Sprite: {fileID: 21300000, guid: 243296f292d074c1ab5480e8907dd534, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
