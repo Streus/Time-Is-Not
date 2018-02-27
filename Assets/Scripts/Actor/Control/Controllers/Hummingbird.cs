@@ -71,6 +71,8 @@ public class Hummingbird : PatrollingEnemy
 		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
 		base.Update();
+
+		hummingAnim.gameObject.GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
 	#region GETTERS_SETTERS
