@@ -21,15 +21,15 @@ public class Player : Controller
     public LayerMask moveMask;
 
     [SerializeField]
-	private bool isOverPit;
+    private bool isOverPit;
 
-	[SerializeField]
-	private bool isOnPlatform;
+    [SerializeField]
+    private bool isOnPlatform;
 
-	[SerializeField]
-	private float minJumpDist;
+    [SerializeField]
+    private float minJumpDist;
 
-	public SpriteRenderer sprite;
+    public SpriteRenderer sprite;
 
 
     public float getMinJumpDist
@@ -64,63 +64,63 @@ public class Player : Controller
         }
     }
 
-	#endregion
+    #endregion
 
-	#region INSTANCE_METHODS
-	public void Start ()
-	{
-		sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer> ();
-		getSelf ().addAbility (Ability.get ("Place Stasis"));
+    #region INSTANCE_METHODS
+    public void Start()
+    {
+        sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        getSelf().addAbility(Ability.get("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
         getSelf().getAbility(1).resetCooldown();
     }
 
-	public override void Update()
-	{
-		// Conditions for stopping the Player from updating
-		// (a) If the camera is not zoomed out 
-		if (!GameManager.CameraIsZoomedOut())
-		{
-			base.Update(); 
-		}
-		CheckForGround ();
-		sprite.sortingOrder = SpriteOrderer.inst.OrderMe (transform);
-	}
+    public override void Update()
+    {
+        // Conditions for stopping the Player from updating
+        // (a) If the camera is not zoomed out 
+        if (!GameManager.CameraIsZoomedOut())
+        {
+            base.Update();
+        }
+        CheckForGround();
+        sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
+    }
 
-	public override void FixedUpdate ()
-	{
-		base.FixedUpdate ();
-	}
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 
     private void OnDestroy()
     {
         getSelf().died -= deathReset;
-        
+
     }
     private void deathReset()
     {
         Debug.Log("I reset");
         setState(playerDefault);
         getSelf().getAbility(1).active = true;
-        
+
     }
 
-	public void enterPushState()
-	{
-		prePushState = getState();
-		setState (pushState);
-	}
+    public void enterPushState()
+    {
+        prePushState = getState();
+        setState(pushState);
+    }
 
-	public void exitPushState()
-	{
-		setState (prePushState);
-	}
+    public void exitPushState()
+    {
+        setState(prePushState);
+    }
 
-	public bool pushing()
-	{
-		return (pushState == getState ());
-	}
+    public bool pushing()
+    {
+        return (pushState == getState());
+    }
 
     public void enterDashState()
     {
@@ -153,76 +153,86 @@ public class Player : Controller
         ContactFilter2D cf = new ContactFilter2D();
         cf.SetLayerMask(moveMask);
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
-		if (hitCount <= 0)
+        if (hitCount <= 0)
             transform.Translate((Vector3)movementVector);
     }
 
-	//checks for pits and moving platforms under the players feet
-	public void CheckForGround()
-	{
-		Collider2D[] colsHit = Physics2D.OverlapPointAll (transform.position + (Vector3)GetComponent<BoxCollider2D> ().offset, 1 << LayerMask.NameToLayer ("SkyEnts") | 1 << LayerMask.NameToLayer ("Pits"));
-		bool seesMP = false;
-		bool seesPit = false;
-		for(int i = 0; i < colsHit.Length; i++)
-		{
-			if (colsHit [i].gameObject.CompareTag ("MovingPlatform"))
-			{
-				seesMP = true;
-			}
-			if (colsHit [i].gameObject.CompareTag ("Pit"))
-			{
-				seesPit = true;
-			}
-		}
-		isOnPlatform = seesMP;
-		isOverPit = seesPit;
-		if(isOverPit && !isOnPlatform && !dashing())
-		{
-			Entity ent = gameObject.GetComponent<Entity> ();
-			if (ent != null)
-				ent.onDeath ();
-		}
-	}
+    //checks for pits and moving platforms under the players feet
+    public void CheckForGround()
+    {
+        Collider2D[] colsHit = Physics2D.OverlapPointAll(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, 1 << LayerMask.NameToLayer("SkyEnts") | 1 << LayerMask.NameToLayer("Pits"));
+        bool seesMP = false;
+        bool seesPit = false;
+        for (int i = 0; i < colsHit.Length; i++)
+        {
+            if (colsHit[i].gameObject.CompareTag("MovingPlatform"))
+            {
+                seesMP = true;
+            }
+            if (colsHit[i].gameObject.CompareTag("Pit"))
+            {
+                seesPit = true;
+            }
+        }
+        isOnPlatform = seesMP;
+        isOverPit = seesPit;
+        if (isOverPit && !isOnPlatform && !dashing())
+        {
+            Entity ent = gameObject.GetComponent<Entity>();
+            if (ent != null)
+                ent.onDeath();
+        }
+    }
 
-	public override void OnDrawGizmos()
-	{
-		// Dash debug
-		if (jumpTargetPos != Vector3.zero)
-		{
-			Gizmos.color = Color.green;
-			Vector2 csize = GetComponent<BoxCollider2D> ().size;
-			Vector3 actualSize = new Vector3 (csize.x * transform.localScale.x, csize.y * transform.localScale.y);
-			Gizmos.DrawWireCube (jumpTargetPos, actualSize);
-		}
-	}
-	#region ISAVABLE_METHODS
+    public override void OnDrawGizmos()
+    {
+        // Dash debug
+        if (jumpTargetPos != Vector3.zero)
+        {
+            Gizmos.color = Color.green;
+            Vector2 csize = GetComponent<BoxCollider2D>().size;
+            Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
+            Gizmos.DrawWireCube(jumpTargetPos, actualSize);
+        }
+    }
+    public void StartWait()
+    {
+        StartCoroutine(WaitForTether());
+    }
+    public IEnumerator WaitForTether()
+    {
+        enterPushState();
+        yield return new WaitForSeconds(.5f);
+        exitPushState();
+    }
+    #region ISAVABLE_METHODS
 
-	public override SeedBase saveData ()
-	{
-		return new PSeed (this);
-	}
+    public override SeedBase saveData()
+    {
+        return new PSeed(this);
+    }
 
-	public override void loadData (SeedBase seed)
-	{
-		base.loadData (seed);
-		PSeed p = (PSeed)seed;
-		jumpTargetPos = p.jumpTargetPos;
-	}
+    public override void loadData(SeedBase seed)
+    {
+        base.loadData(seed);
+        PSeed p = (PSeed)seed;
+        jumpTargetPos = p.jumpTargetPos;
+    }
 
-	#endregion
+    #endregion
 
-	#endregion
+    #endregion
 
-	#region INTERNAL_TYPES
-	private class PSeed : Seed
-	{
-		public Vector3 jumpTargetPos;
+    #region INTERNAL_TYPES
+    private class PSeed : Seed
+    {
+        public Vector3 jumpTargetPos;
 
-		public PSeed(Controller c) : base(c)
-		{
-			Player p = State.cast<Player>(c);
-			jumpTargetPos = p.jumpTargetPos;
-		}
-	}
-	#endregion
+        public PSeed(Controller c) : base(c)
+        {
+            Player p = State.cast<Player>(c);
+            jumpTargetPos = p.jumpTargetPos;
+        }
+    }
+    #endregion
 }
