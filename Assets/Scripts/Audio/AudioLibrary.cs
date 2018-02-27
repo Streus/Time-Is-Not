@@ -165,8 +165,10 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip pressurePlateOn; // -- done : Location - pressure plate script
     public AudioClip pressurePlateOff; // -- doesn't exist but is probably needed : Location - pressure plate script - currently using pressureplateon sound
     public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
-    public AudioClip doorClosed; // -- done : Location - Door script
-    public AudioClip doorOpen; // -- done : Location - Door script 
+    public AudioClip doorFieldClosed; // -- done : Location - Door script
+    public AudioClip doorFieldOpen; // -- done : Location - Door script 
+    public AudioClip doorMetalClose;
+    public AudioClip doorMetalOpen;
 
     #endregion
 
