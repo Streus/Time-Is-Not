@@ -168,7 +168,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	void OnDrawGizmos()
 	{
-		if (_col == null)
+	/*	if (_col == null)
 			_col = gameObject.GetComponent<BoxCollider2D> ();
 		Vector2 moveDir = Vector2.zero;
 		switch(_moveDirection)
@@ -189,7 +189,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
 		moveDir *= 0.1f;
 		Gizmos.DrawCube ((Vector2)transform.position + moveDir + _col.offset, _col.size);
-
+		*/
 
 	}
 
