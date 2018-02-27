@@ -200,7 +200,7 @@ public class RegisteredObject : MonoBehaviour
 			allowReset--;
 
 		if (allowResetChanged != null)
-			allowResetChanged (!val);
+			allowResetChanged (!getAllowReset());
 	}
 
 	public bool getAllowReset()
