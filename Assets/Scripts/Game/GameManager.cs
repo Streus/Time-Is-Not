@@ -171,6 +171,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return inst.playerScript.getMaxJumpDist();
 	}
 
+	public static Vector3 getPlayerJumpTarget()
+	{
+		return inst.playerScript.getJumpTargetPos(); 
+	}
+
 	public static bool isPlayerDashing()
 	{
 		return inst.playerScript.dashing(); 

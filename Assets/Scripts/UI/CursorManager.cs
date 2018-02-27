@@ -114,12 +114,27 @@ public class CursorManager : Singleton<CursorManager>
 				dashCursor.transform.position = dashTargetLockPos; 
 			}
 			// If the dash cursor is within the radius of the dash
-			/*
 			else if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
 			{
 				dashCursor.transform.position = mouseWorldPos; 
 			}
-			*/ 
+			// If the dash cursor is outside the dash radius
+			else
+			{
+				dashCursor.transform.position = GameManager.getPlayerJumpTarget(); 
+			}
+
+			/*
+			// If the player is dashing to a spot, the dash cursor remains fixed
+			if (dashTargetLock)
+			{
+				dashCursor.transform.position = dashTargetLockPos; 
+			}
+			// If the dash cursor is within the radius of the dash
+//			else if (Vector2.Distance((Vector2)mouseWorldPos, pPos) < GameManager.getPlayerMaxJumpDist())
+//			{
+//				dashCursor.transform.position = mouseWorldPos; 
+//			}
 			// If the dash cursor is outside the dash radius
 			else
 			{
@@ -166,6 +181,7 @@ public class CursorManager : Singleton<CursorManager>
 				dashCursor.transform.position = pPos + (mouseDir * finalDist);
 				//dashCursor.transform.position = pPos + (mouseDir * GameManager.getPlayerMaxJumpDist());
 			}
+			*/ 
 		}
 	}
 		
