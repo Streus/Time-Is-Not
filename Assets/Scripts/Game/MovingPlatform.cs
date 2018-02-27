@@ -21,6 +21,7 @@ public class MovingPlatform : MoveObject
 			_waitTimer = 0;
 		}
 		setNextPoint ();
+		CheckForPlayer ();
 	}
 
 	/// <summary>
@@ -62,9 +63,33 @@ public class MovingPlatform : MoveObject
 
 	}
 
+	void CheckForPlayer()
+	{
+		bool seesPlayer = false;
+		Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position, gameObject.GetComponent<BoxCollider2D> ().size, 0f);
+		for(int i = 0; i < colsHit.Length; i++)
+		{
+			if (colsHit[i].gameObject.GetComponent<Entity> () != null) 
+			{
+				//Check if 
+				Entity entityHit = colsHit[i].gameObject.GetComponent<Entity> ();
+				if (entityHit.getFaction () == Entity.Faction.player) 
+				{
+					if (!entityHit.GetComponent<Player> ().dashing ()) 
+					 {
+						seesPlayer = true;
+						_player = entityHit.transform;
+					}
+				}
+			}
+		}
+		if (_player != null && !seesPlayer)
+			_player = null;
+	}
+
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.GetComponent<Entity> () != null) 
+		/*if (col.gameObject.GetComponent<Entity> () != null) 
 		{
 			//Check if 
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
@@ -72,18 +97,18 @@ public class MovingPlatform : MoveObject
 			{
 				_player = entityHit.transform;
 			}
-		}
+		}*/
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		if (col.gameObject.GetComponent<Entity> () != null) 
+		/*if (col.gameObject.GetComponent<Entity> () != null) 
 		{
 			Entity entityHit = col.gameObject.GetComponent<Entity> ();
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_player = null;
 			}
-		}
+		}*/
 	}
 }
