@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4489922459645404}
   - component: {fileID: 50727584840661220}
-  - component: {fileID: 114879508998875472}
   - component: {fileID: 95120681443490820}
   - component: {fileID: 114445996024478426}
   - component: {fileID: 212006608494778506}
   - component: {fileID: 114210800986143452}
   - component: {fileID: 61404376965571386}
+  - component: {fileID: 114244278270935320}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -132,6 +132,20 @@ MonoBehaviour:
   minJumpDist: 0
   sprite: {fileID: 0}
   maxJumpDist: 2
+--- !u!114 &114244278270935320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991302296576302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
 --- !u!114 &114445996024478426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,22 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 0
   movespeed: 3
---- !u!114 &114879508998875472
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1991302296576302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  registeredID: kqI5D36fhkCRLazjF/Mj0Q
-  instanceID: 11544
-  prefabPath: 
-  stasisable: 1
-  allowReset: 1
 --- !u!212 &212006608494778506
 SpriteRenderer:
   m_ObjectHideFlags: 1

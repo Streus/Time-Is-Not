@@ -25,9 +25,9 @@ GameObject:
   - component: {fileID: 114619298949479476}
   - component: {fileID: 114646264623906580}
   - component: {fileID: 212938236447191388}
-  - component: {fileID: 114804344943749318}
   - component: {fileID: 61122957819778704}
   - component: {fileID: 60046205215863430}
+  - component: {fileID: 114385565083487850}
   m_Layer: 8
   m_Name: HermitCrab
   m_TagString: Untagged
@@ -146,6 +146,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114385565083487850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1016497557321634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
 --- !u!114 &114619298949479476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,22 +196,6 @@ MonoBehaviour:
   _downKey: 115
   _leftKey: 97
   isInArea: 0
---- !u!114 &114804344943749318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1016497557321634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  registeredID: fr570M/+0UmTPvt/3xTB6g
-  instanceID: 11192
-  prefabPath: 
-  stasisable: 1
-  allowReset: 1
 --- !u!114 &114891935391876616
 MonoBehaviour:
   m_ObjectHideFlags: 1

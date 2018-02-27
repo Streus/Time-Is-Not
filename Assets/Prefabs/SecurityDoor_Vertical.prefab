@@ -21,12 +21,12 @@ GameObject:
   - component: {fileID: 4514755154847986}
   - component: {fileID: 212481634314410914}
   - component: {fileID: 114873090888215232}
-  - component: {fileID: 114087426257050950}
   - component: {fileID: 95360499343149352}
   - component: {fileID: 60601893251592432}
   - component: {fileID: 60436867562330482}
   - component: {fileID: 82315169233059366}
   - component: {fileID: 61415979230268872}
+  - component: {fileID: 114559385771199938}
   m_Layer: 14
   m_Name: SecurityDoor_Vertical
   m_TagString: Untagged
@@ -225,7 +225,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114087426257050950
+--- !u!114 &114559385771199938
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -236,8 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: M7jdJoCA6U6xp+zbOjPR+w
-  instanceID: 12402
   prefabPath: 
   stasisable: 1
   allowReset: 1

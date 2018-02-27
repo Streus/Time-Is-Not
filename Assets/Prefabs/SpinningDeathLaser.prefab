@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4055253157385092}
   - component: {fileID: 120274544241393510}
   - component: {fileID: 114772797242149810}
-  - component: {fileID: 114916806526197322}
+  - component: {fileID: 114147844923201892}
   m_Layer: 0
   m_Name: DeathLaser 1
   m_TagString: Untagged
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4155991444189208}
   - component: {fileID: 120583488244347870}
   - component: {fileID: 114010366461383838}
-  - component: {fileID: 114700508414093484}
+  - component: {fileID: 114203410830744230}
   m_Layer: 0
   m_Name: DeathLaser 2
   m_TagString: Untagged
@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048179310451416}
   - component: {fileID: 114021830419504684}
-  - component: {fileID: 114986084590390596}
+  - component: {fileID: 114139216026484542}
   m_Layer: 0
   m_Name: SpinningDeathLaser
   m_TagString: Untagged
@@ -406,7 +406,35 @@ MonoBehaviour:
   _clockwise: 1
   _active: 1
   _turnSpeed: -70
---- !u!114 &114700508414093484
+--- !u!114 &114139216026484542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1909325426688012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
+--- !u!114 &114147844923201892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195882875314928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
+--- !u!114 &114203410830744230
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -417,8 +445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: x5YJDXMtGEaFcfbKRwnNmA
-  instanceID: -58078
   prefabPath: 
   stasisable: 1
   allowReset: 1
@@ -493,38 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1366fb1975d9e42b392a58fc63d5aa71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114916806526197322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195882875314928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  registeredID: wKO1PAN+hU+0T9AXBv/QKw
-  instanceID: -58076
-  prefabPath: 
-  stasisable: 1
-  allowReset: 1
---- !u!114 &114986084590390596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1909325426688012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  registeredID: 5DZN2WnvF0ewTw9B9a4WAQ
-  instanceID: 11568
-  prefabPath: 
-  stasisable: 1
-  allowReset: 1
 --- !u!120 &120274544241393510
 LineRenderer:
   m_ObjectHideFlags: 1

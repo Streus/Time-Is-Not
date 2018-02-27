@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 60382080390107772}
   - component: {fileID: 60435800211073230}
   - component: {fileID: 114706560575655574}
+  - component: {fileID: 114147688002424546}
   m_Layer: 14
   m_Name: SecurityDoor_Horizontal
   m_TagString: Untagged
@@ -224,6 +225,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114147688002424546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264879243079698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
 --- !u!114 &114706560575655574
 MonoBehaviour:
   m_ObjectHideFlags: 1

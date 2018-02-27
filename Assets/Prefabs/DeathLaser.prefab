@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4191928071330672}
   - component: {fileID: 120391947824343406}
   - component: {fileID: 114122081058746644}
-  - component: {fileID: 114379680393226360}
+  - component: {fileID: 114313025392646720}
   m_Layer: 0
   m_Name: DeathLaser
   m_TagString: Untagged
@@ -179,7 +179,7 @@ MonoBehaviour:
   _dashPadding: 0.5
   _type: 0
   _activatables: []
---- !u!114 &114379680393226360
+--- !u!114 &114313025392646720
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -190,8 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: s/pgCmaP20CqgKJaa5QT8w
-  instanceID: 10770
   prefabPath: 
   stasisable: 1
   allowReset: 1
