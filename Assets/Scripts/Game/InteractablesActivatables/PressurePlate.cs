@@ -121,7 +121,8 @@ public class PressurePlate : Interactable
 		{
             if (col.gameObject.GetComponent<Player>() != null)
             {
-                state = true;
+				if(!col.gameObject.GetComponent<Player>().dashing())
+                	state = true;
             }
             else if (col.gameObject.GetComponent<PushBlock>() != null)
             {
