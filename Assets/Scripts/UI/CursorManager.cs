@@ -147,7 +147,7 @@ public class CursorManager : Singleton<CursorManager>
 				// Find the nearest RaycastHit
 				for (int i = 0; i < hits.Length; i++)
 				{
-					if (hits[i].collider.isTrigger)
+					if (hits[i].collider.isTrigger || hits[i].collider == GameManager.GetPlayer().GetComponent<Collider2D>())
 						continue; 
 
 					if (nearest == default(RaycastHit2D))
