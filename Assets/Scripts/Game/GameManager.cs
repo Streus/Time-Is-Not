@@ -168,7 +168,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public static float getPlayerMaxJumpDist()
 	{
-		return inst.playerScript.getMaxJumpDist; 
+		return inst.playerScript.getMaxJumpDist();
 	}
 
 	public static bool isPlayerDashing()

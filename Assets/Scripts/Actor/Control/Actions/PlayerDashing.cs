@@ -12,6 +12,6 @@ public class PlayerDashing : Action
         Player p = State.cast<Player>(c);
         Collider2D hitBox = p.GetComponent<Collider2D>();
 		p.gameObject.layer = LayerMask.NameToLayer("DashingPlayer");
-		p.transform.position = Vector2.Lerp(p.transform.position, (Vector2)p.getJumpTargetPos - hitBox.offset, dashSpeed * Time.deltaTime);
+		p.transform.position = Vector2.Lerp(p.transform.position, (Vector2)p.getJumpTargetPos() - hitBox.offset, dashSpeed * Time.deltaTime);
     }
 }
