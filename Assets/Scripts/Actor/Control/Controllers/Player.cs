@@ -31,38 +31,8 @@ public class Player : Controller
 
     public SpriteRenderer sprite;
 
-
-    public float getMinJumpDist
-    {
-        get
-        {
-            return minJumpDist;
-        }
-    }
-
     [SerializeField]
     private float maxJumpDist;
-
-    public float getMaxJumpDist
-    {
-        get
-        {
-            return maxJumpDist;
-        }
-    }
-
-    public void setJumpTargetPos(Vector3 jumpTarget)
-    {
-        jumpTargetPos = jumpTarget;
-    }
-
-    public Vector3 getJumpTargetPos
-    {
-        get
-        {
-            return jumpTargetPos;
-        }
-    }
 
     #endregion
 
@@ -96,16 +66,37 @@ public class Player : Controller
     private void OnDestroy()
     {
         getSelf().died -= deathReset;
-
     }
     private void deathReset()
     {
-        Debug.Log("I reset");
         setState(playerDefault);
         getSelf().getAbility(1).active = true;
-
     }
 
+	#region GETTERS_SETTERS
+
+	public Vector3 getJumpTargetPos()
+	{
+		return jumpTargetPos;
+	}
+
+	public void setJumpTargetPos(Vector3 jumpTarget)
+	{
+		jumpTargetPos = jumpTarget;
+	}
+
+	public float getMaxJumpDist()
+	{
+		return maxJumpDist;
+	}
+
+	public float getMinJumpDist()
+	{
+		return minJumpDist;
+	}
+	#endregion
+
+	#region SPECIAL_BEHAVIOUR
     public void enterPushState()
     {
         prePushState = getState();
@@ -132,6 +123,10 @@ public class Player : Controller
         return (dashState == getState());
     }
 
+	/// <summary>
+	/// Standard movement behavior for the Player.
+	/// DON'T CALL THIS
+	/// </summary>
     public void move()
     {
         Vector2 movementVector = Vector2.zero;
@@ -156,6 +151,53 @@ public class Player : Controller
         if (hitCount <= 0)
             transform.Translate((Vector3)movementVector);
     }
+
+	/// <summary>
+	/// Sets the target jump position for the dash.
+	/// DON'T CALL THIS!
+	/// </summary>
+	public void findTarget()
+	{
+		BoxCollider2D collider = GetComponent<BoxCollider2D> ();
+		Vector2 colliderSize = new Vector2(collider.size.x * transform.localScale.x, collider.size.y * transform.localScale.y) * .5f;
+		Vector2 colliderOffset = collider.offset;
+		Vector3 pospoff = transform.position + (Vector3)colliderOffset;
+
+		float jumpDistance = maxJumpDist;
+		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - pospoff;
+
+		//do a boxcast from the player to the furthest possible jump position
+		RaycastHit2D[] pathCheck = Physics2D.BoxCastAll(pospoff, colliderSize, 0.0f, dir, jumpDistance, moveMask.value);
+
+		if (pathCheck != null)
+		{
+			//find the nearest collision returned by the circlecast, ifex
+			RaycastHit2D nearest = default(RaycastHit2D);
+			foreach (RaycastHit2D hit in pathCheck)
+			{
+				if (hit.collider.isTrigger || hit.collider == GetComponent<Collider2D>())
+					continue;
+
+				if (nearest == default(RaycastHit2D))
+					nearest = hit;
+				else if (hit.distance < nearest.distance)
+					nearest = hit;
+			}
+
+			//set the jump distance to the distance to the nearest collision, ifex
+			if (nearest != default(RaycastHit2D) && nearest.distance < jumpDistance)
+				jumpDistance = nearest.distance;
+		}
+
+		Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		float dist = Vector2.Distance(mp, pospoff);
+		if (dist > jumpDistance) //if the distance to the mouse is greater than our max jump distance, limit the target position to our max jump distance
+			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position + colliderOffset).normalized * jumpDistance;
+		else if (dist < minJumpDist) // if there's no concept of a minimum distance, cut this line out as well as the line with the if statement
+			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position + colliderOffset).normalized * Mathf.Min(jumpDistance, minJumpDist);
+		else //mouse is within the max distance, no need to limit
+			jumpTargetPos = mp;
+	}
 
     //checks for pits and moving platforms under the players feet
     public void CheckForGround()
@@ -184,27 +226,19 @@ public class Player : Controller
         }
     }
 
-    public override void OnDrawGizmos()
-    {
-        // Dash debug
-        if (jumpTargetPos != Vector3.zero)
-        {
-            Gizmos.color = Color.green;
-            Vector2 csize = GetComponent<BoxCollider2D>().size;
-            Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
-            Gizmos.DrawWireCube(jumpTargetPos, actualSize);
-        }
-    }
-    public void StartWait()
-    {
-        StartCoroutine(WaitForTether());
-    }
-    public IEnumerator WaitForTether()
-    {
-        enterPushState();
-        yield return new WaitForSeconds(.5f);
-        exitPushState();
-    }
+	public void StartWait()
+	{
+		StartCoroutine(WaitForTether());
+	}
+
+	public IEnumerator WaitForTether()
+	{
+		enterPushState();
+		yield return new WaitForSeconds(.5f);
+		exitPushState();
+	}
+	#endregion
+    
     #region ISAVABLE_METHODS
 
     public override SeedBase saveData()
@@ -221,6 +255,17 @@ public class Player : Controller
 
     #endregion
 
+	public override void OnDrawGizmos()
+	{
+		// Dash debug
+		if (jumpTargetPos != Vector3.zero)
+		{
+			Gizmos.color = Color.green;
+			Vector2 csize = GetComponent<BoxCollider2D>().size;
+			Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
+			Gizmos.DrawWireCube(jumpTargetPos, actualSize);
+		}
+	}
     #endregion
 
     #region INTERNAL_TYPES

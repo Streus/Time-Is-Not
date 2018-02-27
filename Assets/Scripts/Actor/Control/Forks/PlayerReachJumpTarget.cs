@@ -23,14 +23,13 @@ public class PlayerReachJumpTarget : Fork
                 isColliding = true;
         }
        
-	
-		if (Vector2.Distance ((Vector2)p.transform.position + col.offset, p.getJumpTargetPos) < threshold || isColliding)
+		if (Vector2.Distance ((Vector2)p.transform.position + col.offset, p.getJumpTargetPos()) < threshold || isColliding)
 		{
-            Debug.Log("Target pos: " + p.getJumpTargetPos.x + ", " + p.getJumpTargetPos.y);
-            Debug.Log("Player pos: " + p.transform.position.x + ", " + p.transform.position.y);
-            Debug.Log("True Player pos: " + (p.transform.position.x + col.offset.x) + ", " + (p.transform.position.y + col.offset.y));
-            Debug.Log("Distance: " + Vector2.Distance((Vector2)p.transform.position, p.getJumpTargetPos));
-            Debug.Log("True Distance: " + Vector2.Distance((Vector2)p.transform.position + col.offset, p.getJumpTargetPos));
+//			Debug.Log("Target pos: " + p.getJumpTargetPos().x + ", " + p.getJumpTargetPos().y);
+//            Debug.Log("Player pos: " + p.transform.position.x + ", " + p.transform.position.y);
+//            Debug.Log("True Player pos: " + (p.transform.position.x + col.offset.x) + ", " + (p.transform.position.y + col.offset.y));
+//			Debug.Log("Distance: " + Vector2.Distance((Vector2)p.transform.position, p.getJumpTargetPos()));
+//			Debug.Log("True Distance: " + Vector2.Distance((Vector2)p.transform.position + col.offset, p.getJumpTargetPos()));
 
             p.gameObject.layer = LayerMask.NameToLayer("GroundEnts");
 			p.getSelf ().getAbility (1).active = true;

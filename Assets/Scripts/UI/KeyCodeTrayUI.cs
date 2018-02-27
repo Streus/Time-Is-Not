@@ -8,11 +8,15 @@ using UnityEngine.UI;
 public class KeyCodeTrayUI : MonoBehaviour 
 {
 	RectTransform rectTransform; 
+	[Tooltip("Drag in the rectTransform for the tray piece that needs to be sorted upwards")] 
+	[SerializeField] RectTransform trayEndRectTransform; 
+
 	float targetXPos; 
 
 	[SerializeField] Image[] keycodeSlots; 
 
 	public float startPosX; 
+	public float firstSlotPosX; 
 	public float slotSpacingMultiplier; 
 	public float lerpSpeed = 1; 
 
@@ -29,6 +33,8 @@ public class KeyCodeTrayUI : MonoBehaviour
 	void Start () 
 	{
 		rectTransform = GetComponent<RectTransform>(); 
+
+		trayEndRectTransform.SetSiblingIndex(rectTransform.GetSiblingIndex() - 1); 
 	}
 	
 	// Update is called once per frame
@@ -39,7 +45,14 @@ public class KeyCodeTrayUI : MonoBehaviour
 
 	void UpdateSlots()
 	{
-		targetXPos = startPosX + (GameManager.NumCodesFound() * slotSpacingMultiplier); 
+		if (GameManager.NumCodesFound() > 0)
+		{
+			targetXPos = firstSlotPosX + ((GameManager.NumCodesFound() - 1) * slotSpacingMultiplier); 
+		}
+		else
+		{
+			targetXPos = startPosX; 
+		}
 		rectTransform.anchoredPosition = new Vector2 (Mathf.Lerp(rectTransform.anchoredPosition.x, targetXPos, lerpSpeed * Time.deltaTime), rectTransform.anchoredPosition.y); 
 
 		// Update images
