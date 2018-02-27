@@ -9,6 +9,7 @@ public class HCStanding : Fork
 	{
 		HermitCrab hc = State.cast<HermitCrab> (c);
 
+		hc.doNullify ();
 		return hc.updateStandDuration (Time.deltaTime);
 	}
 }

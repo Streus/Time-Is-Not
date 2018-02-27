@@ -6,7 +6,7 @@ using UnityEngine;
 /// A repository class used by Controllers to manage and update Abilities, Statuses,
 /// and other data.
 /// </summary>
-public sealed class Entity : MonoBehaviour
+public sealed class Entity : MonoBehaviour, ISavable
 {
 	#region STATIC_VARS
 
@@ -20,7 +20,7 @@ public sealed class Entity : MonoBehaviour
 
 	[Tooltip("How fast this Entity can move.")]
 	[SerializeField]
-	private int movespeed = 10;
+	private float movespeed = 4f;
 
 	private List<Ability> abilities;
 	private List<Status> statuses;
@@ -82,9 +82,19 @@ public sealed class Entity : MonoBehaviour
 		return faction;
 	}
 		
-	public int getMovespeed()
+	public float getMovespeed()
 	{
 		return movespeed;
+	}
+
+	public void setMovespeed(float val)
+	{
+		movespeed = val;
+	}
+
+	public void modMovespeed(float mult)
+	{
+		movespeed *= mult;
 	}
 	#endregion
 
@@ -185,6 +195,7 @@ public sealed class Entity : MonoBehaviour
 	}
 	#endregion
 
+	#region STATUS_MANAGEMENT
 	public void addStatus(Status s)
 	{
 		Status existing = statuses.Find (delegate(Status obj)
@@ -220,6 +231,40 @@ public sealed class Entity : MonoBehaviour
 			statusRemoved (s);
 	}
 
+	public void removeStatus(string name)
+	{
+		Status s = Status.get (name, float.PositiveInfinity);
+		if (s == null)
+			return;
+		
+		Status existing = statuses.Find (delegate(Status obj)
+		{
+			return obj.Equals (s);
+		});
+
+		removeStatus (existing);
+	}
+	#endregion
+
+	#region ISAVABLE_METHODS
+
+	// These are mostly for show.  I'm pretty positive they don't actually do anything
+	//in the current way they're implemented
+	public SeedBase saveData()
+	{
+		Seed s = new Seed (this);
+		return s;
+	}
+
+	public void loadData(SeedBase seed)
+	{
+		Seed s = (Seed)seed;
+		movespeed = s.movespeed;
+		abilities = s.abilities;
+		statuses = s.statuses;
+	}
+	#endregion
+
 	public void onDeath()
 	{
 		//invoke statuses
@@ -233,6 +278,20 @@ public sealed class Entity : MonoBehaviour
 	#endregion
 
 	#region INTERNAL_TYPES
+
+	private class Seed : SeedBase
+	{
+		public float movespeed;
+		public List<Ability> abilities;
+		public List<Status> statuses;
+
+		public Seed(Entity e)
+		{
+			movespeed = e.movespeed;
+			abilities = e.abilities;
+			statuses = e.statuses;
+		}
+	}
 
 	/// <summary>
 	/// Used to distinguish between different groups of Actors in gameplay

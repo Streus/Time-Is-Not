@@ -9,6 +9,8 @@ public class HCReturning : Action
 	{
 		HermitCrab hc = State.cast<HermitCrab> (c);
 
+		hc.doNullify ();
+
 		if (hc.updateReturnTimer (Time.deltaTime))
 		{
 			float totalDist = Vector2.Distance (c.transform.position, hc.getHome ());

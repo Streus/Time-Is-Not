@@ -208,6 +208,11 @@ public sealed partial class Status
 			durationCompleted (this);
 	}
 
+	public override bool Equals (object obj)
+	{
+		return ((Status)obj).name == name;
+	}
+
 	#endregion
 
 	#region INTERNAL_TYPES

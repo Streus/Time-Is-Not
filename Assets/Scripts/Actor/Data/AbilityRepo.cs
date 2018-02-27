@@ -40,6 +40,7 @@ public partial class Ability
 
 		return true;
 	}
+
     private static bool isDashing(Entity e, Vector2 tarPos)
     {
         e.GetComponent<Player>().enterDashState();

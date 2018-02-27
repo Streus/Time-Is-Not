@@ -26,6 +26,14 @@ public class HermitCrab : Controller
 	[Tooltip("The radius of the ability nullifying field")]
 	[SerializeField]
 	private float nullFieldRadius = 2f;
+
+	[SerializeField]
+	private LayerMask nullLayers;
+
+	[Tooltip("A multiplier applied to the length of the sitting state when stasised")]
+	[SerializeField]
+	private float slowedMultiplier = 2f;
+	private float sitMod = 1f;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -34,15 +42,31 @@ public class HermitCrab : Controller
 	{
 		base.Awake ();
 		home = transform.position;
+
+		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 	}
+
+	public void OnDestroy()
+	{
+		GetComponent<RegisteredObject> ().allowResetChanged -= onStasised;
+	}
+
+	private void onStasised(bool val)
+	{
+		sitMod = val ? slowedMultiplier : 1f;
+
+		//TODO some visual effect for HC stasis'd?
+	}
+
+	#region GETTERS_SETTERS
 
 	public bool updateSitDuration(float delta)
 	{
-		return (sitDuration -= delta) <= 0f;
+		return (sitDuration += delta) >= sitDurationMax * sitMod;
 	}
 	public void resetSitDuration()
 	{
-		sitDuration = sitDurationMax;
+		sitDuration = 0f;
 	}
 
 	public bool updateStandDuration(float delta)
@@ -63,7 +87,6 @@ public class HermitCrab : Controller
 		returnTimer = returnTimerMax;
 	}
 
-	#region GETTERS_SETTERS
 	public Vector3 getHome()
 	{
 		return home;
@@ -74,6 +97,25 @@ public class HermitCrab : Controller
 		return nullFieldRadius;
 	}
 	#endregion
+
+	public void doNullify()
+	{
+		RaycastHit2D[] hits = Physics2D.CircleCastAll (transform.position, nullFieldRadius, Vector2.zero, 0f, nullLayers);
+		for (int i = 0; i < hits.Length; i++)
+		{
+			Entity e = hits [i].collider.GetComponent<Entity> ();
+			if (e != null && e.getFaction () == Entity.Faction.player)
+			{
+				e.addStatus (Status.get ("Nullified", 0.1f));
+			}
+
+			StasisBubble sb = hits [i].collider.GetComponent<StasisBubble> ();
+			if (sb != null)
+			{
+				LevelStateManager.removeStasisBubble (sb);
+			}
+		}
+	}
 
 	#region ISAVABLE_METHODS
 
@@ -104,7 +146,7 @@ public class HermitCrab : Controller
 			Gizmos.DrawWireSphere (transform.position, nullFieldRadius);
 		}
 
-		if (getMap () != null)
+		if (getMap () != null && Application.isPlaying)
 		{
 			Color c = getMap ().graphColor;
 			Gizmos.color = new Color (1.0f - c.r, 1.0f - c.g, 1.0f - c.b);
