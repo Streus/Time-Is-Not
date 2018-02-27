@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 212548418128925084}
   - component: {fileID: 114425224028334586}
   - component: {fileID: 61129771345197818}
+  - component: {fileID: 114700021191039162}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4697,6 +4698,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114700021191039162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1062996858393866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa8d30a9c7aa45488e9c067e91e0224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteDecayTime: 0.5
+  _spriteTintColor: {r: 0, g: 0.83448267, b: 1, a: 0.572}
+  _spawnDelay: 0.1
 --- !u!114 &114701791660240440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5671,7 +5686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPath: 
-  stasisable: 1
+  stasisable: 0
   allowReset: 1
 --- !u!124 &124559304230223202
 Behaviour:
