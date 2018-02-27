@@ -13,6 +13,7 @@ public class KeyCodeTrayUI : MonoBehaviour
 	[SerializeField] Image[] keycodeSlots; 
 
 	public float startPosX; 
+	public float firstSlotPosX; 
 	public float slotSpacingMultiplier; 
 	public float lerpSpeed = 1; 
 
@@ -39,7 +40,14 @@ public class KeyCodeTrayUI : MonoBehaviour
 
 	void UpdateSlots()
 	{
-		targetXPos = startPosX + (GameManager.NumCodesFound() * slotSpacingMultiplier); 
+		if (GameManager.NumCodesFound() > 0)
+		{
+			targetXPos = firstSlotPosX + ((GameManager.NumCodesFound() - 1) * slotSpacingMultiplier); 
+		}
+		else
+		{
+			targetXPos = startPosX; 
+		}
 		rectTransform.anchoredPosition = new Vector2 (Mathf.Lerp(rectTransform.anchoredPosition.x, targetXPos, lerpSpeed * Time.deltaTime), rectTransform.anchoredPosition.y); 
 
 		// Update images
