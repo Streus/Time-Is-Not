@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class KeyCodeTrayUI : MonoBehaviour 
 {
 	RectTransform rectTransform; 
+	[Tooltip("Drag in the rectTransform for the tray piece that needs to be sorted upwards")] 
+	[SerializeField] RectTransform trayEndRectTransform; 
+
 	float targetXPos; 
 
 	[SerializeField] Image[] keycodeSlots; 
@@ -30,6 +33,8 @@ public class KeyCodeTrayUI : MonoBehaviour
 	void Start () 
 	{
 		rectTransform = GetComponent<RectTransform>(); 
+
+		trayEndRectTransform.SetSiblingIndex(rectTransform.GetSiblingIndex() - 1); 
 	}
 	
 	// Update is called once per frame

@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 224065722717302706}
   - component: {fileID: 222216632028611708}
   - component: {fileID: 114765219370652216}
+  - component: {fileID: 223155475181882476}
   m_Layer: 5
   m_Name: TrayEnd
   m_TagString: Untagged
@@ -1306,6 +1307,7 @@ GameObject:
   - component: {fileID: 222724644459258806}
   - component: {fileID: 114184130999406322}
   - component: {fileID: 114110110614746164}
+  - component: {fileID: 223323784285594886}
   m_Layer: 5
   m_Name: TetherTransition
   m_TagString: Untagged
@@ -1410,6 +1412,7 @@ GameObject:
   - component: {fileID: 224766224753621186}
   - component: {fileID: 222704623923480956}
   - component: {fileID: 114045586198822038}
+  - component: {fileID: 223472892164110022}
   m_Layer: 5
   m_Name: TetherMenuFadeImage
   m_TagString: Untagged
@@ -3430,6 +3433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cbd6d0a8c7442f98ab13fb2f4315f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trayEndRectTransform: {fileID: 224065722717302706}
   keycodeSlots:
   - {fileID: 114310012341477740}
   - {fileID: 114281200217044382}
@@ -9027,7 +9031,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -697953311
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 10000
   m_Sprite: {fileID: 21300000, guid: 3e00e7b67a7c045ab8664d079b3195a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9069,7 +9073,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -697953311
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 10000
   m_Sprite: {fileID: 21300000, guid: 243296f292d074c1ab5480e8907dd534, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9592,6 +9596,66 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: -697953311
   m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!223 &223155475181882476
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360580063152968}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: -697953311
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
+--- !u!223 &223323784285594886
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720055738702822}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 20
+  m_TargetDisplay: 0
+--- !u!223 &223472892164110022
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761871493499236}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &224002942189334078
 RectTransform:
