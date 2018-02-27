@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61043286521424992}
   - component: {fileID: 60631433107476308}
   - component: {fileID: 82434819056934356}
-  - component: {fileID: 114337077209848550}
+  - component: {fileID: 114682438403642510}
   m_Layer: 15
   m_Name: PushBlock
   m_TagString: Untagged
@@ -207,20 +207,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114337077209848550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413051843421496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPath: 
-  stasisable: 1
-  allowReset: 1
 --- !u!114 &114344285468730140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,7 +226,7 @@ MonoBehaviour:
   _downKey: 115
   _leftKey: 97
   isInArea: 0
---- !u!114 &114820527518765682
+--- !u!114 &114682438403642510
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
