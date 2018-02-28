@@ -192,9 +192,9 @@ public class Player : Controller
 		Vector2 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		float dist = Vector2.Distance(mp, pospoff);
 		if (dist > jumpDistance) //if the distance to the mouse is greater than our max jump distance, limit the target position to our max jump distance
-			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position + colliderOffset).normalized * jumpDistance;
+			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position - colliderOffset).normalized * jumpDistance;
 		else if (dist < minJumpDist) // if there's no concept of a minimum distance, cut this line out as well as the line with the if statement
-			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position + colliderOffset).normalized * Mathf.Min(jumpDistance, minJumpDist);
+			jumpTargetPos = (Vector2)transform.position + colliderOffset + (mp - (Vector2)transform.position - colliderOffset).normalized * Mathf.Min(jumpDistance, minJumpDist);
 		else //mouse is within the max distance, no need to limit
 			jumpTargetPos = mp;
 	}
