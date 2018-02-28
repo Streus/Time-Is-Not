@@ -152,7 +152,7 @@ public class Laser : Interactable, IActivatable, ISavable
 		{
 		case LaserType.Trigger:
 			onInteract ();
-                AudioLibrary.PlayLaserSecurityCollisionSound();
+                //AudioLibrary.PlayLaserSecurityCollisionSound();
 			break;
 		case LaserType.Death:
 			entity.onDeath ();
