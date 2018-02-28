@@ -20,6 +20,10 @@ public class TestDashEffect : MonoBehaviour
 	//timer for spawning images
 	private float _timer = 0;
 
+	private bool dashCheck = false;
+	private float checkTimer = 0;
+	private float checkDelay = 0.08f;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -30,6 +34,28 @@ public class TestDashEffect : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		if(!dashCheck && _player.dashing())
+		{
+			dashCheck = true;
+		}
+		if(dashCheck)
+		{
+			if(checkTimer >= -0.1f) 
+			{
+				checkTimer += Time.deltaTime;
+				if (checkTimer >= checkDelay) 
+				{
+					SpawnSprite ((Vector2)transform.position);
+					checkTimer = -1;
+				}
+			}
+		}
+		if(!_player.dashing())
+		{
+			checkTimer = 0;
+			dashCheck = false;
+		}
+
 		IncrimentTimers ();
 		if (_player.dashing ()) 
 		{
@@ -37,21 +63,25 @@ public class TestDashEffect : MonoBehaviour
 			if(_timer <=0)
 			{
 				_timer = _spawnDelay;
-				SpawnSprite ((Vector2)transform.position, _spriteSource.sprite);
+				SpawnSprite ((Vector2)transform.position);
 			}
 		} 
 		else
-			_timer = 0;
+			_timer = 0.06f;
 		
 	}
 
+
+
 	//spawns a new image
-	void SpawnSprite(Vector2 location, Sprite sprite)
+	void SpawnSprite(Vector2 location)
 	{
 		GameObject obj = new GameObject ();
 		obj.AddComponent<SpriteRenderer> ();
-		obj.GetComponent<SpriteRenderer> ().sprite = sprite;
+		obj.GetComponent<SpriteRenderer> ().sprite = _spriteSource.sprite;
 		obj.GetComponent<SpriteRenderer> ().color = _spriteTintColor;
+		obj.GetComponent<SpriteRenderer> ().sortingLayerID = _spriteSource.sortingLayerID;
+		obj.GetComponent<SpriteRenderer> ().sortingOrder = _spriteSource.sortingOrder-1;
 		obj.transform.position = location;
 		_goList.Add (obj);
 		_timeList.Add (_spriteDecayTime);
