@@ -20,10 +20,6 @@ public class TestDashEffect : MonoBehaviour
 	//timer for spawning images
 	private float _timer = 0;
 
-	private bool dashCheck = false;
-	private float checkTimer = 0;
-	private float checkDelay = 0.08f;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -34,27 +30,6 @@ public class TestDashEffect : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!dashCheck && _player.dashing())
-		{
-			dashCheck = true;
-		}
-		if(dashCheck)
-		{
-			if(checkTimer >= -0.1f) 
-			{
-				checkTimer += Time.deltaTime;
-				if (checkTimer >= checkDelay) 
-				{
-					SpawnSprite ((Vector2)transform.position);
-					checkTimer = -1;
-				}
-			}
-		}
-		if(!_player.dashing())
-		{
-			checkTimer = 0;
-			dashCheck = false;
-		}
 
 		IncrimentTimers ();
 		if (_player.dashing ()) 
@@ -67,7 +42,7 @@ public class TestDashEffect : MonoBehaviour
 			}
 		} 
 		else
-			_timer = 0.06f;
+			_timer = 0.05f;
 		
 	}
 
