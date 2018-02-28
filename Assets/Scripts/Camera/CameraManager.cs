@@ -20,10 +20,11 @@ public class CameraManager : MonoBehaviour
 	[SerializeField]
 	private Transform target;
 
-	[Header("Bounds")]
-	[SerializeField] private Vector2 b_origin = Vector2.zero;
-	[SerializeField] private Vector2 b_min = Vector2.zero;
-	[SerializeField] private Vector2 b_max = Vector2.zero;
+	[Header("Camera Bounds Ref (Drag-in)")]
+	[SerializeField] CameraBounds cameraBounds; 
+	private Vector2 b_origin = Vector2.zero;
+	private Vector2 b_min = Vector2.zero;
+	private Vector2 b_max = Vector2.zero;
 
 	// Calculated bounds, with origin offset
 	private Vector2 min = Vector2.zero;
@@ -98,10 +99,32 @@ public class CameraManager : MonoBehaviour
 		regularSize = cam.orthographicSize; 
 
 		shakeDur = shakeInt = shakeDec = 0f;
+
+		if (cameraBounds != null)
+		{
+			b_origin = cameraBounds.b_origin;
+			b_max = cameraBounds.b_max;
+			b_min = cameraBounds.b_min; 
+		}
+		else
+		{
+			Debug.LogWarning("The CameraManager does not have a bounds object assigned"); 
+		}
 	}
 
 	public void Update()
 	{
+		// Update the bounds every frame from the separate bounds object
+		// This isn't ideal, but is being done so that bounds can be stored in separate gameObject outside the LevelManager prefab
+		// This way, you can change the external bounds and have that change update here, 
+		// 		while still allowing the CameraManager to store default camera bounds if the CameraBounds instance isn't assigned
+		if (cameraBounds != null)
+		{
+			b_origin = cameraBounds.b_origin;
+			b_max = cameraBounds.b_max;
+			b_min = cameraBounds.b_min; 
+		}
+
 		//shake the camera
 		if (shakeDur > 0f)
 		{
@@ -300,6 +323,7 @@ public class CameraManager : MonoBehaviour
 		target = t;
 	}
 
+	/*
 	/// <summary>
 	/// Sets the bounds for this camera. If the bounds were valid, returns true, else
 	/// returns false.
@@ -317,6 +341,7 @@ public class CameraManager : MonoBehaviour
 		this.max = b_max + origin;
 		return true;
 	}
+	*/ 
 
 	public void shake(float duration, float intensity, float decayRate = 0f)
 	{
