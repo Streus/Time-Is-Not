@@ -134,12 +134,15 @@ public class Laser : Interactable, IActivatable, ISavable
 	{
 		ToggleSecurityDoors ();
 		disable ();
-		if (_activatables.Length == 0)
+		if (_activatables == null || _activatables.Length == 0)
 			return;
 		foreach(GameObject activatable in _activatables)
 		{
-			if(activatable.GetComponent<IActivatable>() != null)
-				activatable.GetComponent<IActivatable>().onActivate ();
+			if (activatable != null) 
+			{
+				if (activatable.GetComponent<IActivatable> () != null)
+					activatable.GetComponent<IActivatable> ().onActivate ();
+			}
 		}
 	}
 
