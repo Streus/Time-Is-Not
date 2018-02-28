@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete("This functionality has been moved into PlayerDefaultControl")]
 [CreateAssetMenu(menuName = "AI/Forks/Player/Targeting")]
 public class PlayerInvokeTargeting : Fork
 {
