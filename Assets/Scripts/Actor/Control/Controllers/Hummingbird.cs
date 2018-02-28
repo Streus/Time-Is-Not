@@ -41,7 +41,8 @@ public class Hummingbird : PatrollingEnemy
 		}
 
 		Transform spriteChild = transform.Find ("Sprite");
-		hummingAnim = spriteChild.GetComponent<Animator> ();
+		if(spriteChild != null)
+			hummingAnim = spriteChild.GetComponent<Animator> ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 	}
@@ -61,6 +62,10 @@ public class Hummingbird : PatrollingEnemy
 
 	public override void Update()
 	{
+		base.Update();
+
+		if (hummingAnim == null)
+			return;
 		//calculate sprite direction
 //		anim = transform.GetChild(1).GetComponent<Animator>();
 //		Debug.Log (anim.gameObject.name);
@@ -87,7 +92,7 @@ public class Hummingbird : PatrollingEnemy
 		//TODO: check if hummingbird is moving
 		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
-		base.Update();
+
 
 		hummingAnim.gameObject.GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}

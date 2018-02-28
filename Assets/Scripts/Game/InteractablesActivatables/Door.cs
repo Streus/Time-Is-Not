@@ -95,6 +95,8 @@ public class Door : Interactable, IActivatable, ISavable
 	{
 		float xdist = _checkSize.x / 2;
 		float ydist = _checkSize.y / 2;
+		if (_collider == null)
+			return;
 		Vector2 center = (transform.position + (Vector3)(_collider.offset));
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawLine (center + new Vector2(-xdist, ydist), center + new Vector2(xdist, ydist));
