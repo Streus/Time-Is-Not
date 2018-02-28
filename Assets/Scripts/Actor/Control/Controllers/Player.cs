@@ -202,20 +202,25 @@ public class Player : Controller
     //checks for pits and moving platforms under the players feet
     public void CheckForGround()
     {
-        Collider2D[] colsHit = Physics2D.OverlapPointAll(transform.position + (Vector3)GetComponent<BoxCollider2D>().offset, 1 << LayerMask.NameToLayer("SkyEnts") | 1 << LayerMask.NameToLayer("Pits"));
+        Collider2D[] colsHit = Physics2D.OverlapPointAll(transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D>().offset,  1 << LayerMask.NameToLayer("Pits"));
+		Collider2D[] platformsFound = Physics2D.OverlapBoxAll (transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D> ().offset, gameObject.GetComponent<BoxCollider2D>().size * 0.5f, 0,  1 << LayerMask.NameToLayer ("SkyEnts"));
         bool seesMP = false;
         bool seesPit = false;
         for (int i = 0; i < colsHit.Length; i++)
         {
-            if (colsHit[i].gameObject.CompareTag("MovingPlatform"))
-            {
-                seesMP = true;
-            }
             if (colsHit[i].gameObject.CompareTag("Pit"))
             {
                 seesPit = true;
             }
         }
+		for(int i = 0; i < platformsFound.Length; i++)
+		{
+
+			if (platformsFound[i].gameObject.CompareTag("MovingPlatform"))
+			{
+				seesMP = true;
+			}
+		}
         isOnPlatform = seesMP;
         isOverPit = seesPit;
         if (isOverPit && !isOnPlatform && !dashing())
