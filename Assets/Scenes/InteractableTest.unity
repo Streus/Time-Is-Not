@@ -2761,6 +2761,35 @@ Prefab:
       value: 
       objectReference: {fileID: 243663996075996546, guid: 4612a21fb17b6483ab05ce5d6b3fcea5,
         type: 2}
+    - target: {fileID: 4354176451379616, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: tetherPlacement
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f9e5145113b4ff459330e913ac1ccb9, type: 3}
+    - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: tetherError
+      value: 
+      objectReference: {fileID: 8300000, guid: 8de49e45e4f2ced4095ac04f654d7ed4, type: 3}
+    - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: dashForward
+      value: 
+      objectReference: {fileID: 8300000, guid: 86d2a45c13f491e4f91b941742f75860, type: 3}
+    - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: dashError
+      value: 
+      objectReference: {fileID: 8300000, guid: 51f4f92daef313342bd2726b4a9f5037, type: 3}
+    - target: {fileID: 114657037655233136, guid: 7653195774fee4b97af15a525bc1b140,
+        type: 2}
+      propertyPath: dashRecharge
+      value: 
+      objectReference: {fileID: 8300000, guid: 294761694c641e741be01e8175f8c71d, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0
