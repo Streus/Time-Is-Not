@@ -6,18 +6,20 @@ public class TempPlayerScript : MonoBehaviour {
 
 	private Animator _animationController;
 
+	Vector2 position;
+	Vector3 mousePosition;
+
 	void Start () 
 	{
 		_animationController = GetComponent<Animator> ();
 	}
 
 	void Update () {
-//		print ();
-
 		if (Input.GetKeyDown (KeyCode.W))
 		{
 			_animationController.SetInteger ("Direction", 1);
 		}
+
 		if (Input.GetKeyDown (KeyCode.D))
 		{
 			_animationController.SetInteger ("Direction", 2);
@@ -45,6 +47,13 @@ public class TempPlayerScript : MonoBehaviour {
 		{
 			_animationController.SetTrigger ("Dash");
 		}
+			
+		position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
+		mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y); 
+
+		_animationController.SetFloat ("Angle", Vector2.Angle (position, mousePosition));
+
+		print ("Angle between player and cursor: " + Vector2.Angle (position, mousePosition)); 
 	}
 
 	public void PlayTetherAnimation ()

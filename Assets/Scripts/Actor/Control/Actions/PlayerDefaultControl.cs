@@ -42,7 +42,7 @@ public class PlayerDefaultControl : Action
                     {
                         AudioLibrary.PlayDashErrorSound();
                     }
-                }
+                }///
                 c.getSelf().getAbility(1).use(c.getSelf(), p.getJumpTargetPos());
             }
         }
