@@ -29234,7 +29234,7 @@ Prefab:
     - target: {fileID: 114285061580954582, guid: 7653195774fee4b97af15a525bc1b140,
         type: 2}
       propertyPath: movespeed
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 82102803845815924, guid: 7653195774fee4b97af15a525bc1b140,
         type: 2}
@@ -30167,7 +30167,7 @@ MonoBehaviour:
   - {x: 38.8, y: 222}
   - {x: 38.8, y: 241.97}
   _active: 1
-  _moveSpeed: 4
+  _moveSpeed: 3
   _endBehavior: 1
   delayPerPoint: 0
   delayAtEnds: 0
@@ -31225,6 +31225,18 @@ Prefab:
     - target: {fileID: 1413051843421496, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
       propertyPath: m_Name
       value: PushBlock (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631288867116936, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.198284
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631288867116936, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.198284
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631288867116936, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1.198284
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
@@ -34608,7 +34620,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4631288867116936, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.7144165
+      value: -7.7
       objectReference: {fileID: 0}
     - target: {fileID: 4631288867116936, guid: bcaf944dc87fa47aa8e20831c25f82bb, type: 2}
       propertyPath: m_LocalPosition.y
@@ -35898,7 +35910,7 @@ MonoBehaviour:
   - {x: 53, y: 216.3}
   - {x: 83, y: 216.3}
   _active: 1
-  _moveSpeed: 4
+  _moveSpeed: 3
   _endBehavior: 1
   delayPerPoint: 0
   delayAtEnds: 0
@@ -36643,7 +36655,7 @@ MonoBehaviour:
   - {x: 83, y: 216.3}
   - {x: 53, y: 216.3}
   _active: 1
-  _moveSpeed: 4
+  _moveSpeed: 3
   _endBehavior: 1
   delayPerPoint: 0
   delayAtEnds: 0
