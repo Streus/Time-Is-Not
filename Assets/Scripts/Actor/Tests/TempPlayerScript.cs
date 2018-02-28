@@ -6,10 +6,13 @@ public class TempPlayerScript : MonoBehaviour {
 
 	private Animator _animationController;
 
+	private Player _player;
+
 	public float angle;
 
 	void Start () 
 	{
+		_player = gameObject.GetComponentInParent<Player> ();
 		_animationController = GetComponent<Animator> ();
 	}
 
@@ -32,17 +35,17 @@ public class TempPlayerScript : MonoBehaviour {
 			_animationController.SetInteger ("Direction", 4);
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse1))
+		if (Input.GetKeyDown (KeyCode.Mouse1) && LevelStateManager.numStasisLeft > 0)
 		{
 			_animationController.SetTrigger ("StasisBubble");
 		}
 
-		if (Input.GetKeyDown (KeyCode.Space))
+		if (Input.GetKeyDown (KeyCode.Space) && LevelStateManager.numTetherPointsLeft > 0)
 		{
 			_animationController.SetTrigger ("PlaceAnchor");
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0))
+		if (Input.GetKeyDown (KeyCode.Mouse0) && _player.getSelf().getAbility(1).isReady())
 		{
 			_animationController.SetTrigger ("Dash");
 		}
