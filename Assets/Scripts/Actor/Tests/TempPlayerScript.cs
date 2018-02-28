@@ -46,10 +46,6 @@ public class TempPlayerScript : MonoBehaviour {
 		{
 			_animationController.SetTrigger ("Dash");
 		}
-			
-		//position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
-		//mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y); 
-
 
 		Vector3 offset = new Vector3 (transform.parent.GetComponent<BoxCollider2D> ().offset.x, transform.parent.GetComponent<BoxCollider2D> ().offset.y, transform.parent.position.z);
 
@@ -62,6 +58,25 @@ public class TempPlayerScript : MonoBehaviour {
 		_animationController.SetFloat ("Angle", angle);
 	}
 
+	public void ChangeToFacingLeft()
+	{
+		_animationController.SetInteger ("Direction", 4);
+	}
+
+	public void ChangeToFacingDown ()
+	{
+		_animationController.SetInteger ("Direction", 3);
+	}
+
+	public void ChangeToFacingRight()
+	{
+		_animationController.SetInteger ("Direction", 2);
+	}
+
+	public void ChangeToFacingUp ()
+	{
+		_animationController.SetInteger ("Direction", 1);
+	}
 
 	public void PlayTetherAnimation ()
 	{

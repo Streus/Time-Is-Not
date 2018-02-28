@@ -7,6 +7,7 @@ public class HermitCrab : Controller
 	#region INSTANCE_VARS
 	// Where this crab wil return to if moved
 	private Vector3 home;
+	private Animator animationController;
 
 	[Tooltip("How long this crab will remain sitting")]
 	[SerializeField]
@@ -44,6 +45,8 @@ public class HermitCrab : Controller
 		home = transform.position;
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
+
+		animationController = gameObject.GetComponent <Animator> ();
 	}
 
 	public void OnDestroy()
@@ -70,6 +73,7 @@ public class HermitCrab : Controller
 
 		//crab is about to sit down
 		//TODO crab sit animation here
+		animationController.SetBool ("Hide", true);
 	}
 
 	public bool updateStandDuration(float delta)
@@ -82,6 +86,7 @@ public class HermitCrab : Controller
 
 		//crab is about to stand up
 		//TODO crab stand animation here
+		animationController.SetBool ("Hide", false);
 	}
 
 	public bool updateReturnTimer(float delta)
