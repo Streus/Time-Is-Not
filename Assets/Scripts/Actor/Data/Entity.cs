@@ -193,6 +193,23 @@ public sealed class Entity : MonoBehaviour, ISavable
 			return abilities [index];
 		return null;
 	}
+
+	/// <summary>
+	/// Returns an ability in this entity's list with the name provided.
+	/// </summary>
+	public Ability getAbility(string name)
+	{
+		for (int i = 0; i < abilities.Capacity; i++)
+		{
+			if (abilities [i] == null)
+				continue;
+
+			if (abilities [i].name == name)
+				return abilities [i];
+		}
+
+		return null;
+	}
 	#endregion
 
 	#region STATUS_MANAGEMENT
