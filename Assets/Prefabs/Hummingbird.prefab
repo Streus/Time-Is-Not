@@ -74,7 +74,7 @@ Transform:
   m_GameObject: {fileID: 1413525278506206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.175, z: 0}
   m_Children: []
   m_Father: {fileID: 4270377117650956}
   m_RootOrder: 0
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449627520273038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.25, y: 7.3100004, z: 0}
+  m_LocalPosition: {x: -25.47, y: -24.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4011414097952456}
@@ -139,7 +139,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00794967, y: 0.03454526}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!95 &95060554380835552
@@ -190,9 +190,10 @@ MonoBehaviour:
   state: {fileID: 11400000, guid: 908c9b0d006182140a016c19bc6d061a, type: 2}
   map: {fileID: 0}
   patrolStart: {fileID: 0}
-  turnSpeed: 90
-  sightRange: 5
+  turnSpeed: 180
+  sightRange: 3
   fieldOfView: 45
+  slowedMultiplier: 2
 --- !u!114 &114526079705443818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: 1
-  movespeed: 3
+  movespeed: 2.5
 --- !u!114 &114736475121881290
 MonoBehaviour:
   m_ObjectHideFlags: 1
