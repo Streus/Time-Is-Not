@@ -48,6 +48,13 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		}
 	}
 
+	[HideInInspector] public static int numTetherPointsLeft
+	{
+		get{
+			return inst.m_maxNumStates - inst.m_curState - 1; 
+		}
+	}
+
 	// State data
 	List<Dictionary<string, SeedCollection>> stateSeeds; 
 
@@ -102,7 +109,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	void Update()
 	{
-		
+		//Debug.Log("Num tether points left: " + numTetherPointsLeft + "; Num stasis bubbles left: " + numStasisLeft); 
 	}
 
 
