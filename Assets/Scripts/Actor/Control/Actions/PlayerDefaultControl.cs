@@ -30,9 +30,12 @@ public class PlayerDefaultControl : Action
 		if (Input.GetKeyDown (PlayerControlManager.RH_Dash) ||
 		   Input.GetKeyDown (PlayerControlManager.LH_Dash))
 		{
-			if (GameManager.inst.canUseDash && CursorManager.CursorInGameplayState ())
-				c.getSelf ().getAbility (1).use (c.getSelf (), p.getJumpTargetPos ());
-		}
+            if (GameManager.inst.canUseDash && CursorManager.CursorInGameplayState())
+            {
+                c.getSelf().getAbility(1).use(c.getSelf(), p.getJumpTargetPos());
+                AudioLibrary.PlayDashForwardSound();
+            }
+        }
 
         p.move();
 		p.findTarget ();
