@@ -40,9 +40,34 @@ public class HCReturning : Action
 				moveDist = dist;
 
 			//move
+			Vector3 dir = navPos - c.transform.position;
 			c.transform.Translate (
-				(navPos - c.transform.position).normalized *
+				dir.normalized *
 				moveDist, Space.World);
+
+			//determine facing sprite using dir (defined above)
+			//TODO crab walking animation here
+			Quaternion qdir = Quaternion.LookRotation(dir, Vector3.back);
+			if(qdir.eulerAngles.z > 315 || qdir.eulerAngles.z < 45)
+			{
+				//up
+
+			}
+			if(qdir.eulerAngles.z > 45 && qdir.eulerAngles.z < 135)
+			{
+				//left
+
+			}
+			if(qdir.eulerAngles.z > 135 && qdir.eulerAngles.z < 225)
+			{
+				//down
+
+			}
+			if(qdir.eulerAngles.z > 225 && qdir.eulerAngles.z < 315)
+			{
+				//right
+
+			}
 
 			//if near the next point in the path, look ahead
 			if (c.getMap () != null && dist < c.getMap ().cellDimension / 2f)

@@ -67,6 +67,9 @@ public class HermitCrab : Controller
 	public void resetSitDuration()
 	{
 		sitDuration = 0f;
+
+		//crab is about to sit down
+		//TODO crab sit animation here
 	}
 
 	public bool updateStandDuration(float delta)
@@ -76,6 +79,9 @@ public class HermitCrab : Controller
 	public void resetStandDuration()
 	{
 		standDuration = standDurationMax;
+
+		//crab is about to stand up
+		//TODO crab stand animation here
 	}
 
 	public bool updateReturnTimer(float delta)
@@ -85,6 +91,9 @@ public class HermitCrab : Controller
 	public void resetReturnTimer()
 	{
 		returnTimer = returnTimerMax;
+
+		//crab is about to return home
+		//TODO iunno some animtion I guess?
 	}
 
 	public Vector3 getHome()
