@@ -32,8 +32,18 @@ public class PlayerDefaultControl : Action
 		{
             if (GameManager.inst.canUseDash && CursorManager.CursorInGameplayState())
             {
+                if (c.getSelf().getAbility(1).isReady())
+                {
+                    AudioLibrary.PlayDashForwardSound();
+                }
+                else
+                {
+                    if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashError))
+                    {
+                        AudioLibrary.PlayDashErrorSound();
+                    }
+                }
                 c.getSelf().getAbility(1).use(c.getSelf(), p.getJumpTargetPos());
-                AudioLibrary.PlayDashForwardSound();
             }
         }
 
