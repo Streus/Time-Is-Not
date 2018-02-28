@@ -14,9 +14,10 @@ public class Hummingbird : PatrollingEnemy
 	[Range(1f, 360f)]
 	private float fieldOfView = 90f;
 
-	[Tooltip("The amount speed is slowed by stasis bubbles")]
+	[Tooltip("The amount speed this Hb wil move when slowed")]
 	[SerializeField]
-	private float slowedMultiplier = 2f;
+	private float slowedSpeed = 2f;
+	private float savedSpeed;
 
 	private State defaultState;
 
@@ -32,6 +33,8 @@ public class Hummingbird : PatrollingEnemy
 		//NOTE: use protected anim and physbody from Controller
 
 		base.Awake ();
+
+		savedSpeed = getSelf ().getMovespeed ();
 
 		defaultState = getState();
 		if (patrolStart == null)
@@ -55,9 +58,12 @@ public class Hummingbird : PatrollingEnemy
 	private void onStasised(bool val)
 	{
 		if (val)
-			getSelf ().modMovespeed (1 / slowedMultiplier);
+		{
+			savedSpeed = getSelf ().getMovespeed ();
+			getSelf ().setMovespeed (slowedSpeed);
+		}
 		else
-			getSelf ().modMovespeed (slowedMultiplier);
+			getSelf ().setMovespeed (savedSpeed);
 	}
 
 	public override void Update()
