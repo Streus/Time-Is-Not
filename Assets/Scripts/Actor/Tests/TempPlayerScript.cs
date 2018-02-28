@@ -10,13 +10,21 @@ public class TempPlayerScript : MonoBehaviour {
 
 	public float angle;
 
+	private bool isDashing = false;
+
 	void Start () 
 	{
 		_player = gameObject.GetComponentInParent<Player> ();
 		_animationController = GetComponent<Animator> ();
 	}
 
-	void Update () {
+	void Update () 
+	{
+		if(isDashing != _player.dashing())
+		{
+			isDashing = _player.dashing ();
+			_animationController.SetBool ("Dash", _player.dashing());
+		}
 		if (Input.GetKeyDown (KeyCode.W))
 		{
 			_animationController.SetInteger ("Direction", 1);
@@ -45,10 +53,6 @@ public class TempPlayerScript : MonoBehaviour {
 			_animationController.SetTrigger ("PlaceAnchor");
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && _player.getSelf().getAbility(1).isReady())
-		{
-			_animationController.SetTrigger ("Dash");
-		}
 
 		Vector3 offset = new Vector3 (transform.parent.GetComponent<BoxCollider2D> ().offset.x, transform.parent.GetComponent<BoxCollider2D> ().offset.y, transform.parent.position.z);
 
