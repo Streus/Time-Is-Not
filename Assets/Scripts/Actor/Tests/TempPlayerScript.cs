@@ -6,8 +6,7 @@ public class TempPlayerScript : MonoBehaviour {
 
 	private Animator _animationController;
 
-	Vector2 position;
-	Vector3 mousePosition;
+	public float angle;
 
 	void Start () 
 	{
@@ -48,13 +47,21 @@ public class TempPlayerScript : MonoBehaviour {
 			_animationController.SetTrigger ("Dash");
 		}
 			
-		position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
-		mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y); 
+		//position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
+		//mousePosition = new Vector2 (Input.mousePosition.x, Input.mousePosition.y); 
 
-		_animationController.SetFloat ("Angle", Vector2.Angle (position, mousePosition));
 
-		print ("Angle between player and cursor: " + Vector2.Angle (position, mousePosition)); 
+		Vector3 offset = new Vector3 (transform.parent.GetComponent<BoxCollider2D> ().offset.x, transform.parent.GetComponent<BoxCollider2D> ().offset.y, transform.parent.position.z);
+
+		Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (transform.parent.position + offset);
+
+		Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+		angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+		_animationController.SetFloat ("Angle", angle);
 	}
+
 
 	public void PlayTetherAnimation ()
 	{
@@ -64,5 +71,10 @@ public class TempPlayerScript : MonoBehaviour {
 	public void PlayReappearAnimation ()
 	{
 		_animationController.SetTrigger ("Reappear");
+	}
+
+	float AngleBetweenTwoPoints(Vector3 a, Vector3 b) 
+	{
+		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
 	}
 }
