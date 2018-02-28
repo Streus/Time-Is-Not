@@ -34,7 +34,7 @@ public class PlayerDefaultControl : Action
             {
 				if(c.getSelf().getAbility(1).use(c.getSelf(), p.getJumpTargetPos()))
                		AudioLibrary.PlayDashForwardSound();
-				else
+				else if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashError))
 					AudioLibrary.PlayDashErrorSound();
             }
         }
