@@ -20,6 +20,24 @@ public class TempPlayerScript : MonoBehaviour {
 
 	void Update () 
 	{
+		if (_player.pushing ())
+		{
+			_animationController.SetBool ("isPushing", true);
+		} else
+		{
+			_animationController.SetBool ("isPushing", false);
+		}
+
+		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.A))
+		{
+			_animationController.SetBool ("isMoving", true);
+		}
+
+		if ((Input.GetKeyUp (KeyCode.W) || Input.GetKeyUp (KeyCode.D) || Input.GetKeyUp (KeyCode.S) || Input.GetKeyUp (KeyCode.A)))
+		{
+			_animationController.SetBool ("isMoving", false);
+		}
+
 		if(isDashing != _player.dashing())
 		{
 			isDashing = _player.dashing ();
