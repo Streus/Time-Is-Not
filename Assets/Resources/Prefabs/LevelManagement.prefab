@@ -3978,6 +3978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08b6791529b64f71b9d049e53e8ff4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angle: 0
 --- !u!114 &114399133944962830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5739,9 +5740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20336826354465066}
   target: {fileID: 4213511411776624}
-  b_origin: {x: 0, y: -10.54}
-  b_min: {x: -14, y: -10}
-  b_max: {x: 14, y: 10}
+  cameraBounds: {fileID: 0}
   smoothFollow: 0
   smoothSpeed: 10
   followRadius: 0
