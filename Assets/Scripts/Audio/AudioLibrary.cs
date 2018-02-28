@@ -167,8 +167,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip codeDoorUnlock; // -- done : Location - Keycode reader script
     public AudioClip doorFieldClosed; // -- done : Location - Door script
     public AudioClip doorFieldOpen; // -- done : Location - Door script 
-    public AudioClip doorMetalClose;
-    public AudioClip doorMetalOpen;
+    public AudioClip doorMetalClose; // -- done : Location - Door script 
+    public AudioClip doorMetalOpen; // -- done : Location - Door script 
 
     #endregion
 
