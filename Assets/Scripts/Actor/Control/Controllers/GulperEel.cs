@@ -6,6 +6,33 @@ public class GulperEel : PatrollingEnemy
 {
 	#region INSTANCE_METHODS
 
+	public override void Update ()
+	{
+		base.Update ();
+
+		//TODO gulper eel movement animations
+		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
+		{
+			//up
+
+		}
+		if(transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
+		{
+			//left
+
+		}
+		if(transform.eulerAngles.z > 135 && transform.eulerAngles.z < 225)
+		{
+			//down
+
+		}
+		if(transform.eulerAngles.z > 225 && transform.eulerAngles.z < 315)
+		{
+			//right
+
+		}
+	}
+
 	#region ISAVABLE_METHODS
 
 	public override SeedBase saveData ()
