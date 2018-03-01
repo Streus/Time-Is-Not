@@ -17,10 +17,15 @@ public class TempSelectorScene : MonoBehaviour
         }
     }
 
-    public void load()
+    public void Load()
     {
         SaveManager.Load();
-        //SceneManager.LoadScene(SaveManager.saveManager.level);
+        SceneManager.LoadScene(SaveManager.level);
+    }
+
+    public void NewGame()
+    {
+        SaveManager.NewGame();
         SceneManager.LoadScene(SaveManager.level);
     }
 }

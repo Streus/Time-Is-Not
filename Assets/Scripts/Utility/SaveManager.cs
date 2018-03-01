@@ -16,9 +16,10 @@ public class SaveManager : Singleton<SaveManager>
     [DllImport("__Internal")]
     private static extern void WindowAlert(string message);
 
-    //public static SaveManager saveManager;
     static string saveLocation;
+
     static string m_level; 
+
     public static string level
     {
         get
@@ -31,23 +32,14 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    private void Awake()
+    void Awake()
     {
-        /*if(saveManager == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            saveManager = this;
-        }*/
         saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+
         if (File.Exists(saveLocation))
         {
             Load();
         }
-    }
-
-    void Update()
-    {
-        
     }
 
     public static void Save()
@@ -65,6 +57,7 @@ public class SaveManager : Singleton<SaveManager>
                 fileStream = File.Open(saveLocation, FileMode.Open);
                 print("File exists and saved");
             }
+
             else
             {
                 fileStream = File.Create(saveLocation);
@@ -83,6 +76,7 @@ public class SaveManager : Singleton<SaveManager>
                 SyncFiles();
             }
         }
+
         catch (Exception e)
         {
             PlatformSafeMessage("Failed to Save: " + e.Message);
@@ -105,10 +99,10 @@ public class SaveManager : Singleton<SaveManager>
                 VariablesToSave savedData = (VariablesToSave)binaryFormatter.Deserialize(fileStream);
                 fileStream.Close();
 
-                //saveManager.m_level = savedData.m_level;
                 SaveManager.m_level = savedData.m_level;
             }
         }
+
         catch (Exception e)
         {
             PlatformSafeMessage("Failed to Load: " + e.Message);
@@ -121,6 +115,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             WindowAlert(message);
         }
+
         else
         {
             Debug.Log(message);
@@ -134,9 +129,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public static void ClearData()
     {
-        print("Clear Data");
-        SaveManager.level = "Vertical Slice";//saveManager.level = "Vertical Slice";
-        print("Data Cleared");
+        SaveManager.level = "Vertical Slice";
         Save();
         Load();
     }
