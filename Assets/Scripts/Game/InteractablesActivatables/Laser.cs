@@ -31,6 +31,13 @@ public class Laser : Interactable, IActivatable, ISavable
 	[SerializeField]
 	private GameObject[] _activatables;
 
+	[Tooltip("How high off the floor is the laser (offset between visual and check)")]
+	[SerializeField]
+	private float _laserHeight = -0.33f;
+
+	//where the laser is hitting
+	private Vector2 currentHitPoint;
+
 	//the line renderer for the laser
 	private LineRenderer _laserLine;
 
@@ -74,6 +81,7 @@ public class Laser : Interactable, IActivatable, ISavable
 		}
 		else
 		{
+			currentHitPoint = transform.position;
 			if (_laserLine.enabled)
 				_laserLine.enabled = false;
 		}
@@ -93,6 +101,8 @@ public class Laser : Interactable, IActivatable, ISavable
 				Gizmos.DrawLine (transform.position, _activatables[i].transform.position);
 		}
 
+		Gizmos.DrawLine (transform.position + (Vector3.up * _laserHeight), (Vector3)currentHitPoint);
+
 	}
 
 	/// <summary>
@@ -100,7 +110,7 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// </summary>
 	void rayCast()
 	{
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up, _distance, _layersToHit);
+		RaycastHit2D hit = Physics2D.Raycast (transform.position + (Vector3.up * _laserHeight), transform.up, _distance, _layersToHit);
 
 		_laserLine.SetPosition (0, transform.position);
 
@@ -110,8 +120,10 @@ public class Laser : Interactable, IActivatable, ISavable
 			return;
 		} else
 		{
-			_laserLine.SetPosition (1, hit.point);
+			_laserLine.SetPosition (1, (Vector3)hit.point - (Vector3.up * _laserHeight));
+			currentHitPoint = hit.point;
 		}
+		_laserLine.sortingOrder = SpriteOrderer.inst.OrderMe (transform) - 1;
 			
 		if (!Application.isPlaying)
 			return;
@@ -125,6 +137,11 @@ public class Laser : Interactable, IActivatable, ISavable
 				trigger (entityHit);
 			}
 		}
+	}
+
+	public Vector2 currentHit()
+	{
+		return currentHitPoint;
 	}
 
 	/// <summary>
