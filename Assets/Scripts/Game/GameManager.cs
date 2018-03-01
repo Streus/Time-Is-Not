@@ -96,10 +96,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 			playerScript = playerObj.GetComponent<Player>(); 
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
-
-        string levelName = SceneManager.GetActiveScene().name;
-        SaveManager.saveManager.level = levelName;
-        SaveManager.Save();
+        if (SaveManager.saveManager != null)
+        {
+            string levelName = SceneManager.GetActiveScene().name;
+            SaveManager.saveManager.level = levelName;
+            SaveManager.Save();
+        }
     }
 
     void Update()
