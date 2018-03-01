@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserEffect : MonoBehaviour {
+[ExecuteInEditMode]
+public class LaserEffect : MonoBehaviour 
+{
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		if(gameObject.GetComponent<ParticleSystem>() == null)
+		{
+			gameObject.AddComponent<ParticleSystem> ();
+		}
 	}
+
+
 }
