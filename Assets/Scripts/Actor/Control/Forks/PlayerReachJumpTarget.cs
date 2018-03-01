@@ -19,7 +19,7 @@ public class PlayerReachJumpTarget : Fork
         Collider2D[] colsHit = Physics2D.OverlapBoxAll((Vector2)p.transform.position + col.offset, ((BoxCollider2D)col).size, 0f, p.moveMask);
         for (int i = 0; i < colsHit.Length; i++)
         {
-            if (colsHit[i] != col)
+			if (colsHit[i] != col && !colsHit[i].isTrigger)
                 isColliding = true;
         }
        
