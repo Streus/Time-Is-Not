@@ -97,10 +97,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
 
+        string levelName = SceneManager.GetActiveScene().name;
+        SaveManager.saveManager.level = levelName;
+        SaveManager.Save();
+    }
 
-	}
-
-	void Update()
+    void Update()
 	{
 		
 	}
