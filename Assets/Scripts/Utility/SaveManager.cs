@@ -7,7 +7,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : Singleton<SaveManager>
 {
     //-------- Important for JavaScript to Access Data ---------------------------------------------------------------------//
     [DllImport("__Internal")]
@@ -16,10 +16,10 @@ public class SaveManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void WindowAlert(string message);
 
-    public static SaveManager saveManager;
+    //public static SaveManager saveManager;
     static string saveLocation;
-    [SerializeField] private string m_level; 
-    public string level
+    static string m_level; 
+    public static string level
     {
         get
         {
@@ -33,11 +33,11 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        if(saveManager == null)
+        /*if(saveManager == null)
         {
             DontDestroyOnLoad(gameObject);
             saveManager = this;
-        }
+        }*/
         saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
         if (File.Exists(saveLocation))
         {
@@ -73,7 +73,7 @@ public class SaveManager : MonoBehaviour
 
             VariablesToSave savedData = new VariablesToSave();
 
-            savedData.m_level = saveManager.m_level;
+            savedData.m_level = SaveManager.m_level;//saveManager.m_level;
 
             binaryFormatter.Serialize(fileStream, savedData);
             fileStream.Close();
@@ -105,7 +105,8 @@ public class SaveManager : MonoBehaviour
                 VariablesToSave savedData = (VariablesToSave)binaryFormatter.Deserialize(fileStream);
                 fileStream.Close();
 
-                saveManager.m_level = savedData.m_level;
+                //saveManager.m_level = savedData.m_level;
+                SaveManager.m_level = savedData.m_level;
             }
         }
         catch (Exception e)
@@ -134,7 +135,7 @@ public class SaveManager : MonoBehaviour
     public static void ClearData()
     {
         print("Clear Data");
-        saveManager.level = "Vertical Slice";
+        SaveManager.level = "Vertical Slice";//saveManager.level = "Vertical Slice";
         print("Data Cleared");
         Save();
         Load();
