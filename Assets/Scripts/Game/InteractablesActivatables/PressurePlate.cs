@@ -143,8 +143,11 @@ public class PressurePlate : Interactable
 			return;
 		foreach(GameObject activatable in _activatables)
 		{
-			if(activatable.GetComponent<IActivatable>() != null)
-				activatable.GetComponent<IActivatable>().onActivate (_pressed);
+			if(activatable != null)
+			{
+				if (activatable.GetComponent<IActivatable> () != null)
+					activatable.GetComponent<IActivatable> ().onActivate (_pressed);
+			}
 		}
 	}
 
