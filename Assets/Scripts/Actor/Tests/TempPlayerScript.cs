@@ -12,6 +12,8 @@ public class TempPlayerScript : MonoBehaviour {
 
 	private bool isDashing = false;
 
+	private bool isPushing = false;
+
 	void Start () 
 	{
 		_player = gameObject.GetComponentInParent<Player> ();
@@ -20,13 +22,12 @@ public class TempPlayerScript : MonoBehaviour {
 
 	void Update () 
 	{
-		if (_player.pushing ())
+
+		if (isPushing != _player.pushing ())
 		{
-			_animationController.SetBool ("isPushing", true);
-		} else
-		{
-			_animationController.SetBool ("isPushing", false);
-		}
+			isPushing = _player.pushing ();
+			_animationController.SetBool ("isPushing", _player.pushing ());
+		} 
 
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.A))
 		{
