@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class MoveObject : MonoBehaviour, IActivatable, ISavable
 {
 	//TODO: draw gizmos along path
 
 	public enum EndStyle {LoopToStart, BackAndForth, Stop, TeleportToStart};
+
+
+	[Tooltip("World Space Coordinates of the object")]
+	public Vector2 _objectWorldSpacePosition;
 
 	[Tooltip("Path object will follow")]
 	public Vector2[] _points;
@@ -28,7 +33,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	public float delayAtEnds = 0;
 
 	//if true, the object will move backwards through the points
-	private bool _reverseMovement = false;
+	public bool _reverseMovement = false;
 
 	//The current target Point
 	private int _nextPoint = 0;
@@ -61,6 +66,9 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	// Update is called once per frame
 	void Update () 
 	{
+		_objectWorldSpacePosition = (Vector2)transform.position;
+		if (!Application.isPlaying)
+			return;
 		if (_waitTimer > 0)
 			_waitTimer -= Time.deltaTime;
 		else

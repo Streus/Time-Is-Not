@@ -13,6 +13,9 @@ public class MovingPlatform : MoveObject
 	// Update is called once per frame
 	void Update () 
 	{
+		_objectWorldSpacePosition = (Vector2)transform.position;
+		if (!Application.isPlaying)
+			return;
 		if (_waitTimer > 0)
 			_waitTimer -= Time.deltaTime;
 		else
@@ -22,6 +25,18 @@ public class MovingPlatform : MoveObject
 		}
 		setNextPoint ();
 		CheckForPlayer ();
+	}
+
+	public Transform player
+	{
+		get { return _player; }
+		set { _player = value; }
+	}
+
+	public Vector2 offset
+	{
+		get { return _offset; }
+		set { _offset = value; }
 	}
 
 	/// <summary>
@@ -42,8 +57,10 @@ public class MovingPlatform : MoveObject
 			_offset = Vector2.zero;
 	}
 
-	void OnDrawGizmos()
+	public void OnDrawGizmos()
 	{
+		if (_points == null)
+			return;
 		if (_points.Length == 0)
 			return;
 		Gizmos.color = Color.yellow;
@@ -63,7 +80,7 @@ public class MovingPlatform : MoveObject
 
 	}
 
-	void CheckForPlayer()
+	public void CheckForPlayer()
 	{
 		bool seesPlayer = false;
 		Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position, gameObject.GetComponent<BoxCollider2D> ().size, 0f);
@@ -86,29 +103,5 @@ public class MovingPlatform : MoveObject
 		if (_player != null && !seesPlayer)
 			_player = null;
 	}
-
-	void OnTriggerEnter2D(Collider2D col)
-	{
-		/*if (col.gameObject.GetComponent<Entity> () != null) 
-		{
-			//Check if 
-			Entity entityHit = col.gameObject.GetComponent<Entity> ();
-			if (entityHit.getFaction () == Entity.Faction.player) 
-			{
-				_player = entityHit.transform;
-			}
-		}*/
-	}
-
-	void OnTriggerExit2D(Collider2D col)
-	{
-		/*if (col.gameObject.GetComponent<Entity> () != null) 
-		{
-			Entity entityHit = col.gameObject.GetComponent<Entity> ();
-			if (entityHit.getFaction () == Entity.Faction.player) 
-			{
-				_player = null;
-			}
-		}*/
-	}
+		
 }
