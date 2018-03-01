@@ -10,8 +10,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	public enum EndStyle {LoopToStart, BackAndForth, Stop, TeleportToStart};
 
 
-	[Tooltip("World Space Coordinates of the object")]
-	public Vector2 _objectWorldSpacePosition;
+	[Tooltip("(READ ONLY)World Space Coordinates of the object")]
+	public Vector2 _objectWorldSpacePositionREADONLY;
 
 	[Tooltip("Path object will follow")]
 	public Vector2[] _points;
