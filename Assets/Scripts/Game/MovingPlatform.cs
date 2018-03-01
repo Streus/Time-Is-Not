@@ -13,7 +13,7 @@ public class MovingPlatform : MoveObject
 	// Update is called once per frame
 	void Update () 
 	{
-		_objectWorldSpacePosition = (Vector2)transform.position;
+		_objectWorldSpacePositionREADONLY = (Vector2)transform.position;
 		if (!Application.isPlaying)
 			return;
 		if (_waitTimer > 0)
