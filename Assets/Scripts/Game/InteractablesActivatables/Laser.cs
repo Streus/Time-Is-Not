@@ -111,8 +111,10 @@ public class Laser : Interactable, IActivatable, ISavable
 		List<Collider2D> colsToIgnore = new List<Collider2D>();
 		if(gameObject.GetComponent<Collider2D>() != null)
 			colsToIgnore.Add(gameObject.GetComponent<Collider2D>());
-		if(transform.parent.GetComponent<Collider2D>() != null)
-			colsToIgnore.Add(transform.parent.GetComponent<Collider2D>());
+		if(transform.parent != null)
+		{
+			if (transform.parent.GetComponent<Collider2D> () != null)
+				colsToIgnore.Add (transform.parent.GetComponent<Collider2D> ());}
 		if(transform.childCount >= 1)
 		{
 			if (transform.GetChild (0).GetComponent<Collider2D> () != null)
