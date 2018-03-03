@@ -41,9 +41,7 @@ public class HCReturning : Action
 
 			//move
 			Vector3 dir = navPos - c.transform.position;
-			c.transform.Translate (
-				dir.normalized *
-				moveDist, Space.World);
+			c.transform.Translate (dir.normalized * moveDist, Space.World);
 
 			//determine facing sprite using dir (defined above)
 			//TODO crab walking animation here
@@ -73,7 +71,7 @@ public class HCReturning : Action
 			}
 
 			//if near the next point in the path, look ahead
-			if (c.getMap () != null && dist < c.getMap ().cellDimension)
+			if (c.getMap () != null && dist < c.getMap ().cellDimension / 1.5f)
 				c.nextPosition (out navPos);
 		}
 	}
