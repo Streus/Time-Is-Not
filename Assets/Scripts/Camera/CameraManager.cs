@@ -20,8 +20,8 @@ public class CameraManager : MonoBehaviour
 	[SerializeField]
 	private Transform target;
 
-	[Header("Camera Bounds Ref (Drag-in)")]
-	[SerializeField] CameraBounds cameraBounds; 
+	//[Header("Camera Bounds Ref (Drag-in)")]
+	//[SerializeField] CameraBounds cameraBounds; 
 	private Vector2 b_origin = Vector2.zero;
 	private Vector2 b_min = Vector2.zero;
 	private Vector2 b_max = Vector2.zero;
@@ -100,11 +100,11 @@ public class CameraManager : MonoBehaviour
 
 		shakeDur = shakeInt = shakeDec = 0f;
 
-		if (cameraBounds != null)
+		if (SceneSetup.inst != null)
 		{
-			b_origin = cameraBounds.b_origin;
-			b_max = cameraBounds.b_max;
-			b_min = cameraBounds.b_min; 
+			b_origin = SceneSetup.inst.b_origin;
+			b_max = SceneSetup.inst.b_max;
+			b_min = SceneSetup.inst.b_min; 
 		}
 		else
 		{
@@ -118,11 +118,11 @@ public class CameraManager : MonoBehaviour
 		// This isn't ideal, but is being done so that bounds can be stored in separate gameObject outside the LevelManager prefab
 		// This way, you can change the external bounds and have that change update here, 
 		// 		while still allowing the CameraManager to store default camera bounds if the CameraBounds instance isn't assigned
-		if (cameraBounds != null)
+		if (SceneSetup.inst != null)
 		{
-			b_origin = cameraBounds.b_origin;
-			b_max = cameraBounds.b_max;
-			b_min = cameraBounds.b_min; 
+			b_origin = SceneSetup.inst.b_origin;
+			b_max = SceneSetup.inst.b_max;
+			b_min = SceneSetup.inst.b_min; 
 		}
 
 		//shake the camera

@@ -90,6 +90,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// MonoBehaviors
 	public void Awake()
 	{
+		if (SceneSetup.inst != null)
+		{
+			canUseStasis = SceneSetup.inst.canUseStasis; 
+			canUseDash = SceneSetup.inst.canUseDash; 
+		}
+
 		if (playerObj != null)
 		{
 			playerObj.GetComponent<Entity> ().died += killPlayer;
