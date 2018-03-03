@@ -108,7 +108,21 @@ public class Laser : Interactable, IActivatable, ISavable
 	/// </summary>
 	void rayCast()
 	{
+		List<Collider2D> colsToIgnore = new List<Collider2D>();
+		if(gameObject.GetComponent<Collider2D>() != null)
+			colsToIgnore.Add(gameObject.GetComponent<Collider2D>());
+		if(transform.parent.GetComponent<Collider2D>() != null)
+			colsToIgnore.Add(transform.parent.GetComponent<Collider2D>());
+		if(transform.GetChild(0).GetComponent<Collider2D>() != null)
+			colsToIgnore.Add(transform.GetChild(0).GetComponent<Collider2D>());
+		
 		RaycastHit2D hit = Physics2D.Raycast (transform.position + (Vector3.up * laserHeight), transform.up, _distance, _layersToHit);
+
+		while(colsToIgnore.Contains(hit.collider))
+		{
+			//ray.point + [the direction your casting] * some small offset.
+			hit = Physics2D.Raycast (hit.point +  ((Vector2)transform.up * 0.1f), transform.up, _distance, _layersToHit);
+		}
 
 		_laserLine.SetPosition (0, transform.position);
 
