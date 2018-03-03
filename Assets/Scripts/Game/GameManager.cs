@@ -29,8 +29,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 	bool pauseLock; 
 
 	// Ability setup
-	public bool canUseStasis; 
-	public bool canUseDash; 
+	// These variables can be edited in the Inspector via SceneSettings
+	[HideInInspector] public bool canUseStasis; 
+	[HideInInspector] public bool canUseDash; 
 
 	// Death functionality
 	bool isDead; 
