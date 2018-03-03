@@ -14,7 +14,7 @@ public class HCReturning : Action
 		if (hc.updateReturnTimer (Time.deltaTime))
 		{
 			float totalDist = Vector2.Distance (c.transform.position, hc.getHome ());
-			bool nearHome = totalDist < c.getMap ().cellDimension / 2f;
+			bool nearHome = totalDist < c.getMap ().cellDimension;
 
 			Vector3 navPos = hc.transform.position;
 			if (c.getMap () != null)
@@ -47,30 +47,33 @@ public class HCReturning : Action
 
 			//determine facing sprite using dir (defined above)
 			//TODO crab walking animation here
-			Quaternion qdir = Quaternion.LookRotation(dir, Vector3.back);
-			if(qdir.eulerAngles.z > 315 || qdir.eulerAngles.z < 45)
+			if (dir != Vector3.zero)
 			{
-				//up
+				Quaternion qdir = Quaternion.LookRotation (dir, Vector3.back);
+				if (qdir.eulerAngles.z > 315 || qdir.eulerAngles.z < 45)
+				{
+					//up
 
-			}
-			if(qdir.eulerAngles.z > 45 && qdir.eulerAngles.z < 135)
-			{
-				//left
+				}
+				if (qdir.eulerAngles.z > 45 && qdir.eulerAngles.z < 135)
+				{
+					//left
 
-			}
-			if(qdir.eulerAngles.z > 135 && qdir.eulerAngles.z < 225)
-			{
-				//down
+				}
+				if (qdir.eulerAngles.z > 135 && qdir.eulerAngles.z < 225)
+				{
+					//down
 
-			}
-			if(qdir.eulerAngles.z > 225 && qdir.eulerAngles.z < 315)
-			{
-				//right
+				}
+				if (qdir.eulerAngles.z > 225 && qdir.eulerAngles.z < 315)
+				{
+					//right
 
+				}
 			}
 
 			//if near the next point in the path, look ahead
-			if (c.getMap () != null && dist < c.getMap ().cellDimension / 2f)
+			if (c.getMap () != null && dist < c.getMap ().cellDimension)
 				c.nextPosition (out navPos);
 		}
 	}

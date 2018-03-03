@@ -47,6 +47,7 @@ public class HermitCrab : Controller
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 
 		animationController = gameObject.GetComponent <Animator> ();
+		animationController.SetBool ("Hide", true);
 	}
 
 	public void OnDestroy()
@@ -152,8 +153,6 @@ public class HermitCrab : Controller
 
 	public override void OnDrawGizmos()
 	{
-		base.OnDrawGizmos ();
-
 		if (getState () != null)
 		{
 			Gizmos.color = getState ().color;
