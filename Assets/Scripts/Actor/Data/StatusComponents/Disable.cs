@@ -8,7 +8,8 @@ public class Disable : StatusComponent
 	#endregion
 
 	#region INSTANCE_VARS
-
+	// Used to save the value of GameManager.inst.canUseStasis
+	private bool defaultCanTether = false;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -18,6 +19,8 @@ public class Disable : StatusComponent
 		{
 			subject.getAbility (i).available = false;
 		}
+
+		//TODO disable tether behavior
 	}
 
 	public override void onRevert (Entity subject)
@@ -26,6 +29,8 @@ public class Disable : StatusComponent
 		{
 			subject.getAbility (i).available = true;
 		}
+
+		//TODO reenable tether behavior
 	}
 	#endregion
 }
