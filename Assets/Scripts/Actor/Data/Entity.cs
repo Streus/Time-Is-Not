@@ -48,7 +48,7 @@ public sealed class Entity : MonoBehaviour, ISavable
 
 	public void Update()
 	{
-		if (GameManager.isPaused ())
+		if (GameManager.inst != null && GameManager.isPaused ())
 			return;
 
 		int i;

@@ -37,7 +37,7 @@ public class Controller : MonoBehaviour, ISavable
 		
 	public virtual void Update()
 	{
-		if (state != null && !GameManager.isPaused())
+		if (state != null && (GameManager.inst == null || !GameManager.isPaused()))
 			state.update (this);
 	}
 
