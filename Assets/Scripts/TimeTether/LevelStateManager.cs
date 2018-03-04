@@ -287,7 +287,10 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return true;
 	}
 
-	// Public state query methods
+	/*
+	 * Public state query methods
+	 */ 
+
 	public static bool canCreateTetherPoint()
 	{
 		if (curState + 1 >= maxNumStates)
@@ -306,7 +309,11 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return true; 
 	}
 
-	// State change methods
+
+	/*
+	 * State change methods
+	 */
+
 	public static void createTetherPoint()
 	{
 		if (canCreateTetherPoint())
@@ -332,6 +339,39 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		{
 			return false; 
 		}
+	}
+
+	/// <summary>
+	/// Removes the tether point at tetherIndex and shifts remaining points backwards
+	/// </summary>
+	/// <returns>True if the removal was successful, false otherwise</returns>
+	/// <param name="tetherIndex">Tether index.</param>
+	public static bool removeTetherPointAt(int tetherIndex)
+	{
+		if (tetherIndex == 0)
+		{
+			Debug.LogError("Cannot remove the first tether point (when tetherIndex = 0)"); 
+			return false; 
+		}
+		// TODO check if second condition is correct
+		if (tetherIndex < 0 || tetherIndex > curState)
+		{
+			Debug.LogError("tetherIndex " + tetherIndex + " cannot be removed because it is an invalid index. Current tether point: " + curState); 
+			return false; 
+		}
+
+		// Update the value of m_curState
+		// This should always decrement curState by 1
+		inst.m_curState--; 
+
+		// Update stateSeeds
+		// Remove the stateSeeds list at the tetherIndex
+		inst.stateSeeds.RemoveAt(tetherIndex); 
+		// Then, add a new empty Dictionary at the end of the list
+		inst.stateSeeds.Add(new Dictionary<string, SeedCollection> ());
+
+
+		return true; 
 	}
 
 

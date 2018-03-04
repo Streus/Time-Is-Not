@@ -43,7 +43,7 @@ public class TetherManager : Singleton<TetherManager>
     bool continueToLerpBetween;
 
     // An array holding all the timeTetherIndicators spawned in the scene. 
-    GameObject[] timeTetherIndicators;
+	[SerializeField] List<GameObject> timeTetherIndicators;
 
     [SerializeField] TetherUIState tetherUIState;
 
@@ -96,7 +96,9 @@ public class TetherManager : Singleton<TetherManager>
     // Use this for initialization
     void Start()
     {
-        timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates];
+        //timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates];
+		timeTetherIndicators = new List<GameObject>();
+
         CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0);
 
         arrowLerpBetween = true;
@@ -108,6 +110,20 @@ public class TetherManager : Singleton<TetherManager>
 
     void Update()
     {
+		// Test code for removing specific tether points
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			RemoveTetherPoint(1); 
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			RemoveTetherPoint(2); 
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			RemoveTetherPoint(3); 
+		}
+
         /*
 		 * Create tether point functionality
 		 */
@@ -541,6 +557,29 @@ public class TetherManager : Singleton<TetherManager>
         }
     }
 
+	/// <summary>
+	/// Called when removing a specific tether point. LevelStateManger needs to update internal data, and the arrow needs to be shifted back by one point. 
+	/// </summary>
+	public void RemoveTetherPoint(int tetherIndex)
+	{
+		// Remove the time tether indicator gameObject
+		RemoveTimeTetherIndicator(tetherIndex, false); 
+
+		// Update the internal level state data in LevelStateManager
+		//LevelStateManager.removeTetherPointAt(tetherIndex);
+		if (LevelStateManager.removeTetherPointAt(tetherIndex))
+		{
+			Debug.Log("Removal succesful for point " + tetherIndex); 
+		}
+		else
+		{
+			Debug.Log("Could not remove point " + tetherIndex); 
+		} 
+
+		// Set a new target for the timeline arrow
+		SetArrowTarget(LevelStateManager.curState, true, false);
+	}
+
     /// <summary>
     /// Called via UI buttons in the timeline to load a state
     /// </summary>
@@ -558,29 +597,65 @@ public class TetherManager : Singleton<TetherManager>
 
     void LoadTetherPoint(int state)
     {
-        RemoveTimeTetherIndicator(state + 1);
+        RemoveTimeTetherIndicator(state + 1, true);
         LevelStateManager.loadTetherPoint(state);
     }
 
     void CreateTimeTetherIndicator(Vector3 pos, int state)
     {
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
-        //timeTetherIndicators.Add(indicator); 
-        timeTetherIndicators[state] = indicator;
+        timeTetherIndicators.Add(indicator); 
+        //timeTetherIndicators[state] = indicator;
     }
 
     // Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
-    void RemoveTimeTetherIndicator(int index)
+	/// <summary>
+	/// Removes time tether indicators. If removeAll == true, removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
+	/// </summary>
+	/// <param name="index">Index.</param>
+	/// <param name="removeAll">If set to <c>true</c> remove all.</param>
+	void RemoveTimeTetherIndicator(int index, bool removeAll)
     {
-        //Debug.Log("Remove indicators starting at index " + index); 
+        Debug.Log("Remove indicators starting at index " + index);
 
-        for (int i = index; i < timeTetherIndicators.Length; i++)
+		// First, test to make sure the index is in range
+		if (index > timeTetherIndicators.Count - 1)
+		{
+			return; 
+		}
+
+
+		if (!removeAll)
+		{
+			if (timeTetherIndicators[index] != null)
+			{
+				Destroy(timeTetherIndicators[index].gameObject);
+				timeTetherIndicators.RemoveAt(index); 
+			}
+			return; 
+		}
+
+		//Debug.Log("RemoveAll at index " + index); 
+
+		/*
+		for (int i = index; i < timeTetherIndicators.Count; i++)
         {
             if (timeTetherIndicators[i] != null)
             {
                 Destroy(timeTetherIndicators[i].gameObject);
+				timeTetherIndicators.RemoveAt(i); 
             }
         }
+		*/ 
+
+		for (int i = timeTetherIndicators.Count - 1; i >= index; i--)
+		{
+			if (timeTetherIndicators[i] != null)
+			{
+				Destroy(timeTetherIndicators[i].gameObject);
+				timeTetherIndicators.RemoveAt(i); 
+			}
+		}
     }
 
     // UI Screenshot stuff
