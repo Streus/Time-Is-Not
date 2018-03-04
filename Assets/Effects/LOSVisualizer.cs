@@ -26,8 +26,12 @@ public class LOSVisualizer : MonoBehaviour
 
 		//setup mesh filter
 		mesh = new Mesh ();
-		mesh.name = "ViewMesh";
+		mesh.name = "SightMesh";
+		mesh.MarkDynamic ();
 		mFilter.mesh = mesh;
+
+		GetComponent<MeshRenderer> ().sortingLayerName = "Sight";
+		GetComponent<MeshRenderer> ().sortingOrder = 1000;
 	}
 
 	public void LateUpdate()
