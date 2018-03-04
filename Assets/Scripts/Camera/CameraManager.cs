@@ -157,7 +157,39 @@ public class CameraManager : MonoBehaviour
 
 		if (Application.isPlaying)
 		{
-			if ((Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut)) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
+			/*
+			//if ((Input.GetKey(PlayerControlManager.LH_ZoomOut) || Input.GetKey(PlayerControlManager.RH_ZoomOut)) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
+			if (PlayerControlManager.GetKey(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
+			{
+				m_zoomState = true; 
+				zoomTo(zoomOutSize, zoomOutLerpSpeed);
+				updateZoomPan(false);
+			}
+			else
+			{
+				m_zoomState = false; 
+				zoomTo(regularSize, zoomInLerpSpeed);
+				updateZoomPan(true);
+			}
+			*/
+
+			// Toggle zoom state key inputs
+			if (m_zoomState == false)
+			{
+				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
+				{
+					m_zoomState = true; 
+				}
+			}
+			else
+			{
+				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT))
+				{
+					m_zoomState = false; 
+				}
+			}
+
+			if (m_zoomState == true && GameManager.isPlayerDead() == false)
 			{
 				m_zoomState = true; 
 				zoomTo(zoomOutSize, zoomOutLerpSpeed);
