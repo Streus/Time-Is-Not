@@ -48,4 +48,22 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 
 		return inst.screenshots[stateNum]; 
 	}
+
+	public static void removeScreenshotAt(int index)
+	{
+		// Error cases
+		if (index < 0 || index >= inst.screenshots.Count)
+		{
+			Debug.LogError("Invalid index of " + index + " for screenshot to remove"); 
+			return; 
+		}
+		if (inst.screenshots[index] == null)
+		{
+			Debug.LogError("Null screenshot RenderTexture at index " + index); 
+			return; 
+		}
+
+		inst.screenshots.RemoveAt(index);
+		inst.screenshots.Add(new RenderTexture (inst.shotWidth, inst.shotHeight, inst.shotDepth)); 
+	}
 }

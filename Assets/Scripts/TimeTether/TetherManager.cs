@@ -110,20 +110,6 @@ public class TetherManager : Singleton<TetherManager>
 
     void Update()
     {
-		// Test code for removing specific tether points
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			RemoveTetherPoint(1); 
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			RemoveTetherPoint(2); 
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			RemoveTetherPoint(3); 
-		}
-
         /*
 		 * Create tether point functionality
 		 */
@@ -558,7 +544,7 @@ public class TetherManager : Singleton<TetherManager>
     }
 
 	/// <summary>
-	/// Called when removing a specific tether point. LevelStateManger needs to update internal data, and the arrow needs to be shifted back by one point. 
+	/// Called when removing a specific tether point. 
 	/// </summary>
 	public void RemoveTetherPoint(int tetherIndex)
 	{
@@ -575,6 +561,9 @@ public class TetherManager : Singleton<TetherManager>
 		{
 			Debug.Log("Could not remove point " + tetherIndex); 
 		} 
+
+		// Update the screenshots
+		ScreenshotManager.removeScreenshotAt(tetherIndex); 
 
 		// Set a new target for the timeline arrow
 		SetArrowTarget(LevelStateManager.curState, true, false);
