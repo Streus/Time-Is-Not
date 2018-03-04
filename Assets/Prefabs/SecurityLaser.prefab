@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
-  _triggersSecurityDoors: 0
+  _triggersSecurityDoors: 1
   _distance: 10
   _layersToHit:
     serializedVersion: 2
@@ -179,7 +179,6 @@ MonoBehaviour:
   _dashPadding: 0.5
   _type: 1
   _activatables: []
-  _laserHeight: -0.3
 --- !u!120 &120501053689106286
 LineRenderer:
   m_ObjectHideFlags: 1
