@@ -20,7 +20,6 @@ public class TetherIndicator : MonoBehaviour
 		// Save a transform ref to the moving platform
 		// Vector2 offset
 		// Update position of point every frame to be moving platform position + offset
-
 		Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x); 
 
 		if (moveParent == null)
@@ -35,6 +34,15 @@ public class TetherIndicator : MonoBehaviour
 			}
 		}
 		else
+		{
+			transform.position = moveParent.position + offsetFromMoveParent; 
+		}
+	}
+
+	// Called during the load process to update the position of any tether indicators with moveParents, whose RegisteredObjects have just sowed new data
+	public void UpdatePosition()
+	{
+		if (moveParent != null)
 		{
 			transform.position = moveParent.position + offsetFromMoveParent; 
 		}

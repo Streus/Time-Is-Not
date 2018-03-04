@@ -43,7 +43,7 @@ public class TetherManager : Singleton<TetherManager>
     bool continueToLerpBetween;
 
     // An array holding all the timeTetherIndicators spawned in the scene. 
-	[SerializeField] List<GameObject> timeTetherIndicators;
+	[SerializeField] List<TetherIndicator> timeTetherIndicators;
 
     [SerializeField] TetherUIState tetherUIState;
 
@@ -97,7 +97,7 @@ public class TetherManager : Singleton<TetherManager>
     void Start()
     {
         //timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates];
-		timeTetherIndicators = new List<GameObject>();
+		timeTetherIndicators = new List<TetherIndicator>();
 
         CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0);
 
@@ -604,7 +604,7 @@ public class TetherManager : Singleton<TetherManager>
     void CreateTimeTetherIndicator(Vector3 pos, int state)
     {
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
-        timeTetherIndicators.Add(indicator); 
+		timeTetherIndicators.Add(indicator.GetComponent<TetherIndicator>()); 
         //timeTetherIndicators[state] = indicator;
     }
 
@@ -657,6 +657,36 @@ public class TetherManager : Singleton<TetherManager>
 			}
 		}
     }
+
+	/// <summary>
+	/// Returns the position of the specified time tether indicator point. Necessary for setting player position
+	/// </summary>
+	/// <returns>The time tether indicator position.</returns>
+	/// <param name="index">Index of the timeTetherIndicators array</param>
+	public Vector3 GetTimeTetherIndicatorPos(int index)
+	{
+		if (index < timeTetherIndicators.Count && timeTetherIndicators[index] != null)
+		{
+			return timeTetherIndicators[index].transform.position; 
+		}
+		Debug.LogError("Could not retrieve timeTetherIndicators at index " + index + ". Vector3.zero has been returned instead."); 
+		return Vector3.zero; 
+	}
+
+	/// <summary>
+	/// Forces all positions of time tether indicators to update
+	/// This needs to be used during the state load process to make sure tether positions update as if their moveParent position changes
+	/// </summary>
+	public void UpdateTetherIndicatorPositions()
+	{
+		for (int i = 0; i < timeTetherIndicators.Count; i++)
+		{
+			if (timeTetherIndicators[i] != null)
+			{
+				timeTetherIndicators[i].UpdatePosition(); 
+			}
+		}
+	}
 
     // UI Screenshot stuff
 

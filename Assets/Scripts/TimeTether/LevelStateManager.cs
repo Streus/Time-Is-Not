@@ -273,6 +273,12 @@ public class LevelStateManager : Singleton<LevelStateManager>
 				ro.sow (data);
 		}
 
+		// Update the position of the tether indicators to reflect changes to their RegisteredObject moveParent transform
+		TetherManager.inst.UpdateTetherIndicatorPositions(); 
+
+		// Reapply the player position, based on the tether indicator position
+		GameManager.GetPlayer().transform.position = TetherManager.inst.GetTimeTetherIndicatorPos(LevelStateManager.curState); 
+
 		// Reset state data for dictionaries after the current new state, if they've already been instantiated
 		for (int i = state + 1; i < stateSeeds.Count; i++)
 		{
