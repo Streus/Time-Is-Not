@@ -261,6 +261,16 @@ public class CursorManager : Singleton<CursorManager>
 		}
 
 		// Secondary cursor (dash target)
+		// Temporary: hide the dash cursor while zoomed out
+		// TODO: replace this with a separate CursorState for zoom out
+		if (GameManager.CameraIsZoomedOut())
+		{
+			dashCursorRend.enabled = false; 
+		}
+		else
+		{
+			dashCursorRend.enabled = true; 
+		}
 
 		if (GameManager.isPlayerDashing() == true)
 		{
