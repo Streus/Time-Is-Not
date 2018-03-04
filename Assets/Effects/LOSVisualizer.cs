@@ -9,6 +9,7 @@ public class LOSVisualizer : MonoBehaviour
 	[SerializeField]
 	private Hummingbird hummingbird;
 
+	[Tooltip("The number of casts per degree of FoV.")]
 	[SerializeField]
 	private int resolution;
 
@@ -23,6 +24,7 @@ public class LOSVisualizer : MonoBehaviour
 	{
 		mFilter = GetComponent<MeshFilter> ();
 
+		//setup mesh filter
 		mesh = new Mesh ();
 		mesh.name = "ViewMesh";
 		mFilter.mesh = mesh;
@@ -30,6 +32,7 @@ public class LOSVisualizer : MonoBehaviour
 
 	public void LateUpdate()
 	{
+		//build list of points
 		int casts = Mathf.RoundToInt (hummingbird.getFOV () * resolution);
 		float dAngle = hummingbird.getFOV () / casts;
 		List<Vector3> points = new List<Vector3> ();
@@ -37,9 +40,10 @@ public class LOSVisualizer : MonoBehaviour
 		for (int i = 0; i <= casts; i++)
 		{
 			float angle = transform.eulerAngles.z - hummingbird.getFOV () / 2 + dAngle * i;
-			Vector3 dir = new Vector3 (Mathf.Sin (angle * Mathf.Deg2Rad), -Mathf.Cos (angle * Mathf.Deg2Rad), 0f);
+			Vector3 dir = new Vector3 (Mathf.Sin (-angle * Mathf.Deg2Rad), Mathf.Cos (angle * Mathf.Deg2Rad), 0f);
 			RaycastHit2D hit;
 
+			//if there's a hit, add the hit point, else, add a point at max range
 			hit = Physics2D.Raycast (transform.position, dir, hummingbird.getSightRange (), hummingbird.getObstMask());
 			if (hit.collider != null)
 				points.Add ((Vector3)hit.point);
@@ -47,6 +51,7 @@ public class LOSVisualizer : MonoBehaviour
 				points.Add (transform.position + dir * hummingbird.getSightRange ());
 		}
 
+		//create arrays of vertices and triangles to build mesh
 		int vCount = points.Count + 1;
 		Vector3[] vertices = new Vector3[vCount];
 		int[] tris = new int[(vCount - 2) * 3];
@@ -58,12 +63,14 @@ public class LOSVisualizer : MonoBehaviour
 
 			if (i < vCount - 2)
 			{
-				tris [i * 3] = 0;
+				//gotta add triangle points in reverse order for normals to come out right
+				tris [i * 3] = i + 2;
 				tris [i * 3 + 1] = i + 1;
-				tris [i * 3 + 2] = i + 2;
+				tris [i * 3 + 2] = 0;
 			}
 		}
 
+		//setup mesh
 		mesh.Clear ();
 		mesh.vertices = vertices;
 		mesh.triangles = tris;
