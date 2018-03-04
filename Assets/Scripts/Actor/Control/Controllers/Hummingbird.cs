@@ -14,7 +14,10 @@ public class Hummingbird : PatrollingEnemy
 	[Range(1f, 360f)]
 	private float fieldOfView = 90f;
 
-	[Tooltip("The amount speed this Hb wil move when slowed")]
+	[SerializeField]
+	private LayerMask targetMask, obstMask;
+
+	[Tooltip("The amount speed this HB wil move when slowed")]
 	[SerializeField]
 	private float slowedSpeed = 2f;
 	private float savedSpeed;
@@ -99,8 +102,8 @@ public class Hummingbird : PatrollingEnemy
 		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
 
-
-		hummingAnim.gameObject.GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
+		if(SpriteOrderer.inst != null)
+			GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
 	#region GETTERS_SETTERS
@@ -113,6 +116,16 @@ public class Hummingbird : PatrollingEnemy
 	public float getFOV()
 	{
 		return fieldOfView;
+	}
+
+	public int getTargetMask()
+	{
+		return targetMask.value;
+	}
+
+	public int getObstMask()
+	{
+		return obstMask.value;
 	}
 
 	public Transform getPursuitTarget()
@@ -146,8 +159,6 @@ public class Hummingbird : PatrollingEnemy
 
 	public override void OnDrawGizmos()
 	{
-		base.OnDrawGizmos ();
-
 		Gizmos.color = getState().color;
 
 		Vector3 fwd = transform.up;
@@ -157,6 +168,8 @@ public class Hummingbird : PatrollingEnemy
 		Gizmos.DrawLine (transform.position, (transform.up * sightRange) + transform.position);
 		Gizmos.DrawLine (transform.position, (rightBound.normalized * sightRange) + transform.position);
 		Gizmos.DrawLine (transform.position, (leftBound.normalized * sightRange) + transform.position);
+
+		Gizmos.DrawWireSphere (transform.position, sightRange);
 	}
 	#endregion
 
