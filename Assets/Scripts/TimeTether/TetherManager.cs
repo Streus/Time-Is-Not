@@ -605,7 +605,7 @@ public class TetherManager : Singleton<TetherManager>
     {
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
 		timeTetherIndicators.Add(indicator.GetComponent<TetherIndicator>()); 
-        //timeTetherIndicators[state] = indicator;
+		indicator.GetComponent<TetherIndicator>().tetherIndex = state; 
     }
 
     // Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
@@ -624,7 +624,7 @@ public class TetherManager : Singleton<TetherManager>
 			return; 
 		}
 
-
+		// Option 1: Only remove the indicator at the index; the others are effectively shifted
 		if (!removeAll)
 		{
 			if (timeTetherIndicators[index] != null)
@@ -632,28 +632,26 @@ public class TetherManager : Singleton<TetherManager>
 				Destroy(timeTetherIndicators[index].gameObject);
 				timeTetherIndicators.RemoveAt(index); 
 			}
-			return; 
+		}
+		// Option 2: Remove every indicator from the index and after
+		else
+		{
+			for (int i = timeTetherIndicators.Count - 1; i >= index; i--)
+			{
+				if (timeTetherIndicators[i] != null)
+				{
+					Destroy(timeTetherIndicators[i].gameObject);
+					timeTetherIndicators.RemoveAt(i); 
+				}
+			}
 		}
 
-		//Debug.Log("RemoveAll at index " + index); 
-
-		/*
-		for (int i = index; i < timeTetherIndicators.Count; i++)
-        {
-            if (timeTetherIndicators[i] != null)
-            {
-                Destroy(timeTetherIndicators[i].gameObject);
-				timeTetherIndicators.RemoveAt(i); 
-            }
-        }
-		*/ 
-
-		for (int i = timeTetherIndicators.Count - 1; i >= index; i--)
+		// Iterate through each indicator to update its internal index
+		for (int i = 0; i < timeTetherIndicators.Count; i++)
 		{
 			if (timeTetherIndicators[i] != null)
 			{
-				Destroy(timeTetherIndicators[i].gameObject);
-				timeTetherIndicators.RemoveAt(i); 
+				timeTetherIndicators[i].tetherIndex = i; 
 			}
 		}
     }

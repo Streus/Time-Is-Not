@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class TetherIndicator : MonoBehaviour 
 {
+	[HideInInspector] public int tetherIndex; 
+
 	Transform moveParent; 
 	Vector3 offsetFromMoveParent; 
 
+	public bool allowRemoval; 
+	public float removeRadius = 1; 
+	bool playerInRemoveRadius; 
+
+	public GameObject tetherPointSprite; 
+	public GameObject removePrompt; 
+
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		if (removePrompt != null)
+			removePrompt.SetActive(false); 
 	}
 	
 	// Update is called once per frame
@@ -20,7 +31,7 @@ public class TetherIndicator : MonoBehaviour
 		// Save a transform ref to the moving platform
 		// Vector2 offset
 		// Update position of point every frame to be moving platform position + offset
-		Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, transform.localScale.x); 
+		Collider2D[] hits = Physics2D.OverlapCircleAll(tetherPointSprite.transform.position, transform.localScale.x); 
 
 		if (moveParent == null)
 		{
@@ -36,6 +47,41 @@ public class TetherIndicator : MonoBehaviour
 		else
 		{
 			transform.position = moveParent.position + offsetFromMoveParent; 
+		}
+
+		playerInRemoveRadius = false; 
+
+		if (allowRemoval)
+		{
+			hits = Physics2D.OverlapCircleAll(tetherPointSprite.transform.position, removeRadius); 
+
+			for (int i = 0; i < hits.Length; i++)
+			{
+				if (hits[i].CompareTag("Player"))
+				{
+					playerInRemoveRadius = true; 
+				}
+			}
+		}
+
+		// Don't allow the remove prompt/action for the first tether point (when tetherIndex == 0)
+		if (playerInRemoveRadius && tetherIndex != 0)
+		{
+			// Display the remove prompt
+			if (removePrompt != null)
+				removePrompt.SetActive(true); 
+
+			// Test for remove action
+			// TODO- might want to have this be a hold action
+			if (PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
+			{
+				TetherManager.inst.RemoveTetherPoint(tetherIndex); 
+			}
+		}
+		else
+		{
+			if (removePrompt != null)
+				removePrompt.SetActive(false); 
 		}
 	}
 
