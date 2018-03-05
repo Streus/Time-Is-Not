@@ -17,6 +17,11 @@ public class Hummingbird : PatrollingEnemy
 	[SerializeField]
 	private LayerMask targetMask, obstMask;
 
+	[SerializeField]
+	private Color patrolColor, pursuitColor;
+
+	private bool inPursuit;
+
 	[Tooltip("The amount speed this HB wil move when slowed")]
 	[SerializeField]
 	private float slowedSpeed = 2f;
@@ -38,6 +43,7 @@ public class Hummingbird : PatrollingEnemy
 		base.Awake ();
 
 		savedSpeed = getSelf ().getMovespeed ();
+		inPursuit = false;
 
 		defaultState = getState();
 		if (patrolStart == null)
@@ -127,6 +133,26 @@ public class Hummingbird : PatrollingEnemy
 	public int getObstMask()
 	{
 		return obstMask.value;
+	}
+
+	public Color getPatrolColor()
+	{
+		return patrolColor;
+	}
+
+	public Color getPursuitColor()
+	{
+		return pursuitColor;
+	}
+
+	public bool getInPursuit()
+	{
+		return inPursuit;
+	}
+
+	public void setInPursuit(bool val)
+	{
+		inPursuit = val;
 	}
 
 	public Transform getPursuitTarget()

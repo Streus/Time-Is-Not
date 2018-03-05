@@ -25,12 +25,14 @@ public class HBSightCone : Fork
 					if (wallCheck.collider == null)
 					{
 						bird.setPursuitTarget (hits [i].collider.transform);
+						bird.setInPursuit (true);
 						return true;
 					}
 				}
 			}
 		}
 
+		bird.setInPursuit (false);
 		return false;
 	}
 }

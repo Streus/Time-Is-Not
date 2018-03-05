@@ -79,6 +79,11 @@ public class LOSVisualizer : MonoBehaviour
 		mesh.vertices = vertices;
 		mesh.triangles = tris;
 		mesh.RecalculateNormals ();
+
+		if (hummingbird.getInPursuit ())
+			GetComponent<MeshRenderer> ().material.color = hummingbird.getPursuitColor ();
+		else
+			GetComponent<MeshRenderer> ().material.color = hummingbird.getPatrolColor ();
 	}
 	#endregion
 }
