@@ -85,18 +85,9 @@ public class StasisBubble : MonoBehaviour
 		// Temporary: You can right click to remove a stasis bubble
 		if (canRightClickDestroy)
 		{
-			Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)); 
-
-			if (Input.GetMouseButtonDown(1))
+			if (MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
 			{
-				if (bubbleCollider.bounds.Contains(mouseWorldPos))
-				{
-					RemoveBubble();
-				}
-				else
-				{
-					//Debug.Log("Not in bubble. mouseWorldPos: " + mouseWorldPos); 
-				}
+				RemoveBubble();
 			}
 		}
 	}
@@ -123,6 +114,21 @@ public class StasisBubble : MonoBehaviour
 	public bool ColliderContainsPos(Vector3 pos)
 	{
 		if (bubbleCollider.bounds.Contains(pos))
+		{
+			return true; 
+		}
+
+		return false; 
+	}
+
+	/// <summary>
+	/// Returns true if the mouse is hovering over this bubble
+	/// </summary>
+	public bool MouseIsOver()
+	{
+		Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+		if (bubbleCollider.bounds.Contains(mouseWorldPos))
 		{
 			return true; 
 		}

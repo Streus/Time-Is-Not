@@ -29,6 +29,7 @@ public class CursorManager : Singleton<CursorManager>
 	[Header("Stasis Cursor sprites")]
 	[SerializeField] Sprite cursorStasisEnabled;
 	[SerializeField] Sprite cursorStasisDisabled;
+	[SerializeField] Sprite cursorStasisHover; 
 
 	[Header("Menu Cursor sprites")]
 	[SerializeField] Sprite cursorMenu;
@@ -249,12 +250,19 @@ public class CursorManager : Singleton<CursorManager>
 
 	void UpdateGameplayCursor()
 	{
-		// Main cursor (stasis)
+		// Choose sprite for main cursor (stasis)
+
+		// If hovering over a stasis bubble
+		if (LevelStateManager.CursorIsOverAStasisBubble())
+		{
+			mainCursorRend.sprite = cursorStasisHover; 
+		}
 		// TODO: This might be the wrong check. Might need to check where the player checks if can shoot a stasis bubble
-		if (LevelStateManager.canAddStasisBubble())
+		else if (GameManager.inst.canUseStasis && LevelStateManager.canAddStasisBubble())
 		{
 			mainCursorRend.sprite = cursorStasisEnabled; 
 		}
+
 		else
 		{
 			mainCursorRend.sprite = cursorStasisDisabled; 

@@ -510,4 +510,20 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		return false; 
 	}
 
+	/// <summary>
+	/// Returns true if the cursor is over one of the player's stasis bubbles
+	/// </summary>
+	/// <returns><c>true</c>, if over a bubble, <c>false</c> otherwise.</returns>
+	public static bool CursorIsOverAStasisBubble()
+	{
+		for (int i = 0; i < stasisBubbles.Count; i++)
+		{
+			if (stasisBubbles[i].MouseIsOver())
+			{
+				return true; 
+			}
+		}
+		return false; 
+	}
+
 }
