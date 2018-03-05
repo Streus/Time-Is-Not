@@ -93,12 +93,32 @@ public class UIManager : Singleton<UIManager>
         mainMixer.SetFloat("masterVolume", masterVolLevel);
     }
 
+    public void SetSFXVolume(float sfxVolumeLevel)
+    {
+        mainMixer.SetFloat("sfxVolume", sfxVolumeLevel);
+    }
+
     public float GetMasterVolume()
     {
         float value;
 
         bool result = mainMixer.GetFloat("masterVolume", out value);
         if(result)
+        {
+            return value;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    public float GetSFXVolume()
+    {
+        float value;
+
+        bool result = mainMixer.GetFloat("sfxVolume", out value);
+        if (result)
         {
             return value;
         }

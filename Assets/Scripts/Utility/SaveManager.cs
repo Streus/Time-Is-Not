@@ -58,6 +58,10 @@ public class SaveManager : Singleton<SaveManager>
         {
             Load();
         }
+        else
+        {
+            //Possibly set defaults
+        }
     }
 
     private void Update()
@@ -165,7 +169,7 @@ public class SaveManager : Singleton<SaveManager>
     public static void ClearData()
     {
         SaveManager.level = "Vertical Slice";
-        SaveManager.controlPreset = 0;
+        //SaveManager.controlPreset = 0;
         Save();
         Load();
     }
