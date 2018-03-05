@@ -85,7 +85,7 @@ public class UIManager : Singleton<UIManager>
     public void SavePreset()
     {
         SaveManager.controlPreset = currentPreset;
-        SaveManager.Save(false);
+        SaveManager.Save();
     }
 
     public void SetMasterVolume(float masterVolLevel)

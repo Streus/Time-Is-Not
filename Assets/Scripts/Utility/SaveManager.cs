@@ -18,7 +18,7 @@ public class SaveManager : Singleton<SaveManager>
 
     static string saveLocation;
 
-    //public string l;
+    public string l;
 
     static string m_level; 
 
@@ -34,7 +34,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    //public int cp;
+    public int cp;
 
     static int m_controlPreset;
 
@@ -60,60 +60,13 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    /*private void Update()
+    private void Update()
     {
         cp = controlPreset;
         l = level;
-    }*/
+    }
 
-  /*  public static void Save()
-    {
-        print("SAVINGDATANOW");
-        
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream;
-
-        if(saveLocation == null)
-        {
-            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
-        }
-
-        try
-        {
-            if (File.Exists(saveLocation))
-            {
-                File.WriteAllText(saveLocation, string.Empty);
-                fileStream = File.Open(saveLocation, FileMode.Open);
-                print("File exists and saved");
-            }
-
-            else
-            {
-                fileStream = File.Create(saveLocation);
-                print("Creating file");
-            }
-
-            VariablesToSave savedData = new VariablesToSave();
-
-            savedData.m_level = SaveManager.m_level;
-            savedData.m_controlPreset = SaveManager.m_controlPreset;
-
-            binaryFormatter.Serialize(fileStream, savedData);
-            fileStream.Close();
-
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                SyncFiles();
-            }
-        }
-
-        catch (Exception e)
-        {
-            PlatformSafeMessage("Failed to Save: " + e.Message);
-        }
-    }*/
-
-    public static void Save(bool allData)
+    public static void Save()
     {
         print("SAVINGDATANOW");
 
@@ -142,15 +95,9 @@ public class SaveManager : Singleton<SaveManager>
 
             VariablesToSave savedData = new VariablesToSave();
 
-            if (allData)
-            {
-                savedData.m_level = SaveManager.m_level;
-                savedData.m_controlPreset = SaveManager.m_controlPreset;
-            }
-            else
-            {
-                savedData.m_controlPreset = SaveManager.m_controlPreset;
-            }
+            savedData.m_level = SaveManager.m_level;
+            savedData.m_controlPreset = SaveManager.m_controlPreset;
+            
 
             binaryFormatter.Serialize(fileStream, savedData);
             fileStream.Close();
@@ -219,7 +166,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         SaveManager.level = "Vertical Slice";
         SaveManager.controlPreset = 0;
-        Save(true);
+        Save();
         Load();
     }
 
@@ -237,7 +184,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void OnApplicationQuit()
     {
-        Save(true);
+        Save();
     }
 
     [Serializable]
