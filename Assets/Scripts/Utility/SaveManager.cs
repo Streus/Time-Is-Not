@@ -18,6 +18,8 @@ public class SaveManager : Singleton<SaveManager>
 
     static string saveLocation;
 
+    public string l;
+
     static string m_level; 
 
     public static string level
@@ -31,6 +33,21 @@ public class SaveManager : Singleton<SaveManager>
             m_level = value;
         }
     }
+    public int cp;
+
+    static int m_controlPreset;
+
+    public static int controlPreset
+    {
+        get
+        {
+            return m_controlPreset;
+        }
+        set
+        {
+            m_controlPreset = value;
+        }
+    }
 
     void Awake()
     {
@@ -42,7 +59,13 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public static void Save()
+    private void Update()
+    {
+        cp = controlPreset;
+        l = level;
+    }
+
+  /*  public static void Save()
     {
         print("SAVINGDATANOW");
         
@@ -71,7 +94,62 @@ public class SaveManager : Singleton<SaveManager>
 
             VariablesToSave savedData = new VariablesToSave();
 
-            savedData.m_level = SaveManager.m_level;//saveManager.m_level;
+            savedData.m_level = SaveManager.m_level;
+            savedData.m_controlPreset = SaveManager.m_controlPreset;
+
+            binaryFormatter.Serialize(fileStream, savedData);
+            fileStream.Close();
+
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                SyncFiles();
+            }
+        }
+
+        catch (Exception e)
+        {
+            PlatformSafeMessage("Failed to Save: " + e.Message);
+        }
+    }*/
+
+    public static void Save(bool allData)
+    {
+        print("SAVINGDATANOW");
+
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream fileStream;
+
+        if (saveLocation == null)
+        {
+            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+        }
+
+        try
+        {
+            if (File.Exists(saveLocation))
+            {
+                File.WriteAllText(saveLocation, string.Empty);
+                fileStream = File.Open(saveLocation, FileMode.Open);
+                print("File exists and saved");
+            }
+
+            else
+            {
+                fileStream = File.Create(saveLocation);
+                print("Creating file");
+            }
+
+            VariablesToSave savedData = new VariablesToSave();
+
+            if (allData)
+            {
+                savedData.m_level = SaveManager.m_level;
+                savedData.m_controlPreset = SaveManager.m_controlPreset;
+            }
+            else
+            {
+                savedData.m_controlPreset = SaveManager.m_controlPreset;
+            }
 
             binaryFormatter.Serialize(fileStream, savedData);
             fileStream.Close();
@@ -108,6 +186,7 @@ public class SaveManager : Singleton<SaveManager>
                 fileStream.Close();
 
                 SaveManager.m_level = savedData.m_level;
+                SaveManager.m_controlPreset = savedData.m_controlPreset;
             }
         }
 
@@ -138,19 +217,33 @@ public class SaveManager : Singleton<SaveManager>
     public static void ClearData()
     {
         SaveManager.level = "Vertical Slice";
-        Save();
+        SaveManager.controlPreset = 0;
+        Save(true);
         Load();
+    }
+
+    public static bool HasData()
+    {
+        if(File.Exists(saveLocation))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void OnApplicationQuit()
     {
-        Save();
+        Save(true);
     }
 
     [Serializable]
     public class VariablesToSave
     {
         public string m_level;
+        public int m_controlPreset;
     }
 
 }

@@ -111,7 +111,7 @@ public class GameManager : Singleton<GameManager> , ISavable
         }*/
         string levelName = SceneManager.GetActiveScene().name;
         SaveManager.level = levelName;
-        SaveManager.Save();
+        SaveManager.Save(true);
     }
 
     void Update()

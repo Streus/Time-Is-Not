@@ -17,6 +17,13 @@ public enum ControlInput
 	PAUSE_MENU
 };
 
+public enum ControlScheme
+{
+    PRESET_1,
+    PRESET_2,
+    PRESET_3
+};
+
 public class PlayerControlManager : Singleton<PlayerControlManager>
 {
 	/*
