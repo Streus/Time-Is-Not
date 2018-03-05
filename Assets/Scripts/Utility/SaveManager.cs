@@ -18,7 +18,7 @@ public class SaveManager : Singleton<SaveManager>
 
     static string saveLocation;
 
-    public string l;
+    //public string l;
 
     static string m_level; 
 
@@ -33,7 +33,8 @@ public class SaveManager : Singleton<SaveManager>
             m_level = value;
         }
     }
-    public int cp;
+
+    //public int cp;
 
     static int m_controlPreset;
 
@@ -59,11 +60,11 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         cp = controlPreset;
         l = level;
-    }
+    }*/
 
   /*  public static void Save()
     {
