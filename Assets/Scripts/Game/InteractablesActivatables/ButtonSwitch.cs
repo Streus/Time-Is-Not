@@ -117,7 +117,7 @@ public class ButtonSwitch : Interactable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused())
+		if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused() && !GameManager.CameraIsZoomedOut())
 		{
 			onInteract ();
 			if(_timer != Mathf.Infinity && _timer > 0)
