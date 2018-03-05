@@ -49,6 +49,11 @@ public class SaveManager : Singleton<SaveManager>
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         FileStream fileStream;
 
+        if(saveLocation == null)
+        {
+            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+        }
+
         try
         {
             if (File.Exists(saveLocation))
@@ -86,8 +91,11 @@ public class SaveManager : Singleton<SaveManager>
     public static void Load()
     {
         print("LOADINGDATANOW");
-        
-        saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+
+        if (saveLocation == null)
+        {
+            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+        }
 
         try
         {
