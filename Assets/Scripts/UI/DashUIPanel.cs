@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class DashUIPanel : MonoBehaviour 
+public class DashUIPanel : Singleton<DashUIPanel> 
 {
 	[Header("References")]
 	[Tooltip("(Drag In) The dash UI piece of the time tether that displays dash UI")]

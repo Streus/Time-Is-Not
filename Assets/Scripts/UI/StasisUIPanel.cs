@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StasisUIPanel : MonoBehaviour 
+public class StasisUIPanel : Singleton<StasisUIPanel> 
 {
 	[Tooltip("(Drag In) The stasis UI piece of the time tether that displays stasis UI")]
 	public GameObject stasisPanel; 
