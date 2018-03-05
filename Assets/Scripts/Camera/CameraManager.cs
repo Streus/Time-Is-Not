@@ -47,7 +47,7 @@ public class CameraManager : MonoBehaviour
 		" to begin updating its position.")]
 	public float followRadius = 0f;
 
-	[Header("Zoom/pan properties")]
+	[Header("Zoom properties")]
 	public float zoomOutLerpSpeed; 
 	public float zoomInLerpSpeed; 
 	float regularSize; 
@@ -62,8 +62,16 @@ public class CameraManager : MonoBehaviour
 		}
 	}
 
+	[Header("Pan properties")]
+	[Tooltip("If true, moving the mouse to the edge causes the screen to pan. Uses vert and hortScrollPercDivisor")] 
+	public bool useCursorPan; 
+	[Tooltip("If true, you can use WASD keyboard controls to pan the camera")] 
+	public bool useKeyboardPan; 
+	[Tooltip("Only used with cursor panning. How close the mouse must be to the top/bottom edge to pan. Equation: Screen.height / vertScrollPercDivisor")]
 	public float vertScrollPercDivisor;
+	[Tooltip("Only used with cursor panning. How close the mouse must be to the left/right edge to pan. Equation: Screen.width / horizScrollPercDivisor")]
 	public float horizScrollPercDivisor; 
+	[Tooltip("The speed, multiplied by Time.deltaTime, that panning moves the camera")] 
 	public float panSpeed; 
 
 	private Vector2 panOffset;
@@ -459,27 +467,66 @@ public class CameraManager : MonoBehaviour
 		}
 		else
 		{
-			// Horizontal pan
-			// Right side
-			if (!atRightBound && Input.mousePosition.x > Screen.width - Screen.width / horizScrollPercDivisor)
-			{
-				panOffset += new Vector2 (panSpeed * Time.deltaTime, 0);
-			}
-			// Left side
-			else if (!atLeftBound && Input.mousePosition.x < 0 + Screen.width / horizScrollPercDivisor)
-			{
-				panOffset -= new Vector2 (panSpeed * Time.deltaTime, 0); 
-			} 
+			// Used to avoid double inputs stacking from both mouse and keyboard
+			// 0 = right, 1 = left, 2 = top, 3 = bottom
+			bool[] dirs = new bool[4]; 
 
-			// Vertical pan
-			if (!atTopBound && Input.mousePosition.y > Screen.height - Screen.height / vertScrollPercDivisor)
+			if (useCursorPan)
 			{
-				panOffset += new Vector2 (0, panSpeed * Time.deltaTime); 
+				// Horizontal pan
+				// Right side
+				if (!atRightBound && Input.mousePosition.x > Screen.width - Screen.width / horizScrollPercDivisor)
+				{
+					panOffset += new Vector2 (panSpeed * Time.deltaTime, 0);
+					dirs[0] = true; 
+				}
+				// Left side
+				else if (!atLeftBound && Input.mousePosition.x < 0 + Screen.width / horizScrollPercDivisor)
+				{
+					panOffset -= new Vector2 (panSpeed * Time.deltaTime, 0); 
+					dirs[1] = true; 
+				} 
+
+				// Vertical pan
+				// Top side
+				if (!atTopBound && Input.mousePosition.y > Screen.height - Screen.height / vertScrollPercDivisor)
+				{
+					panOffset += new Vector2 (0, panSpeed * Time.deltaTime);
+					dirs[2] = true; 
+				}
+				// Bottom side
+				else if (!atBottomBound && Input.mousePosition.y < 0 + Screen.width / vertScrollPercDivisor)
+				{
+					panOffset -= new Vector2 (0, panSpeed * Time.deltaTime); 
+					dirs[3] = true; 
+				} 
 			}
-			else if (!atBottomBound && Input.mousePosition.y < 0 + Screen.width / vertScrollPercDivisor)
+			if (useKeyboardPan)
 			{
-				panOffset -= new Vector2 (0, panSpeed * Time.deltaTime); 
-			} 
+				// Horizontal pan
+				// Right side
+				if (!atRightBound && PlayerControlManager.GetKey(ControlInput.RIGHT) && !dirs[0])
+				{
+					panOffset += new Vector2 (panSpeed * Time.deltaTime, 0);
+				}
+				// Left side
+				else if (!atLeftBound && PlayerControlManager.GetKey(ControlInput.LEFT) && !dirs[1])
+				{
+					panOffset -= new Vector2 (panSpeed * Time.deltaTime, 0); 
+				}
+
+				// Vertical pan
+				// Top side
+				if (!atTopBound && PlayerControlManager.GetKey(ControlInput.UP) && !dirs[2])
+				{
+					panOffset += new Vector2 (0, panSpeed * Time.deltaTime);
+				}
+				// Bottom side
+				else if (!atBottomBound && PlayerControlManager.GetKey(ControlInput.DOWN) && !dirs[3])
+				{
+					panOffset -= new Vector2 (0, panSpeed * Time.deltaTime); 
+				}
+			}
 		}
 
 		//Debug.Log("panOffset: " + panOffset); 

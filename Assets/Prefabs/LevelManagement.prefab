@@ -5575,7 +5575,7 @@ MonoBehaviour:
   tetherMenuFadeInSpeed: 4
   tetherMenuFadeOutSpeed: 12
   fadeImage: {fileID: 114045586198822038}
-  fadeImageMaxAlpha: 0.6666
+  fadeImageMaxAlpha: 0.3
   fadeImageFadeInSpeed: 20
   fadeImageFadeOutSpeed: 20
   screenshot: {fileID: 114341112097192794}
@@ -5777,6 +5777,8 @@ MonoBehaviour:
   zoomOutLerpSpeed: 0.2
   zoomInLerpSpeed: 0.2
   zoomOutSize: 5
+  useCursorPan: 0
+  useKeyboardPan: 1
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 12
   panSpeed: 10
