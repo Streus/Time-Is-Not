@@ -92,4 +92,19 @@ public class UIManager : Singleton<UIManager>
     {
         mainMixer.SetFloat("masterVolume", masterVolLevel);
     }
+
+    public float GetMasterVolume()
+    {
+        float value;
+
+        bool result = mainMixer.GetFloat("masterVolume", out value);
+        if(result)
+        {
+            return value;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
 }
