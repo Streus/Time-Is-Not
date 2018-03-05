@@ -115,7 +115,7 @@ public class TetherManager : Singleton<TetherManager>
 		 */
 
         // Creating a tether point
-		if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut())
+		if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPaused())
         {
             if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
             {
@@ -133,7 +133,7 @@ public class TetherManager : Singleton<TetherManager>
         if (allowFastTether)
         {
             // These conditions determine whether tethering is allowed
-            if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPlayerDashing())
+			if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPlayerDashing() && !GameManager.isPaused())
             {
                 // If the player presses the menu key, start the timer
                 //if (Input.GetKeyDown(PlayerControlManager.LH_TetherMenu) || Input.GetKeyDown(PlayerControlManager.RH_TetherMenu))
@@ -169,14 +169,15 @@ public class TetherManager : Singleton<TetherManager>
 		 */
 
         // Bringing up the tether menu
-        if (tetherUIState == TetherUIState.GAMEPLAY || tetherUIState == TetherUIState.TETHER_MENU)
+		// Adding the pause menu active check prevents the cursor from getting reverted to the gameplay cursor while the pause menu is up
+		if ((tetherUIState == TetherUIState.GAMEPLAY || tetherUIState == TetherUIState.TETHER_MENU) && !PauseMenuManager.pauseMenuActive)
         {
             // Test for bringing up the menu, while alive
             if (!GameManager.isPlayerDead())
             {
                 // If the tether menu key is held down
-                if ((Input.GetKey(PlayerControlManager.RH_TetherMenu) || Input.GetKey(PlayerControlManager.LH_TetherMenu)) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
-                {
+				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
+				{
                     tetherUIState = TetherUIState.TETHER_MENU;
                     GameManager.setPause(true);
                     CursorManager.inst.lockCursorType = true;
@@ -731,6 +732,18 @@ public class TetherManager : Singleton<TetherManager>
         return false;
     }
 
+	/// <summary>
+	/// The PauseMenuManager calls this function to check that bringing up the pause menu is allowed. 
+	/// </summary>
+	public static bool PauseMenuAllowed()
+	{
+		if (inst.tetherUIState == TetherUIState.GAMEPLAY)
+		{
+			return true; 
+		}
+
+		return false; 
+	}
 
 
 

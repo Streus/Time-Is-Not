@@ -123,12 +123,17 @@ public class GameManager : Singleton<GameManager> , ISavable
 	 * Pause functionality
 	 */ 
 
-	public static void setPause(bool state)
+	/// <summary>
+	/// Sets whether the game is paused
+	/// </summary>
+	/// <returns><c>true</c>, if pause's state could be changed <c>false</c> otherwise.</returns>
+	/// <param name="state">Whether to pause or resume the game</param>
+	public static bool setPause(bool state)
 	{
 		// Return if locked or the state isn't actually changing
 		if (inst.pauseLock || inst.paused == state)
 		{
-			return; 
+			return false; 
 		}
 
 		inst.paused = state; 
@@ -137,7 +142,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			inst.pauseToggled(state); 
 		}
-
+		return true; 
 	}
 
 	public static bool isPaused()

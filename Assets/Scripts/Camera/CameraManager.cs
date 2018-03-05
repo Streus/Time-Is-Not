@@ -184,28 +184,34 @@ public class CameraManager : MonoBehaviour
 			// Toggle zoom state key inputs
 			if (m_zoomState == false)
 			{
-				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing())
+				// These conditions determine whether zooming out is allowed
+				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing() && !PauseMenuManager.pauseMenuActive)
 				{
 					m_zoomState = true; 
 				}
 			}
 			else
 			{
-				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT))
+				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && !PauseMenuManager.pauseMenuActive)
 				{
 					m_zoomState = false; 
 				}
 			}
 
-			if (m_zoomState == true && GameManager.isPlayerDead() == false)
+			// If the player is dead, force the zoom to cancel
+			if (GameManager.isPlayerDead())
 			{
-				m_zoomState = true; 
+				m_zoomState = false; 
+			}
+
+			// Update zoom properties, based on m_zoomState
+			if (m_zoomState == true)
+			{
 				zoomTo(zoomOutSize, zoomOutLerpSpeed);
 				updateZoomPan(false);
 			}
 			else
 			{
-				m_zoomState = false; 
 				zoomTo(regularSize, zoomInLerpSpeed);
 				updateZoomPan(true);
 			}

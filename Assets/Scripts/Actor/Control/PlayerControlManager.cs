@@ -13,11 +13,16 @@ public enum ControlInput
 	TETHER_MENU,
 	DASH,
 	FIRE_STASIS,
-	ZOOM_OUT
+	ZOOM_OUT,
+	PAUSE_MENU
 };
 
 public class PlayerControlManager : Singleton<PlayerControlManager>
 {
+	/*
+	 * Right hand controls
+	 */ 
+
     [Header("Right Hand Controls: This controls what key the player presses to move the player up")]
     [SerializeField] private KeyCode rH_Up;
     public static KeyCode RH_Up
@@ -108,6 +113,20 @@ public class PlayerControlManager : Singleton<PlayerControlManager>
             return inst.rH_ZoomOut;
         }
     }
+	[Header("Right Hand Controls: This controls what key the player presses to reveal/hide the pause menu")]
+	[SerializeField] private KeyCode rH_PauseMenu;
+	public static KeyCode RH_PauseMenu
+	{
+		get
+		{
+			return inst.rH_PauseMenu;
+		}
+	}
+
+	/*
+	 * Left hand controls
+	 */ 
+
     [Header("Left Hand Controls: This controls what key the player presses to move the player up")]
     [SerializeField] private KeyCode lH_Up;
     public static KeyCode LH_Up
@@ -198,44 +217,74 @@ public class PlayerControlManager : Singleton<PlayerControlManager>
             return inst.lH_ZoomOut;
         }
     }
+	[Header("Left Hand Controls: This controls what key the player presses to reveal/hide the pause menu")]
+	[SerializeField] private KeyCode lH_PauseMenu;
+	public static KeyCode LH_PauseMenu
+	{
+		get
+		{
+			return inst.lH_PauseMenu;
+		}
+	}
 
 
 	/*
 	 * Get key functions
 	 */ 
 
+	/// <summary>
+	/// Similar to Input.GetKey(), but takes ControlInput parameter instead of KeyCode, which can map to multiple buttons as defined in the PlayerControlManager's Inspector
+	/// </summary>
+	/// <returns><c>true</c>, if key is held, <c>false</c> otherwise.</returns>
+	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKey(ControlInput inputType)
 	{
 		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
 
-		if (Input.GetKey(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		// Iterate through each key mapped to an action, and return true if any of them are currently being pressed
+		for (int i = 0; i < inputKeys.Length; i++)
 		{
-			return true; 
+			if (Input.GetKey(inputKeys[i]))
+				return true; 
 		}
 
 		return false; 
 
 	}
 
+	/// <summary>
+	/// Similar to Input.GetKeyDown(), but takes ControlInput parameter instead of Keycode, which can map to multiple buttons as defined in the PlayerControlManager's Inspector
+	/// </summary>
+	/// <returns><c>true</c>, if key is pressed, <c>false</c> otherwise.</returns>
+	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKeyDown(ControlInput inputType)
 	{
 		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
 
-		if (Input.GetKeyDown(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		// Iterate through each key mapped to an action, and return true if any of them have just been pressed
+		for (int i = 0; i < inputKeys.Length; i++)
 		{
-			return true; 
+			if (Input.GetKeyDown(inputKeys[i]))
+				return true; 
 		}
 
 		return false; 
 	}
 
+	/// <summary>
+	/// Similar to Input.GetKeyUp(), but takes ControlInput parameter instead of Keycode, which can map to multiple buttons as defined in the PlayerControlManager's Inspector
+	/// </summary>
+	/// <returns><c>true</c>, if key is released, <c>false</c> otherwise.</returns>
+	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKeyUp(ControlInput inputType)
 	{
 		KeyCode[] inputKeys = GetKeyCodesFor(inputType); 
 
-		if (Input.GetKeyUp(inputKeys[0]) || Input.GetKey(inputKeys[1]))
+		// Iterate through each key mapped to an action, and return true if any of them have just been released
+		for (int i = 0; i < inputKeys.Length; i++)
 		{
-			return true; 
+			if (Input.GetKeyUp(inputKeys[i]))
+				return true; 
 		}
 
 		return false; 
@@ -265,6 +314,8 @@ public class PlayerControlManager : Singleton<PlayerControlManager>
 				return new KeyCode[]{RH_FireStasis, LH_FireStasis};
 			case ControlInput.ZOOM_OUT:
 				return new KeyCode[]{RH_ZoomOut, LH_ZoomOut};
+			case ControlInput.PAUSE_MENU:
+				return new KeyCode[]{RH_PauseMenu, LH_PauseMenu};
 			default:
 				return null; 
 		}
