@@ -142,6 +142,8 @@ public class Player : Controller
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
 		physbody.velocity += movementVector;
+		if (physbody.velocity.magnitude > getSelf ().getMovespeed ())
+			physbody.velocity = physbody.velocity.normalized * getSelf ().getMovespeed ();
 
         // Wall check / check for moving platforms
         RaycastHit2D[] hits = new RaycastHit2D[1];

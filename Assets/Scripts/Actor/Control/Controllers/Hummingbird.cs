@@ -102,8 +102,9 @@ public class Hummingbird : PatrollingEnemy
 		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
 
-		if(SpriteOrderer.inst != null)
-			GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
+		//FIXME no SpriteRenderer on Hummingbird
+//		if(SpriteOrderer.inst != null)
+//			GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
 	#region GETTERS_SETTERS
