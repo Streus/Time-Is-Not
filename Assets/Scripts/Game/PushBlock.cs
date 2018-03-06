@@ -217,8 +217,11 @@ public class PushBlock : MonoBehaviour, ISavable
 
 		bool seesArea = false;
 
-		if (hits.Length > 0)
-			seesArea = true;
+		for(int i = 0; i < hits.Length; i++)
+		{
+			if ((hits [i].collider.gameObject.layer == LayerMask.NameToLayer ("Wall") && !hits [i].collider.isTrigger) || hits [i].collider.gameObject.layer == LayerMask.NameToLayer ("PushBlockArea"))
+				seesArea = true;
+		}
 
 		return seesArea;
 
