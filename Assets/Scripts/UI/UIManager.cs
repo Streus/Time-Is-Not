@@ -88,6 +88,11 @@ public class UIManager : Singleton<UIManager>
         SaveManager.Save();
     }
 
+    public void OpenScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
     public void SetMasterVolume(float masterVolLevel)
     {
         mainMixer.SetFloat("masterVolume", masterVolLevel);
