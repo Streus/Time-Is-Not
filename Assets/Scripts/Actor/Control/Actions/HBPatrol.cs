@@ -19,7 +19,13 @@ public class HBPatrol : Action
 		if (c.getMap () != null)
 		{
 			if (!c.currentPosition (out navPos))
+			{
 				c.setPath (n.transform.position);
+
+				//throw out the first node in the path
+				Vector3 trash;
+				c.nextPosition (out trash);
+			}
 			c.currentPosition (out navPos);
 		}
 		else
@@ -49,8 +55,14 @@ public class HBPatrol : Action
 			if (Vector2.Distance (patroller.transform.position, n.transform.position) < patrolTolerance)
 			{
 				patroller.nextPatrolNode ();
-				if(c.getMap() != null)
+				if (c.getMap () != null)
+				{
 					c.setPath (patroller.getPatrolTarget ().transform.position);
+
+					//throw out the first node in the path
+					Vector3 trash;
+					c.nextPosition (out trash);
+				}
 			}
 		}
 	}
