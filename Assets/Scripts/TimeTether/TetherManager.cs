@@ -549,6 +549,15 @@ public class TetherManager : Singleton<TetherManager>
 	/// </summary>
 	public void RemoveTetherPoint(int tetherIndex)
 	{
+		StartCoroutine("RemoveTetherProcess", tetherIndex); 
+	}
+
+	IEnumerator RemoveTetherProcess(int tetherIndex)
+	{
+		GameManager.GetPlayerAnimator().SetTrigger("TetherAnchorStop"); 
+
+		yield return new WaitForSeconds(1); 
+
 		// Remove the time tether indicator gameObject
 		RemoveTimeTetherIndicator(tetherIndex, false); 
 
