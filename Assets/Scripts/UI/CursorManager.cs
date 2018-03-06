@@ -185,27 +185,6 @@ public class CursorManager : Singleton<CursorManager>
 			*/ 
 		}
 	}
-		
-
-	#if UNITY_EDITOR
-	void OnDrawGizmos()
-	{
-		if (Application.isPlaying)
-		{
-			GameObject p = GameManager.GetPlayer();
-			Collider2D pcol = p.GetComponent<Collider2D>();
-			Vector3 pPos = p.transform.position + (Vector3)pcol.offset; 
-			pPos = new Vector3 (pPos.x, pPos.y, 0); 
-			Gizmos.color = Color.yellow; 
-			Gizmos.DrawWireSphere(pPos, GameManager.getPlayerMaxJumpDist()); 
-
-			//TEMPORARY MOUSE GIZMO SHIT
-			Gizmos.color = Color.white; 
-			Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Gizmos.DrawLine(transform.position + (Vector3)pcol.offset, mouseWorldPos);
-		}
-	}
-	#endif
 
 	void RefreshCursorType()
 	{

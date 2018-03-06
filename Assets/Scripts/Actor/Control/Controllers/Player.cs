@@ -266,13 +266,19 @@ public class Player : Controller
 	public override void OnDrawGizmos()
 	{
 		// Dash debug
+		BoxCollider2D col =  GetComponent<BoxCollider2D>();
 		if (jumpTargetPos != Vector3.zero)
 		{
 			Gizmos.color = getState().color;
-			Vector2 csize = GetComponent<BoxCollider2D>().size;
+			Vector2 csize = col.size;
 			Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
 			Gizmos.DrawWireCube(jumpTargetPos, actualSize);
 		}
+
+		#if UNITY_EDITOR
+		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, minJumpDist);
+		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, maxJumpDist);
+		#endif
 	}
     #endregion
 

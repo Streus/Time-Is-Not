@@ -86,6 +86,11 @@ public class Controller : MonoBehaviour, ISavable
 			Debug.LogError ("Could not find path to " + target.ToString () + ".");
 	}
 
+	public void discardPath()
+	{
+		path.Clear ();
+	}
+
 	public bool currentPosition(out Vector3 pos)
 	{
 		pos = Vector3.zero;
