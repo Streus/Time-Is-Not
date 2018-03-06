@@ -34,11 +34,14 @@ public class Player : Controller
     [SerializeField]
     private float maxJumpDist;
 
+	private Transform shadow;
+
     #endregion
 
     #region INSTANCE_METHODS
     public void Start()
     {
+		shadow = transform.Find ("Margaux Shadow");
         sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         getSelf().addAbility(Ability.get("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
@@ -48,6 +51,7 @@ public class Player : Controller
 
     public override void Update()
     {
+		
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
 		if (GameManager.inst != null && !GameManager.CameraIsZoomedOut())
@@ -56,6 +60,9 @@ public class Player : Controller
         }
         CheckForGround();
         sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
+		SpriteRenderer shadowRend = shadow.GetComponent<SpriteRenderer> ();
+		if(shadowRend != null)
+			shadowRend.sortingOrder = SpriteOrderer.inst.OrderMe(shadow);
     }
 
     public override void FixedUpdate()
