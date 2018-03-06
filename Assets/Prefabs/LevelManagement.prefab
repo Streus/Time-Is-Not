@@ -6162,7 +6162,7 @@ MonoBehaviour:
   playerWalking2: {fileID: 8300000, guid: 5381e74ca895a3848bfda77df3cf93a2, type: 3}
   playerWalking3: {fileID: 8300000, guid: ba3fe9b4e1432f04d82b7ce60b2d5fe1, type: 3}
   playerWalking4: {fileID: 8300000, guid: a650191fdefd9124e9484c20fece50c3, type: 3}
-  stasisHum: {fileID: 8300000, guid: 08e58085562b0154582dcfe10296ace9, type: 3}
+  stasisHum: {fileID: 8300000, guid: 186deeb24d0518448bda86a3bcfffbab, type: 3}
   pushBlockMoving: {fileID: 8300000, guid: f45ef389f5708864f981bfe18d42c67f, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: c3d3bdf96fe8d2e4fb172e550c2772e0, type: 3}
   pressurePlateOff: {fileID: 8300000, guid: c3d3bdf96fe8d2e4fb172e550c2772e0, type: 3}
@@ -7755,8 +7755,8 @@ MonoBehaviour:
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 12
   panSpeed: 10
-  atLeftBound: 1
-  atRightBound: 1
+  atLeftBound: 0
+  atRightBound: 0
   atTopBound: 0
   atBottomBound: 1
 --- !u!114 &114998644300738530
