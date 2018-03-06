@@ -235,9 +235,7 @@ public class Player : Controller
         isOverPit = seesPit;
         if (isOverPit && !isOnPlatform && !dashing())
         {
-            Entity ent = gameObject.GetComponent<Entity>();
-            if (ent != null)
-                ent.onDeath();
+			getSelf ().onDeath ();
         }
     }
 
