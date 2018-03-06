@@ -626,6 +626,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4423698969752914, guid: 510e11079d2184235b09906fc722504a,
     type: 2}
   m_PrefabInternal: {fileID: 132627998}
+--- !u!1 &132628000 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1113096533566288, guid: 510e11079d2184235b09906fc722504a,
+    type: 2}
+  m_PrefabInternal: {fileID: 132627998}
 --- !u!4 &153452149 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4329253685737680, guid: 129d70486d4114daeb338d562bc6d412,
@@ -4738,7 +4743,7 @@ Prefab:
         type: 2}
       propertyPath: _activatables.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 132628000}
     - target: {fileID: 212564267576401704, guid: 73613c1af8a0a4affac7fe8a7c3a0d78,
         type: 2}
       propertyPath: m_SortingOrder
