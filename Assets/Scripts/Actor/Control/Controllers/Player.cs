@@ -276,6 +276,7 @@ public class Player : Controller
 		}
 
 		#if UNITY_EDITOR
+		UnityEditor.Handles.color = getState().color;
 		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, minJumpDist);
 		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, maxJumpDist);
 		#endif
