@@ -74,6 +74,7 @@ public class HermitCrab : Controller
 
 		//crab is about to sit down
 		//TODO crab sit animation here
+		animationController.SetInteger ("Direction", 0);
 		animationController.SetBool ("Hide", true);
 	}
 

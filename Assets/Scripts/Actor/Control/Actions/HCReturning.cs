@@ -51,22 +51,22 @@ public class HCReturning : Action
 				if (qdir.eulerAngles.z > 315 || qdir.eulerAngles.z < 45)
 				{
 					//up
-
+					hc.GetComponent<Animator> ().SetInteger ("Direction", 1);
 				}
 				if (qdir.eulerAngles.z > 45 && qdir.eulerAngles.z < 135)
 				{
 					//left
-
+					hc.GetComponent<Animator> ().SetInteger ("Direction", 4);
 				}
 				if (qdir.eulerAngles.z > 135 && qdir.eulerAngles.z < 225)
 				{
 					//down
-
+					hc.GetComponent<Animator> ().SetInteger ("Direction", 3);
 				}
 				if (qdir.eulerAngles.z > 225 && qdir.eulerAngles.z < 315)
 				{
 					//right
-
+					hc.GetComponent<Animator> ().SetInteger ("Direction", 2);
 				}
 			}
 
