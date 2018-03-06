@@ -64,7 +64,9 @@ public class PushBlock : MonoBehaviour, ISavable
 
         source = this.GetComponent<AudioSource>();
         pushBlockSound = AudioLibrary.inst.pushBlockMoving;
-		_col = gameObject.GetComponent<BoxCollider2D> ();
+        source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+
+        _col = gameObject.GetComponent<BoxCollider2D> ();
 	}
 
 	public void OnDestroy()

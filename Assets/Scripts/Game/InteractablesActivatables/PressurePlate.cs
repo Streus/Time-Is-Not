@@ -37,6 +37,8 @@ public class PressurePlate : Interactable
 
         _source = this.GetComponent<AudioSource>();
 
+        _source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+
         pressurePlateOnSound = AudioLibrary.inst.pressurePlateOn;
         pressurePlateOffSound = AudioLibrary.inst.pressurePlateOff;
 

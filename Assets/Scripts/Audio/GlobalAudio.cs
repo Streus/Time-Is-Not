@@ -31,7 +31,7 @@ public class GlobalAudio : Singleton<GlobalAudio>
 	 * Play Sound methods
 	 */
 
-	public static void PlaySound(AudioClip clip, bool bypassEffects, int priority, float volume, float pitch, float stereoPan)
+	public static void PlaySound(AudioClip clip, bool bypassEffects, int priority, float volume, float pitch, float stereoPan, AudioMixerGroup group)
 	{
 		if (clip == null)
 		{
@@ -44,34 +44,34 @@ public class GlobalAudio : Singleton<GlobalAudio>
 		source.priority = priority;
 		source.volume = volume;
 		source.pitch = pitch; 
-		source.panStereo = stereoPan; 
+		source.panStereo = stereoPan;
+        source.outputAudioMixerGroup = group;
 		source.Play(); 
 	}
 
-	public static void PlaySound(AudioClip clip, int priority, float volume, float pitch)
+	public static void PlaySound(AudioClip clip, int priority, float volume, float pitch, AudioMixerGroup group)
 	{
-		PlaySound(clip, false, priority, volume, pitch, 0); 
+		PlaySound(clip, false, priority, volume, pitch, 0, group); 
 	}
 
-	public static void PlaySound(AudioClip clip, bool bypassEffects, int priority, float volume, float minPitch, float maxPitch, float stereoPan)
+	public static void PlaySound(AudioClip clip, bool bypassEffects, int priority, float volume, float minPitch, float maxPitch, float stereoPan, AudioMixerGroup group)
 	{
-		PlaySound(clip, bypassEffects, priority, volume, Random.Range(minPitch, maxPitch), stereoPan); 
-	}
-		
-
-	public static void PlaySound(AudioClip clip)
-	{
-		PlaySound(clip, false, 128, 1, 1, 0); 
+		PlaySound(clip, bypassEffects, priority, volume, Random.Range(minPitch, maxPitch), stereoPan, group); 
 	}
 
-	public static void PlaySound(AudioClip clip, int priority, float volume, float minPitch, float maxPitch)
+    public static void PlaySound(AudioClip clip, AudioMixerGroup group)
+    {
+        PlaySound(clip, false, 128, 1, 1, 0, group);
+    }
+
+    public static void PlaySound(AudioClip clip, int priority, float volume, float minPitch, float maxPitch, AudioMixerGroup group)
 	{
-		PlaySound(clip, false, priority, volume, Random.Range(minPitch, maxPitch), 0); 
+		PlaySound(clip, false, priority, volume, Random.Range(minPitch, maxPitch), 0, group); 
 	}
 
-	public static void PlaySound(AudioClip clip, float minPitch, float maxPitch)
+	public static void PlaySound(AudioClip clip, float minPitch, float maxPitch, AudioMixerGroup group)
 	{
-		PlaySound(clip, false, 128, 1, Random.Range(minPitch, maxPitch), 0); 
+		PlaySound(clip, false, 128, 1, Random.Range(minPitch, maxPitch), 0, group); 
 	}
 
 	public static bool ClipIsPlaying(AudioClip clip)

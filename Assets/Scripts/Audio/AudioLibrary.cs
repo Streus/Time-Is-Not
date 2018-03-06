@@ -13,14 +13,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayTetherSelect()
     {
-        GlobalAudio.PlaySound(inst.tetherSelect);
+        GlobalAudio.PlaySound(inst.tetherSelect, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip tetherMenuHover; // --  done : Location - TetherManager script
 
     public static void PlayTetherMenuHover()
     {
-        GlobalAudio.PlaySound(inst.tetherMenuHover);
+        GlobalAudio.PlaySound(inst.tetherMenuHover, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     //public AudioClip gameOver; // -- question : Do we have a sound for this?
@@ -33,56 +33,56 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayTetherPlacementSound()
     {
-        GlobalAudio.PlaySound(inst.tetherPlacement);
+        GlobalAudio.PlaySound(inst.tetherPlacement, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip tetherRewind; // -- done : Location - TetherManager script
 
     public static void PlayTetherRewindSound()
     {
-        GlobalAudio.PlaySound(inst.tetherRewind);
+        GlobalAudio.PlaySound(inst.tetherRewind, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip tetherError; // -- done : Location - TetherManger script
 
     public static void PlayTetherErrorSound()
     {
-        GlobalAudio.PlaySound(inst.tetherError);
+        GlobalAudio.PlaySound(inst.tetherError, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip stasisShoot; // -- done : Location - StasisBullet script
 
     public static void PlayStasisShootSound()
     {
-        GlobalAudio.PlaySound(inst.stasisShoot);
+        GlobalAudio.PlaySound(inst.stasisShoot, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip stasisError; // -- done : Location - LevelState Manager script
 
     public static void PlayStasisErrorSound()
     {
-        GlobalAudio.PlaySound(inst.stasisError);
+        GlobalAudio.PlaySound(inst.stasisError, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip dashForward; // -- done : Location - PlayerInvokeTargeting script
 
     public static void PlayDashForwardSound()
     {
-        GlobalAudio.PlaySound(inst.dashForward);
+        GlobalAudio.PlaySound(inst.dashForward, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip dashError; // -- done : Location - PlayerInvokeTargeting script
 
     public static void PlayDashErrorSound()
     {
-        GlobalAudio.PlaySound(inst.dashError);
+        GlobalAudio.PlaySound(inst.dashError, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip dashRecharge; // -- done : Location - DashUIPanel script
 
     public static void PlayDashRechargeSound()
     {
-        GlobalAudio.PlaySound(inst.dashRecharge);
+        GlobalAudio.PlaySound(inst.dashRecharge, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
     #endregion
 
@@ -93,14 +93,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayLaserSecurityCollisionSound()
     {
-        GlobalAudio.PlaySound(inst.laserSecurityCollisiion);
+        GlobalAudio.PlaySound(inst.laserSecurityCollisiion, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip laserDeathCollisiion; // -- done :  Location - laser script // PROBLEM WITH COLLISION AND TETHERING
 
     public static void PlayLaserDeathCollisionSound()
     {
-        GlobalAudio.PlaySound(inst.laserDeathCollisiion);
+        GlobalAudio.PlaySound(inst.laserDeathCollisiion, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip alarmTriggered; //-- question - Will it be constant or just a few moments and will it be location based?
@@ -109,14 +109,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayCodePickupSound()
     {
-        GlobalAudio.PlaySound(inst.codePickup);
+        GlobalAudio.PlaySound(inst.codePickup, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip normalSwitch; // -- done : ButtonSwitch Script
 
     public static void PlayNormalSwitchSound()
     {
-        GlobalAudio.PlaySound(inst.normalSwitch);
+        GlobalAudio.PlaySound(inst.normalSwitch, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
     #endregion
 
@@ -134,16 +134,16 @@ public class AudioLibrary : Singleton<AudioLibrary>
         switch(sound)
         {
             case 0:
-                GlobalAudio.PlaySound(inst.playerWalking1);
+                GlobalAudio.PlaySound(inst.playerWalking1, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
                 break;
             case 1:
-                GlobalAudio.PlaySound(inst.playerWalking2);
+                GlobalAudio.PlaySound(inst.playerWalking2, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
                 break;
             case 2:
-                GlobalAudio.PlaySound(inst.playerWalking3);
+                GlobalAudio.PlaySound(inst.playerWalking3, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
                 break;
             case 3:
-                GlobalAudio.PlaySound(inst.playerWalking4);
+                GlobalAudio.PlaySound(inst.playerWalking4, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
                 break;
         }
     }

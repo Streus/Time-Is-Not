@@ -11,6 +11,14 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] AudioMixer mainMixer;
 
+    public AudioMixer mixer
+    {
+        get
+        {
+            return mainMixer;
+        }
+    }
+
     //Sets the preset in the main menu
     private void Awake()
     {
