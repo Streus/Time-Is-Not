@@ -196,7 +196,10 @@ public class Hummingbird : PatrollingEnemy
 		Gizmos.DrawLine (transform.position, (rightBound.normalized * sightRange) + transform.position);
 		Gizmos.DrawLine (transform.position, (leftBound.normalized * sightRange) + transform.position);
 
-		Gizmos.DrawWireSphere (transform.position, sightRange);
+		#if UNITY_EDITOR
+		UnityEditor.Handles.color = getState().color;
+		UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, sightRange);
+		#endif
 	}
 	#endregion
 
