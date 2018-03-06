@@ -59,14 +59,13 @@ public class PushBlock : MonoBehaviour, ISavable
 	{
 		//TODO: get input keys from input module
 		_rb2d = gameObject.GetComponent<Rigidbody2D> ();
+		_col = gameObject.GetComponent<BoxCollider2D> ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 
         source = this.GetComponent<AudioSource>();
         pushBlockSound = AudioLibrary.inst.pushBlockMoving;
         source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
-
-        _col = gameObject.GetComponent<BoxCollider2D> ();
 	}
 
 	public void OnDestroy()
