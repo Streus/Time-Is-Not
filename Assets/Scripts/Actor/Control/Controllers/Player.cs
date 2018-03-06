@@ -50,7 +50,7 @@ public class Player : Controller
     {
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
-        if (!GameManager.CameraIsZoomedOut())
+		if (GameManager.inst != null && !GameManager.CameraIsZoomedOut())
         {
             base.Update();
         }
@@ -268,7 +268,7 @@ public class Player : Controller
 		// Dash debug
 		if (jumpTargetPos != Vector3.zero)
 		{
-			Gizmos.color = Color.green;
+			Gizmos.color = getState().color;
 			Vector2 csize = GetComponent<BoxCollider2D>().size;
 			Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
 			Gizmos.DrawWireCube(jumpTargetPos, actualSize);

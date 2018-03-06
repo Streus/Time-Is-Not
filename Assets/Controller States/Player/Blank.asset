@@ -11,8 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
   m_Name: Blank
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0, b: 0, a: 1}
   enterAction: {fileID: 0}
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: 7ae50fc6bb62d4a43bc66bb7b572da25, type: 2}
   exitAction: {fileID: 0}
   paths: []
