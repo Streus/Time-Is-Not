@@ -18,7 +18,7 @@ public class SaveManager : Singleton<SaveManager>
 
     static string saveLocation;
 
-    public string l;
+    public string l; //for testing
 
     static string m_level; 
 
@@ -34,7 +34,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public int cp;
+    public int cp; //for testing
 
     static int m_controlPreset;
 
@@ -64,7 +64,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    private void Update()
+    private void Update() //for testing
     {
         cp = controlPreset;
         l = level;
