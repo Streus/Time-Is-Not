@@ -336,6 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 178410851}
   - component: {fileID: 178410852}
+  - component: {fileID: 178410853}
   m_Layer: 5
   m_Name: SFX Volume Slider
   m_TagString: Untagged
@@ -423,6 +424,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &178410853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178410850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9f0df7bee66a8479de5733d3d0a12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &221862322
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,6 +915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406404025}
   - component: {fileID: 406404026}
+  - component: {fileID: 406404027}
   m_Layer: 5
   m_Name: Master Volume Slider
   m_TagString: Untagged
@@ -990,6 +1003,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &406404027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 406404024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3532058ca9503642a344f4d7c9c3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &450668379
 GameObject:
   m_ObjectHideFlags: 0
