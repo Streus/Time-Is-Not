@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751260890696162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.853825, y: -19.408237, z: 0}
+  m_LocalPosition: {x: -5.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4929614640784060}
@@ -73,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 1161877851094914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.125, y: 1.125, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children: []
   m_Father: {fileID: 4221670023458940}
   m_RootOrder: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: 1
-  movespeed: 5
+  movespeed: 3.5
 --- !u!114 &114680755274380400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +207,7 @@ MonoBehaviour:
   state: {fileID: 11400000, guid: 627231870d7fc324ca8c9c4ff9a02d92, type: 2}
   map: {fileID: 0}
   patrolStart: {fileID: 0}
-  turnSpeed: 360
+  turnSpeed: 110
 --- !u!212 &212050098199055614
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -280,7 +280,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 257601029
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 194
   m_Sprite: {fileID: 21300000, guid: cca5d1a07985e4789a78a2bb2fcf501f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
