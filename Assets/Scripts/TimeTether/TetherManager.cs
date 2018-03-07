@@ -453,6 +453,11 @@ public class TetherManager : Singleton<TetherManager>
         tempTetherScript.PlayTetherAnimation();
         AudioLibrary.PlayTetherRewindSound();
 
+		// Play ripple out particle effect
+		ParticleSystem ripples = Instantiate(Resources.Load("Prefabs/ParticlesRippleOut") as GameObject, GameManager.GetPlayer().transform).GetComponent<ParticleSystem>();
+		ripples.transform.position = GameManager.GetPlayer().transform.position;
+		ripples.Play(); 
+
         // Temporary way of delaying; should eventually have the animation controller tell this script that Margot's animation has finished
         yield return new WaitForSeconds(0.5f);
 
@@ -477,6 +482,8 @@ public class TetherManager : Singleton<TetherManager>
             yield return null;
         }
 
+		Destroy(ripples.gameObject); 
+
         // Load the desired state via LevelStateManager
         LoadTetherPoint(stateToLoad);
         //RemoveTimeTetherIndicator(stateToLoad + 1); 
@@ -490,14 +497,21 @@ public class TetherManager : Singleton<TetherManager>
         yield return new WaitForSeconds(0.1f);
         tetherTransition.SetFadeIn();
 
+		// Play ripple in particle effect
+		ripples = Instantiate(Resources.Load("Prefabs/ParticlesRippleIn") as GameObject, GameManager.GetPlayer().transform).GetComponent<ParticleSystem>();
+		ripples.transform.position = GameManager.GetPlayer().transform.position; 
+		ripples.Play(); 
+
         while (tetherTransition.TransitionInProgress())
         {
             // Wait for the transition in to finish
             yield return null;
         }
 
-        // When the transition is done, start two simultaneous actions
+        // When the transition is done, start these simultaneous actions
         // 	(1) Make Margot play her appear animation
+
+		ripples.enableEmission = false; 
 
         yield return new WaitForSeconds(0.2f);
 
@@ -512,6 +526,8 @@ public class TetherManager : Singleton<TetherManager>
         }
 
         yield return new WaitForSeconds(0.5f);
+
+		Destroy(ripples.gameObject);
 
         // Now that the process has finished, restore control to the player
         // TODO
