@@ -52,6 +52,7 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	public bool isInArea;
 
+    [SerializeField] bool isHermitCrab;
 
 	private BoxCollider2D _col;
 	// Use this for initialization
@@ -62,10 +63,12 @@ public class PushBlock : MonoBehaviour, ISavable
 		_col = gameObject.GetComponent<BoxCollider2D> ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
-
-        source = this.GetComponent<AudioSource>();
-        pushBlockSound = AudioLibrary.inst.pushBlockMoving;
-        source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        if (!isHermitCrab)
+        {
+            source = this.GetComponent<AudioSource>();
+            pushBlockSound = AudioLibrary.inst.pushBlockMoving;
+            source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        }
 	}
 
 	public void OnDestroy()
@@ -285,7 +288,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		if (!_player.pushing ())
 			_player.enterPushState ();
 		_beingPushed = true;
-        if (source != null)
+        if (source != null && !isHermitCrab)
         {
             source.clip = pushBlockSound;
             source.Play();
@@ -302,7 +305,7 @@ public class PushBlock : MonoBehaviour, ISavable
 			_player.exitPushState ();
 		_rb2d.velocity = Vector2.zero;
 		_beingPushed = false;
-        if (source != null)
+        if (source != null && !isHermitCrab)
         {
             source.Stop();
         }

@@ -6515,8 +6515,8 @@ MonoBehaviour:
   codeDoorUnlock: {fileID: 8300000, guid: 739082ac0be789b41b9c4c53e945588a, type: 3}
   doorFieldClosed: {fileID: 8300000, guid: 445dc2b5c6cede4479105020b10c3a4b, type: 3}
   doorFieldOpen: {fileID: 8300000, guid: a75efa2855b69ef43b1da712ee3ff533, type: 3}
-  doorMetalClose: {fileID: 8300000, guid: 9c8282fce15f8a540b14340d7c82f4e8, type: 3}
-  doorMetalOpen: {fileID: 8300000, guid: c98fd2215d58ca040b31de3f50978007, type: 3}
+  doorMetalClose: {fileID: 8300000, guid: 66ab707238c1b0d4899e7468739f3c33, type: 3}
+  doorMetalOpen: {fileID: 8300000, guid: db060de408f408641bd548628d8b151b, type: 3}
 --- !u!114 &114676048049763710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8106,9 +8106,9 @@ MonoBehaviour:
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 12
   panSpeed: 10
-  atLeftBound: 1
-  atRightBound: 1
-  atTopBound: 1
+  atLeftBound: 0
+  atRightBound: 0
+  atTopBound: 0
   atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
