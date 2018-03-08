@@ -67,6 +67,9 @@ public class TetherManager : Singleton<TetherManager>
     CanvasGroup tetherMenuGroup;
     [SerializeField] float tetherMenuFadeInSpeed = 1;
     [SerializeField] float tetherMenuFadeOutSpeed = 1;
+	[SerializeField] Image menuLight; 
+	[SerializeField] Sprite menuLightOn; 
+	[SerializeField] Sprite menuLightOff; 
 
     [Header("Fade image settings")]
     [Tooltip("(Drag In) The background image that darkens the background when the tether UI is up")]
@@ -228,6 +231,17 @@ public class TetherManager : Singleton<TetherManager>
 
         UpdateTimeArrowPos();
         UpdateScreenshotState();
+
+		if (tetherUIState == TetherUIState.TETHER_MENU)
+		{
+			if (menuLight != null && menuLightOn != null)
+				menuLight.sprite = menuLightOn; 
+		}
+		else
+		{
+			if (menuLight != null && menuLightOff != null)
+				menuLight.sprite = menuLightOff; 
+		}
     }
 
     /// <summary>
