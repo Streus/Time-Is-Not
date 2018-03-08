@@ -44,20 +44,21 @@ public class TempPlayerScript : MonoBehaviour {
 			isDashing = _player.dashing ();
 			_animationController.SetBool ("Dash", _player.dashing());
 		}
-		if (Input.GetKeyDown (KeyCode.W))
+
+		if (Input.GetKey (KeyCode.W))
 		{
 			_animationController.SetInteger ("Direction", 1);
 		}
 
-		if (Input.GetKeyDown (KeyCode.D))
+		if (Input.GetKey (KeyCode.D))
 		{
 			_animationController.SetInteger ("Direction", 2);
 		}
-		if (Input.GetKeyDown (KeyCode.S))
+		if (Input.GetKey (KeyCode.S))
 		{
 			_animationController.SetInteger ("Direction", 3);
 		}
-		if (Input.GetKeyDown (KeyCode.A))
+		if (Input.GetKey (KeyCode.A))
 		{
 			_animationController.SetInteger ("Direction", 4);
 		}
@@ -71,7 +72,6 @@ public class TempPlayerScript : MonoBehaviour {
 		{
 			_animationController.SetTrigger ("PlaceAnchor");
 		}
-
 
 		Vector3 offset = new Vector3 (transform.parent.GetComponent<BoxCollider2D> ().offset.x, transform.parent.GetComponent<BoxCollider2D> ().offset.y, transform.parent.position.z);
 
