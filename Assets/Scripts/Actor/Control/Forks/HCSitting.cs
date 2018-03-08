@@ -10,7 +10,10 @@ public class HCSitting : Fork
 		HermitCrab hc = State.cast<HermitCrab> (c);
 
 		if (hc.GetComponent<PushBlock> ()._beingPushed)
+		{
+			hc.setWasPushed (true);
 			return false;
+		}
 		else
 			return hc.updateSitDuration (Time.deltaTime);
 	}

@@ -22,7 +22,7 @@ public class HBSightCone : Fork
 					RaycastHit2D wallCheck;
 					float dist = Vector2.Distance (c.transform.position, hits [i].collider.transform.position);
 					wallCheck = Physics2D.Raycast (c.transform.position, dir, dist, bird.getObstMask());
-					if (wallCheck.collider == null)
+					if (wallCheck.collider == null || wallCheck.collider.isTrigger)
 					{
 						bird.setPursuitTarget (hits [i].collider.transform);
 						bird.setInPursuit (true);

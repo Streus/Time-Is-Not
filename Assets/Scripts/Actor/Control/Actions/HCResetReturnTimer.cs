@@ -9,6 +9,9 @@ public class HCResetReturnTimer : Action
 	{
 		HermitCrab hc = State.cast<HermitCrab> (c);
 
-		hc.resetReturnTimer ();
+		if (hc.getWasPushed ())
+			hc.setReturnTimerOnStand ();
+		else
+			hc.resetReturnTimer ();
 	}
 }

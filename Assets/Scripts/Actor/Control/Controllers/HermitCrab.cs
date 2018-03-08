@@ -23,6 +23,10 @@ public class HermitCrab : Controller
 	[SerializeField]
 	private float returnTimerMax = 5f;
 	private float returnTimer;
+	[Tooltip("What the return timer will be set to if the HC was pushed when sitting.")]
+	[SerializeField]
+	private float returnTimerOnStand = 3f;
+	private bool wasPushed = false;
 
 	[Tooltip("The radius of the ability nullifying field")]
 	[SerializeField]
@@ -101,6 +105,19 @@ public class HermitCrab : Controller
 
 		//crab is about to return home
 		//TODO iunno some animtion I guess?
+	}
+	public void setReturnTimerOnStand()
+	{
+		returnTimer = returnTimerOnStand;
+	}
+
+	public bool getWasPushed()
+	{
+		return wasPushed;
+	}
+	public void setWasPushed(bool val)
+	{
+		wasPushed = val;
 	}
 
 	public Vector3 getHome()
