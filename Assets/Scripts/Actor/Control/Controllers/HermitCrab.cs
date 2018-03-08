@@ -29,7 +29,7 @@ public class HermitCrab : Controller
 	private float nullFieldRadius = 2f;
 
 	[SerializeField]
-	private LayerMask nullLayers;
+	private LayerMask nullLayers, nullObstLayers;
 
 	[Tooltip("A multiplier applied to the length of the sitting state when stasised")]
 	[SerializeField]
@@ -119,6 +119,15 @@ public class HermitCrab : Controller
 		RaycastHit2D[] hits = Physics2D.CircleCastAll (transform.position, nullFieldRadius, Vector2.zero, 0f, nullLayers);
 		for (int i = 0; i < hits.Length; i++)
 		{
+			RaycastHit2D losCheck;
+			losCheck = Physics2D.Raycast (
+				transform.position,
+				hits[i].collider.transform.position - transform.position,
+				Vector2.Distance (transform.position, hits[i].collider.transform.position),
+				nullObstLayers.value);
+			if (losCheck.collider != null)
+				continue;
+
 			Entity e = hits [i].collider.GetComponent<Entity> ();
 			if (e != null && e.getFaction () == Entity.Faction.player)
 			{
