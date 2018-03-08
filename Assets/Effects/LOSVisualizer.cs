@@ -48,8 +48,11 @@ public class LOSVisualizer : MonoBehaviour
 			RaycastHit2D hit;
 
 			//if there's a hit, add the hit point, else, add a point at max range
+			bool saveQHT = Physics2D.queriesHitTriggers;
+			Physics2D.queriesHitTriggers = false;
 			hit = Physics2D.Raycast (transform.position, dir, hummingbird.getSightRange (), hummingbird.getObstMask());
-			if (hit.collider != null && !hit.collider.isTrigger)
+			Physics2D.queriesHitTriggers = saveQHT;
+			if (hit.collider != null)
 				points.Add ((Vector3)hit.point);
 			else
 				points.Add (transform.position + dir * hummingbird.getSightRange ());
