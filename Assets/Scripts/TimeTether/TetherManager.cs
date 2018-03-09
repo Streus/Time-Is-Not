@@ -120,7 +120,7 @@ public class TetherManager : Singleton<TetherManager>
         // Creating a tether point
 		if (tetherUIState == TetherUIState.GAMEPLAY && !GameManager.isPlayerDead() && !GameManager.CameraIsZoomedOut() && !GameManager.isPaused())
         {
-            if (Input.GetKeyDown(PlayerControlManager.RH_DropTether) || Input.GetKeyDown(PlayerControlManager.LH_DropTether))
+			if (PlayerControlManager.GetKeyDown(ControlInput.DROP_TETHER))
             {
                 CreatePoint();
                 GameManager.GetPlayer().GetComponent<Player>().StartWait();

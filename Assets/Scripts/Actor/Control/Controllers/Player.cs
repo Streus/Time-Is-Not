@@ -148,13 +148,13 @@ public class Player : Controller
     {
         Vector2 movementVector = Vector2.zero;
 
-        if (Input.GetKey(PlayerControlManager.RH_Up) || Input.GetKey(PlayerControlManager.LH_Up)) // UP
-            movementVector += Vector2.up;
-        if (Input.GetKey(PlayerControlManager.RH_Left) || Input.GetKey(PlayerControlManager.LH_Left)) // LEFT
+		if (PlayerControlManager.GetKey(ControlInput.UP)) // UP
+			movementVector += Vector2.up;
+		if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
             movementVector += Vector2.left;
-        if (Input.GetKey(PlayerControlManager.RH_Down) || Input.GetKey(PlayerControlManager.LH_Down)) // DOWN
+		if (PlayerControlManager.GetKey(ControlInput.DOWN)) // DOWN
             movementVector += Vector2.down;
-        if (Input.GetKey(PlayerControlManager.RH_Right) || Input.GetKey(PlayerControlManager.LH_Right)) // RIGHT
+		if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
             movementVector += Vector2.right;
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;

@@ -14,8 +14,7 @@ public class PlayerDefaultControl : Action
 		bool inSBBounds = LevelStateManager.StasisBubbleAtPos (mousePos);
 
 		// Use Stasis Placement ablility
-		if (Input.GetKeyDown (PlayerControlManager.RH_FireStasis) ||
-			Input.GetKeyDown(PlayerControlManager.LH_FireStasis))
+		if (PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
 		{
 			if (GameManager.inst.canUseStasis &&
 			   !inSBBounds &&
@@ -27,8 +26,7 @@ public class PlayerDefaultControl : Action
 		}
 
 		// Use Dash ability
-		if (Input.GetKeyDown (PlayerControlManager.RH_Dash) ||
-		   Input.GetKeyDown (PlayerControlManager.LH_Dash))
+		if (PlayerControlManager.GetKeyDown(ControlInput.DASH))
 		{
             if (GameManager.inst.canUseDash && CursorManager.CursorInGameplayState())
             {

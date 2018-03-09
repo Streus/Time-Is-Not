@@ -8,8 +8,7 @@ public class PlayerInvokeTargeting : Fork
     public override bool check(Controller c)
     {
         Player p = State.cast<Player>(c);
-        if ((Input.GetKeyDown(PlayerControlManager.RH_Dash) ||
-            Input.GetKeyDown(PlayerControlManager.LH_Dash)) &&
+		if (PlayerControlManager.GetKeyDown(ControlInput.DASH) &&
 			CursorManager.CursorInGameplayState())
         {
             return true;
