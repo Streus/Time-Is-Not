@@ -1919,6 +1919,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4029233003248236, guid: 9387128bbdda648ad9d2f308aecd5844,
     type: 2}
   m_PrefabInternal: {fileID: 520352881}
+--- !u!1 &531267842 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1559782986648734, guid: 73613c1af8a0a4affac7fe8a7c3a0d78,
+    type: 2}
+  m_PrefabInternal: {fileID: 1127524217}
 --- !u!1 &571448104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,6 +2423,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61a40f94fe8804930a24603dd133e7c0, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &790931161 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1062996858393866, guid: 7653195774fee4b97af15a525bc1b140,
+    type: 2}
+  m_PrefabInternal: {fileID: 1937123276}
 --- !u!1001 &846004682
 Prefab:
   m_ObjectHideFlags: 0
@@ -3631,7 +3641,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4228245800250006, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -18.37
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 4228245800250006, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3779,6 +3789,26 @@ Prefab:
       propertyPath: dialogueChain.Array.data[3]._location.y
       value: -175
       objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._followTarget
+      value: 
+      objectReference: {fileID: 531267842}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[1]._followTarget
+      value: 
+      objectReference: {fileID: 790931161}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[4]._followTarget
+      value: 
+      objectReference: {fileID: 790931161}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[5]._followTarget
+      value: 
+      objectReference: {fileID: 790931161}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
   m_IsPrefabParent: 0

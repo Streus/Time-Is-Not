@@ -40,10 +40,10 @@ public class DialogueManager : Singleton<DialogueManager>
 		foreach(DialogueObject dialogue in _activeDialogues)
 		{
 			int i = _activeDialogues.IndexOf (dialogue);
-			if (dialogue.UseWorldSpace)
+			if (dialogue.FollowTarget != null)
 			{
-				Debug.Log ("Moving...");
-				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, _activeDialogues[i].Location);
+				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
+				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector3(loc.x, loc.y + 1, loc.z));
 				((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;

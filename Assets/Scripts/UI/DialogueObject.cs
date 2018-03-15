@@ -18,7 +18,7 @@ public class DialogueObject
 	private float _timer;
 
 	[SerializeField]
-	private bool _useWorldSpace = false;
+	private GameObject _followTarget;
 
 	[SerializeField]
 	private float _boxLifetime;
@@ -30,7 +30,7 @@ public class DialogueObject
 		_next = next;
 		_boxLifetime = lifeTime;
 		_timer = lifeTime;
-		_useWorldSpace = false;
+		_followTarget = null;
 
 	}
 
@@ -41,7 +41,7 @@ public class DialogueObject
 		_next = null;
 		_boxLifetime = lifeTime;
 		_timer = lifeTime;
-		_useWorldSpace = false;
+		_followTarget = null;
 	}
 
 	public DialogueObject(DialogueObject original)
@@ -51,7 +51,7 @@ public class DialogueObject
 		_next = original.Next;
 		_timer = original.Timer;
 		_boxLifetime = original.Lifetime;
-		_useWorldSpace = original.UseWorldSpace;
+		_followTarget = original.FollowTarget;
 	}
 
 	public string Dialogue
@@ -78,10 +78,10 @@ public class DialogueObject
 		set{_uiObject = value;}
 	}
 
-	public bool UseWorldSpace
+	public GameObject FollowTarget
 	{
-		get{return _useWorldSpace;}
-		set{_useWorldSpace = value;}
+		get{return _followTarget;}
+		set{_followTarget = value;}
 	}
 
 	public float Timer
