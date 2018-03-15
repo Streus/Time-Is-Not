@@ -3623,7 +3623,7 @@ Prefab:
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
       propertyPath: dialogueChain.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4228245800250006, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3691,15 +3691,14 @@ Prefab:
         type: 2}
       propertyPath: dialogueChain.Array.data[2]._dialogue
       value: This is your time tether, it displays your active tether points, represented
-        by diamonds on the timeline, as well as your collected keycards in a tray
-        on the side, and the charge of your dash. Later on, you may be able to repair
-        the device to add more functionality!
+        by diamonds on the timeline.
       objectReference: {fileID: 0}
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
       propertyPath: dialogueChain.Array.data[3]._dialogue
-      value: Space places a tether point, shift opens the time tether menu, and left
-        click to dash. q allows you to zoom out and e interacts with objects.
+      value: It also stores your collected keycards in a tray on the side, and the
+        charge of your dash. Later on, you may be able to repair the device to add
+        more functionality!
       objectReference: {fileID: 0}
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
@@ -3739,13 +3738,46 @@ Prefab:
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
       propertyPath: dialogueChain.Array.data[4]._dialogue
+      value: Space places a tether point, shift opens the time tether menu, and left
+        click to dash. q allows you to zoom out and e interacts with objects.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[4]._boxLifetime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[5]._dialogue
       value: The time tether will automatically save you in case of emergency, so
         experiment to your heart's content, have fun!
       objectReference: {fileID: 0}
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
-      propertyPath: dialogueChain.Array.data[4]._boxLifetime
+      propertyPath: dialogueChain.Array.data[5]._boxLifetime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[6]._dialogue
+      value: ', as well as your collected keycards in a tray on the side, and the
+        charge of your dash. Later on, you may be able to repair the device to add
+        more functionality!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[6]._boxLifetime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[3]._location.x
+      value: -420
+      objectReference: {fileID: 0}
+    - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[3]._location.y
+      value: -175
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
