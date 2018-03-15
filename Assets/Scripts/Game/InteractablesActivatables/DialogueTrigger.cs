@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DialogueTrigger : MonoBehaviour, IActivatable
+{
+	private DialogueObject[] dialogueChain;
+
+	void Start()
+	{
+		for(int i = 0; i < dialogueChain.Length -1; i++)
+		{
+			dialogueChain [i].Next = dialogueChain [i + 1];
+		}
+	}
+
+	/// <summary>
+	/// Display Dialogue.
+	/// </summary>
+	public bool onActivate()
+	{
+		if (dialogueChain.Length == 0)
+			return false;
+		DialogueManager.inst.CreateBox (dialogueChain [0]);
+		return true;
+	}
+
+	/// <summary>
+	/// Display Dialogue.
+	/// </summary>
+	public bool onActivate (bool state)
+	{
+		if (dialogueChain.Length == 0)
+			return false;
+		DialogueManager.inst.CreateBox (dialogueChain [0]);
+		return true;
+	}
+}

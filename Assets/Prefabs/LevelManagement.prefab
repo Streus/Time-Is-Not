@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 223131333902363682}
   - component: {fileID: 114581595660789750}
   - component: {fileID: 114059634415534702}
+  - component: {fileID: 114251429038456954}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -4708,6 +4709,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyCode: 2
+--- !u!114 &114251429038456954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013494518387460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bac975c2c1604ba6bc90eec90742f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueBoxPrefab: {fileID: 1323067950435502, guid: 5b82fed662da44ae49b20a687af1f06b,
+    type: 2}
+  _sampleDialogue:
+    _dialogue: 
+    _location: {x: 0, y: 0}
+    _timer: 0
 --- !u!114 &114251760214911200
 MonoBehaviour:
   m_ObjectHideFlags: 1
