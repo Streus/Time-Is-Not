@@ -77,6 +77,18 @@ public class PlayerControlManager : ScriptableObject
 		setCount = 1;
 		currentSet = 0;
 		bindings = new KeyCode[ciLength * setCount];
+		bindings [0] = KeyCode.W;
+		bindings [1] = KeyCode.S;
+		bindings [2] = KeyCode.A;
+		bindings [3] = KeyCode.D;
+		bindings [4] = KeyCode.E;
+		bindings [5] = KeyCode.Space;
+		bindings [6] = KeyCode.LeftShift;
+		bindings [7] = KeyCode.Mouse0;
+		bindings [8] = KeyCode.Mouse1;
+		bindings [9] = KeyCode.Q;
+		bindings [10] = KeyCode.Escape;
+
 		setNames = new string[setCount];
 		setNames [0] = "DEFAULT";
 	}
