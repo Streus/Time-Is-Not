@@ -16,13 +16,22 @@ public class PCMInspector : Editor
 		}
 		catch(System.NullReferenceException nre)
 		{
-			Debug.LogError (nre.Message + "\nCould not make serialized object of " + pcm.gameObject);
+			Debug.LogError (nre.Message + "\nCould not make serialized object of " + pcm.name);
 		}
 	}
 
 	public override void OnInspectorGUI ()
 	{
 		tar.Update ();
+
+		if (pcm.isPrimary ())
+		{
+			GUIStyle cll = EditorStyles.largeLabel;
+			cll.alignment = TextAnchor.MiddleCenter;
+			GUILayout.Label ("Primary", cll);
+		}
+		else if (GUILayout.Button ("Set as Primary"))
+			pcm.setAsPrimary ();
 
 		GUILayout.Label ("Set Options", EditorStyles.boldLabel);
 
@@ -55,6 +64,9 @@ public class PCMInspector : Editor
 		}
 
 		if (GUI.changed)
+		{
 			EditorUtility.SetDirty (pcm);
+			Undo.RecordObject (pcm, "Edited " + name);
+		}
 	}
 }

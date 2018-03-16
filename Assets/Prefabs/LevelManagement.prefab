@@ -667,7 +667,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4576292314622706}
-  - component: {fileID: 114276828258970536}
   m_Layer: 0
   m_Name: PlayerControlManager
   m_TagString: Untagged
@@ -2407,7 +2406,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 12.39, y: -44.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396684429741562}
@@ -2448,7 +2447,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5900002, z: 0}
+  m_LocalPosition: {x: 12.390005, y: -44.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -2550,7 +2549,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672024216453400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.25, y: -0.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4354176451379616}
@@ -2562,8 +2561,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.76, y: -20.59, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.6, y: -2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -2746,7 +2745,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -4875,39 +4874,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114276828258970536
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1271168959542432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 771acf3607d0e7a419d11a9d39354b18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rH_Up: 119
-  rH_Down: 115
-  rH_Left: 97
-  rH_Right: 100
-  rH_Interact: 101
-  rH_DropTether: 32
-  rH_TetherMenu: 304
-  rH_Dash: 323
-  rH_FireStasis: 324
-  rH_ZoomOut: 113
-  rH_PauseMenu: 27
-  lH_Up: 105
-  lH_Down: 107
-  lH_Left: 106
-  lH_Right: 108
-  lH_Interact: 117
-  lH_DropTether: 32
-  lH_TetherMenu: 303
-  lH_Dash: 323
-  lH_FireStasis: 324
-  lH_ZoomOut: 111
-  lH_PauseMenu: 27
 --- !u!114 &114281200217044382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5217,6 +5183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   securityDoors: {fileID: 0}
+  controlManager: {fileID: 11400000, guid: 1c477e27ab12d9e4d8192d9929842354, type: 2}
   canUseStasis: 0
   canUseDash: 1
   playerObj: {fileID: 1062996858393866}
@@ -7838,7 +7805,7 @@ MonoBehaviour:
   atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 1
+  atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8066,7 +8033,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -762
+  m_SortingOrder: 5075
   m_Sprite: {fileID: 21300002, guid: 7d2f987391cda48a59b5bf09e54f726a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

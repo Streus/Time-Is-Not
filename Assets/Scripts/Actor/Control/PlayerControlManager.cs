@@ -18,8 +18,9 @@ public enum ControlInput
 	PAUSE_MENU
 };
 
+[CreateAssetMenu(menuName = "Controls/Player Control Manager")]
 [ExecuteInEditMode]
-public class PlayerControlManager : MonoBehaviour
+public class PlayerControlManager : ScriptableObject
 {
 	#region STATIC_VARS
 
@@ -52,15 +53,24 @@ public class PlayerControlManager : MonoBehaviour
 
 	#region INSTANCE_METHODS
 
+	public void OnEnable()
+	{
+		if (isPrimary())
+			Debug.Log ("This is the primary PCM.");
+	}
+
 	public void Awake()
 	{
+		Debug.Log ("PCM Awake."); //DEBUG
 		if (primary == null)
-			primary = this;
+		{
+			setAsPrimary ();
+		}
 		else
 		{
 			Debug.LogWarning ("There is already a PlayerControlManager somewhere else.");
 			#if UNITY_EDITOR
-			UnityEditor.EditorGUIUtility.PingObject(primary.gameObject);
+			UnityEditor.EditorGUIUtility.PingObject(primary);
 			#endif
 		}
 
@@ -72,6 +82,15 @@ public class PlayerControlManager : MonoBehaviour
 	}
 
 	#region GETTERS_SETTERS
+
+	public bool isPrimary()
+	{
+		return primary == this;
+	}
+	public void setAsPrimary()
+	{
+		primary = this;
+	}
 
 	public int getSetCount()
 	{
@@ -108,6 +127,15 @@ public class PlayerControlManager : MonoBehaviour
 			currentSet = setCount - 1;
 		else
 			currentSet = val;
+	}
+	public void setCurrentSet(string name)
+	{
+		for (int i = 0; i < setNames.Length; i++)
+		{
+			if (setNames [i] == name)
+				setCurrentSet (i);
+		}
+		throw new ArgumentException (name + " is not currently a managed bindings set.");
 	}
 
 	public KeyCode getBinding(int index)

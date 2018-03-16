@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	[Tooltip("Empty gameobject containing all security doors in the level that should be tripped at once")]
 	public GameObject securityDoors;
 
-
+	public PlayerControlManager controlManager;
 
 	// Pause functionality
 	bool paused; 
@@ -114,6 +114,8 @@ public class GameManager : Singleton<GameManager> , ISavable
         string levelName = SceneManager.GetActiveScene().name;
         SaveManager.level = levelName;
         SaveManager.Save();
+
+		controlManager.setAsPrimary ();
     }
 
     void Update()
