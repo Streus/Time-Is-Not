@@ -36,6 +36,14 @@ public class Player : Controller
 
 	private Transform shadow;
 
+	//how long it takes the player to fall into a pit while walking against it
+	[SerializeField]
+	private float pitFallDelay = 1f;
+
+	//how long the player has been walking against a pit
+	[SerializeField]
+	private float pitTimer = 0f;
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -58,7 +66,7 @@ public class Player : Controller
         {
             base.Update();
         }
-        CheckForGround();
+        //CheckForGround();
         sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
 		SpriteRenderer shadowRend = shadow.GetComponent<SpriteRenderer> ();
 		if(shadowRend != null)
@@ -158,8 +166,60 @@ public class Player : Controller
         ContactFilter2D cf = new ContactFilter2D();
         cf.SetLayerMask(moveMask);
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
-        if (hitCount <= 0)
+
+		//Check for Pits/platforms
+		Debug.Log ("walls: " + hitCount);
+		RaycastHit2D[] pitsFound = new RaycastHit2D[1];
+		RaycastHit2D[] platformsFound = new RaycastHit2D[1];
+		int pitCount = 0;
+		int platformCount = 0;
+		ContactFilter2D pitFilter = new ContactFilter2D();
+		ContactFilter2D platformFilter = new ContactFilter2D();
+		pitFilter.SetLayerMask(1 << LayerMask.NameToLayer("Pits"));
+		pitFilter.useTriggers = true;
+		platformFilter.SetLayerMask(1 << LayerMask.NameToLayer("SkyEnts"));
+		platformFilter.useTriggers = true;
+
+		pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime);
+		//pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed() * Time.deltaTime)), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
+
+		Debug.Log ("Pits: " + pitCount);
+
+		platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime);
+
+		Debug.Log ("Platforms: " + platformCount);
+		bool seesPlatform = false;
+		for(int i = 0; i < platformsFound.Length; i++)
+		{
+			if(platformsFound[i].collider != null) 
+			{
+				if (platformsFound [i].collider.CompareTag ("MovingPlatform"))
+					seesPlatform = true;
+			}
+		}
+
+		Debug.Log ("SeesPlatform: " + seesPlatform);
+		bool seesPit = (pitCount > 0 && !seesPlatform);
+		Debug.Log ("SeesPit: " + seesPit);
+		//if there are no walls or pits, move
+        if (hitCount <= 0 && !seesPit)
             transform.Translate((Vector3)movementVector);
+
+		//if there are no walls and there is a pit, incriment the pit timer
+		if (seesPit && hitCount <= 0) {
+			physbody.velocity -= (physbody.velocity * 0.2f);
+			pitTimer += Time.deltaTime;
+		}
+		else
+			pitTimer = 0;
+
+		//if the pit timer fills, kill the player
+		if (pitTimer >= pitFallDelay) 
+		{
+			//TODO: play falling animation
+			getSelf ().onDeath ();
+		}
+
     }
 
 	/// <summary>
@@ -210,7 +270,7 @@ public class Player : Controller
 	}
 
     //checks for pits and moving platforms under the players feet
-    public void CheckForGround()
+	/*public void CheckForGround()
     {
         Collider2D[] colsHit = Physics2D.OverlapPointAll(transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D>().offset,  1 << LayerMask.NameToLayer("Pits"));
 		Collider2D[] platformsFound = Physics2D.OverlapBoxAll (transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D> ().offset, gameObject.GetComponent<BoxCollider2D>().size * 0.5f, 0,  1 << LayerMask.NameToLayer ("SkyEnts"));
@@ -237,7 +297,7 @@ public class Player : Controller
         {
 			getSelf ().onDeath ();
         }
-    }
+    }*/
 
 	public void StartWait()
 	{
