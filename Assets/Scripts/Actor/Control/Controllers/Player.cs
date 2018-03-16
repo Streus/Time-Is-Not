@@ -40,8 +40,10 @@ public class Player : Controller
 	[SerializeField]
 	private float pitFallDelay = 1f;
 
-	//how long the player has been walking against a pit
 	[SerializeField]
+	private float pitSpeedAdjustment = 0.2f;
+
+	//how long the player has been walking against a pit
 	private float pitTimer = 0f;
 
     #endregion
@@ -207,7 +209,7 @@ public class Player : Controller
 
 		//if there are no walls and there is a pit, incriment the pit timer
 		if (seesPit && hitCount <= 0) {
-			physbody.velocity -= (physbody.velocity * 0.2f);
+			physbody.velocity -= (physbody.velocity * pitSpeedAdjustment);
 			pitTimer += Time.deltaTime;
 		}
 		else
