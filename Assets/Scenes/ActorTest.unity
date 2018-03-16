@@ -247,9 +247,33 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114276828258970536, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &373610156 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1271168959542432, guid: 7653195774fee4b97af15a525bc1b140,
+    type: 2}
+  m_PrefabInternal: {fileID: 373610155}
+--- !u!114 &373610157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373610156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771acf3607d0e7a419d11a9d39354b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setCount: 3
+  currentSet: 0
+  bindings: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  setNames:
+  - Default
+  - Alternate1
+  - Alternate2
 --- !u!1 &452614158
 GameObject:
   m_ObjectHideFlags: 0

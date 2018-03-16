@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum ControlInput
 {
@@ -17,14 +18,14 @@ public enum ControlInput
 	PAUSE_MENU
 };
 
-[CreateAssetMenu(menuName = "Controls/Player Control Manager", fileName = "Primary")]
-public class PlayerControlManager : ScriptableObject
+[ExecuteInEditMode]
+public class PlayerControlManager : MonoBehaviour
 {
-	private const int CI_LENGTH = 11;
-
 	#region STATIC_VARS
 
-	private PlayerControlManager primary;
+	public static readonly int ciLength = Enum.GetNames (typeof(ControlInput)).Length;
+
+	private static PlayerControlManager primary;
 	#endregion
 
 	#region STATIC_METHODS
@@ -55,10 +56,17 @@ public class PlayerControlManager : ScriptableObject
 	{
 		if (primary == null)
 			primary = this;
+		else
+		{
+			Debug.LogWarning ("There is already a PlayerControlManager somewhere else.");
+			#if UNITY_EDITOR
+			UnityEditor.EditorGUIUtility.PingObject(primary.gameObject);
+			#endif
+		}
 
 		setCount = 1;
 		currentSet = 0;
-		bindings = new KeyCode[CI_LENGTH * setCount]; //TODO unhardcode enum length
+		bindings = new KeyCode[ciLength * setCount];
 		setNames = new string[setCount];
 		setNames [0] = "DEFAULT";
 	}
@@ -73,10 +81,17 @@ public class PlayerControlManager : ScriptableObject
 	{
 		if (val != setCount)
 		{
-			KeyCode[] newArr = new KeyCode[val * CI_LENGTH];
-			for (int i = 0; i < bindings.Length; i++)
-				newArr [i] = bindings [i];
-			bindings = newArr;
+			//resize bindings
+			KeyCode[] newBin = new KeyCode[val * ciLength];
+			for (int i = 0, c = Mathf.Min(newBin.Length, bindings.Length); i < c; i++)
+				newBin [i] = bindings [i];
+			bindings = newBin;
+
+			//resize set names
+			string[] newNam = new string[val];
+			for (int i = 0, c = Mathf.Min (newNam.Length, setNames.Length); i < c; i++)
+				newNam [i] = setNames [i];
+			setNames = newNam;
 		}
 		setCount = val;
 	}
@@ -110,7 +125,7 @@ public class PlayerControlManager : ScriptableObject
 
 	public void setBinding(KeyCode key, int index)
 	{
-		if (index < 0 || index >= setCount)
+		if (index < 0 || index >= bindings.Length)
 			throw new System.IndexOutOfRangeException (index + " is out of bounds!");
 
 		bindings [index] = key;
@@ -136,9 +151,9 @@ public class PlayerControlManager : ScriptableObject
 		setNames [index] = name;
 	}
 
-	public KeyCode getKey(ControlInput input)
+	public KeyCode getBinding(ControlInput input)
 	{
-		return bindings [(int)input + (currentSet * CI_LENGTH)];
+		return bindings [(int)input + (currentSet * ciLength)];
 	}
 	#endregion
 
@@ -149,7 +164,7 @@ public class PlayerControlManager : ScriptableObject
 	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKey(ControlInput inputType)
 	{
-		return false;
+		return Input.GetKey (primary.getBinding(inputType));
 	}
 
 	/// <summary>
@@ -159,7 +174,7 @@ public class PlayerControlManager : ScriptableObject
 	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKeyDown(ControlInput inputType)
 	{
-		return false;
+		return Input.GetKeyDown (primary.getBinding(inputType));
 	}
 
 	/// <summary>
@@ -169,7 +184,7 @@ public class PlayerControlManager : ScriptableObject
 	/// <param name="inputType">ControlInput enum for a type of input action</param>
 	public static bool GetKeyUp(ControlInput inputType)
 	{
-		return false;
+		return Input.GetKeyUp (primary.getBinding(inputType));
 	}
 	#endregion
 }
