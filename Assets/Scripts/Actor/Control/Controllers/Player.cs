@@ -172,7 +172,7 @@ public class Player : Controller
 		//Check for Pits/platforms
 		Debug.Log ("walls: " + hitCount);
 		RaycastHit2D[] pitsFound = new RaycastHit2D[1];
-		RaycastHit2D[] platformsFound = new RaycastHit2D[1];
+		Collider2D[] platformsFound = new Collider2D[1];
 		int pitCount = 0;
 		int platformCount = 0;
 		ContactFilter2D pitFilter = new ContactFilter2D();
@@ -183,19 +183,20 @@ public class Player : Controller
 		platformFilter.useTriggers = true;
 
 		pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
-		//pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed() * Time.deltaTime)), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
 
 		Debug.Log ("Pits: " + pitCount);
 
-		platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
+		//platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
+		platformCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed())), GetComponent<BoxCollider2D>().size, 0, platformFilter, platformsFound);
+
 
 		Debug.Log ("Platforms: " + platformCount);
 		bool seesPlatform = false;
 		for(int i = 0; i < platformsFound.Length; i++)
 		{
-			if(platformsFound[i].collider != null) 
+			if(platformsFound[i] != null) 
 			{
-				if (platformsFound [i].collider.CompareTag ("MovingPlatform"))
+				if (platformsFound [i].CompareTag ("MovingPlatform"))
 					seesPlatform = true;
 			}
 		}
