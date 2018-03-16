@@ -4,33 +4,45 @@ using UnityEngine;
 
 public class GulperEel : PatrollingEnemy
 {
-	#region INSTANCE_METHODS
 
-	public override void Update ()
+    private Animator gulperAnim;
+    #region INSTANCE_METHODS
+    public override void Awake()
+    {
+        base.Awake();
+
+        Transform spriteChild = transform.Find("Sprite");
+        if (spriteChild != null)
+            gulperAnim = spriteChild.GetComponent<Animator>();
+    }
+    public override void Update ()
 	{
 		base.Update ();
 
-		//TODO gulper eel movement animations
-		if(transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
-		{
-			//up
+        if (gulperAnim == null)
+            return;
 
-		}
+        //TODO gulper eel movement animations
+        if (transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
+		{
+            //up
+            gulperAnim.SetInteger("Direction", 1);
+        }
 		if(transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
 		{
-			//left
-
-		}
+            //left
+            gulperAnim.SetInteger("Direction", 4);
+        }
 		if(transform.eulerAngles.z > 135 && transform.eulerAngles.z < 225)
 		{
-			//down
-
-		}
+            //down
+            gulperAnim.SetInteger("Direction", 3);
+        }
 		if(transform.eulerAngles.z > 225 && transform.eulerAngles.z < 315)
 		{
-			//right
-
-		}
+            //right
+            gulperAnim.SetInteger("Direction", 2);
+        }
 	}
 
 	#region ISAVABLE_METHODS
