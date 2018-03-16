@@ -4722,10 +4722,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueBoxPrefab: {fileID: 1323067950435502, guid: 5b82fed662da44ae49b20a687af1f06b,
     type: 2}
-  _sampleDialogue:
-    _dialogue: 
-    _location: {x: 0, y: 0}
-    _timer: 0
 --- !u!114 &114251760214911200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5392,6 +5388,8 @@ MonoBehaviour:
   minJumpDist: 0
   sprite: {fileID: 212922450303914020}
   maxJumpDist: 2
+  pitFallDelay: 1
+  pitSpeedAdjustment: 1
 --- !u!114 &114427904616215608
 MonoBehaviour:
   m_ObjectHideFlags: 1

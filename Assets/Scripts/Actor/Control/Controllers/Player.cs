@@ -182,12 +182,12 @@ public class Player : Controller
 		platformFilter.SetLayerMask(1 << LayerMask.NameToLayer("SkyEnts"));
 		platformFilter.useTriggers = true;
 
-		pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime);
+		pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 		//pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed() * Time.deltaTime)), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
 
 		Debug.Log ("Pits: " + pitCount);
 
-		platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime);
+		platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 
 		Debug.Log ("Platforms: " + platformCount);
 		bool seesPlatform = false;
@@ -216,7 +216,7 @@ public class Player : Controller
 			pitTimer = 0;
 
 		//if the pit timer fills, kill the player
-		if (pitTimer >= pitFallDelay) 
+		if (pitTimer >= pitFallDelay || (seesPit && movementVector == Vector2.zero) || (movementVector != Vector2.zero && !CheckForGround())) 
 		{
 			//TODO: play falling animation
 			getSelf ().onDeath ();
@@ -271,8 +271,8 @@ public class Player : Controller
 			jumpTargetPos = mp;
 	}
 
-    //checks for pits and moving platforms under the players feet
-	/*public void CheckForGround()
+    //checks for pits and moving platforms under the players feet, returns false if the player is over a pit
+	public bool CheckForGround()
     {
         Collider2D[] colsHit = Physics2D.OverlapPointAll(transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D>().offset,  1 << LayerMask.NameToLayer("Pits"));
 		Collider2D[] platformsFound = Physics2D.OverlapBoxAll (transform.position + (Vector3)gameObject.GetComponent<BoxCollider2D> ().offset, gameObject.GetComponent<BoxCollider2D>().size * 0.5f, 0,  1 << LayerMask.NameToLayer ("SkyEnts"));
@@ -295,11 +295,8 @@ public class Player : Controller
 		}
         isOnPlatform = seesMP;
         isOverPit = seesPit;
-        if (isOverPit && !isOnPlatform && !dashing())
-        {
-			getSelf ().onDeath ();
-        }
-    }*/
+		return !(isOverPit && !isOnPlatform && !dashing ());
+    }
 
 	public void StartWait()
 	{
