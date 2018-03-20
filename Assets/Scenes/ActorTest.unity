@@ -155,7 +155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4354176451379616, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -44.6
       objectReference: {fileID: 0}
     - target: {fileID: 20336826354465066, guid: 7653195774fee4b97af15a525bc1b140,
         type: 2}
@@ -247,6 +247,10 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4354176451379616, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 12.389999
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114276828258970536, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
@@ -267,13 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771acf3607d0e7a419d11a9d39354b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setCount: 3
+  setCount: 1
   currentSet: 0
-  bindings: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  bindings: 770000007300000061000000640000006500000020000000300100004301000044010000710000001b000000
   setNames:
-  - Default
-  - Alternate1
-  - Alternate2
+  - DEFAULT
 --- !u!1 &452614158
 GameObject:
   m_ObjectHideFlags: 0
