@@ -12,4 +12,8 @@ public class SceneSetup : Singleton<SceneSetup>
 	[Header("Scene ability settings")]
 	public bool canUseStasis; 
 	public bool canUseDash; 
+
+	[Header("Level timer settings")]
+	public bool useEndTimer; 
+	public float endTimerLength = 10; 
 }

@@ -36,6 +36,34 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// Death functionality
 	bool isDead; 
 
+	// End level timer functionality
+	bool m_useEndTimer; 
+	public bool useEndTimer
+	{
+		get{
+			return m_useEndTimer; 
+		}
+	}
+
+	float endTimerLength; 
+
+	float m_endTimer;
+	public float endTimer
+	{
+		get{
+			return m_endTimer; 
+		}
+	}
+
+	public string timerString
+	{
+		get{
+			float minutes = Mathf.Floor(m_endTimer / 60);
+			float seconds = (m_endTimer % 60);
+			return minutes.ToString("00") + ":" + seconds.ToString("00"); 
+		}
+	}
+
 	// Actions
 	public event StateToggled pauseToggled; 
 	public event StateToggled pauseLockedToggled; 
@@ -69,7 +97,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		//SeedBase seed = new SeedBase (gameObject);
 		Seed seed = new Seed ();
-		seed.codes = m_codes; 
+
+		//seed.codes = m_codes; 
+		seed.endTimer = endTimer;
+		seed.endTimerActive = m_useEndTimer; 
 
 		return seed;
 	}
@@ -77,7 +108,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		Seed seed = (Seed)s;
 
-		m_codes = seed.codes;
+		//m_codes = seed.codes;
+		m_endTimer = seed.endTimer;
+		m_useEndTimer = seed.endTimerActive; 
 
 		if (isDead)
 			isDead = false; 
@@ -86,7 +119,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public class Seed : SeedBase
 	{
 		// Define all the extra variables that should be saved here
+
+		// Why is there here? It doesn't appear to work
 		public List<CodeName> codes; 
+
+		public float endTimer; 
+		public bool endTimerActive; 
 	}
 
 	// MonoBehaviors
@@ -96,6 +134,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			canUseStasis = SceneSetup.inst.canUseStasis; 
 			canUseDash = SceneSetup.inst.canUseDash; 
+			endTimerLength = SceneSetup.inst.endTimerLength; 
+			m_useEndTimer = SceneSetup.inst.useEndTimer; 
+			m_endTimer = endTimerLength; 
 		}
 
 		if (playerObj != null)
@@ -119,8 +160,41 @@ public class GameManager : Singleton<GameManager> , ISavable
     }
 
     void Update()
+	{ 
+		if (m_useEndTimer && !paused && !isDead)
+		{
+			m_endTimer -= Time.deltaTime; 
+			if (m_endTimer <= 0)
+			{
+				m_endTimer = 0; 
+				killPlayer(); 
+			}
+
+			//endTimerText.enabled = true; 
+
+			float minutes = Mathf.Floor(m_endTimer / 60);
+			float seconds = (m_endTimer % 60);
+
+			//endTimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00"); 
+
+			//Debug.Log("m_endTimer = " + m_endTimer); 
+		}
+		else
+		{
+			Debug.Log("No timer?"); 
+			//endTimerText.enabled = false; 
+		}
+	}
+
+	public void StartEndTimer()
 	{
-		
+		StartEndTimer(endTimerLength); 
+	}
+
+	public void StartEndTimer(float length)
+	{
+		m_useEndTimer = true; 
+		m_endTimer = length; 
 	}
 
 	/*
