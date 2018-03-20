@@ -8,6 +8,7 @@ public class HermitCrab : Controller
 	// Where this crab wil return to if moved
 	private Vector3 home;
 	private Animator animationController;
+    private SpriteRenderer nullifierField;
 
 	[Tooltip("How long this crab will remain sitting")]
 	[SerializeField]
@@ -50,7 +51,9 @@ public class HermitCrab : Controller
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 
-		animationController = gameObject.GetComponent <Animator> ();
+        Transform nullifierChild = transform.Find("NullifierField");
+        nullifierField = nullifierChild.GetComponent<SpriteRenderer>();
+        animationController = gameObject.GetComponent <Animator> ();
 		animationController.SetBool ("Hide", true);
 	}
 
@@ -80,6 +83,7 @@ public class HermitCrab : Controller
 		//TODO crab sit animation here
 		animationController.SetInteger ("Direction", 0);
 		animationController.SetBool ("Hide", true);
+        nullifierField.enabled = true;
 	}
 
 	public bool updateStandDuration(float delta)
@@ -93,7 +97,8 @@ public class HermitCrab : Controller
 		//crab is about to stand up
 		//TODO crab stand animation here
 		animationController.SetBool ("Hide", false);
-	}
+        nullifierField.enabled = false;
+    }
 
 	public bool updateReturnTimer(float delta)
 	{
