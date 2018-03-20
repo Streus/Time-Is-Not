@@ -6,11 +6,11 @@ using UnityEngine;
 public class HBPursue : Action
 {
 	public float killDistance = 0.6f;
-
+    AudioSource source;
 	public override void perform (Controller c)
 	{
 		Hummingbird bird = State.cast<Hummingbird> (c);
-        
+        source = c.GetComponent<AudioSource>();
 		c.facePoint (bird.getPursuitTarget().position, bird.getTurnSpeed() * Time.deltaTime);
 
 		float moveDist = c.getSelf ().getMovespeed () * Time.deltaTime;
@@ -18,7 +18,11 @@ public class HBPursue : Action
 			(bird.getPursuitTarget().position - c.transform.position).normalized *
 			moveDist, Space.World);
 
-		if (Vector3.Distance (c.transform.position, bird.getPursuitTarget ().position) < killDistance)
-			bird.getPursuitTarget ().GetComponent<Entity> ().onDeath ();
+        if (Vector3.Distance(c.transform.position, bird.getPursuitTarget().position) < killDistance)
+        {
+            bird.getPursuitTarget().GetComponent<Entity>().onDeath();
+            
+            source.PlayOneShot(AudioLibrary.inst.hummingBirdAttacking);
+        }
 	}
 }
