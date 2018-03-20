@@ -83,7 +83,7 @@ public class HermitCrab : Controller
 		//TODO crab sit animation here
 		animationController.SetInteger ("Direction", 0);
 		animationController.SetBool ("Hide", true);
-        nullifierField.enabled = true;
+        nullifierField.enabled = false;
 	}
 
 	public bool updateStandDuration(float delta)
@@ -97,7 +97,7 @@ public class HermitCrab : Controller
 		//crab is about to stand up
 		//TODO crab stand animation here
 		animationController.SetBool ("Hide", false);
-        nullifierField.enabled = false;
+        nullifierField.enabled = true;
     }
 
 	public bool updateReturnTimer(float delta)
