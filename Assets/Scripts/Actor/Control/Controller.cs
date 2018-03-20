@@ -33,6 +33,9 @@ public class Controller : MonoBehaviour, ISavable
 		physbody = GetComponent<Rigidbody2D> ();
 
 		path = null;
+
+		if (state != null)
+			state.enter (this);
 	}
 		
 	public virtual void Update()
