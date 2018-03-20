@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HBEnterPursue : MonoBehaviour {
+[CreateAssetMenu(menuName = "AI/Actions/Hummingbird/HBEnterPursue")]
+public class HBEnterPursue : Action
+{
+    AudioSource source;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void perform(Controller c)
+    {
+        source = c.GetComponent<AudioSource>();
+        source.clip = AudioLibrary.inst.hummingBirdSpotting;
+        source.loop = false;
+        source.Play();
+    }
 }
