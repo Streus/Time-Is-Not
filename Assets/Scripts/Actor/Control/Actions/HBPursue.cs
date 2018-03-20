@@ -10,7 +10,7 @@ public class HBPursue : Action
 	public override void perform (Controller c)
 	{
 		Hummingbird bird = State.cast<Hummingbird> (c);
-
+        
 		c.facePoint (bird.getPursuitTarget().position, bird.getTurnSpeed() * Time.deltaTime);
 
 		float moveDist = c.getSelf ().getMovespeed () * Time.deltaTime;

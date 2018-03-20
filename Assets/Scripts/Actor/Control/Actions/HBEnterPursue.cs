@@ -13,5 +13,10 @@ public class HBEnterPursue : Action
         source.clip = AudioLibrary.inst.hummingBirdSpotting;
         source.loop = false;
         source.Play();
+        if(!source.isPlaying)
+        {
+            Debug.Log("done");
+            //continue playing patrol sound but needs to be shorter
+        }
     }
 }
