@@ -101,12 +101,16 @@ public class Laser : Interactable, IActivatable, ISavable
 			rayCast ();
 			if (!_laserLine.enabled)
 				_laserLine.enabled = true;
+			if(!particleFolder.activeInHierarchy)
+				particleFolder.SetActive (true);
 		}
 		else
 		{
 			currentHitPoint = transform.position;
 			if (_laserLine.enabled)
 				_laserLine.enabled = false;
+			if(particleFolder.activeInHierarchy)
+				particleFolder.SetActive (false);
 		}
         if(!GameManager.isPlayerDead())
         {

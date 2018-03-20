@@ -5,8 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI/Actions/General/DiscardPath")]
 public class DiscardPath : Action
 {
+    AudioSource source;
 	public override void perform (Controller c)
 	{
-		c.discardPath ();
-	}
+        
+        source = c.GetComponent<AudioSource>();
+        source.clip = AudioLibrary.inst.hummingBirdMoving;
+        source.loop = true;
+        source.Play();
+        c.discardPath();
+    }
 }
