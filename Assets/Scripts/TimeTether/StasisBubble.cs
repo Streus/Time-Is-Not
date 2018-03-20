@@ -48,7 +48,7 @@ public class StasisBubble : MonoBehaviour
 
         source = this.GetComponent<AudioSource>();
         stasisHum = AudioLibrary.inst.stasisHum;
-        source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("Ambient")[0];
+        //source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("Ambient")[0];
         if (source != null)
         {
             source.clip = stasisHum;

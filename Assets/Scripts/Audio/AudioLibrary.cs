@@ -168,7 +168,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip doorMetalOpen; // -- done : Location - Door script 
     public AudioClip laserSecurityHum; // -- done : Location - Laser script
     public AudioClip laserDeathHum; // -- done : Location - Laser script
-    public AudioClip floatingPlatform; // -- done : Location - Moving Platform script
+    public AudioClip floatingPlatform; // -- done : Location - manual application
     #endregion
 
     #region Enemy Sounds

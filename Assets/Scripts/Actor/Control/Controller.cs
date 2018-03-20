@@ -91,7 +91,8 @@ public class Controller : MonoBehaviour, ISavable
 
 	public void discardPath()
 	{
-		path.Clear ();
+		if(path != null)
+			path.Clear ();
 	}
 
 	public bool currentPosition(out Vector3 pos)
