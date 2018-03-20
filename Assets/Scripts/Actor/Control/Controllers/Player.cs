@@ -148,14 +148,38 @@ public class Player : Controller
     {
         Vector2 movementVector = Vector2.zero;
 
-		if (PlayerControlManager.GetKey(ControlInput.UP)) // UP
-			movementVector += Vector2.up;
-		if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
+        if (PlayerControlManager.GetKey(ControlInput.UP)) // UP
+        {
+            movementVector += Vector2.up;
+            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+            {
+                AudioLibrary.PlayerWalking();
+            }
+        }
+        if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
+        {
             movementVector += Vector2.left;
+            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+            {
+                AudioLibrary.PlayerWalking();
+            }
+        }
 		if (PlayerControlManager.GetKey(ControlInput.DOWN)) // DOWN
+        {
             movementVector += Vector2.down;
-		if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
+            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+            {
+                AudioLibrary.PlayerWalking();
+            }
+        }
+        if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
+        {
             movementVector += Vector2.right;
+            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+            {
+                AudioLibrary.PlayerWalking();
+            }
+        }
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
 		physbody.velocity += movementVector;

@@ -117,32 +117,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
     }
     #endregion
 
-#region Character Sounds
+    #region Character Sounds
     // Character //
 
-    public AudioClip playerWalking1; // -- questions : Need mltiple or change pitch?
-    public AudioClip playerWalking2;
-    public AudioClip playerWalking3;
-    public AudioClip playerWalking4;
+    public AudioClip playerWalking;
 
-    public static void RandomPlayerWalkingSound()
+    public static void PlayerWalking()
     {
-        int sound = Random.Range(0, 4);
-        switch(sound)
-        {
-            case 0:
-                GlobalAudio.PlaySound(inst.playerWalking1, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
-                break;
-            case 1:
-                GlobalAudio.PlaySound(inst.playerWalking2, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
-                break;
-            case 2:
-                GlobalAudio.PlaySound(inst.playerWalking3, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
-                break;
-            case 3:
-                GlobalAudio.PlaySound(inst.playerWalking4, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
-                break;
-        }
+        GlobalAudio.PlaySound(inst.playerWalking, 128, 0.0f, 1.0f, 3.0f, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
     #endregion
 

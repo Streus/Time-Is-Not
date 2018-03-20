@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1014014030956952
 GameObject:
   m_ObjectHideFlags: 1
@@ -2406,7 +2406,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.3, y: -44.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4396684429741562}
@@ -2447,7 +2447,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.300001, y: -44.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -2549,7 +2549,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672024216453400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: -10}
+  m_LocalPosition: {x: -0.0000019073486, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4354176451379616}
@@ -2562,7 +2562,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.4, y: -6.15, z: 0}
+  m_LocalPosition: {x: 28.400002, y: -215.58524, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -3002,7 +3002,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -6211,10 +6211,7 @@ MonoBehaviour:
     type: 3}
   codePickup: {fileID: 8300000, guid: e22a3859980480a4bb607aee859e6b7e, type: 3}
   normalSwitch: {fileID: 8300000, guid: 1f0e3228a8fd7044691d2278e37673e9, type: 3}
-  playerWalking1: {fileID: 8300000, guid: 598616cacc324204b9c78d7d7d091e34, type: 3}
-  playerWalking2: {fileID: 8300000, guid: 5381e74ca895a3848bfda77df3cf93a2, type: 3}
-  playerWalking3: {fileID: 8300000, guid: ba3fe9b4e1432f04d82b7ce60b2d5fe1, type: 3}
-  playerWalking4: {fileID: 8300000, guid: a650191fdefd9124e9484c20fece50c3, type: 3}
+  playerWalking: {fileID: 8300000, guid: 598616cacc324204b9c78d7d7d091e34, type: 3}
   stasisHum: {fileID: 8300000, guid: 186deeb24d0518448bda86a3bcfffbab, type: 3}
   pushBlockMoving: {fileID: 8300000, guid: f45ef389f5708864f981bfe18d42c67f, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: e3b08dea8325ead49b5e581d22f25cf3, type: 3}
@@ -7968,7 +7965,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1922095691
   m_SortingLayer: 2
-  m_SortingOrder: 5075
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300006, guid: 7ce2eb9839d3747b887335e555e0ed11, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
