@@ -173,16 +173,15 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     #region Enemy Sounds
 
-    public AudioClip hermitCrabDown; // -- waiting
-    public AudioClip hermitCrabStand; // -- waiting
-    public AudioClip hermitCrabMoving; // -- waiting
+    public AudioClip hermitCrabDown; // -- Location : HCResetStandDur script
+    public AudioClip hermitCrabStand; // -- Location : HCResetSitDur script
+    public AudioClip hermitCrabMoving; // -- Location : HCResetReturnTimer script
     public AudioClip hermitCrabField; // -- waiting
     public AudioClip hermitCrabIdleNoise; // -- waiting
-    public AudioClip gulperEelMoving; // -- waiting
-    public AudioClip hummingBirdMoving; // -- waiting
-    public AudioClip hummingBirdSpotting; // -- waiting
-    public AudioClip hummingBirdAttacking; // -- waiting
-
+    public AudioClip gulperEelMoving; // -- Location : same as stasis
+    public AudioClip hummingBirdMoving; // -- Location : DiscardPath script
+    public AudioClip hummingBirdSpotting; // -- Location : HBEnterPursue script
+    public AudioClip hummingBirdAttacking; // -- Location : HBPursue script
     #endregion
 
 #region Ambient
