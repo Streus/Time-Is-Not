@@ -103,8 +103,6 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.laserDeathCollisiion, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
-    public AudioClip alarmTriggered; //-- question - Will it be constant or just a few moments and will it be location based?
-
     public AudioClip codePickup; // -- done : Location - CodePickup script
 
     public static void PlayCodePickupSound()
@@ -169,35 +167,32 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip doorFieldOpen; // -- done : Location - Door script 
     public AudioClip doorMetalClose; // -- done : Location - Door script 
     public AudioClip doorMetalOpen; // -- done : Location - Door script 
-
+    public AudioClip laserSecurityHum; // -- waiting
+    public AudioClip laserDeathHum; // -- waiting
+    public AudioClip floatingPlatform; // -- waiting
     #endregion
 
+    #region Enemy Sounds
 
-
-
-
-
-
-
-
-
-
-    // Not yet implemented
-    /*
-    public AudioClip hermitCrabDigging; // -- waiting
+    public AudioClip hermitCrabDown; // -- waiting
+    public AudioClip hermitCrabStand; // -- waiting
+    public AudioClip hermitCrabMoving; // -- waiting
     public AudioClip hermitCrabField; // -- waiting
-
+    public AudioClip hermitCrabIdleNoise; // -- waiting
     public AudioClip gulperEelMoving; // -- waiting
-    public AudioClip gulperEelEating; // -- waiting
-
     public AudioClip hummingBirdMoving; // -- waiting
     public AudioClip hummingBirdSpotting; // -- waiting
     public AudioClip hummingBirdAttacking; // -- waiting
 
-    public AudioClip wires; //-- question
-    public AudioClip timedSwitch;
+    #endregion
 
-        //laserSecurity // -- waiting : Location - Manually applied to audiosource on Security Laser Laser child in Prefab - PROBLEM
-    //laserDeath // -- waiting : Location - Manually applied to audiosource on Death Laser Prefab - PROBLEM
-    */
+
+    //Ambient Sounds
+    public AudioClip wireSparks; // -- waiting
+    public AudioClip backgroundDrone; // -- waiting
+    public AudioClip hum; // -- waiting
+    public AudioClip electricHum; // -- waiting
+    public AudioClip labMachines; // -- waiting
+    public AudioClip lowElectricHum; // -- waiting
+    public AudioClip computers; // -- waiting
 }
