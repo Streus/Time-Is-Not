@@ -7,6 +7,7 @@ public class HermitCrabFieldSound : MonoBehaviour
     SpriteRenderer fieldRenderer;
     AudioSource source;
     AudioClip hermitField;
+    AudioClip hermitIdle;
     bool fieldOn = false;
 	// Use this for initialization
 	void Start ()
@@ -14,7 +15,7 @@ public class HermitCrabFieldSound : MonoBehaviour
         fieldRenderer = this.GetComponent<SpriteRenderer>();
         source = this.gameObject.GetComponent<AudioSource>();
         hermitField = AudioLibrary.inst.hermitCrabField;
-        source.clip = hermitField;
+        hermitIdle = AudioLibrary.inst.hermitCrabIdleNoise;
 	}
 	
 	// Update is called once per frame
@@ -22,14 +23,17 @@ public class HermitCrabFieldSound : MonoBehaviour
     {
         if(fieldRenderer.enabled && fieldOn)
         {
+            source.clip = hermitField;
             source.Play();
-            Debug.Log("ON");
+            //Debug.Log("ON");
             fieldOn = false;
         }
         else if (!fieldRenderer.enabled && !fieldOn)
         {
-            source.Stop();
-            Debug.Log("OFF");
+            source.clip = hermitIdle;
+            source.Play();
+            //source.Stop();
+            //Debug.Log("OFF");
             fieldOn = true;
         }
 		
