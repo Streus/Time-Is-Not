@@ -46,9 +46,6 @@ public class Player : Controller
 	//how long the player has been walking against a pit
 	private float pitTimer = 0f;
 
-
-	private Vector3 TEMPVECTOR;
-
     #endregion
 
     #region INSTANCE_METHODS
@@ -172,10 +169,7 @@ public class Player : Controller
         cf.SetLayerMask(moveMask);
         hitCount = GetComponent<Collider2D>().Cast(movementVector, cf, hits, getSelf().getMovespeed() * Time.deltaTime);
 
-		TEMPVECTOR = (Vector3)GetComponent<Collider2D> ().offset + transform.position + (Vector3)(movementVector * (getSelf ().getMovespeed ()));
-
 		//Check for Pits/platforms
-		Debug.Log ("walls: " + hitCount);
 		Collider2D[] pitsFound = new Collider2D[1];
 		Collider2D[] platformsFound = new Collider2D[1];
 		int pitCount = 0;
@@ -189,14 +183,11 @@ public class Player : Controller
 
 		//pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 
-		Debug.Log ("Pits: " + pitCount);
 
 		//platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 		platformCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed())), GetComponent<BoxCollider2D>().size, 0, platformFilter, platformsFound);
 		pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed())), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
 
-
-		Debug.Log ("Platforms: " + platformCount);
 		bool seesPlatform = false;
 		for(int i = 0; i < platformsFound.Length; i++)
 		{
@@ -207,9 +198,7 @@ public class Player : Controller
 			}
 		}
 
-		Debug.Log ("SeesPlatform: " + seesPlatform);
 		bool seesPit = (pitCount > 0 && !seesPlatform);
-		Debug.Log ("SeesPit: " + seesPit);
 		//if there are no walls or pits, move
         if (hitCount <= 0 && !seesPit)
             transform.Translate((Vector3)movementVector);
@@ -351,10 +340,6 @@ public class Player : Controller
 		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, minJumpDist);
 		UnityEditor.Handles.DrawWireDisc(transform.position + (Vector3)col.offset, Vector3.forward, maxJumpDist);
 		#endif
-		Gizmos.DrawLine (TEMPVECTOR, TEMPVECTOR);
-		Gizmos.DrawLine (TEMPVECTOR, TEMPVECTOR);
-		Gizmos.DrawLine (TEMPVECTOR, TEMPVECTOR);
-		Gizmos.DrawLine (TEMPVECTOR, TEMPVECTOR);
 	}
     #endregion
 
