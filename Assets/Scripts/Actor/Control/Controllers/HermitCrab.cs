@@ -55,7 +55,8 @@ public class HermitCrab : Controller
         nullifierField = nullifierChild.GetComponent<SpriteRenderer>();
         animationController = gameObject.GetComponent <Animator> ();
 		animationController.SetBool ("Hide", true);
-	}
+        
+    }
 
 	public void OnDestroy()
 	{
