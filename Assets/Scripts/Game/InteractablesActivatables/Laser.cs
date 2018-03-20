@@ -53,9 +53,14 @@ public class Laser : Interactable, IActivatable, ISavable
 
     AudioSource source;
 
+	[SerializeField]
+	private GameObject particleFolder;
+	private ParticleSystem[] laserParticles;
+
     // Use this for initialization
     void Start()
 	{
+		laserParticles = GetComponentsInChildren<ParticleSystem>(); 
 		if(anim == null)
 			anim = gameObject.GetComponentInParent<Animator> ();
 		if (!Application.isPlaying)
@@ -86,7 +91,9 @@ public class Laser : Interactable, IActivatable, ISavable
 		if (anim != null)
 			anim.SetFloat ("ZRotation", transform.eulerAngles.z);
 
-
+		if(laserParticles == null || laserParticles.Length == 0)
+			laserParticles = GetComponentsInChildren<ParticleSystem>(); 
+		
 		if(_laserLine == null)
 			_laserLine = gameObject.GetComponent<LineRenderer> ();
 		if(isEnabled()) 
@@ -152,11 +159,20 @@ public class Laser : Interactable, IActivatable, ISavable
 		if (hit.collider == null) 
 		{
 			_laserLine.SetPosition (1, transform.position + (transform.up * _distance));
+			if(particleFolder != null && particleFolder.activeInHierarchy)
+				particleFolder.SetActive (false);
 			return;
 		} else
 		{
 			_laserLine.SetPosition (1, (Vector3)hit.point - (Vector3.up * laserHeight));
 			currentHitPoint = hit.point;
+			if(particleFolder != null) 
+			{
+				if(!particleFolder.activeInHierarchy)
+					particleFolder.SetActive (true);
+				particleFolder.transform.position = (Vector3)hit.point - (Vector3.up * laserHeight);
+				particleFolder.transform.rotation = Quaternion.LookRotation (hit.normal);
+			}
 		}
 		_laserLine.sortingOrder = SpriteOrderer.inst.OrderMe (transform) - 1;
 			
@@ -296,5 +312,21 @@ public class Laser : Interactable, IActivatable, ISavable
 	{
 		//is the laser on?
 		public bool isOn;
+	}
+
+	void ParticlePauseControl()
+	{
+		if (laserParticles == null || laserParticles.Length <= 0)
+			return;
+		if (GameManager.isPaused() && !laserParticles[0].isPaused)
+		{
+			for(int i = 0; i < laserParticles.Length; i++)
+				laserParticles[i].Pause();
+		}
+		else if (!GameManager.isPaused() && laserParticles[0].isPaused)
+		{
+			for(int i = 0; i < laserParticles.Length; i++)
+				laserParticles[i].Play();
+		}
 	}
 }

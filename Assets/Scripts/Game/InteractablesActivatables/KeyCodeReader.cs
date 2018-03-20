@@ -128,7 +128,7 @@ public class KeyCodeReader : Interactable, ISavable
 	/// </summary>
 	void getInput()
 	{
-		if(_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.HasCode(_codeName) && isEnabled())
+		if(_playerInRange && !isTriggered && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
 			_buttonPrompt.SetActive (false);
