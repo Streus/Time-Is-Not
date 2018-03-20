@@ -18,6 +18,7 @@ public class PlayerDefaultControl : Action
 		{
 			if (GameManager.inst.canUseStasis &&
 			   !inSBBounds &&
+				!TetherManager.CursorIsOverATetherPoint() && 
 			   CursorManager.CursorInGameplayState ())
 				c.getSelf ().getAbility (0).use (c.getSelf (), mousePos);
 
