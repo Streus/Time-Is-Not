@@ -10,9 +10,6 @@ public class MovingPlatform : MoveObject
 
 	private Transform _player = null;
 
-    AudioSource source;
-    AudioClip movingPlatform;
-
     // Update is called once per frame
     void Update () 
 	{
