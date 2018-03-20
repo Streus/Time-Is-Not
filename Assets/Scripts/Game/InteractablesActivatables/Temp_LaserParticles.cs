@@ -24,4 +24,14 @@ public class Temp_LaserParticles : MonoBehaviour
 			laserParticles.Play(); 
 		}
 	}
+
+	public void SetParticlePosition(Vector2 location)
+	{
+		transform.position = (Vector3)location;
+	}
+
+	public void SetParticleRotation(Vector2 rot)
+	{
+		//transform.rotation.Set(rot.x, rot.y,);
+	}
 }
