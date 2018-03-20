@@ -181,7 +181,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		}
 		else
 		{
-			Debug.Log("No timer?"); 
+			//Debug.Log("No timer?"); 
 			//endTimerText.enabled = false; 
 		}
 	}

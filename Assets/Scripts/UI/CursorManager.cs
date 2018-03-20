@@ -232,7 +232,7 @@ public class CursorManager : Singleton<CursorManager>
 		// Choose sprite for main cursor (stasis)
 
 		// If hovering over a stasis bubble
-		if (LevelStateManager.CursorIsOverAStasisBubble())
+		if (LevelStateManager.CursorIsOverAStasisBubble() || TetherManager.CursorIsOverATetherPoint())
 		{
 			mainCursorRend.sprite = cursorStasisHover; 
 		}

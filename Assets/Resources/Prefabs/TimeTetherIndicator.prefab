@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4959730921623292}
   - component: {fileID: 212249386141589752}
   - component: {fileID: 95390247005820908}
+  - component: {fileID: 58709338374652690}
   m_Layer: 0
   m_Name: TetherPointSprite
   m_TagString: Untagged
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394173653959778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 90.48905, y: 233.87, z: 0}
+  m_LocalPosition: {x: 1.65, y: -19.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4959730921623292}
@@ -101,6 +102,21 @@ Transform:
   m_Father: {fileID: 4739462768023496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58709338374652690
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206333013961170}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!95 &95390247005820908
 Animator:
   serializedVersion: 3
@@ -130,8 +146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetherIndex: 0
-  allowRemoval: 1
+  allowRadiusRemoval: 0
   removeRadius: 0.5
+  allowKeyRemoval: 1
+  clickCollider: {fileID: 58709338374652690}
   tetherPointSprite: {fileID: 1206333013961170}
   removePrompt: {fileID: 1337658480514572}
 --- !u!212 &212249386141589752

@@ -9,9 +9,14 @@ public class TetherIndicator : MonoBehaviour
 	Transform moveParent; 
 	Vector3 offsetFromMoveParent; 
 
-	public bool allowRemoval; 
+	[Tooltip("If true, the player can walk up to a tether point, see a prompt icon, and press e to remove the tether point")] 
+	public bool allowRadiusRemoval; 
 	public float removeRadius = 1; 
 	bool playerInRemoveRadius; 
+
+	[Tooltip("If true, using an input (right click) removes a tether point")] 
+	public bool allowKeyRemoval; 
+	public Collider2D clickCollider; 
 
 	public GameObject tetherPointSprite; 
 	public GameObject removePrompt; 
@@ -49,9 +54,15 @@ public class TetherIndicator : MonoBehaviour
 			transform.position = moveParent.position + offsetFromMoveParent; 
 		}
 
+
+		/*
+		 * Radius Tether point removal
+		 * Possibly deprecated
+		 */ 
+
 		playerInRemoveRadius = false; 
 
-		if (allowRemoval)
+		if (allowRadiusRemoval)
 		{
 			hits = Physics2D.OverlapCircleAll(tetherPointSprite.transform.position, removeRadius); 
 
@@ -83,6 +94,15 @@ public class TetherIndicator : MonoBehaviour
 			if (removePrompt != null)
 				removePrompt.SetActive(false); 
 		}
+
+		/*
+		 * Input (right click) Tether point removal
+		 */ 
+		if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS) && !LevelStateManager.CursorIsOverAStasisBubble())
+		{
+			TetherManager.inst.RemoveTetherPoint(tetherIndex); 
+		}
+
 	}
 
 	// Called during the load process to update the position of any tether indicators with moveParents, whose RegisteredObjects have just sowed new data
@@ -92,5 +112,20 @@ public class TetherIndicator : MonoBehaviour
 		{
 			transform.position = moveParent.position + offsetFromMoveParent; 
 		}
+	}
+
+	/// <summary>
+	/// Returns true if the mouse is hovering over this object
+	/// </summary>
+	public bool MouseIsOver()
+	{
+		Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+
+		if (clickCollider != null && clickCollider.bounds.Contains(mouseWorldPos) && tetherIndex != 0)
+		{
+			return true; 
+		}
+
+		return false; 
 	}
 }

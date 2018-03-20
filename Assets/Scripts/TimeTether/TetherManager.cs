@@ -784,6 +784,22 @@ public class TetherManager : Singleton<TetherManager>
 		return false; 
 	}
 
+	/// <summary>
+	/// Returns true if the cursor is over one of the player's stasis bubbles
+	/// </summary>
+	/// <returns><c>true</c>, if over a bubble, <c>false</c> otherwise.</returns>
+	public static bool CursorIsOverATetherPoint()
+	{
+		for (int i = 0; i < inst.timeTetherIndicators.Count; i++)
+		{
+			if (inst.timeTetherIndicators[i].MouseIsOver())
+			{
+				return true; 
+			}
+		}
+		return false; 
+	}
+
 
 
 }
