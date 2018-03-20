@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114326016635306418}
   - component: {fileID: 95611325897181496}
   - component: {fileID: 114046994596514696}
+  - component: {fileID: 82091567774917894}
   m_Layer: 9
   m_Name: MovingPlatform
   m_TagString: MovingPlatform
@@ -60,7 +61,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8888889, y: 0.8888889}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -69,6 +70,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8}
   m_EdgeRadius: 0
+--- !u!82 &82091567774917894
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420561669220098}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 12
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95611325897181496
 Animator:
   serializedVersion: 3
@@ -97,8 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registeredID: i2MksD1tbUOlvuDrLOSDdw
-  instanceID: 10414
   prefabPath: 
   stasisable: 1
   allowReset: 1
@@ -113,12 +192,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479641984524d4ce1bb7b8c7b0e181b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectWorldSpacePositionREADONLY: {x: 0, y: 0}
   _points: []
   _active: 1
   _moveSpeed: 1
   _endBehavior: 1
   delayPerPoint: 0
   delayAtEnds: 0
+  _reverseMovement: 0
   _waitTimer: 0
 --- !u!212 &212189260564534216
 SpriteRenderer:

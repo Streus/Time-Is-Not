@@ -48,6 +48,11 @@ public class Laser : Interactable, IActivatable, ISavable
 
     private bool playSound = true;
 
+    AudioClip laserSecurityHum;
+    AudioClip laserDeathHum;
+
+    AudioSource source;
+
     // Use this for initialization
     void Start()
 	{
@@ -59,6 +64,19 @@ public class Laser : Interactable, IActivatable, ISavable
 		_laserLine.colorGradient = _laserColor;
 		isInverted = !isEnabled ();
 
+        source = this.gameObject.GetComponent<AudioSource>();
+        laserSecurityHum = AudioLibrary.inst.laserSecurityHum;
+        laserDeathHum = AudioLibrary.inst.laserDeathHum;
+        if(_type == LaserType.Trigger)
+        {
+            source.clip = laserSecurityHum;
+            source.Play();
+        }
+        else
+        {
+            source.clip = laserDeathHum;
+            source.Play();
+        }
 	}
 	
 	// Update is called once per frame
@@ -189,10 +207,12 @@ public class Laser : Interactable, IActivatable, ISavable
 		{
 		case LaserType.Trigger:
 			onInteract ();
-                //AudioLibrary.PlayLaserSecurityCollisionSound();
+                source.Stop();
+                AudioLibrary.PlayLaserSecurityCollisionSound();
 			break;
 		case LaserType.Death:
 			entity.onDeath ();
+                source.Stop();
                 if (playSound)
                 {
                     AudioLibrary.PlayLaserDeathCollisionSound();

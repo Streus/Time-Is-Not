@@ -10,8 +10,19 @@ public class MovingPlatform : MoveObject
 
 	private Transform _player = null;
 
-	// Update is called once per frame
-	void Update () 
+    AudioSource source;
+    AudioClip movingPlatform;
+
+    void Start()
+    {
+        source = this.gameObject.GetComponent<AudioSource>();
+        movingPlatform = AudioLibrary.inst.floatingPlatform;
+        source.clip = movingPlatform;
+        source.Play();
+    }
+
+    // Update is called once per frame
+    void Update () 
 	{
 		_objectWorldSpacePositionREADONLY = (Vector2)transform.position;
 		if (!Application.isPlaying)
