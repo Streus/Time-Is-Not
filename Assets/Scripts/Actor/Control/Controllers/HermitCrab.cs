@@ -46,7 +46,6 @@ public class HermitCrab : Controller
 
 	public override void Awake ()
 	{
-		base.Awake ();
 		home = transform.position;
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
@@ -56,6 +55,7 @@ public class HermitCrab : Controller
         animationController = gameObject.GetComponent <Animator> ();
 		animationController.SetBool ("Hide", true);
         
+		base.Awake ();
     }
 
 	public void OnDestroy()
