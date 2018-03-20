@@ -23,7 +23,6 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherMenuHover, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
-    //public AudioClip gameOver; // -- question : Do we have a sound for this?
 #endregion
 
 #region Mechanic Sounds
@@ -167,9 +166,9 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip doorFieldOpen; // -- done : Location - Door script 
     public AudioClip doorMetalClose; // -- done : Location - Door script 
     public AudioClip doorMetalOpen; // -- done : Location - Door script 
-    public AudioClip laserSecurityHum; // -- waiting
-    public AudioClip laserDeathHum; // -- waiting
-    public AudioClip floatingPlatform; // -- waiting
+    public AudioClip laserSecurityHum; // -- done : Location - Laser script
+    public AudioClip laserDeathHum; // -- done : Location - Laser script
+    public AudioClip floatingPlatform; // -- done : Location - Moving Platform script
     #endregion
 
     #region Enemy Sounds
@@ -186,6 +185,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     #endregion
 
+#region Ambient
 
     //Ambient Sounds
     public AudioClip wireSparks; // -- waiting
@@ -195,4 +195,5 @@ public class AudioLibrary : Singleton<AudioLibrary>
     public AudioClip labMachines; // -- waiting
     public AudioClip lowElectricHum; // -- waiting
     public AudioClip computers; // -- waiting
+#endregion
 }
