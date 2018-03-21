@@ -44,8 +44,13 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	// Determines whether in stasis. Returned when ISavable calls ignoreReset, and modfied via ToggleStasis
 	private bool inStasis = false;
 
+	private bool stuckOnBlock = false;
+
 
 	public float _waitTimer = 0;
+
+
+	public Vector2 _movementVector;
 
 
 	// Use this for initialization
@@ -77,6 +82,9 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 			_waitTimer = 0;
 		}
 		setNextPoint ();
+		Vector2 movementVector = (_points [_nextPoint] - (Vector2)transform.position).normalized;
+		_movementVector = movementVector;
+		CheckForBlocks ();
 	}
 
 	void OnDrawGizmos()
@@ -92,6 +100,55 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		if(_endBehavior == EndStyle.LoopToStart)
 			Gizmos.DrawLine (_points[ _points.Length - 1], _points[0]);
 
+		BoxCollider2D col = gameObject.GetComponent<BoxCollider2D> ();
+		//Gizmos.DrawCube (transform.position, (Vector3)transform.localScale + (new Vector3 (1, 1, 1) * (-0.02f)));
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawLine (transform.position + new Vector3 (-1 * (transform.localScale.x * col.size.x / 2 + (-0.02f)),transform.localScale.y * col.size.y / 2 + (-0.02f), 0), transform.position + new Vector3 (transform.localScale.x * col.size.x / 2 + (-0.02f), transform.localScale.y * col.size.y / 2 + (-0.02f), 0));
+		Gizmos.DrawLine (transform.position + new Vector3 (transform.localScale.x * col.size.x / 2 + (-0.02f), transform.localScale.y * col.size.y / 2 + (-0.02f), 0), transform.position + new Vector3 (transform.localScale.x * col.size.x / 2 + (-0.02f), -1 * (transform.localScale.y * col.size.y / 2 + (-0.02f)), 0));
+		Gizmos.DrawLine (transform.position + new Vector3 (transform.localScale.x * col.size.x / 2 + (-0.02f), -1 * (transform.localScale.y * col.size.y / 2 + (-0.02f)), 0), transform.position + new Vector3 (-1 * (transform.localScale.x * col.size.x / 2 + (-0.02f)), -1 * (transform.localScale.y * col.size.y / 2 + (-0.02f)), 0));
+		Gizmos.DrawLine (transform.position + new Vector3 (-1 * (transform.localScale.x * col.size.x / 2 + (-0.02f)), -1 * (transform.localScale.y * col.size.y / 2 + (-0.02f)), 0), transform.position + new Vector3 (-1 * (transform.localScale.x * col.size.x / 2 + (-0.02f)), transform.localScale.y * col.size.y / 2 + (-0.02f), 0));
+
+	}
+
+	bool CheckForBlocks()
+	{
+		bool blockedByBlock = false;
+		BoxCollider2D col = gameObject.GetComponent<BoxCollider2D> ();
+		Debug.Log ("Searching for colliders...");
+		if((gameObject.layer == LayerMask.NameToLayer("Wall") || gameObject.layer == LayerMask.NameToLayer("HalfWall")) && col != null)
+		{
+			Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position, (new Vector2(col.transform.localScale.x * col.size.x, col.transform.localScale.y * col.size.y)) + new Vector2 ((-0.02f), (-0.02f)), 0f);
+			Debug.Log ("Found " + colsHit.Length + " colliders");
+			for(int i = 0; i < colsHit.Length; i++)
+			{
+				PushBlock block = colsHit [i].GetComponent<PushBlock> ();
+				if(block != null)
+				{
+					Debug.Log ("Found push block");
+					Vector2 blockDir = ((Vector2)block.transform.position - (Vector2)transform.position).normalized;
+					if((blockDir.x >= 0.2 && _movementVector.x >= 0.1)|| (blockDir.x <= -0.2 && _movementVector.x <= -0.1) || (blockDir.y >= 0.2 && _movementVector.y >= 0.1) || (blockDir.y <= -0.2 && _movementVector.y <= -0.1))
+					{
+						if (block.InStasis ()) 
+						{
+							Debug.Log ("Block is in stasis...");
+							//block is in stasis, freeze the moving object.
+							blockedByBlock = true;
+						} else 
+						{
+							Debug.Log ("Moving block");
+							Vector2 blockOffset = (Vector2)(block.transform.position - transform.position);
+							if (_active && !inStasis && !GameManager.isPaused())
+								block.transform.position = Vector2.MoveTowards (block.transform.position, _points [_nextPoint] + blockOffset, _moveSpeed * Time.deltaTime);
+						}
+					}
+					
+				}
+			}
+		}
+		else
+			Debug.Log ("Object is not a wall or has no collider.");
+		stuckOnBlock = blockedByBlock;
+		return false;
 	}
 
 	/// <summary>
@@ -100,7 +157,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	/// <param name="point">Point to move to.</param>
 	void MoveToPoint(Vector2 point)
 	{
-		if (!_active || inStasis || GameManager.isPaused())
+		if (!_active || inStasis || GameManager.isPaused() || stuckOnBlock)
 			return;
 		transform.position = Vector2.MoveTowards (transform.position, _points [_nextPoint], _moveSpeed * Time.deltaTime);
 	}
