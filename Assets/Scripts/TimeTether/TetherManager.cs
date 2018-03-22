@@ -611,6 +611,7 @@ public class TetherManager : Singleton<TetherManager>
 
 	IEnumerator RemoveTetherProcess(int tetherIndex)
 	{
+		// TODO- fix this!!!
 		GameManager.GetPlayerAnimator().SetTrigger("TetherAnchorStop"); 
 
 		yield return new WaitForSeconds(1); 
