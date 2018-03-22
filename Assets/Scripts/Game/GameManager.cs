@@ -41,7 +41,7 @@ public enum PauseType
 
 	// The game is in some other pause state relating to a cutscene.
 	// Fully pauses world entities
-	CUTSCENE = 0x16
+	CUTSCENE = 0x10
 }
 
 [RequireComponent(typeof(RegisteredObject))]
@@ -402,11 +402,19 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public bool IsLowerPauseType(PauseType testType)
 	{
+		//int check = PauseType.CUTSCENE & PauseType.TETHER_MENU
+
 		if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
 		{
 			return true; 
 		}
 		return false; 
+	}
+
+	// Usage: int check = PauseType.a | PauseType.b
+	public bool CheckPause(int check)
+	{
+		return ((int)m_pauseType & check) != 0; 
 	}
 
 
