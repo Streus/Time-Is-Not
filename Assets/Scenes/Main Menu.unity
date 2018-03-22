@@ -2413,8 +2413,8 @@ RectTransform:
   m_Father: {fileID: 380220747}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.84481305}
-  m_AnchorMax: {x: 1, y: 0.93977356}
+  m_AnchorMin: {x: 0, y: 0.8989525}
+  m_AnchorMax: {x: 1, y: 0.9999999}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2931,7 +2931,7 @@ GameObject:
   - component: {fileID: 964359751}
   - component: {fileID: 964359750}
   m_Layer: 5
-  m_Name: TEXT (1)
+  m_Name: ST
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2952,8 +2952,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1092, y: -1160}
-  m_SizeDelta: {x: 149, y: 1664}
+  m_AnchoredPosition: {x: 1050, y: -800}
+  m_SizeDelta: {x: 200, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964359750
 MonoBehaviour:
@@ -3005,7 +3005,7 @@ GameObject:
   - component: {fileID: 1027900030}
   - component: {fileID: 1027900029}
   m_Layer: 5
-  m_Name: TEXT
+  m_Name: Devs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3026,8 +3026,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 439, y: -1161}
-  m_SizeDelta: {x: 149, y: 1664}
+  m_AnchoredPosition: {x: 450, y: -800}
+  m_SizeDelta: {x: 200, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027900029
 MonoBehaviour:
@@ -3350,8 +3350,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 708962725}
   m_HandleRect: {fileID: 708962724}
   m_Direction: 2
-  m_Value: 0.9334544
-  m_Size: 0.09496053
+  m_Value: 0.9999999
+  m_Size: 0.1010474
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4520,8 +4520,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.799988, y: -1729.7}
-  m_SizeDelta: {x: 1513.5, y: 4409.2}
+  m_AnchoredPosition: {x: 7.799988, y: -1862.4497}
+  m_SizeDelta: {x: 1513.5, y: 4143.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1535705422
 GameObject:
@@ -5157,7 +5157,7 @@ GameObject:
   - component: {fileID: 1771979743}
   - component: {fileID: 1771979742}
   m_Layer: 5
-  m_Name: Dev Scroll View
+  m_Name: Scroll View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
