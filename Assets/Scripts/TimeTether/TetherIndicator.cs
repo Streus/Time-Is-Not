@@ -22,25 +22,20 @@ public class TetherIndicator : MonoBehaviour
 	public GameObject tetherPointSprite; 
 	public GameObject removePrompt; 
 
-	[Header("Drag in animation controllers")] 
-	//public AnimatorContr firstTetherAnimator;
-	//public Animator otherTetherAnimator; 
-	public Animator tetherAnimator; 
-	public Animator silverAnchorAnimator;
-	public Animator goldAnchorAnimator;
+	[Header("Indicator Sprites")] 
+	public SpriteRenderer goldSprite; 
+	public SpriteRenderer silverSprite; 
 
 
 	// Use this for initialization
 	void Start () 
 	{
 		if (removePrompt != null)
-			removePrompt.SetActive(false); 
-	}
+			removePrompt.SetActive(false);
 
-	public void SetAnimationController()
-	{
-		tetherAnimator = silverAnchorAnimator;
+		UpdateTetherSprite(); 
 	}
+		
 	
 	// Update is called once per frame
 	void Update () 
@@ -117,6 +112,20 @@ public class TetherIndicator : MonoBehaviour
 			TetherManager.inst.RemoveTetherPoint(tetherIndex); 
 		}
 
+	}
+
+	public void UpdateTetherSprite()
+	{
+		if (tetherIndex == 0)
+		{
+			goldSprite.enabled = true; 
+			silverSprite.enabled = false; 
+		}
+		else
+		{
+			goldSprite.enabled = false; 
+			silverSprite.enabled = true; 
+		}
 	}
 
 	// Called during the load process to update the position of any tether indicators with moveParents, whose RegisteredObjects have just sowed new data

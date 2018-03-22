@@ -661,7 +661,9 @@ public class TetherManager : Singleton<TetherManager>
     {
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
 		timeTetherIndicators.Add(indicator.GetComponent<TetherIndicator>()); 
-		indicator.GetComponent<TetherIndicator>().tetherIndex = state; 
+		TetherIndicator newIndicator = indicator.GetComponent<TetherIndicator>();
+		newIndicator.tetherIndex = state; 
+		newIndicator.UpdateTetherSprite(); 
     }
 
     // Removes all tether indicators from timeTetherIndicators[index] to timeTetherIndicators[Length-1]
