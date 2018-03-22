@@ -26,10 +26,15 @@ public class LevelChanger: MonoBehaviour, IActivatable
 	public bool onActivate()
 	{
 		Scene scene = SceneManager.GetSceneByName (_levelToLoad);
-		if (scene == null)
+		if (scene == null) {
 			Debug.LogError ("Error, no such scene exists.");
-		else
+			return false;
+		}
+		else {
 			SceneManager.LoadScene (_levelToLoad);
+			return true;
+		}
+	
 	}
 
 	/// <summary>
@@ -38,9 +43,14 @@ public class LevelChanger: MonoBehaviour, IActivatable
 	public bool onActivate (bool state)
 	{
 		Scene scene = SceneManager.GetSceneByName (_levelToLoad);
-		if (scene == null)
+		if (scene == null) {
 			Debug.LogError ("Error, no such scene exists.");
-		else
+			return false;
+		}
+		else {
 			SceneManager.LoadScene (_levelToLoad);
+			return true;
+		}
+		
 	}
 }
