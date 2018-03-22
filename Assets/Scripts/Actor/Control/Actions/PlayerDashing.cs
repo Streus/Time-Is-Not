@@ -12,10 +12,21 @@ public class PlayerDashing : Action
         Player p = State.cast<Player>(c);
         Collider2D hitBox = p.GetComponent<Collider2D>();
 		p.gameObject.layer = LayerMask.NameToLayer("DashingPlayer");
-		//lerp movement
-		//p.transform.position = Vector2.Lerp(p.transform.position, (Vector2)p.getJumpTargetPos() - hitBox.offset, dashSpeed * Time.deltaTime);
-		//constant speed movement
 		p.transform.position = Vector2.MoveTowards (p.transform.position, (Vector2)p.getJumpTargetPos() - hitBox.offset, dashSpeed * Time.deltaTime);
+		p.setDashingAnim (true);
 
+		Vector3 offset = new Vector3 (
+			p.transform.GetComponent<BoxCollider2D> ().offset.x,
+			p.transform.GetComponent<BoxCollider2D> ().offset.y,
+			p.transform.position.z);
+
+		Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (
+			p.transform.position + offset);
+
+		Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+		p.setDashAngle(Mathf.Atan2(
+			positionOnScreen.y - mouseOnScreen.y,
+			positionOnScreen.x - mouseOnScreen.x) * Mathf.Rad2Deg);
     }
 }

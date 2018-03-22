@@ -33,6 +33,7 @@ public class PlayerReachJumpTarget : Fork
 
             p.gameObject.layer = LayerMask.NameToLayer("GroundEnts");
 			p.getSelf ().getAbility (1).active = true;
+			p.setDashingAnim (false);
 			return true;
 		}
         

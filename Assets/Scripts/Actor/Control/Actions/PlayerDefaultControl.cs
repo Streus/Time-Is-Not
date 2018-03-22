@@ -17,10 +17,13 @@ public class PlayerDefaultControl : Action
 		if (PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
 		{
 			if (GameManager.inst.canUseStasis &&
-			   !inSBBounds &&
-				!TetherManager.CursorIsOverATetherPoint() && 
-			   CursorManager.CursorInGameplayState ())
+			    !inSBBounds &&
+			    !TetherManager.CursorIsOverATetherPoint () &&
+			    CursorManager.CursorInGameplayState ())
+			{
+				p.setStasisShootAnim ();
 				c.getSelf ().getAbility (0).use (c.getSelf (), mousePos);
+			}
 
 			if(!LevelStateManager.canAddStasisBubble() && !GlobalAudio.ClipIsPlaying(AudioLibrary.inst.stasisError))
 				AudioLibrary.PlayStasisErrorSound();

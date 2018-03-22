@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : Controller
 {
+	#region STATIC_VARS
+
+	public const int PAUSEMASK_MOVE = ~0;
+	#endregion
+
     #region INSTANCE_VARS
     [SerializeField]
     private State pushState;
@@ -49,6 +54,7 @@ public class Player : Controller
     #endregion
 
     #region INSTANCE_METHODS
+
     public void Start()
     {
 		shadow = transform.Find ("Margaux Shadow");
@@ -57,14 +63,15 @@ public class Player : Controller
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
         getSelf().getAbility(1).resetCooldown();
+
+		anim = transform.GetChild (0).GetComponent <Animator>();
     }
 
     public override void Update()
     {
-		
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
-		if (GameManager.inst != null && !GameManager.CameraIsZoomedOut())
+		if (GameManager.inst != null && !GameManager.inst.CheckPause (PAUSEMASK_MOVE))
         {
             base.Update();
         }
@@ -91,6 +98,36 @@ public class Player : Controller
     }
 
 	#region GETTERS_SETTERS
+
+	public void setPlaceAnchorAnim()
+	{
+		anim.SetTrigger ("PlaceAnchor");
+	}
+
+	public void setActivateTTAnim()
+	{
+		anim.SetTrigger ("ActivateTimeTether");
+	}
+
+	public void setReappearAnim()
+	{
+		anim.SetTrigger ("Reappear");
+	}
+
+	public void setDashAngle(float angle)
+	{
+		anim.SetFloat ("Angle", angle);
+	}
+
+	public void setStasisShootAnim()
+	{
+		anim.SetTrigger ("StasisBubble");
+	}
+
+	public void setDashingAnim(bool val)
+	{
+		anim.SetBool ("Dash", val);
+	}
 
 	public Vector3 getJumpTargetPos()
 	{
@@ -133,11 +170,15 @@ public class Player : Controller
     {
         prePushState = getState();
         setState(pushState);
+
+		anim.SetBool ("isPushing", true);
     }
 
     public void exitPushState()
     {
         setState(prePushState);
+
+		anim.SetBool ("isPushing", false);
     }
 		
     public void enterDashState()
@@ -159,6 +200,7 @@ public class Player : Controller
             if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
             {
                 AudioLibrary.PlayerWalking();
+				anim.SetInteger ("Direction", 2);
             }
         }
         if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
@@ -167,6 +209,7 @@ public class Player : Controller
             if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
             {
                 AudioLibrary.PlayerWalking();
+				anim.SetInteger ("Direction", 3);
             }
         }
 		if (PlayerControlManager.GetKey(ControlInput.DOWN)) // DOWN
@@ -175,6 +218,7 @@ public class Player : Controller
             if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
             {
                 AudioLibrary.PlayerWalking();
+				anim.SetInteger ("Direction", 4);
             }
         }
         if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
@@ -183,6 +227,7 @@ public class Player : Controller
             if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
             {
                 AudioLibrary.PlayerWalking();
+				anim.SetInteger ("Direction", 1);
             }
         }
 
@@ -229,8 +274,13 @@ public class Player : Controller
 
 		bool seesPit = (pitCount > 0 && !seesPlatform);
 		//if there are no walls or pits, move
-        if (hitCount <= 0 && !seesPit)
-            transform.Translate((Vector3)movementVector);
+		if (hitCount <= 0 && !seesPit && movementVector != Vector2.zero)
+		{
+			transform.Translate ((Vector3)movementVector);
+			anim.SetBool ("isMoving", true);
+		}
+		else
+			anim.SetBool ("isMoving", false);
 
 		//if there are no walls and there is a pit, incriment the pit timer
 		if (seesPit && hitCount <= 0) {
@@ -246,7 +296,6 @@ public class Player : Controller
 			//TODO: play falling animation
 			getSelf ().onDeath ();
 		}
-
     }
 
 	/// <summary>

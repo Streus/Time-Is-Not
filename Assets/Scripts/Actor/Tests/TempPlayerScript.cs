@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete("Moved all of these into the main Player Script.")]
 public class TempPlayerScript : MonoBehaviour {
 
 	private Animator _animationController;
@@ -20,8 +21,14 @@ public class TempPlayerScript : MonoBehaviour {
 		_animationController = GetComponent<Animator> ();
 	}
 
+	//FIXME use proper bindings from PlayerControlManager
 	void Update () 
 	{
+		if (GameManager.inst != null && GameManager.inst.CheckPause (Player.PAUSEMASK_MOVE))
+		{
+			_animationController.SetBool ("isMoving", false);
+			return;
+		}
 
 		if (isPushing != _player.pushing ())
 		{
