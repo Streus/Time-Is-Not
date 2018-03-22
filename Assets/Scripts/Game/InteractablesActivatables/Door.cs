@@ -293,10 +293,14 @@ public class Door : Interactable, IActivatable, ISavable
 	{
 		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
-		if (inStasis)
-			_sprite.color = Color.yellow;
-		else
-			_sprite.color = Color.white;
+		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
+		for(int i = 0; i < renderers.Length; i++) 
+		{
+			if (inStasis)
+				renderers[i].color = Color.yellow;
+			else
+				renderers[i].color = Color.white;
+		}
 	}
 
 	/// <summary>
