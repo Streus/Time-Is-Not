@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4786162333263162}
   - component: {fileID: 212894547048554362}
-  - component: {fileID: 65779823098101294}
   m_Layer: 11
   m_Name: CleanPits_MidCenter
   m_TagString: Pit
@@ -41,18 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65779823098101294
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1004480970724290}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0.5, y: -0.5, z: 0}
 --- !u!212 &212894547048554362
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4617139851472098}
   - component: {fileID: 212541087446998504}
-  - component: {fileID: 65421314197633668}
   m_Layer: 11
   m_Name: CrackedPits_TopCenter
   m_TagString: Pit
@@ -41,18 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65421314197633668
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1602985203183538}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.85, z: 0.2}
-  m_Center: {x: 0.5, y: -0.58, z: 0}
 --- !u!212 &212541087446998504
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -84,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 784860609
   m_SortingLayer: -3
-  m_SortingOrder: -100
+  m_SortingOrder: -400
   m_Sprite: {fileID: 21300002, guid: 1dc2bac1060b52c42898ba1685fe8262, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

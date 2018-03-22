@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4079509437649916}
   - component: {fileID: 212242558740615254}
-  - component: {fileID: 65913867995863062}
   m_Layer: 11
   m_Name: CrackedPits_MidCenter
   m_TagString: Pit
@@ -41,18 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65913867995863062
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1483409103083374}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0.5, y: -0.5, z: 0}
 --- !u!212 &212242558740615254
 SpriteRenderer:
   m_ObjectHideFlags: 1
