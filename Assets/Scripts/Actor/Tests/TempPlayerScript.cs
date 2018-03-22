@@ -113,12 +113,16 @@ public class TempPlayerScript : MonoBehaviour {
 
 	public void PlayTetherAnimation ()
 	{
-		_animationController.SetTrigger ("ActivateTimeTether");
+		// Temp fix
+		if (_animationController != null)
+			_animationController.SetTrigger ("ActivateTimeTether");
 	}
 
 	public void PlayReappearAnimation ()
 	{
-		_animationController.SetTrigger ("Reappear");
+		// Temp fix
+		if (_animationController != null)
+			_animationController.SetTrigger ("Reappear");
 	}
 
 	float AngleBetweenTwoPoints(Vector3 a, Vector3 b) 
