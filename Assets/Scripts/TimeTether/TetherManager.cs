@@ -176,21 +176,34 @@ public class TetherManager : Singleton<TetherManager>
 		if ((tetherUIState == TetherUIState.GAMEPLAY || tetherUIState == TetherUIState.TETHER_MENU) && !PauseMenuManager.pauseMenuActive)
         {
             // Test for bringing up the menu, while alive
-            if (!GameManager.isPlayerDead())
+			if (!GameManager.isPlayerDead())
             {
                 // If the tether menu key is held down
-				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
+				//if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
+				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing() && (GameManager.inst.pauseType == PauseType.NONE || GameManager.inst.pauseType == PauseType.TETHER_MENU)) 
 				{
                     tetherUIState = TetherUIState.TETHER_MENU;
-                    GameManager.setPause(true);
+                    //GameManager.setPause(true);
+					if (GameManager.inst.pauseType == PauseType.NONE)
+					{
+						GameManager.inst.EnterPauseState(PauseType.TETHER_MENU); 
+					}
+
                     CursorManager.inst.lockCursorType = true;
                     CursorManager.inst.cursorState = CursorState.MENU;
                     ShowTetherMenu();
                 }
-                else
+				else
                 {
                     tetherUIState = TetherUIState.GAMEPLAY;
-                    GameManager.setPause(false);
+
+                    //GameManager.setPause(false);
+					if (GameManager.inst.pauseType == PauseType.TETHER_MENU)
+					{
+						GameManager.inst.ExitPauseState(); 
+						Debug.Log("ExitPauseState()"); 
+					}
+
                     CursorManager.inst.lockCursorType = false;
                     CursorManager.inst.OnCursorBoundsUpdated();
                     HideTetherMenu();
@@ -201,7 +214,8 @@ public class TetherManager : Singleton<TetherManager>
             else
             {
                 tetherUIState = TetherUIState.TETHER_MENU;
-                GameManager.setPause(true);
+                //GameManager.setPause(true);
+				GameManager.inst.EnterPauseState(PauseType.TETHER_MENU); 
                 CursorManager.inst.lockCursorType = true;
                 CursorManager.inst.cursorState = CursorState.MENU;
                 ShowTetherMenu();
@@ -389,8 +403,16 @@ public class TetherManager : Singleton<TetherManager>
             return;
         }
 
+		if (GameManager.inst.pauseType == PauseType.GAME)
+		{
+			return; 
+		}
+
         tetherUIState = TetherUIState.TETHER_ANIMATION;
-        GameManager.setPause(true);
+        //GameManager.setPause(true);
+		GameManager.inst.ExitPauseState(); 
+		GameManager.inst.EnterPauseState(PauseType.TETHER_TRANSITION); 
+
         CursorManager.inst.lockCursorType = true;
         CursorManager.inst.cursorState = CursorState.DEACTIVATED;
 
@@ -411,7 +433,9 @@ public class TetherManager : Singleton<TetherManager>
         }
 
         tetherUIState = TetherUIState.TETHER_ANIMATION;
-        GameManager.setPause(true);
+        //GameManager.setPause(true);
+		GameManager.inst.ExitPauseState(); 
+		GameManager.inst.EnterPauseState(PauseType.TETHER_TRANSITION); 
         CursorManager.inst.lockCursorType = true;
         CursorManager.inst.cursorState = CursorState.DEACTIVATED;
 
@@ -432,7 +456,9 @@ public class TetherManager : Singleton<TetherManager>
         }
         AudioLibrary.PlayTetherSelect();
         tetherUIState = TetherUIState.TETHER_ANIMATION;
-        GameManager.setPause(true);
+        //GameManager.setPause(true);
+		GameManager.inst.ExitPauseState(); 
+		GameManager.inst.EnterPauseState(PauseType.TETHER_TRANSITION); 
         CursorManager.inst.lockCursorType = true;
         CursorManager.inst.cursorState = CursorState.DEACTIVATED;
 
@@ -546,7 +572,8 @@ public class TetherManager : Singleton<TetherManager>
         // Now that the process has finished, restore control to the player
         // TODO
         tetherUIState = TetherUIState.GAMEPLAY;
-        GameManager.setPause(false);
+        //GameManager.setPause(false);
+		GameManager.inst.ExitPauseState(); 
         CursorManager.inst.lockCursorType = false;
         CursorManager.inst.OnCursorBoundsUpdated();
     }

@@ -38,7 +38,8 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 	void Update () 
 	{
 		// Check for key input for bring up/hiding pause menu
-		if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && TetherManager.PauseMenuAllowed() && !disablePauseMenu)
+		//if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && TetherManager.PauseMenuAllowed() && !disablePauseMenu)
+		if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && !disablePauseMenu)
 		{
 			if (!m_pauseMenuActive)
 			{
@@ -88,8 +89,9 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
 		m_pauseMenuActive = true; 
 		pauseCanvasGroup.blocksRaycasts = true; 
-		GameManager.setPause(true); 
-		GameManager.setPauseLock(true); 
+		//GameManager.setPause(true); 
+		//GameManager.setPauseLock(true); 
+		GameManager.inst.EnterPauseState(PauseType.GAME); 
 		CursorManager.inst.lockCursorType = true;
 		CursorManager.inst.cursorState = CursorState.MENU;
 	}
@@ -103,8 +105,9 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
 		m_pauseMenuActive = false; 
 		pauseCanvasGroup.blocksRaycasts = false; 
-		GameManager.setPause(false); 
-		GameManager.setPauseLock(false); 
+		//GameManager.setPause(false); 
+		//GameManager.setPauseLock(false); 
+		GameManager.inst.ExitPauseState(); 
 		CursorManager.inst.lockCursorType = false;
 	}
 

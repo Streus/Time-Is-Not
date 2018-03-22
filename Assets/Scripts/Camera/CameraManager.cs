@@ -114,10 +114,6 @@ public class CameraManager : MonoBehaviour
 			b_max = SceneSetup.inst.b_max;
 			b_min = SceneSetup.inst.b_min; 
 		}
-		else
-		{
-			Debug.LogWarning("The CameraManager does not have a bounds object assigned"); 
-		}
 	}
 
 	public void Update()
@@ -188,6 +184,7 @@ public class CameraManager : MonoBehaviour
 				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing() && !PauseMenuManager.pauseMenuActive)
 				{
 					m_zoomState = true; 
+					GameManager.inst.EnterPauseState(PauseType.ZOOM);
 				}
 			}
 			else
@@ -195,6 +192,7 @@ public class CameraManager : MonoBehaviour
 				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && !PauseMenuManager.pauseMenuActive)
 				{
 					m_zoomState = false; 
+					GameManager.inst.ExitPauseState(); 
 				}
 			}
 
@@ -477,7 +475,7 @@ public class CameraManager : MonoBehaviour
 			// 0 = right, 1 = left, 2 = top, 3 = bottom
 			bool[] dirs = new bool[4]; 
 
-			if (useCursorPan)
+			if (useCursorPan && GameManager.inst.pauseType == PauseType.ZOOM)
 			{
 				// Horizontal pan
 				// Right side
@@ -507,7 +505,7 @@ public class CameraManager : MonoBehaviour
 					dirs[3] = true; 
 				} 
 			}
-			if (useKeyboardPan)
+			if (useKeyboardPan && GameManager.inst.pauseType == PauseType.ZOOM)
 			{
 				// Horizontal pan
 				// Right side

@@ -16,6 +16,34 @@ public enum CodeName
 	CODE_8
 };
 
+public enum PauseType
+{
+	// ## Outside pause graph ##
+	// The game is not paused
+	NONE = 0x0,
+
+	// ## Top level ##
+	// The game is completely paused via a pause menu that overrides all other types of pauses
+	GAME = 0x1,
+
+	// ## Bottom level ##
+	// The game is performing a transition involving death and/or the time tether. This is only exited when the transition is finished
+	// Fully pauses world entities
+	TETHER_TRANSITION = 0x2,
+
+	// The tether selection menu is up
+	TETHER_MENU = 0x4,
+
+	// The player has zoomed out, which pauses player movement but NOT the actions of most entities.
+	// If the player dies while zoomed out, the game must first unpause before then setting the pause type to TETHER_TRANSITION
+	// Does not fully pause world entities
+	ZOOM = 0x8,
+
+	// The game is in some other pause state relating to a cutscene.
+	// Fully pauses world entities
+	CUTSCENE = 0x16
+}
+
 [RequireComponent(typeof(RegisteredObject))]
 public class GameManager : Singleton<GameManager> , ISavable
 {
@@ -25,8 +53,42 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public PlayerControlManager controlManager;
 
 	// Pause functionality
-	bool paused; 
-	bool pauseLock; 
+	//bool paused; 
+	//bool pauseLock; 
+
+	PauseType m_pauseType; 
+	public PauseType pauseType
+	{
+		get{
+			return m_pauseType; 
+		}
+	}
+
+	// Holds a backup of the pause type if the player brings up a GAME pause while in another pause state
+	PauseType prevPauseType; 
+
+	// Inspector display
+	[SerializeField] PauseType pauseTypeDisplay;
+	[SerializeField] PauseType prevPauseTypeDisplay; 
+
+	// Returns true if the current pause state means that all entities in the world should be paused
+	public static bool isPaused()
+	{
+		if (inst.pauseType == PauseType.NONE || inst.pauseType == PauseType.ZOOM)
+		{
+			return false;
+		}
+		return true; 
+	}
+
+	// Bitmasked pause variables
+	public int lowerPauseStates
+	{
+		get{
+			return (int)PauseType.CUTSCENE & (int)PauseType.TETHER_TRANSITION & (int)PauseType.TETHER_MENU & (int)PauseType.ZOOM; 
+		}
+	}
+
 
 	// Ability setup
 	// These variables can be edited in the Inspector via SceneSettings
@@ -161,7 +223,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 
     void Update()
 	{ 
-		if (m_useEndTimer && !paused && !isDead)
+		if (m_useEndTimer && !isPaused())
 		{
 			m_endTimer -= Time.deltaTime; 
 			if (m_endTimer <= 0)
@@ -184,6 +246,13 @@ public class GameManager : Singleton<GameManager> , ISavable
 			//Debug.Log("No timer?"); 
 			//endTimerText.enabled = false; 
 		}
+
+		#if UNITY_EDITOR
+
+		pauseTypeDisplay = m_pauseType;
+		prevPauseTypeDisplay = prevPauseType; 
+
+		#endif
 	}
 
 	public void StartEndTimer()
@@ -201,6 +270,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	 * Pause functionality
 	 */ 
 
+	/*
 	/// <summary>
 	/// Sets whether the game is paused
 	/// </summary>
@@ -237,6 +307,109 @@ public class GameManager : Singleton<GameManager> , ISavable
 			inst.pauseLockedToggled(state); 
 		}
 	}
+	*/
+
+	/// <summary>
+	/// Tells the GameManager to enter (not exit) a specific pause state. Returns true if successful
+	/// </summary>
+	/// <param name="newPauseType">New pause type.</param>
+	public bool EnterPauseState(PauseType newPauseType)
+	{
+		// Pause states have two levels
+		// The lower level pause states are CUTSCENE, TETHER_TRANSITION, and ZOOM
+		// The top level pause state is a full GAME pause, which can be accessed independently or on top of a lower level
+		// If entering a top level pause through a lower level, when exiting the state machine must pass back down through the lower level
+
+		// Check for redunancy
+		if (pauseType == newPauseType)
+		{
+			Debug.LogWarning("Trying to change GameManager pause type to the same pause type"); 
+			return false; 
+		}
+
+		// Don't allow entering a pause state of NONE (that would be exiting!)
+		if (newPauseType == PauseType.NONE)
+		{
+			Debug.LogError("EnterPauseState cannot accept PauseType.NONE as a parameter - it would be considered exiting"); 
+			return false; 
+		}
+
+		// Reset the backup pause state
+		prevPauseType = PauseType.NONE; 
+
+		// If the current pause type is NONE, allow entry into any pause state
+		if (pauseType == PauseType.NONE)
+		{
+			m_pauseType = newPauseType; 
+			return true; 
+		}
+		// If the current pause type is one of the lower level states (below full game pause), elevate to game paused and save the previous pause state
+		//else if ((int)pauseType == lowerPauseStates && newPauseType == PauseType.GAME)
+		else if (IsLowerPauseType(pauseType) && newPauseType == PauseType.GAME)
+		{
+			// Back up the current pause type so it can be restored when unpausing
+			prevPauseType = pauseType; 
+
+			m_pauseType = newPauseType; 
+			return true; 
+		}
+
+		return false; 
+	}
+
+	/// <summary>
+	/// Exits the current pause state, moving down a level to either NONE or the backup prevPauseType
+	/// </summary>
+	public bool ExitPauseState()
+	{
+		// Throw a warning if trying to exit while not even paused
+		if (pauseType == PauseType.NONE)
+		{
+			Debug.LogWarning("ExitPauseState cannot exit a PauseType of NONE"); 
+			return false; 
+		}
+		// Allow fully exiting pause if in one of the lower level states
+		//else if ((int)pauseType == lowerPauseStates)
+		else if (IsLowerPauseType(pauseType))
+		{
+			m_pauseType = PauseType.NONE; 
+			return true; 
+		}
+		// When exiting a top level game pause, check whether to return to NONE or a backup pause state
+		else if (pauseType == PauseType.GAME)
+		{
+			Debug.Log("pauseType == GAME"); 
+
+			// If a backup of the previous pause state was created, load the backup
+			//if ((int)prevPauseType == lowerPauseStates)
+			if (IsLowerPauseType(prevPauseType))
+			{
+				m_pauseType = prevPauseType; 
+				Debug.Log("Set pause state to prevPauseState of " + prevPauseType); 
+			}
+			else
+			{
+				m_pauseType = PauseType.NONE; 
+			}
+
+			// Reset the backup pause state
+			prevPauseType = PauseType.NONE; 
+
+			return true; 
+		}
+		return false; 
+	}
+
+	public bool IsLowerPauseType(PauseType testType)
+	{
+		if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
+		{
+			return true; 
+		}
+		return false; 
+	}
+
+
 
 	/*
 	 * Player information getters
@@ -250,7 +423,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public static void killPlayer()
 	{
 		inst.isDead = true; 
-		inst.paused = true;
+		//inst.paused = true;
+
+		// Set the pause state to TETHER_MENU
+		inst.EnterPauseState(PauseType.TETHER_MENU); 
 	}
 
 	public static GameObject GetPlayer()

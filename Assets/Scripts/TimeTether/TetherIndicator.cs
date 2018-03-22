@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class TetherIndicator : MonoBehaviour 
 {
@@ -21,11 +22,24 @@ public class TetherIndicator : MonoBehaviour
 	public GameObject tetherPointSprite; 
 	public GameObject removePrompt; 
 
+	[Header("Drag in animation controllers")] 
+	//public AnimatorContr firstTetherAnimator;
+	//public Animator otherTetherAnimator; 
+	public Animator tetherAnimator; 
+	public Animator silverAnchorAnimator;
+	public Animator goldAnchorAnimator;
+
+
 	// Use this for initialization
 	void Start () 
 	{
 		if (removePrompt != null)
 			removePrompt.SetActive(false); 
+	}
+
+	public void SetAnimationController()
+	{
+		tetherAnimator = silverAnchorAnimator;
 	}
 	
 	// Update is called once per frame
