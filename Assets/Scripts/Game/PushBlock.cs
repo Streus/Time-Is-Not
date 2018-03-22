@@ -216,7 +216,7 @@ public class PushBlock : MonoBehaviour, ISavable
 			moveDir = Vector2.left * _col.size.x;
 			break;
 		}
-		RaycastHit2D[] hits = Physics2D.BoxCastAll ((Vector2)transform.position + _col.offset + (new Vector2(moveDir.x /2, moveDir.y /2)), _col.size * 0.55f, 0, moveDir, 0.1f, 1 << LayerMask.NameToLayer ("PushBlockArea") | 1 << LayerMask.NameToLayer ("Wall"));
+		RaycastHit2D[] hits = Physics2D.BoxCastAll ((Vector2)transform.position + _col.offset + (new Vector2(moveDir.x /2, moveDir.y /2)), new Vector2(_col.size.x - (moveDir.normalized.x * 0.45f), _col.size.y - (moveDir.normalized.y * 0.45f)), 0, moveDir, 0.1f, 1 << LayerMask.NameToLayer ("PushBlockArea") | 1 << LayerMask.NameToLayer ("Wall"));
 		//GetComponent<Collider2D>().Cast(moveDir, hits, dist, true);
 
 		bool seesArea = false;
