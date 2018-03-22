@@ -111,6 +111,21 @@ public class Player : Controller
 	{
 		return minJumpDist;
 	}
+
+	public bool inDefault()
+	{
+		return getState ().name == "PlayerDefault";
+	}
+
+	public bool pushing()
+	{
+		return (pushState.Equals(getState()));
+	}
+
+	public bool dashing()
+	{
+		return (dashState.Equals(getState()));
+	}
 	#endregion
 
 	#region SPECIAL_BEHAVIOUR
@@ -124,20 +139,10 @@ public class Player : Controller
     {
         setState(prePushState);
     }
-
-    public bool pushing()
-    {
-        return (pushState == getState());
-    }
-
+		
     public void enterDashState()
     {
         setState(dashState);
-    }
-
-    public bool dashing()
-    {
-        return (dashState == getState());
     }
 
 	/// <summary>

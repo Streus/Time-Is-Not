@@ -83,6 +83,11 @@ public sealed class State : ScriptableObject
 		if (exitAction != null)
 			exitAction.perform (c);
 	}
+
+	public override bool Equals (object other)
+	{
+		return ((State)other).name == name;
+	}
 	#endregion
 
 	/// <summary>
