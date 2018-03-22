@@ -101,7 +101,7 @@ public class Laser : Interactable, IActivatable, ISavable
 			rayCast ();
 			if (!_laserLine.enabled)
 				_laserLine.enabled = true;
-			if(!particleFolder.activeInHierarchy)
+			if(particleFolder != null && !particleFolder.activeInHierarchy)
 				particleFolder.SetActive (true);
 		}
 		else
@@ -109,7 +109,7 @@ public class Laser : Interactable, IActivatable, ISavable
 			currentHitPoint = transform.position;
 			if (_laserLine.enabled)
 				_laserLine.enabled = false;
-			if(particleFolder.activeInHierarchy)
+			if(particleFolder != null && particleFolder.activeInHierarchy)
 				particleFolder.SetActive (false);
 		}
         if(!GameManager.isPlayerDead())

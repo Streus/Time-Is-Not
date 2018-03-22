@@ -19,6 +19,9 @@ public class StasisBubble : MonoBehaviour
 	[Tooltip("Should the bubble fade as it disappears? This only has an aesthetic effect")]
 	public bool fadeWithTimer; 
 
+	[Tooltip("A gameobject to spawn that contains the effect to play when a stasis bubble is destroyed")]
+	public GameObject bubblePopEffect; 
+
 	// Temporary
 	private Vector3 initScale; 
 
@@ -109,6 +112,7 @@ public class StasisBubble : MonoBehaviour
 	/// </summary>
 	public void DestroyBubble()
 	{
+		Instantiate (bubblePopEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject); 
 	}
 
