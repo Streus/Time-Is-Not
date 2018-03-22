@@ -10,6 +10,11 @@ public class TetherIndicator : MonoBehaviour
 	Transform moveParent; 
 	Vector3 offsetFromMoveParent; 
 
+	[Tooltip("How large is the radius that tests whether the tether point should attach to a moving platform?")]
+	public float moveOverlapRadius = 0.1f; 
+	[Tooltip("The origin position fromr which moveOverlapRadius is tested for overlapping moving platforms")]
+	public GameObject platformAttachPoint; 
+
 	[Tooltip("If true, the player can walk up to a tether point, see a prompt icon, and press e to remove the tether point")] 
 	public bool allowRadiusRemoval; 
 	public float removeRadius = 1; 
@@ -45,7 +50,7 @@ public class TetherIndicator : MonoBehaviour
 		// Save a transform ref to the moving platform
 		// Vector2 offset
 		// Update position of point every frame to be moving platform position + offset
-		Collider2D[] hits = Physics2D.OverlapCircleAll(tetherPointSprite.transform.position, transform.localScale.x); 
+		Collider2D[] hits = Physics2D.OverlapCircleAll(platformAttachPoint.transform.position, moveOverlapRadius); 
 
 		if (moveParent == null)
 		{
