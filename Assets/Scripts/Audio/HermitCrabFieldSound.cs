@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HermitCrabFieldSound : MonoBehaviour
 {
-    SpriteRenderer fieldRenderer;
+	HCNullFieldVisualizer fieldRenderer;
     AudioSource source;
     AudioClip hermitField;
     AudioClip hermitIdle;
@@ -12,7 +12,7 @@ public class HermitCrabFieldSound : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        fieldRenderer = this.GetComponent<SpriteRenderer>();
+		fieldRenderer = GetComponent<HCNullFieldVisualizer> ();
         source = this.gameObject.GetComponent<AudioSource>();
         hermitField = AudioLibrary.inst.hermitCrabField;
         hermitIdle = AudioLibrary.inst.hermitCrabIdleNoise;

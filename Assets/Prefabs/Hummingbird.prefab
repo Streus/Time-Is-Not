@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4011414097952456}
   - component: {fileID: 33322732606364370}
   - component: {fileID: 23767892714102442}
-  - component: {fileID: 114889084256764492}
+  - component: {fileID: 114197056262683896}
   m_Layer: 9
   m_Name: SightCone
   m_TagString: Untagged
@@ -102,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449627520273038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.97, y: -1.9, z: 0}
+  m_LocalPosition: {x: -5.14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4011414097952456}
@@ -325,6 +325,19 @@ MonoBehaviour:
   patrolColor: {r: 1, g: 1, b: 0, a: 0.49803922}
   pursuitColor: {r: 1, g: 0, b: 0, a: 0.49803922}
   slowedSpeed: 2
+--- !u!114 &114197056262683896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413525278506206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617d4fcd491517c45a26b7f96de17581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hummingbird: {fileID: 114110128772651808}
+  resolution: 1
 --- !u!114 &114526079705443818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -364,19 +377,6 @@ MonoBehaviour:
   prefabPath: 
   stasisable: 1
   allowReset: 1
---- !u!114 &114889084256764492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413525278506206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15ec86cfcf4b754b8e2c2712dbc9477, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hummingbird: {fileID: 114110128772651808}
-  resolution: 1
 --- !u!212 &212987389039151208
 SpriteRenderer:
   m_ObjectHideFlags: 1

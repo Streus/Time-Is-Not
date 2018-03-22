@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class LOSVisualizer : MonoBehaviour
+public class HBLOSVisualizer : MonoBehaviour
 {
 	#region INSTANCE_VARS
 	[SerializeField]
