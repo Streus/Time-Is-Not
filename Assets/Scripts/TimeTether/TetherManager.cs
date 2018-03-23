@@ -228,6 +228,8 @@ public class TetherManager : Singleton<TetherManager>
 		 */
 
         // When zooming/zoomed out, hide the bottom left time tether HUD
+		// JK let's not do this
+		/*
         if (GameManager.CameraIsZoomedOut())
         {
             tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 0, tetherHUDFadeOutSpeed * Time.deltaTime);
@@ -237,6 +239,7 @@ public class TetherManager : Singleton<TetherManager>
         {
             tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 1, tetherHUDFadeInSpeed * Time.deltaTime);
         }
+        */ 
 
 
         /*
@@ -612,9 +615,10 @@ public class TetherManager : Singleton<TetherManager>
 	IEnumerator RemoveTetherProcess(int tetherIndex)
 	{
 		// TODO- fix this!!!
-		GameManager.GetPlayerAnimator().SetTrigger("TetherAnchorStop"); 
+		//GameManager.GetPlayerAnimator().SetTrigger("TetherAnchorStop"); 
 
-		yield return new WaitForSeconds(1); 
+		if (false)
+			yield return new WaitForSeconds(1); 
 
 		// Remove the time tether indicator gameObject
 		RemoveTimeTetherIndicator(tetherIndex, false); 
@@ -688,7 +692,8 @@ public class TetherManager : Singleton<TetherManager>
 		{
 			if (timeTetherIndicators[index] != null)
 			{
-				Destroy(timeTetherIndicators[index].gameObject);
+				timeTetherIndicators[index].StartDestroy(); 
+				//Destroy(timeTetherIndicators[index].gameObject);
 				timeTetherIndicators.RemoveAt(index); 
 			}
 		}
@@ -699,7 +704,8 @@ public class TetherManager : Singleton<TetherManager>
 			{
 				if (timeTetherIndicators[i] != null)
 				{
-					Destroy(timeTetherIndicators[i].gameObject);
+					timeTetherIndicators[i].StartDestroy(); 
+					//Destroy(timeTetherIndicators[i].gameObject);
 					timeTetherIndicators.RemoveAt(i); 
 				}
 			}

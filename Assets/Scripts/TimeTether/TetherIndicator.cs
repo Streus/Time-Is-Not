@@ -31,6 +31,11 @@ public class TetherIndicator : MonoBehaviour
 	public SpriteRenderer goldSprite; 
 	public SpriteRenderer silverSprite; 
 
+	Animator spriteAnimator; 
+
+	public GameObject returnObjPrefab; 
+	public bool spawnReturnObj; 
+
 
 	// Use this for initialization
 	void Start () 
@@ -117,6 +122,18 @@ public class TetherIndicator : MonoBehaviour
 			TetherManager.inst.RemoveTetherPoint(tetherIndex); 
 		}
 
+		// Check for Destroy
+		if (spriteAnimator != null && spriteAnimator.GetCurrentAnimatorStateInfo(0).IsName("WaitForDestroy"))
+		{
+			// TODO- spawn object that flies toward the player
+			if (spawnReturnObj)
+			{
+				GameObject returnObj = (GameObject) Instantiate(returnObjPrefab, transform.position, transform.rotation);
+			}
+
+			Destroy(this.gameObject); 
+		}
+
 	}
 
 	public void UpdateTetherSprite()
@@ -125,11 +142,13 @@ public class TetherIndicator : MonoBehaviour
 		{
 			goldSprite.enabled = true; 
 			silverSprite.enabled = false; 
+			spriteAnimator = goldSprite.GetComponent<Animator>(); 
 		}
 		else
 		{
 			goldSprite.enabled = false; 
 			silverSprite.enabled = true; 
+			spriteAnimator = silverSprite.GetComponent<Animator>(); 
 		}
 	}
 
@@ -155,5 +174,11 @@ public class TetherIndicator : MonoBehaviour
 		}
 
 		return false; 
+	}
+
+	public void StartDestroy()
+	{
+		//goldSprite.GetComponent<Animator>().
+		spriteAnimator.SetTrigger("TetherAnchorStop"); 
 	}
 }
