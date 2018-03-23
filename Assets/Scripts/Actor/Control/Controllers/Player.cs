@@ -199,38 +199,42 @@ public class Player : Controller
         if (PlayerControlManager.GetKey(ControlInput.UP)) // UP
         {
             movementVector += Vector2.up;
-            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-            {
-                AudioLibrary.PlayerWalking();
-				anim.SetInteger ("Direction", 2);
-            }
+			anim.SetInteger ("Direction", 2);
+//            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+//            {
+//                AudioLibrary.PlayerWalking();
+//				anim.SetInteger ("Direction", 2);
+//            }
         }
         if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
         {
             movementVector += Vector2.left;
-            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-            {
-                AudioLibrary.PlayerWalking();
-				anim.SetInteger ("Direction", 3);
-            }
+			anim.SetInteger ("Direction", 3);
+//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+//            {
+//                AudioLibrary.PlayerWalking();
+//				anim.SetInteger ("Direction", 3);
+//            }
         }
 		if (PlayerControlManager.GetKey(ControlInput.DOWN)) // DOWN
         {
             movementVector += Vector2.down;
-            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-            {
-                AudioLibrary.PlayerWalking();
-				anim.SetInteger ("Direction", 4);
-            }
+			anim.SetInteger ("Direction", 4);
+//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+//            {
+//                AudioLibrary.PlayerWalking();
+//				anim.SetInteger ("Direction", 4);
+//            }
         }
         if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
         {
             movementVector += Vector2.right;
-            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-            {
-                AudioLibrary.PlayerWalking();
-				anim.SetInteger ("Direction", 1);
-            }
+			anim.SetInteger ("Direction", 1);
+//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
+//            {
+//                AudioLibrary.PlayerWalking();
+//				anim.SetInteger ("Direction", 1);
+//            }
         }
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
