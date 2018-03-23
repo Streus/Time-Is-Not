@@ -47,7 +47,7 @@ public class TetherManager : Singleton<TetherManager>
 
     [SerializeField] TetherUIState tetherUIState;
 
-    [SerializeField] TempPlayerScript tempTetherScript;
+	[SerializeField] Player playerScript;
 
     [SerializeField] TetherTransition tetherTransition;
 
@@ -493,7 +493,7 @@ public class TetherManager : Singleton<TetherManager>
 
         // Make Margot play her tether animation
         // start animation
-        tempTetherScript.PlayTetherAnimation();
+        playerScript.PlayTetherAnimation();
         AudioLibrary.PlayTetherRewindSound();
 
 		// Play ripple out particle effect
@@ -536,7 +536,7 @@ public class TetherManager : Singleton<TetherManager>
         yield return new WaitForSeconds(0.3f);
 
         // Now that the state has been loaded, make the transition fade back in
-        tempTetherScript.PlayReappearAnimation();
+        playerScript.PlayReappearAnimation();
         yield return new WaitForSeconds(0.1f);
         tetherTransition.SetFadeIn();
 

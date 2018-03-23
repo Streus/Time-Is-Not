@@ -58,13 +58,15 @@ public class Player : Controller
     public void Start()
     {
 		shadow = transform.Find ("Margaux Shadow");
-        sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+//        sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+		sprite = gameObject.GetComponent <SpriteRenderer> ();
         getSelf().addAbility(Ability.get("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
         getSelf().getAbility(1).resetCooldown();
 
-		anim = transform.GetChild (0).GetComponent <Animator>();
+//		anim = transform.GetChild (0).GetComponent <Animator>();
+		anim = gameObject.GetComponent <Animator>();
     }
 
     public override void Update()
@@ -433,4 +435,14 @@ public class Player : Controller
         }
     }
     #endregion
+
+	public void PlayTetherAnimation ()
+	{
+		anim.SetTrigger ("ActivateTimeTether");
+	}
+
+	public void PlayReappearAnimation ()
+	{
+		anim.SetTrigger ("Reappear");
+	}
 }
