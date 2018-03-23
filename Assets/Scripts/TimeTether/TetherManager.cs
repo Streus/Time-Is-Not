@@ -123,7 +123,8 @@ public class TetherManager : Singleton<TetherManager>
 			if (PlayerControlManager.GetKeyDown(ControlInput.DROP_TETHER))
             {
                 CreatePoint();
-                GameManager.GetPlayer().GetComponent<Player>().StartWait();
+                //GameManager.GetPlayer().GetComponent<Player>().StartWait();
+				GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
             }
         }
 
