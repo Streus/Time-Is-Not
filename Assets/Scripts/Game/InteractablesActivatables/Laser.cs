@@ -66,7 +66,7 @@ public class Laser : Interactable, IActivatable, ISavable
 		if (!Application.isPlaying)
 			return;
 		_laserLine = gameObject.GetComponent<LineRenderer> ();
-		_laserLine.colorGradient = _laserColor;
+		//_laserLine.colorGradient = _laserColor;
 		isInverted = !isEnabled ();
 
         source = this.gameObject.GetComponent<AudioSource>();
