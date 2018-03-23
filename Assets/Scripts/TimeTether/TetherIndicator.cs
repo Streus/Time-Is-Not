@@ -128,7 +128,7 @@ public class TetherIndicator : MonoBehaviour
 			// TODO- spawn object that flies toward the player
 			if (spawnReturnObj)
 			{
-				GameObject returnObj = (GameObject) Instantiate(returnObjPrefab, transform.position, transform.rotation);
+				GameObject returnObj = (GameObject) Instantiate(returnObjPrefab, platformAttachPoint.transform.position, transform.rotation);
 			}
 
 			Destroy(this.gameObject); 

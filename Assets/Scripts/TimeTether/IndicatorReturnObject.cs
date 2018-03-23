@@ -113,5 +113,7 @@ public class IndicatorReturnObject : MonoBehaviour
 			transform.position = target.transform.position + (maxLoadDist * dir); 
 		}
 		*/ 
+		// Destroy this object if another tether back is called while this one is flying
+		Destroy(gameObject); 
 	}
 }
