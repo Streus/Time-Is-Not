@@ -95,8 +95,16 @@ public class Player : Controller
     }
     private void deathReset()
     {
+		//go to default state
         setState(playerDefault);
+
+		//unpause dash cooldown
         getSelf().getAbility(1).active = true;
+
+		//stop animations
+		anim.SetBool ("Dash", false);
+		anim.SetBool ("isMoving", false);
+		anim.SetBool("isPushing", false);
     }
 
 	#region GETTERS_SETTERS
