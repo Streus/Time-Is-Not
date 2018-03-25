@@ -17,6 +17,12 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     bool hover = false;
 
+	[Tooltip("Drag in the next tether point button, if it exists")] 
+	[SerializeField] CanLoadButton nextButton; 
+
+	bool beingRemoved; 
+	public Color beingRemovedColor; 
+
 	void Start()
 	{
 		button = GetComponent<Button>(); 
@@ -52,6 +58,8 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     AudioLibrary.PlayTetherMenuHover();
                 //}
                 hover = true;
+
+				StartBeingRemovedSequence(true); 
             }
 		}
 	}
@@ -64,6 +72,35 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 			//Debug.Log("Mouse is no longer over button for state " + state);
 			TetherManager.OnPointerExit();
             hover = false;
+
+			StartBeingRemovedSequence(false); 
+		}
+	}
+
+	void StartBeingRemovedSequence(bool isBeingRemoved)
+	{
+		if (nextButton != null)
+		{
+			nextButton.SetToBeingRemoved(isBeingRemoved); 
+		}
+	}
+		
+	public void SetToBeingRemoved(bool isBeingRemoved)
+	{
+		beingRemoved = isBeingRemoved; 
+
+		if (isBeingRemoved && button.interactable)
+		{
+			image.color = beingRemovedColor;
+		}
+		else
+		{
+			image.color = Color.white; 
+		}
+
+		if (nextButton != null)
+		{
+			nextButton.SetToBeingRemoved(isBeingRemoved); 
 		}
 	}
 }
