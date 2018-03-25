@@ -38,6 +38,9 @@ public class InteractableUILink : MonoBehaviour
 
 		for (int i = 0; i < linkPoints.Count; i++)
 		{
+			if (linkPoints[i] == null)
+				continue; 
+
 			/*
 			if (localPositions)
 			{
@@ -79,6 +82,9 @@ public class InteractableUILink : MonoBehaviour
 				Gizmos.DrawLine((Vector3)linkPoints[i], (Vector3)linkPoints[i + 1]);
 			}
 			*/ 
+			if (linkPoints[i] == null)
+				continue;
+
 			Gizmos.DrawLine(linkPoints[i].transform.position, linkPoints[i + 1].transform.position);
 		}
 	}
