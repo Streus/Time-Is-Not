@@ -6,11 +6,15 @@ public class InteractableUILink : MonoBehaviour
 {
 	GameObject lineRendPrefab; 
 
-	[Tooltip("If checked, the link point Vector2s will be in local position relative to the gameObject. Otherwise, they will be in world position")]
-	public bool localPositions = true; 
+	//[Tooltip("If checked, the link point Vector2s will be in local position relative to the gameObject. Otherwise, they will be in world position")]
+	//public bool localPositions = true; 
 
-	[Tooltip("The positions of the line renderer. Must be set manually. Uses local/world space depending on whether localPositions is checked.")]
-	[SerializeField] List<Vector2> linkPoints; 
+	//[Tooltip("The positions of the line renderer. Must be set manually. Uses local/world space depending on whether localPositions is checked.")]
+	//[SerializeField] List<Vector2> linkPoints; 
+
+	[Tooltip("The positions of the line renderer. Must be set using gameObject positions")]
+	[SerializeField] List<GameObject> linkPoints; 
+
 	LineRenderer lineRenderer; 
 
 	[Tooltip("Optional color override specific to this interactable UI link, used instead of the default Color in ZoomOutUI. Only used if its alpha is > 0")] 
@@ -34,6 +38,7 @@ public class InteractableUILink : MonoBehaviour
 
 		for (int i = 0; i < linkPoints.Count; i++)
 		{
+			/*
 			if (localPositions)
 			{
 				lineRenderer.SetPosition(i, (Vector3)linkPoints[i]); 
@@ -42,6 +47,8 @@ public class InteractableUILink : MonoBehaviour
 			{
 				lineRenderer.SetPosition(i, transform.position + (Vector3)linkPoints[i]); 
 			}
+			*/
+			lineRenderer.SetPosition(i, linkPoints[i].transform.position); 
 		}
 
 		if (overrideColor.a == 0)
@@ -62,6 +69,7 @@ public class InteractableUILink : MonoBehaviour
 		Gizmos.color = Color.yellow; 
 		for (int i = 0; i < linkPoints.Count - 1; i++)
 		{
+			/*
 			if (localPositions)
 			{
 				Gizmos.DrawLine(transform.position + (Vector3)linkPoints[i], transform.position + (Vector3)linkPoints[i + 1]); 
@@ -70,6 +78,8 @@ public class InteractableUILink : MonoBehaviour
 			{
 				Gizmos.DrawLine((Vector3)linkPoints[i], (Vector3)linkPoints[i + 1]);
 			}
+			*/ 
+			Gizmos.DrawLine(linkPoints[i].transform.position, linkPoints[i + 1].transform.position);
 		}
 	}
 }
