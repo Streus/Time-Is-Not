@@ -24,7 +24,7 @@ public class TempPlayerScript : MonoBehaviour {
 	//FIXME use proper bindings from PlayerControlManager
 	void Update () 
 	{
-		if (GameManager.inst != null && GameManager.inst.CheckPause (Player.PAUSEMASK_MOVE))
+		if (GameManager.inst != null && GameManager.CheckPause (Player.PAUSEMASK_MOVE))
 		{
 			_animationController.SetBool ("isMoving", false);
 			return;

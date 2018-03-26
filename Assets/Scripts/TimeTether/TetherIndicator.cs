@@ -36,6 +36,26 @@ public class TetherIndicator : MonoBehaviour
 	public GameObject returnObjPrefab; 
 	public bool spawnReturnObj; 
 
+	// Screenshot-only sprites
+	[Header("Screenshot Sprites")] 
+	[Tooltip("(Drag in) The sprite renderer for the arrow that should appear in the screenshot")]
+	[SerializeField] SpriteRenderer screenshotArrow; 
+	[Tooltip("(Drag in) The sprite renderer for a tether point that doesn't animate and only appears in the screenshot")]
+	[SerializeField] SpriteRenderer screenshotTetherRend; 
+
+	[SerializeField] Sprite screenshotGoldTether; 
+	[SerializeField] Sprite screenshotSilverTether; 
+
+	void OnEnable()
+	{
+		ScreenshotManager.inst.takeScreenshot += OnScreenshot; 
+	}
+
+	void OnDisable()
+	{
+		if (ScreenshotManager.inst != null)
+			ScreenshotManager.inst.takeScreenshot -= OnScreenshot; 
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -44,6 +64,9 @@ public class TetherIndicator : MonoBehaviour
 			removePrompt.SetActive(false);
 
 		UpdateTetherSprite(); 
+
+		screenshotArrow.enabled = false;
+		screenshotTetherRend.enabled = false;
 	}
 		
 	
@@ -143,12 +166,14 @@ public class TetherIndicator : MonoBehaviour
 			goldSprite.enabled = true; 
 			silverSprite.enabled = false; 
 			spriteAnimator = goldSprite.GetComponent<Animator>(); 
+			screenshotTetherRend.sprite = screenshotGoldTether; 
 		}
 		else
 		{
 			goldSprite.enabled = false; 
 			silverSprite.enabled = true; 
 			spriteAnimator = silverSprite.GetComponent<Animator>(); 
+			screenshotTetherRend.sprite = screenshotSilverTether; 
 		}
 	}
 
@@ -180,5 +205,28 @@ public class TetherIndicator : MonoBehaviour
 	{
 		//goldSprite.GetComponent<Animator>().
 		spriteAnimator.SetTrigger("TetherAnchorStop"); 
+	}
+
+	void OnScreenshot(bool startShot)
+	{
+		Debug.Log("On Screenshot: " + startShot + "; tetherIndex: " + tetherIndex);
+
+		// Only enable the arrow if it's the current tether
+		if (LevelStateManager.curState == tetherIndex)
+		{
+			screenshotArrow.enabled = startShot; 
+		}
+
+		// For all sprites, change them to use a specific tether sprite
+		screenshotTetherRend.enabled = startShot; 
+
+		if (tetherIndex == 0)
+		{
+			goldSprite.enabled = !startShot; 
+		}
+		else
+		{
+			silverSprite.enabled = !startShot; 
+		}
 	}
 }

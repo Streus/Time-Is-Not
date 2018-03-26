@@ -327,6 +327,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 			return false; 
 		}
 
+		// In default, dashing, pushing
+
 		// Don't allow entering a pause state of NONE (that would be exiting!)
 		if (newPauseType == PauseType.NONE)
 		{
@@ -402,9 +404,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public bool IsLowerPauseType(PauseType testType)
 	{
-		//int check = PauseType.CUTSCENE & PauseType.TETHER_MENU
+		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.ZOOM; 
 
-		if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
+		//if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
+		if (CheckPause(check))
 		{
 			return true; 
 		}
@@ -412,9 +415,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 	}
 
 	// Usage: int check = PauseType.a | PauseType.b
-	public bool CheckPause(int check)
+	public static bool CheckPause(int check)
 	{
-		return ((int)m_pauseType & check) != 0; 
+		if (inst != null)
+			return ((int)inst.m_pauseType & check) != 0; 
+		return false; 
 	}
 
 

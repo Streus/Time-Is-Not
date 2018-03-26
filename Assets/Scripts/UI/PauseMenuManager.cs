@@ -28,6 +28,8 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 	[SerializeField] CanvasGroup pauseCanvasGroup;  
 	[SerializeField] GameObject pausePanelParent; 
 
+	int check = (int)PauseType.TETHER_TRANSITION; 
+
 	void Start () 
 	{
 		pauseCanvasGroup.alpha = 0; 
@@ -39,7 +41,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 	{
 		// Check for key input for bring up/hiding pause menu
 		//if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && TetherManager.PauseMenuAllowed() && !disablePauseMenu)
-		if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && !disablePauseMenu)
+		if (PlayerControlManager.GetKeyDown(ControlInput.PAUSE_MENU) && !disablePauseMenu && !GameManager.CheckPause(check))
 		{
 			if (!m_pauseMenuActive)
 			{

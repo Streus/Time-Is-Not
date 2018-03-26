@@ -16,16 +16,26 @@ public class IndicatorReturnObject : MonoBehaviour
 	[SerializeField] float maxLoadDist = 10; 
 
 	//int pauseStates; 
+	static List<IndicatorReturnObject> instances;
 
 	void OnEnable()
 	{
 		LevelStateManager.inst.stateLoaded += OnLoad;
+
+		if (instances == null)
+			instances = new List<IndicatorReturnObject> (); 
+
+		if (!instances.Contains(this))
+			instances.Add(this); 
 	}
 
 	void OnDisable()
 	{
 		if (LevelStateManager.inst != null)
 			LevelStateManager.inst.stateLoaded -= OnLoad;
+		
+		if (instances != null && instances.Contains(this))
+			instances.Remove(this);
 	}
 
 	// Use this for initialization
@@ -115,5 +125,16 @@ public class IndicatorReturnObject : MonoBehaviour
 		*/ 
 		// Destroy this object if another tether back is called while this one is flying
 		Destroy(gameObject); 
+	}
+
+	/// <summary>
+	/// Checks if there are any IndicatorReturnObjects in the scene
+	/// </summary>
+	/// <returns><c>true</c>, if there are no instances, <c>false</c> otherwise.</returns>
+	public static bool NoInstancesExist()
+	{
+		if (instances == null || instances.Count == 0)
+			return true; 
+		return false; 
 	}
 }

@@ -95,7 +95,11 @@ public class TetherManager : Singleton<TetherManager>
     [SerializeField] float tetherHUDFadeInSpeed;
     [SerializeField] float tetherHUDFadeOutSpeed;
 
+	// TODO change this to false at the start of the scene and reenable once the player gets control after Amelia finishes her first placing animation
+	bool tetherHUDVisible = true; 
+
     bool playTMenuOpen = true;
+
     // Use this for initialization
     void Start()
     {
@@ -113,6 +117,12 @@ public class TetherManager : Singleton<TetherManager>
 
     void Update()
     {
+		// FIXME Remove this test later
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			EndLevelRemoveAllTetherPoints(); 
+		}
+
         /*
 		 * Create tether point functionality
 		 */
@@ -122,9 +132,13 @@ public class TetherManager : Singleton<TetherManager>
         {
 			if (PlayerControlManager.GetKeyDown(ControlInput.DROP_TETHER))
             {
-                CreatePoint();
-                //GameManager.GetPlayer().GetComponent<Player>().StartWait();
+                //CreatePoint();
+				//GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
+
+				// Order flipped so the tether point exists for the screenshot
+				// Test!
 				GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
+				CreatePoint();
             }
         }
 
@@ -223,6 +237,18 @@ public class TetherManager : Singleton<TetherManager>
             }
         }
 
+		/*
+		 * Tether Corner HUD visibility
+		 */ 
+
+		if (tetherHUDVisible)
+		{
+			tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 1, tetherHUDFadeInSpeed * Time.deltaTime);
+		}
+		else
+		{
+			tetherHUDGroup.alpha = Mathf.Lerp(tetherHUDGroup.alpha, 0, tetherHUDFadeOutSpeed * Time.deltaTime);
+		}
 
         /*
 		 * Tether Corner HUD fading when zooming out
@@ -615,9 +641,6 @@ public class TetherManager : Singleton<TetherManager>
 
 	IEnumerator RemoveTetherProcess(int tetherIndex)
 	{
-		// TODO- fix this!!!
-		//GameManager.GetPlayerAnimator().SetTrigger("TetherAnchorStop"); 
-
 		if (false)
 			yield return new WaitForSeconds(1); 
 
@@ -721,6 +744,12 @@ public class TetherManager : Singleton<TetherManager>
 			}
 		}
     }
+
+	public void EndLevelRemoveAllTetherPoints()
+	{
+		tetherHUDVisible = false; 
+		RemoveTimeTetherIndicator(0, true); 
+	}
 
 	/// <summary>
 	/// Returns the position of the specified time tether indicator point. Necessary for setting player position

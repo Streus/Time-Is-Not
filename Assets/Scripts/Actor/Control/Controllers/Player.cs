@@ -73,7 +73,7 @@ public class Player : Controller
     {
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
-		if (GameManager.inst != null && !GameManager.inst.CheckPause (PAUSEMASK_MOVE))
+		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
         {
             base.Update();
         }
@@ -216,7 +216,7 @@ public class Player : Controller
 //            {
 //                AudioLibrary.PlayerWalking();
 //				anim.SetInteger ("Direction", 2);
-//            }
+//            } 
         }
         if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
         {

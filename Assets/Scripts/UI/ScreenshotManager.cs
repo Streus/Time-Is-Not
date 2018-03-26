@@ -12,6 +12,12 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	public int shotHeight;
 	public int shotDepth; 
 
+	// Events
+	public event ScreenshotEvent takeScreenshot;
+
+	// Delegates
+	public delegate void ScreenshotEvent(bool startShot);
+
 	void Awake()
 	{
 		for (int i = 0; i < LevelStateManager.maxNumStates; i++)
@@ -33,8 +39,27 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 
 		inst.screenCam.targetTexture = inst.screenshots[stateNum]; 
 
+		// Enable the camera to take a screenshot
 		inst.screenCam.enabled = true; 
+
+		// Apply any effects only the screenshot camera can see, using an event
+		if (inst.takeScreenshot != null)
+		{
+			inst.takeScreenshot(true); 
+		}
+
+		// Realign the screenshot camera to use bounds correctly
+
+		// Take the screenshot
 		inst.screenCam.Render();
+
+		// Unapply any effects only the screenshot camera can see, using an event
+		if (inst.takeScreenshot != null)
+		{
+			inst.takeScreenshot(false); 
+		}
+
+		// Disable the camera after taking the screenshot
 		inst.screenCam.enabled = false; 
 	}
 

@@ -16,4 +16,8 @@ public class SceneSetup : Singleton<SceneSetup>
 	[Header("Level timer settings")]
 	public bool useEndTimer; 
 	public float endTimerLength = 10; 
+
+	[Header("Level header settings")]
+	public bool useLevelHeader; 
+	public string levelHeader; 
 }

@@ -379,7 +379,7 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 		return true; 
 	}
-
+		
 
 	/*
 	 * Stasis Bubbles
