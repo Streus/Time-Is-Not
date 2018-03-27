@@ -74,9 +74,13 @@ public class Player : Controller
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
 		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
-        {
-            base.Update();
-        }
+		{
+			base.Update ();
+		}
+		else
+		{
+			anim.SetBool ("isMoving", false);
+		}
         //CheckForGround();
         sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
 		SpriteRenderer shadowRend = shadow.GetComponent<SpriteRenderer> ();
