@@ -615,8 +615,9 @@ public class TetherManager : Singleton<TetherManager>
         if (LevelStateManager.canCreateTetherPoint())
         {
             Debug.Log("Create tether point");
+			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
             LevelStateManager.createTetherPoint();
-            CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
+            
             AudioLibrary.PlayTetherPlacementSound();
             // Timeline arrow
             SetArrowTarget(LevelStateManager.curState, false, true);
@@ -688,6 +689,8 @@ public class TetherManager : Singleton<TetherManager>
 
     void CreateTimeTetherIndicator(Vector3 pos, int state)
     {
+		Debug.Log("Create time tether indicator. State = " + state); 
+
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
 		timeTetherIndicators.Add(indicator.GetComponent<TetherIndicator>()); 
 		TetherIndicator newIndicator = indicator.GetComponent<TetherIndicator>();
