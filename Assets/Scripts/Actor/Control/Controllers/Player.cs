@@ -51,6 +51,9 @@ public class Player : Controller
 	//how long the player has been walking against a pit
 	private float pitTimer = 0f;
 
+	private Vector3 TESTPOSITION;
+	private Vector3 TESTSIZE;
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -275,8 +278,14 @@ public class Player : Controller
 
 
 		//platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
-		platformCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed())), GetComponent<BoxCollider2D>().size, 0, platformFilter, platformsFound);
-		pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(movementVector * (getSelf().getMovespeed())), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
+
+		Vector2 colSize = gameObject.GetComponent<BoxCollider2D> ().size;
+		Vector2 moveVect = new Vector2(movementVector.normalized.x * colSize.x, movementVector.normalized.y * colSize.y);
+		platformCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(moveVect), GetComponent<BoxCollider2D>().size, 0, platformFilter, platformsFound);
+		pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(moveVect), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
+
+		TESTPOSITION = (Vector3)GetComponent<Collider2D> ().offset + transform.position + (Vector3)(moveVect);
+		TESTSIZE = GetComponent<BoxCollider2D> ().size;
 
 		bool seesPlatform = false;
 		for(int i = 0; i < platformsFound.Length; i++)
@@ -428,6 +437,10 @@ public class Player : Controller
 			Vector3 actualSize = new Vector3(csize.x * transform.localScale.x, csize.y * transform.localScale.y);
 			Gizmos.DrawWireCube(jumpTargetPos, actualSize);
 		}
+
+		//Platform Debug
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawCube (TESTPOSITION, TESTSIZE);
 
 		#if UNITY_EDITOR
 		UnityEditor.Handles.color = getState().color;
