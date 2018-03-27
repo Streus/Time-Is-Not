@@ -46,6 +46,8 @@ public class TetherIndicator : MonoBehaviour
 	[SerializeField] Sprite screenshotGoldTether; 
 	[SerializeField] Sprite screenshotSilverTether; 
 
+	[SerializeField] ParticleSystem zoomParticles; 
+
 	void OnEnable()
 	{
 		ScreenshotManager.inst.takeScreenshot += OnScreenshot; 
@@ -155,6 +157,18 @@ public class TetherIndicator : MonoBehaviour
 			}
 
 			Destroy(this.gameObject); 
+		}
+
+		if (zoomParticles != null)
+		{
+			if (GameManager.inst.pauseType == PauseType.ZOOM)
+			{
+				zoomParticles.gameObject.SetActive(true); 
+			}
+			else
+			{
+				zoomParticles.gameObject.SetActive(false); 
+			}
 		}
 
 	}
