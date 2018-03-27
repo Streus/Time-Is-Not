@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class LevelNameHeader : MonoBehaviour 
 {
+	// The main Header to use at the start of the scene
+	private static LevelNameHeader main;
+
 	// Enum State Machine
-	enum HeaderState
+	public enum HeaderState
 	{
 		WAIT_TO_APPEAR,
 		APPEAR,
 		VISIBLE,
 		DISAPPREAR,
 		INACTIVE
-	}; 
+	}
 
 	[Header("Current state (read only)")] 
 	[SerializeField] HeaderState headerState; 
@@ -36,8 +39,29 @@ public class LevelNameHeader : MonoBehaviour
 	[SerializeField] float waitToAppearLength = 1; 
 	[SerializeField] float stayVisibleLength = 1; 
 
+	/// <summary>
+	/// Get the main LevelNameHeader for this level
+	/// </summary>
+	/// <returns>whaddyathink</returns>
+	public static LevelNameHeader getMain()
+	{
+		return main;
+	}
 
-	// Use this for initialization
+	private void Awake()
+	{
+		//set this as main if no main exists
+		if (main == null)
+			main = this;
+	}
+
+	private void OnDestroy()
+	{
+		//free up the main ref if this was main
+		if (main == this)
+			main = null;
+	}
+
 	void Start () 
 	{
 		levelHeaderGroup = GetComponent<CanvasGroup>(); 
@@ -46,15 +70,7 @@ public class LevelNameHeader : MonoBehaviour
 		{
 			levelNameText.text = SceneSetup.inst.levelHeader; 
 
-			if (SceneSetup.inst.useLevelHeader)
-			{
-				SetHeaderState(HeaderState.WAIT_TO_APPEAR); 
-				//SetHeaderState(HeaderState.APPEAR); 
-			}
-			else
-			{
-				SetHeaderState(HeaderState.INACTIVE); 
-			}
+			SetHeaderState(HeaderState.INACTIVE);
 		}
 		else
 		{
@@ -110,7 +126,7 @@ public class LevelNameHeader : MonoBehaviour
 		}
 	}
 
-	void SetHeaderState(HeaderState newState)
+	public void SetHeaderState(HeaderState newState)
 	{
 		headerState = newState;
 
