@@ -32,6 +32,9 @@ public class ButtonSwitch : Interactable
 	[SerializeField]
 	private Sprite _pressedSprite;
 
+	[SerializeField]
+	private bool _reusable = true;
+
 	//spriteRenderer for the object
 	private SpriteRenderer _sprite;
 
@@ -118,9 +121,14 @@ public class ButtonSwitch : Interactable
 	void getInput()
 	{
 		//if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused() && !GameManager.CameraIsZoomedOut())
-		if (_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.inst.pauseType == PauseType.NONE)
+		if (_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.inst.pauseType == PauseType.NONE && isEnabled())
 		{
 			onInteract ();
+			if(!_reusable)
+			{
+				disable ();
+				return;
+			}
 			if(_timer != Mathf.Infinity && _timer > 0)
 			{
 				StartCoroutine (buttonTimer (_timer));
@@ -143,7 +151,8 @@ public class ButtonSwitch : Interactable
 				activatable.GetComponent<IActivatable>().onActivate ();
 		}
 		_sprite.sprite = _pressedSprite;
-		StartCoroutine (spriteTimer (0.4f));
+		if(_reusable)
+			StartCoroutine (spriteTimer (0.4f));
 	}
 
 	IEnumerator spriteTimer(float seconds)
