@@ -51,7 +51,10 @@ public class KeyCodeReader : Interactable, ISavable
         //TODO: get input button from input module
         source = this.GetComponent<AudioSource>();
         keyCodeUse = AudioLibrary.inst.codeDoorUnlock;
-        source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        if (source != null)
+        {
+            source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        }
         if (_buttonPrompt != null)
 			_buttonPrompt.SetActive (false);
 		if (_negativePrompt != null)

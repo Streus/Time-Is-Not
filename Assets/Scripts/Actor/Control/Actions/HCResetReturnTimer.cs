@@ -15,9 +15,12 @@ public class HCResetReturnTimer : Action
         {
             
             hc.setReturnTimerOnStand();
-            source.clip = AudioLibrary.inst.hermitCrabMoving;
-            source.loop = true;
-            source.Play();
+            if (source != null)
+            {
+                source.clip = AudioLibrary.inst.hermitCrabMoving;
+                source.loop = true;
+                source.Play();
+            }
         }
         else
             hc.resetReturnTimer();

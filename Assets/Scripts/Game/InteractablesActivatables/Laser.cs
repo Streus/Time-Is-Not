@@ -72,15 +72,21 @@ public class Laser : Interactable, IActivatable, ISavable
         source = this.gameObject.GetComponent<AudioSource>();
         laserSecurityHum = AudioLibrary.inst.laserSecurityHum;
         laserDeathHum = AudioLibrary.inst.laserDeathHum;
-        if(_type == LaserType.Trigger)
+        
+        if (source != null)
         {
-            source.clip = laserSecurityHum;
-            source.Play();
-        }
-        else
-        {
-            source.clip = laserDeathHum;
-            source.Play();
+            source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+
+            if (_type == LaserType.Trigger)
+            {
+                source.clip = laserSecurityHum;
+                source.Play();
+            }
+            else
+            {
+                source.clip = laserDeathHum;
+                source.Play();
+            }
         }
 	}
 	

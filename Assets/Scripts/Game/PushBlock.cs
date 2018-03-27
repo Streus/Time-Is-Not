@@ -67,7 +67,10 @@ public class PushBlock : MonoBehaviour, ISavable
         {
             source = this.GetComponent<AudioSource>();
             pushBlockSound = AudioLibrary.inst.pushBlockMoving;
-            source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+            if(source != null)
+            {
+                source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+            }
         }
 	}
 

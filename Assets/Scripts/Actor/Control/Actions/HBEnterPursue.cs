@@ -10,13 +10,11 @@ public class HBEnterPursue : Action
     public override void perform(Controller c)
     {
         source = c.GetComponent<AudioSource>();
-        source.clip = AudioLibrary.inst.hummingBirdSpotting;
-        source.loop = false;
-        source.Play();
-        if(!source.isPlaying)
+        if (source != null)
         {
-            Debug.Log("done");
-            //continue playing patrol sound but needs to be shorter
+            source.clip = AudioLibrary.inst.hummingBirdSpotting;
+            source.loop = false;
+            source.Play();
         }
     }
 }

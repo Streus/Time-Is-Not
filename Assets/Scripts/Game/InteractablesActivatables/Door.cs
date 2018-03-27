@@ -69,7 +69,10 @@ public class Door : Interactable, IActivatable, ISavable
         closeFieldDoor = AudioLibrary.inst.doorFieldClosed;
         openMetalDoor = AudioLibrary.inst.doorMetalOpen;
         closeMetalDoor = AudioLibrary.inst.doorMetalClose;
-        source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        if (source != null)
+        {
+            source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
+        }
     }
 
 	// Update is called once per frame

@@ -10,9 +10,12 @@ public class DiscardPath : Action
 	{
         
         source = c.GetComponent<AudioSource>();
-        source.clip = AudioLibrary.inst.hummingBirdMoving;
-        source.loop = true;
-        source.Play();
+        if (source != null)
+        {
+            source.clip = AudioLibrary.inst.hummingBirdMoving;
+            source.loop = true;
+            source.Play();
+        }
         c.discardPath();
     }
 }

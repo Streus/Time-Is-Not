@@ -21,8 +21,11 @@ public class HBPursue : Action
         if (Vector3.Distance(c.transform.position, bird.getPursuitTarget().position) < killDistance)
         {
             bird.getPursuitTarget().GetComponent<Entity>().onDeath();
-            
-            source.PlayOneShot(AudioLibrary.inst.hummingBirdAttacking);
+
+            if (source != null)
+            {
+                source.PlayOneShot(AudioLibrary.inst.hummingBirdAttacking);
+            }
         }
 	}
 }
