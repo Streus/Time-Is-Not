@@ -24,6 +24,7 @@ public class LevelNameHeader : MonoBehaviour
 	[Header("Object refs")] 
 	[SerializeField] Text levelNameText; 
 
+	[SerializeField]
 	CanvasGroup levelHeaderGroup; 
 
 	// Transition settings
@@ -48,33 +49,34 @@ public class LevelNameHeader : MonoBehaviour
 		return main;
 	}
 
-	private void Awake()
+	public void Awake()
 	{
 		//set this as main if no main exists
 		if (main == null)
 			main = this;
+
+		levelHeaderGroup = GetComponent<CanvasGroup>();
 	}
 
-	private void OnDestroy()
+	public void OnDestroy()
 	{
 		//free up the main ref if this was main
 		if (main == this)
 			main = null;
 	}
-
+		
 	void Start () 
 	{
-		levelHeaderGroup = GetComponent<CanvasGroup>(); 
-
 		if (SceneSetup.inst != null)
 		{
 			levelNameText.text = SceneSetup.inst.levelHeader; 
 
-			SetHeaderState(HeaderState.INACTIVE);
+//			SetHeaderState(HeaderState.INACTIVE);
 		}
 		else
 		{
-			SetHeaderState(HeaderState.INACTIVE); 
+			levelNameText.text = "DEFAULT";
+//			SetHeaderState(HeaderState.INACTIVE); 
 		}
 	}
 	

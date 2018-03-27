@@ -39,13 +39,9 @@ public class TransitionBuddy
 
 	public void endCurrentScene(string nextScene)
 	{
-		endCurrentScene (SceneManager.GetSceneByName (nextScene));
-	}
-
-	public void endCurrentScene(Scene nextScene)
-	{
-		SceneManager.LoadScene (nextScene.name);
-		SceneManager.SetActiveScene (nextScene);
+		SceneManager.LoadScene (nextScene);
+		Debug.Log ("Loaded " + nextScene); //DEBUG
+		SceneManager.SetActiveScene (SceneManager.GetSceneByName (nextScene));
 
 		Debug.Log ("[TransitionBuddy] Okay, time to go! New scene, here we come!"); //DEBUG TB
 	}
@@ -55,7 +51,8 @@ public class TransitionBuddy
 	{
 		//TODO fade-in effect
 		//TODO save this level as the most current level
-//		LevelNameHeader.getMain().SetHeaderState(LevelNameHeader.HeaderState.APPEAR);
+		if(LevelNameHeader.getMain() != null)
+			LevelNameHeader.getMain().SetHeaderState(LevelNameHeader.HeaderState.APPEAR);
 
 		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
 	}
