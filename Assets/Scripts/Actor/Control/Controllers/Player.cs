@@ -181,7 +181,6 @@ public class Player : Controller
         prePushState = getState();
         setState(pushState);
 
-		Debug.Log ("Enter Push"); //DEBUG
 		anim.SetBool ("isMoving", true);
 		anim.SetBool ("isPushing", true);
     }
@@ -190,7 +189,6 @@ public class Player : Controller
     {
         setState(prePushState);
 
-		Debug.Log ("Exit Push"); //DEBUG
 		anim.SetBool ("isMoving", false);
 		anim.SetBool ("isPushing", false);
     }

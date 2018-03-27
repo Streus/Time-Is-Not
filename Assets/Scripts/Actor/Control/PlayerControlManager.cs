@@ -61,7 +61,6 @@ public class PlayerControlManager : ScriptableObject
 
 	public void Awake()
 	{
-		Debug.Log ("PCM Awake."); //DEBUG
 		if (primary == null)
 		{
 			setAsPrimary ();
