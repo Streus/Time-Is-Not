@@ -99,6 +99,11 @@ public class TetherManager : Singleton<TetherManager>
 	// TODO change this to false at the start of the scene and reenable once the player gets control after Amelia finishes her first placing animation
 	bool tetherHUDVisible = true; 
 
+	// Set true when the level ends and all tether indicator return objects are flying to the player. Set false again when all are collected
+	bool endLevelWaitForCollection; 
+	// Set true once EndLevelRemoveAllTetherPoints is called
+	bool levelIsEnding; 
+
     bool playTMenuOpen = true;
 
     // Use this for initialization
@@ -286,6 +291,17 @@ public class TetherManager : Singleton<TetherManager>
 		{
 			if (menuLight != null && menuLightOff != null)
 				menuLight.sprite = menuLightOff; 
+		}
+
+
+		// End level tether point collection
+		// Once all indicator return objects have returned to the player and been destroyed, this will allow EndLevelAllTetherPointdCollected to return true
+		if (endLevelWaitForCollection)
+		{
+			if (IndicatorReturnObject.NoInstancesExist())
+			{
+				endLevelWaitForCollection = false; 
+			}
 		}
     }
 
@@ -751,10 +767,24 @@ public class TetherManager : Singleton<TetherManager>
 		}
     }
 
+	/// <summary>
+	/// Causes all tether points, including the first, to enter their destroy animation
+	/// </summary>
 	public void EndLevelRemoveAllTetherPoints()
 	{
 		tetherHUDVisible = false; 
-		RemoveTimeTetherIndicator(0, true); 
+		RemoveTimeTetherIndicator(0, true);
+		endLevelWaitForCollection = true; 
+		levelIsEnding = true; 
+	}
+
+	public bool EndLevelAllTetherPointsCollected()
+	{
+		if (levelIsEnding && endLevelWaitForCollection == false)
+		{
+			return true; 
+		}
+		return false; 
 	}
 
 	/// <summary>
