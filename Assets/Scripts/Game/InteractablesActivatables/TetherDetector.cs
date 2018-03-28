@@ -6,6 +6,8 @@ public class TetherDetector : Interactable
 {
 	[SerializeField]
 	private Vector2 _range = new Vector2(1,1);
+	[SerializeField]
+	private Vector2 _offset = new Vector2(0,0);
 
 	[Tooltip("List of activatables to affect.")]
 	[SerializeField]
@@ -28,7 +30,7 @@ public class TetherDetector : Interactable
 
 	bool CheckForTether()
 	{
-		Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position, _range, 0);
+		Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position + (Vector3)_offset, _range, 0);
 		for(int i = 0; i < colsHit.Length; i++)
 		{
 			if(colsHit[i].GetComponentInParent<TetherIndicator>() != null)
@@ -61,7 +63,7 @@ public class TetherDetector : Interactable
 	{
 		float xdist = _range.x / 2;
 		float ydist = _range.y / 2;
-		Vector2 center = (transform.position);
+		Vector2 center = (transform.position + (Vector3)_offset);
 		Gizmos.color = Color.green;
 		Gizmos.DrawLine (center + new Vector2(-xdist, ydist), center + new Vector2(xdist, ydist));
 		Gizmos.DrawLine (center + new Vector2(xdist, -ydist), center + new Vector2(xdist, ydist));
