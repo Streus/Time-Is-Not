@@ -68,6 +68,10 @@ public class TetherManager : Singleton<TetherManager>
     CanvasGroup tetherMenuGroup;
     [SerializeField] float tetherMenuFadeInSpeed = 1;
     [SerializeField] float tetherMenuFadeOutSpeed = 1;
+
+	// If > 0, counts down and prevents the tether menu from being brought up
+	public float tetherMenuDisableTimer; 
+
 	[SerializeField] Image menuLight; 
 	[SerializeField] Sprite menuLightOn; 
 	[SerializeField] Sprite menuLightOff; 
@@ -123,12 +127,6 @@ public class TetherManager : Singleton<TetherManager>
 
     void Update()
     {
-		// FIXME Remove this test later
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			EndLevelRemoveAllTetherPoints(); 
-		}
-
         /*
 		 * Create tether point functionality
 		 */
@@ -201,7 +199,7 @@ public class TetherManager : Singleton<TetherManager>
             {
                 // If the tether menu key is held down
 				//if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && !GameManager.CameraIsZoomedOut() && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing())
-				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && fastTetherKeyTimer <= 0 && !GameManager.isPlayerDashing() && (GameManager.inst.pauseType == PauseType.NONE || GameManager.inst.pauseType == PauseType.TETHER_MENU)) 
+				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU) && fastTetherKeyTimer <= 0 && tetherMenuDisableTimer == 0 && !GameManager.isPlayerDashing() && (GameManager.inst.pauseType == PauseType.NONE || GameManager.inst.pauseType == PauseType.TETHER_MENU)) 
 				{
                     tetherUIState = TetherUIState.TETHER_MENU;
                     //GameManager.setPause(true);
@@ -222,7 +220,7 @@ public class TetherManager : Singleton<TetherManager>
 					if (GameManager.inst.pauseType == PauseType.TETHER_MENU)
 					{
 						GameManager.inst.ExitPauseState(); 
-						Debug.Log("ExitPauseState()"); 
+						//Debug.Log("ExitPauseState()"); 
 					}
 
                     CursorManager.inst.lockCursorType = false;
@@ -301,6 +299,23 @@ public class TetherManager : Singleton<TetherManager>
 			if (IndicatorReturnObject.NoInstancesExist())
 			{
 				endLevelWaitForCollection = false; 
+			}
+		}
+
+		if (tetherMenuDisableTimer > 0)
+		{
+			tetherMenuDisableTimer -= Time.deltaTime; 
+			if (tetherMenuDisableTimer < 0)
+			{
+				// Don't allow the timer to reach 0 until the tether menu key has been released
+				if (PlayerControlManager.GetKey(ControlInput.TETHER_MENU))
+				{
+					tetherMenuDisableTimer = 0.1f; 
+				}
+				else
+				{
+					tetherMenuDisableTimer = 0f; 
+				}
 			}
 		}
     }
@@ -558,7 +573,7 @@ public class TetherManager : Singleton<TetherManager>
 
         // Next, start two simultaneous actions
         // 	(1) Make the screen transition play
-        //tetherTransition.SetFadeOut();
+        tetherTransition.SetFadeOut();
 		tetherShaderTransition.SetFadeOut(); 
 
         //	(2) Make the timeline arrow move directly above the previous tether point
@@ -583,7 +598,7 @@ public class TetherManager : Singleton<TetherManager>
         // Now that the state has been loaded, make the transition fade back in
         playerScript.PlayReappearAnimation();
         yield return new WaitForSeconds(0.1f);
-        //tetherTransition.SetFadeIn();
+        tetherTransition.SetFadeIn();
 		tetherShaderTransition.SetFadeIn(); 
 
 		// Play ripple in particle effect
@@ -633,7 +648,7 @@ public class TetherManager : Singleton<TetherManager>
     {
         if (LevelStateManager.canCreateTetherPoint())
         {
-            Debug.Log("Create tether point");
+            //Debug.Log("Create tether point");
 			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
             LevelStateManager.createTetherPoint();
             
@@ -708,7 +723,7 @@ public class TetherManager : Singleton<TetherManager>
 
     void CreateTimeTetherIndicator(Vector3 pos, int state)
     {
-		Debug.Log("Create time tether indicator. State = " + state); 
+		//Debug.Log("Create time tether indicator. State = " + state); 
 
         GameObject indicator = Instantiate(timeTetherIndicatorPrefab, pos, Quaternion.identity, this.transform);
 		timeTetherIndicators.Add(indicator.GetComponent<TetherIndicator>()); 
@@ -894,7 +909,7 @@ public class TetherManager : Singleton<TetherManager>
 	{
 		for (int i = 0; i < inst.timeTetherIndicators.Count; i++)
 		{
-			if (inst.timeTetherIndicators[i].MouseIsOver())
+			if (inst.timeTetherIndicators[i].MouseIsOver() && inst.timeTetherIndicators[i].allowKeyRemoval)
 			{
 				return true; 
 			}

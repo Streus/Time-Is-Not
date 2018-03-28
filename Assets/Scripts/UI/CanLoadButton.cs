@@ -23,10 +23,16 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	bool beingRemoved; 
 	public Color beingRemovedColor; 
 
+	[SerializeField] Button removeButton; 
+	public bool hideRemoveButton; 
+
 	void Start()
 	{
 		button = GetComponent<Button>(); 
 		image = GetComponent<Image>(); 
+
+		if (hideRemoveButton && removeButton != null)
+			removeButton.gameObject.SetActive(false); 
 	}
 	
 	// Update is called once per frame
@@ -35,12 +41,18 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (LevelStateManager.canLoadTetherPoint(state))
         {
             button.interactable = true;
-			//image.sprite = activeSprite;  
+			//image.sprite = activeSprite; 
+
+			if (removeButton != null && !hideRemoveButton)
+				removeButton.gameObject.SetActive(true); 
         }
         else
         {
             button.interactable = false;
 			//image.sprite = inactiveSprite; 
+
+			if (removeButton != null)
+				removeButton.gameObject.SetActive(false); 
         }
 	}
 
@@ -102,5 +114,14 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		{
 			nextButton.SetToBeingRemoved(isBeingRemoved); 
 		}
+	}
+
+	public void OnRemoveButton()
+	{
+		Debug.Log("On Remove Button: " + state); 
+
+		TetherManager.inst.RemoveTetherPoint(state); 
+
+		TetherManager.inst.tetherMenuDisableTimer = 0.2f; 
 	}
 }

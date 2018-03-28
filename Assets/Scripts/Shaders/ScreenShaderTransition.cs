@@ -112,7 +112,7 @@ public class ScreenShaderTransition : MonoBehaviour
 			}
 
 			transitionMat.SetFloat("_Cutoff", curFade);
-			Debug.Log("material cutoff: " + transitionMat.GetFloat("_Cutoff"));
+			//Debug.Log("material cutoff: " + transitionMat.GetFloat("_Cutoff"));
 		}
 	}
 

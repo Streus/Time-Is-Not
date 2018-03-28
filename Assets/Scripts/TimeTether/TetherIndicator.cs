@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 
 public class TetherIndicator : MonoBehaviour 
 {
-	[HideInInspector] public int tetherIndex; 
+	public int tetherIndex; 
 
 	Transform moveParent; 
 	Vector3 offsetFromMoveParent; 
@@ -223,7 +223,7 @@ public class TetherIndicator : MonoBehaviour
 
 	void OnScreenshot(bool startShot)
 	{
-		Debug.Log("On Screenshot: " + startShot + "; tetherIndex: " + tetherIndex);
+		//Debug.Log("On Screenshot: " + startShot + "; tetherIndex: " + tetherIndex);
 
 		// Only enable the arrow if it's the current tether
 		if (LevelStateManager.curState == tetherIndex)
