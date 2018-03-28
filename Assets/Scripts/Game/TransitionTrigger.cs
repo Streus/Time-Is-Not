@@ -10,13 +10,20 @@ public class TransitionTrigger : MonoBehaviour
 
 	private bool activated = false;
 
+	private ScreenShaderTransition sst;
+
 	public void Update()
 	{
-		if (activated && IndicatorReturnObject.NoInstancesExist ())
+		//stay idle waiting for player to finish / cleanup to be done
+		if (activated && TetherManager.inst.EndLevelAllTetherPointsCollected())
 		{
 			//start transition
-			//TODO delay this by fade-out
-			TransitionBuddy.getInstance().endCurrentScene(nextScene);
+			sst = ScreenShaderTransition.getInstance("LevelChangeTransition");
+			if (sst != null)
+			{
+				sst.SetFadeOut ();
+				sst.fadeOutDone += performTransition;
+			}
 		}
 	}
 
@@ -27,5 +34,12 @@ public class TransitionTrigger : MonoBehaviour
 		TetherManager.inst.EndLevelRemoveAllTetherPoints ();
 
 		activated = true;
+	}
+
+	// Move to the next level
+	private void performTransition()
+	{
+		sst.fadeOutDone -= performTransition;
+		TransitionBuddy.getInstance().endCurrentScene(nextScene);
 	}
 }

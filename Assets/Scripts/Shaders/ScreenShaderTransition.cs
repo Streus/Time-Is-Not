@@ -5,6 +5,13 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ScreenShaderTransition : MonoBehaviour 
 {
+	// Static directory of all active SSTs
+	private static Dictionary<string, ScreenShaderTransition> directory;
+	static ScreenShaderTransition()
+	{
+		directory = new Dictionary<string, ScreenShaderTransition> ();
+	}
+
 	// Enum State Machine
 	public enum TransitionState
 	{
@@ -48,6 +55,24 @@ public class ScreenShaderTransition : MonoBehaviour
 	// Delegates
 	public delegate void TransitionDone();
 
+	// Directory management
+	public void Awake()
+	{
+		directory.Add (transitionName, this);
+	}
+	public void OnDestroy()
+	{
+		directory.Remove (transitionName);
+	}
+
+	public static ScreenShaderTransition getInstance(string name)
+	{
+		ScreenShaderTransition sst;
+		if (directory.TryGetValue (name, out sst))
+			return sst;
+		return null;
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -62,9 +87,9 @@ public class ScreenShaderTransition : MonoBehaviour
 			if (transitionState == TransitionState.FADE_IN)
 			{
 				curFade -= fadeInSpeed * Time.deltaTime; 
-				if (curFade <= 0)
+				if (curFade <= 0f)
 				{
-					curFade = 0; 
+					curFade = 0f; 
 					SetTransitionState(TransitionState.OFF); 
 					if (fadeInDone != null)
 					{
@@ -75,9 +100,9 @@ public class ScreenShaderTransition : MonoBehaviour
 			else if (transitionState == TransitionState.FADE_OUT)
 			{
 				curFade += fadeOutSpeed * Time.deltaTime; 
-				if (curFade >= 1)
+				if (curFade >= 1f)
 				{
-					curFade = 1; 
+					curFade = 1f; 
 					SetTransitionState(TransitionState.ON); 
 					if (fadeOutDone != null)
 					{
@@ -94,7 +119,7 @@ public class ScreenShaderTransition : MonoBehaviour
 	#if UNITY_EDITOR
 	void OnValidate()
 	{
-		SetTransitionState(transitionState); 
+		SetTransitionState(transitionState);
 	}
 	#endif
 

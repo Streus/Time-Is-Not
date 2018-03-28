@@ -12,6 +12,7 @@ public class TransitionBuddy
 
 	#region INSTANCE_VARS
 
+	private ScreenShaderTransition transitionEffect;
 	#endregion
 
 	#region STATIC_METHODS
@@ -29,6 +30,7 @@ public class TransitionBuddy
 	private TransitionBuddy()
 	{
 		SceneManager.activeSceneChanged += beginNewScene;
+		transitionEffect = null;
 		Debug.Log ("[TransitionBuddy] I'm back!"); //DEBUG TB
 	}
 
@@ -40,21 +42,37 @@ public class TransitionBuddy
 	public void endCurrentScene(string nextScene)
 	{
 		SceneManager.LoadScene (nextScene);
-		Debug.Log ("Loaded " + nextScene); //DEBUG
 		SceneManager.SetActiveScene (SceneManager.GetSceneByName (nextScene));
 
 		Debug.Log ("[TransitionBuddy] Okay, time to go! New scene, here we come!"); //DEBUG TB
 	}
 
-	//Called when a new scene starts
+	//Called when a new scene starts, after awake
 	private void beginNewScene (Scene prev, Scene curr)
 	{
 		//TODO fade-in effect
 		//TODO save this level as the most current level
-		if(LevelNameHeader.getMain() != null)
-			LevelNameHeader.getMain().SetHeaderState(LevelNameHeader.HeaderState.APPEAR);
+		transitionEffect = ScreenShaderTransition.getInstance("LevelChangeTransition");
+		if (transitionEffect != null)
+		{
+			transitionEffect.SetFadeIn ();
+			transitionEffect.fadeInDone += finishSceneSetup;
+		}
 
 		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
+	}
+
+	private void finishSceneSetup()
+	{
+		transitionEffect.fadeInDone -= finishSceneSetup;
+		transitionEffect = null;
+
+		if (LevelNameHeader.getMain () != null)
+			LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.APPEAR);
+		else
+			Debug.LogWarning ("No main LevelNameHeader!");
+
+		Debug.Log ("[TransitionBuddy] All done setting up. Have fun!");
 	}
 	#endregion
 }
