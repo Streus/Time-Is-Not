@@ -1754,6 +1754,8 @@ GameObject:
   - component: {fileID: 92258014609004294}
   - component: {fileID: 124559304230223202}
   - component: {fileID: 81493142316779116}
+  - component: {fileID: 114598479184496808}
+  - component: {fileID: 114462171412792342}
   m_Layer: 5
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5458,6 +5460,24 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Master Volume: 100'
+--- !u!114 &114462171412792342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672024216453400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75d77c17e2d04ddcb1c7919ff183fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionName: TetherTransition
+  transitionState: 3
+  shaderEnabled: 1
+  transitionMat: {fileID: 2100000, guid: 0809bd71e07f046f19fe6e988239a252, type: 2}
+  fadeInSpeed: 1
+  fadeOutSpeed: 1
+  curFade: 0
 --- !u!114 &114463685186844486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5898,6 +5918,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114598479184496808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672024216453400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75d77c17e2d04ddcb1c7919ff183fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionName: LevelChangeTransition
+  transitionState: 0
+  shaderEnabled: 1
+  transitionMat: {fileID: 2100000, guid: ffb2080831d034e8c8414b6faf98e5c6, type: 2}
+  fadeInSpeed: 2
+  fadeOutSpeed: 2
+  curFade: 1
 --- !u!114 &114606689985659730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7165,6 +7203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headerState: 0
   levelNameText: {fileID: 114761437161147164}
+  levelHeaderGroup: {fileID: 0}
   fadeInSpeed: 5
   fadeOutSpeed: 5
   waitToAppearLength: 1
