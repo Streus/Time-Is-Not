@@ -61,14 +61,22 @@ public class TransitionBuddy
 			transitionEffect.SetFadeIn ();
 			transitionEffect.fadeInDone += finishSceneSetup;
 		}
+		else
+		{
+			Debug.LogWarning ("Fade In not set up!");
+			finishSceneSetup ();
+		}
 
 		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
 	}
 
 	private void finishSceneSetup()
 	{
-		transitionEffect.fadeInDone -= finishSceneSetup;
-		transitionEffect = null;
+		if (transitionEffect != null)
+		{
+			transitionEffect.fadeInDone -= finishSceneSetup;
+			transitionEffect = null;
+		}
 
 		//start up header display
 		if (LevelNameHeader.getMain () != null)
