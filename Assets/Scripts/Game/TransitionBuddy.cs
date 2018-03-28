@@ -50,8 +50,11 @@ public class TransitionBuddy
 	//Called when a new scene starts, after awake
 	private void beginNewScene (Scene prev, Scene curr)
 	{
-		//TODO fade-in effect
-		//TODO save this level as the most current level
+		//save
+		SaveManager.level = SceneManager.GetActiveScene ().name;
+		SaveManager.Save ();
+
+		//start fade effect
 		transitionEffect = ScreenShaderTransition.getInstance("LevelChangeTransition");
 		if (transitionEffect != null)
 		{
@@ -67,6 +70,7 @@ public class TransitionBuddy
 		transitionEffect.fadeInDone -= finishSceneSetup;
 		transitionEffect = null;
 
+		//start up header display
 		if (LevelNameHeader.getMain () != null)
 			LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.APPEAR);
 		else
