@@ -20,6 +20,15 @@ public class ScreenShaderTransition : MonoBehaviour
 	[Header("Current state (read only)")] 
 	[SerializeField] TransitionState transitionState; 
 
+	// Other scripts can check transitionInProgress to determine if the transitionState == FADE_IN or FADE_OUT
+	bool m_transitionInProgress; 
+	public bool transitionInProgress
+	{
+		get{
+			return m_transitionInProgress; 
+		}
+	}
+
 	[Header("Settings")] 
 	[SerializeField] bool shaderEnabled;
 	[SerializeField] Material transitionMat; 
@@ -109,15 +118,19 @@ public class ScreenShaderTransition : MonoBehaviour
 		{
 			case TransitionState.FADE_IN:
 				curFade = 1;
+				m_transitionInProgress = true; 
 				break; 
 			case TransitionState.ON:
 				curFade = 1;
+				m_transitionInProgress = false; 
 				break; 
 			case TransitionState.FADE_OUT:
 				curFade = 0;
+				m_transitionInProgress = true; 
 				break; 
 			case TransitionState.OFF:
 				curFade = 0;
+				m_transitionInProgress = false; 
 				break; 
 		}
 	}

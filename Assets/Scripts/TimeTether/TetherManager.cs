@@ -50,6 +50,7 @@ public class TetherManager : Singleton<TetherManager>
 	[SerializeField] Player playerScript;
 
     [SerializeField] TetherTransition tetherTransition;
+	[SerializeField] ScreenShaderTransition tetherShaderTransition; 
 
     [Header("Fast tether back settings")]
     [Tooltip("If true, the player can tap the tether menu key to instantly go back to the last tether point.")]
@@ -542,6 +543,7 @@ public class TetherManager : Singleton<TetherManager>
         // Next, start two simultaneous actions
         // 	(1) Make the screen transition play
         tetherTransition.SetFadeOut();
+		tetherShaderTransition.SetFadeOut(); 
 
         //	(2) Make the timeline arrow move directly above the previous tether point
         SetArrowTarget(stateToLoad, false, false);
@@ -566,6 +568,7 @@ public class TetherManager : Singleton<TetherManager>
         playerScript.PlayReappearAnimation();
         yield return new WaitForSeconds(0.1f);
         tetherTransition.SetFadeIn();
+		tetherShaderTransition.SetFadeIn(); 
 
 		// Play ripple in particle effect
 		ripples = Instantiate(Resources.Load("Prefabs/ParticlesRippleIn") as GameObject, GameManager.GetPlayer().transform).GetComponent<ParticleSystem>();
