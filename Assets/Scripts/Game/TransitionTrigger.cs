@@ -15,7 +15,9 @@ public class TransitionTrigger : MonoBehaviour
 	public void Update()
 	{
 		//stay idle waiting for player to finish / cleanup to be done
-		if (activated && TetherManager.inst.EndLevelAllTetherPointsCollected())
+		if (activated && 
+			IndicatorReturnObject.NoInstancesExist() &&
+			TetherManager.inst.EndLevelAllTetherPointsCollected())
 		{
 			//start transition
 			sst = ScreenShaderTransition.getInstance("LevelChangeTransition");
@@ -23,6 +25,7 @@ public class TransitionTrigger : MonoBehaviour
 			{
 				sst.SetFadeOut ();
 				sst.fadeOutDone += performTransition;
+				activated = false;
 			}
 		}
 	}
