@@ -36,8 +36,18 @@ public class TransitionTrigger : MonoBehaviour
 		GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
 		TetherManager.inst.EndLevelRemoveAllTetherPoints ();
 
+		//FIXME temporary solution to waiting for tethers to be destroyed
+		StartCoroutine (temp_delay ());
+//		activated = true;
+	}
+		
+	#region DON'T LOOK PLS THANKS
+	private IEnumerator temp_delay()
+	{
+		yield return new WaitForSecondsRealtime (1f);
 		activated = true;
 	}
+	#endregion
 
 	// Move to the next level
 	private void performTransition()

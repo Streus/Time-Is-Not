@@ -67,17 +67,14 @@ public class LevelNameHeader : MonoBehaviour
 		
 	void Start () 
 	{
+		//get level name
 		if (SceneSetup.inst != null)
-		{
 			levelNameText.text = SceneSetup.inst.levelHeader; 
-
-//			SetHeaderState(HeaderState.INACTIVE);
-		}
 		else
-		{
 			levelNameText.text = "DEFAULT";
-//			SetHeaderState(HeaderState.INACTIVE); 
-		}
+
+		//set to default state
+		SetHeaderState(HeaderState.INACTIVE); 
 	}
 	
 	// Update is called once per frame
