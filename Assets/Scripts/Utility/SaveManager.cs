@@ -22,6 +22,9 @@ public class SaveManager : Singleton<SaveManager>
 
     static string m_level; 
 
+	[Tooltip("The scene loaded when new game is pressed")] 
+	public string newGameStartScene; 
+
     public static string level
     {
         get
@@ -168,7 +171,8 @@ public class SaveManager : Singleton<SaveManager>
 
     public static void ClearData()
     {
-        SaveManager.level = "Vertical Slice";
+        //SaveManager.level = "Vertical Slice";
+		SaveManager.level = inst.newGameStartScene; 
         //SaveManager.controlPreset = 0;
         Save();
         Load();
