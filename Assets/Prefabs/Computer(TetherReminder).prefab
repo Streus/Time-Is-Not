@@ -53,8 +53,7 @@ GameObject:
   - component: {fileID: 4474388846862060}
   - component: {fileID: 212661972061090416}
   - component: {fileID: 61057354510700188}
-  - component: {fileID: 114792843922076260}
-  - component: {fileID: 61545962016765448}
+  - component: {fileID: 114475100206734072}
   m_Layer: 15
   m_Name: Computer(TetherReminder)
   m_TagString: Untagged
@@ -69,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1502804306694576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -91.42, y: -230.94, z: 0}
+  m_LocalPosition: {x: -4.98, y: -11.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4938998810490076}
@@ -128,32 +127,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8286424, y: 0.8732147}
   m_EdgeRadius: 0
---- !u!61 &61545962016765448
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1502804306694576}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.751915}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1.28, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.59, y: 1.5136261}
-  m_EdgeRadius: 0
---- !u!114 &114792843922076260
+--- !u!114 &114475100206734072
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -161,18 +135,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1502804306694576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf64b3365c0ac4087a0c8d8ef057e5b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d38f258541c84d96a3af184c531f68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
   _triggersSecurityDoors: 0
-  _interactKey: 101
-  _activatables:
-  - {fileID: 0}
-  _buttonPrompt: {fileID: 1313033636659088}
-  _negativePrompt: {fileID: 1283069099216856}
-  _unpressedSprite: {fileID: 21300000, guid: 4c7a71fc1717b43d4a2f037ac8b6a816, type: 3}
-  _pressedSprite: {fileID: 21300000, guid: 4c7a71fc1717b43d4a2f037ac8b6a816, type: 3}
+  _range: {x: 1.96, y: 1.7}
+  _activatables: []
 --- !u!212 &212172729142160302
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -246,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -19608
+  m_SortingOrder: 1158
   m_Sprite: {fileID: 21300000, guid: 4c7a71fc1717b43d4a2f037ac8b6a816, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
