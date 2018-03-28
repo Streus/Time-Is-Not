@@ -558,7 +558,7 @@ public class TetherManager : Singleton<TetherManager>
 
         // Next, start two simultaneous actions
         // 	(1) Make the screen transition play
-        tetherTransition.SetFadeOut();
+        //tetherTransition.SetFadeOut();
 		tetherShaderTransition.SetFadeOut(); 
 
         //	(2) Make the timeline arrow move directly above the previous tether point
@@ -583,7 +583,7 @@ public class TetherManager : Singleton<TetherManager>
         // Now that the state has been loaded, make the transition fade back in
         playerScript.PlayReappearAnimation();
         yield return new WaitForSeconds(0.1f);
-        tetherTransition.SetFadeIn();
+        //tetherTransition.SetFadeIn();
 		tetherShaderTransition.SetFadeIn(); 
 
 		// Play ripple in particle effect
