@@ -124,7 +124,7 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayerWalking()
     {
-        GlobalAudio.PlaySound(inst.playerWalking, 128, 0.0f, 1.0f, 1.25f, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+        GlobalAudio.PlaySound(inst.playerWalking, 128, 1.0f, 1.0f, 1.25f, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
     #endregion
 
