@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400539008978016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.58, y: 5.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224153313036315280}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -120,11 +120,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 220
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 300
+    m_MaxSize: 296
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 21300008, guid: 9689ecb25f4ff4441ba825d797b9268f, type: 3}
   - {fileID: 21300006, guid: 9689ecb25f4ff4441ba825d797b9268f, type: 3}
   - {fileID: 21300004, guid: 9689ecb25f4ff4441ba825d797b9268f, type: 3}
+  - {fileID: 21300000, guid: 9689ecb25f4ff4441ba825d797b9268f, type: 3}
   _controller: {fileID: 0}
 --- !u!212 &212712519541560872
 SpriteRenderer:

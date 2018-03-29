@@ -21,7 +21,7 @@ public class EndTimerTrigger : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other){ 
         if(other.gameObject.tag == "Player"){ 
             if(GameManager.inst.useEndTimer == false){ 
-                GameManager.inst.StartEndTimer();
+                GameManager.inst.StartEndTimer(20);
                 TurnOnTimers = true;
             }
         }
