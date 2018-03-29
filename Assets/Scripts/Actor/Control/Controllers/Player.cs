@@ -284,7 +284,7 @@ public class Player : Controller
 		//platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 
 		Vector2 colSize = gameObject.GetComponent<BoxCollider2D> ().size;
-		Vector2 moveVect = new Vector2(movementVector.normalized.x * colSize.x, movementVector.normalized.y * colSize.y);
+		Vector2 moveVect = new Vector2(movementVector.normalized.x * colSize.x * 0.5f, movementVector.normalized.y * colSize.y);
 		platformCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(moveVect), GetComponent<BoxCollider2D>().size, 0, platformFilter, platformsFound);
 		pitCount = Physics2D.OverlapBox((Vector3)GetComponent<Collider2D>().offset + transform.position + (Vector3)(moveVect), GetComponent<BoxCollider2D>().size, 0, pitFilter, pitsFound);
 
