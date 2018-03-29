@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HermitCrabFieldSound : MonoBehaviour
 {
-	HCNullFieldVisualizer fieldRenderer;
+	/*HCNullFieldVisualizer fieldRenderer;
     AudioSource source;
     AudioClip hermitField;
     AudioClip hermitIdle;
@@ -37,5 +37,5 @@ public class HermitCrabFieldSound : MonoBehaviour
             fieldOn = true;
         }
 		
-	}
+	}*/
 }
