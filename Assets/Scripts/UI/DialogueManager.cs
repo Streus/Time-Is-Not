@@ -25,8 +25,18 @@ public class DialogueManager : Singleton<DialogueManager>
 	public void CreateBox(DialogueObject dialogue)
 	{
 		DialogueObject dia = new DialogueObject (dialogue);
-		GameObject obj = Instantiate (_dialogueBoxPrefab, transform);
-		obj.transform.localPosition = (Vector3)dia.Location;
+
+		Vector2 screenPoint;
+
+		if (dia.FollowTarget != null) 
+		{
+			Vector3 loc = dia.FollowTarget.transform.position;
+			screenPoint = new Vector3 (loc.x, loc.y + 1, loc.z);
+		} 
+		else
+			screenPoint = dia.Location;
+
+		GameObject obj = Instantiate (_dialogueBoxPrefab, screenPoint, Quaternion.identity);
 		obj.GetComponentInChildren<Text> ().text = dia.Dialogue;
 		dia.UIObject = obj;
 		_activeDialogues.Add (dia);
@@ -43,8 +53,9 @@ public class DialogueManager : Singleton<DialogueManager>
 			if (dialogue.FollowTarget != null)
 			{
 				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
-				Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector3(loc.x, loc.y + 1, loc.z));
-				((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
+				Vector2 screenPoint = new Vector3(loc.x, loc.y + 1.5f, loc.z);
+				((RectTransform)_activeDialogues [i].UIObject.transform).position = screenPoint;
+				//((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;
 			if(_activeDialogues[i].Timer <=0)

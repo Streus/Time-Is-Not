@@ -122,7 +122,7 @@ public class PushBlock : MonoBehaviour, ISavable
 	/// </summary>
 	void getInput()
 	{
-		if(!_beingPushed && _playerInRange)
+		if(!_beingPushed && _playerInRange && !GameManager.isPaused())
 		{
 			//Move in direction if key is pressed
 			switch(_moveDirection)

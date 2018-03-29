@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 224271243158833760}
   - component: {fileID: 222504253539060388}
   - component: {fileID: 114152052505496248}
+  - component: {fileID: 223697354953014266}
   m_Layer: 5
   m_Name: DialogueBox
   m_TagString: Untagged
@@ -118,6 +119,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323067950435502}
+--- !u!223 &223697354953014266
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323067950435502}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 708501609
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!224 &224271243158833760
 RectTransform:
   m_ObjectHideFlags: 1
@@ -126,7 +147,7 @@ RectTransform:
   m_GameObject: {fileID: 1323067950435502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children:
   - {fileID: 224986382305391386}
   m_Father: {fileID: 0}
