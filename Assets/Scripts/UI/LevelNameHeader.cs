@@ -56,6 +56,9 @@ public class LevelNameHeader : MonoBehaviour
 			main = this;
 
 		levelHeaderGroup = GetComponent<CanvasGroup>();
+
+		//set to default state
+		SetHeaderState(HeaderState.INACTIVE);
 	}
 
 	public void OnDestroy()
@@ -72,9 +75,6 @@ public class LevelNameHeader : MonoBehaviour
 			levelNameText.text = SceneSetup.inst.levelHeader; 
 		else
 			levelNameText.text = "DEFAULT";
-
-		//set to default state
-		SetHeaderState(HeaderState.INACTIVE); 
 	}
 	
 	// Update is called once per frame
