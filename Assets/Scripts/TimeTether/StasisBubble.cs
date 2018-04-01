@@ -63,6 +63,10 @@ public class StasisBubble : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		// Test
+		Debug.Log("CursorIsOverATetherPoint: " + TetherManager.CursorIsOverATetherPoint() + "; CursorIsOverAStasisBubble: " + LevelStateManager.CursorIsOverAStasisBubble()); 
+		
+
 		if (useBubbleAliveTimer && !GameManager.isPaused())
 		{
 			bubbleAliveTimer -= Time.deltaTime; 
@@ -88,7 +92,7 @@ public class StasisBubble : MonoBehaviour
 		}
 
 		// Temporary: You can right click to remove a stasis bubble
-		if (canRightClickDestroy)
+		if (canRightClickDestroy && !TetherManager.CursorIsOverATetherPoint())
 		{
 			if (MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
 			{
