@@ -82,7 +82,7 @@ public class InteractableUILink : MonoBehaviour
 				Gizmos.DrawLine((Vector3)linkPoints[i], (Vector3)linkPoints[i + 1]);
 			}
 			*/ 
-			if (linkPoints[i] == null)
+			if (linkPoints[i] == null || linkPoints[i + 1] == null)
 				continue;
 
 			Gizmos.DrawLine(linkPoints[i].transform.position, linkPoints[i + 1].transform.position);
