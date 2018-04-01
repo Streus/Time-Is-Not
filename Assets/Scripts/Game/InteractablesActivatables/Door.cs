@@ -111,12 +111,14 @@ public class Door : Interactable, IActivatable, ISavable
 
 	bool CheckForPlayer()
 	{
+		if (!Application.isPlaying)
+			return false;
 		Collider2D[] colsHit = Physics2D.OverlapBoxAll ((new Vector2 (transform.position.x, transform.position.y) + _collider.offset), _checkSize, 0.0f, _playerLayers);
 		bool seesPlayer = false;
 		for(int i = 0; i < colsHit.Length; i++)
 		{
 			Entity entityHit = colsHit[i].gameObject.GetComponent<Entity> ();
-			if (entityHit.getFaction () == Entity.Faction.player) 
+			if (entityHit != null && entityHit.getFaction () == Entity.Faction.player) 
 			{
 				seesPlayer = true;
 			}
