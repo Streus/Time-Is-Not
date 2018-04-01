@@ -103,16 +103,23 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		BoxCollider2D col = gameObject.GetComponent<BoxCollider2D> ();
 		Vector2 adjustment;
 
+		Vector2 truePosition = transform.position;
+
 		if (col != null)
+		{
 			adjustment = col.size;
+			truePosition += col.offset;
+		}
+
+
 		else
 			adjustment = new Vector2 (1, 1);
 		//Gizmos.DrawCube (transform.position, (Vector3)transform.localScale + (new Vector3 (1, 1, 1) * (-0.02f)));
 		Gizmos.color = Color.cyan;
-		Gizmos.DrawLine (transform.position + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)),transform.localScale.y * adjustment.y / 2 + (-0.02f), 0), transform.position + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0));
-		Gizmos.DrawLine (transform.position + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0), transform.position + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0));
-		Gizmos.DrawLine (transform.position + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0), transform.position + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0));
-		Gizmos.DrawLine (transform.position + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0), transform.position + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0));
+		Gizmos.DrawLine ((Vector3)truePosition + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)),transform.localScale.y * adjustment.y / 2 + (-0.02f), 0), (Vector3)truePosition + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0));
+		Gizmos.DrawLine ((Vector3)truePosition + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0), (Vector3)truePosition + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0));
+		Gizmos.DrawLine ((Vector3)truePosition + new Vector3 (transform.localScale.x * adjustment.x / 2 + (-0.02f), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0), (Vector3)truePosition + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0));
+		Gizmos.DrawLine ((Vector3)truePosition + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), -1 * (transform.localScale.y * adjustment.y / 2 + (-0.02f)), 0), (Vector3)truePosition + new Vector3 (-1 * (transform.localScale.x * adjustment.x / 2 + (-0.02f)), transform.localScale.y * adjustment.y / 2 + (-0.02f), 0));
 
 	}
 
