@@ -20,6 +20,9 @@ public class CameraManager : MonoBehaviour
 	[SerializeField]
 	private Transform target;
 
+	// Custom camera zoom zones
+	[SerializeField] CameraZoomZoneCollider cameraZoomZoneCollider; 
+
 	//[Header("Camera Bounds Ref (Drag-in)")]
 	//[SerializeField] CameraBounds cameraBounds; 
 	private Vector2 b_origin = Vector2.zero;
@@ -50,6 +53,9 @@ public class CameraManager : MonoBehaviour
 	[Header("Zoom properties")]
 	public float zoomOutLerpSpeed; 
 	public float zoomInLerpSpeed; 
+	public float zoneZoomOutLerpSpeed; 
+	public float zoneZoomInLerpSpeed; 
+	bool useZoneZoomOutSpeed; 
 	float regularSize; 
 	public float zoomOutSize; 
 
@@ -84,6 +90,7 @@ public class CameraManager : MonoBehaviour
 	public bool atBottomBound;
 
 	private float shakeDur, shakeInt, shakeDec;
+
 	#endregion
 
 	#region STATIC_METHODS
@@ -91,6 +98,18 @@ public class CameraManager : MonoBehaviour
 	#endregion
 
 	#region INSTANCE_METHODS
+
+	void OnEnable()
+	{
+		if (LevelStateManager.inst != null)
+			LevelStateManager.inst.stateLoaded += OnStateLoaded; 
+	}
+
+	void OnDisable()
+	{
+		if (LevelStateManager.inst != null)
+			LevelStateManager.inst.stateLoaded -= OnStateLoaded; 
+	}
 
 	public void Awake()
 	{
@@ -177,6 +196,15 @@ public class CameraManager : MonoBehaviour
 			}
 			*/
 
+			if (cameraZoomZoneCollider != null && m_zoomState == false)
+			{
+				if (cameraZoomZoneCollider.collisionActive)
+				{
+					zoomTo(cameraZoomZoneCollider.targetCameraSize, zoneZoomOutLerpSpeed);
+					useZoneZoomOutSpeed = true; 
+				}
+			}
+
 			// Toggle zoom state key inputs
 			if (m_zoomState == false)
 			{
@@ -193,6 +221,7 @@ public class CameraManager : MonoBehaviour
 				{
 					m_zoomState = false; 
 					GameManager.inst.ExitPauseState(); 
+					useZoneZoomOutSpeed = false; 
 				}
 			}
 
@@ -210,8 +239,18 @@ public class CameraManager : MonoBehaviour
 			}
 			else
 			{
-				zoomTo(regularSize, zoomInLerpSpeed);
-				updateZoomPan(true);
+				if (cameraZoomZoneCollider == null || !cameraZoomZoneCollider.collisionActive)
+				{
+					if (useZoneZoomOutSpeed)
+					{
+						zoomTo(regularSize, zoneZoomInLerpSpeed);
+					}
+					else
+					{
+						zoomTo(regularSize, zoomInLerpSpeed);
+					}
+					updateZoomPan(true);
+				}
 			}
 		}
 
@@ -426,7 +465,7 @@ public class CameraManager : MonoBehaviour
 			return; 
 		}
 
-		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, speed); 
+		cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, speed * Time.deltaTime); 
 	}
 
 	public void recenter(float speed)
@@ -537,5 +576,17 @@ public class CameraManager : MonoBehaviour
 		//cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z), 10 * Time.deltaTime);
 		cam.transform.localPosition = new Vector3 (panOffset.x, panOffset.y, cam.transform.localPosition.z); 
 	}
+
+	void OnStateLoaded(bool success)
+	{
+		//Debug.Log("OnStateLoaded"); 
+
+		if (success)
+		{
+			useZoneZoomOutSpeed = false;
+			zoomTo(regularSize, 1); 
+		}
+	}
+
 	#endregion
 }
