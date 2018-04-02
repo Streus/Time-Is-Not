@@ -80,8 +80,14 @@ public class PushBlock : MonoBehaviour, ISavable
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
+		if (GameManager.CameraIsZoomedOut ()) 
+		{
+			if (_beingPushed)
+				stop ();
+			return;
+		}
 		getInput ();
 
 		if(_beingPushed)
