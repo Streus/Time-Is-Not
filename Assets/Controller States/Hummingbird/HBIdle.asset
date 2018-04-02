@@ -9,19 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
-  m_Name: HBPatrol
+  m_Name: HBIdle
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 1, b: 0, a: 1}
-  enterAction: {fileID: 11400000, guid: 56c231b76d1e34a44a17aaae429c00b7, type: 2}
-  actions:
-  - {fileID: 11400000, guid: d627db702bd6d564e9d302bd8d2268d9, type: 2}
+  color: {r: 1, g: 1, b: 0, a: 1}
+  enterAction: {fileID: 0}
+  actions: []
   exitAction: {fileID: 0}
   paths:
-  - name: Encounter Player
+  - name: See Player
     success: {fileID: 11400000, guid: bdc5773fc29f5f6428428d672d17bdfa, type: 2}
     failure: {fileID: 0}
     decision: {fileID: 11400000, guid: a82489a219996df4db5bc1da58fd9c2d, type: 2}
-  - name: End Of Path
-    success: {fileID: 11400000, guid: c9a72cdca121c584da31e54ab9c97a7c, type: 2}
-    failure: {fileID: 0}
-    decision: {fileID: 11400000, guid: 383a097d1ca09684eb7f6237199b97bb, type: 2}

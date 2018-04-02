@@ -10,6 +10,7 @@ public class PatrollingEnemy : Controller
 
 	[SerializeField]
 	protected PatrolNode patrolStart;
+	private PatrolNode prevNode;
 
 	[SerializeField]
 	[Range(1f, 360f)]
@@ -18,6 +19,11 @@ public class PatrollingEnemy : Controller
 
 	#region INSTANCE_METHODS
 
+	public PatrolNode getPrevNode()
+	{
+		return prevNode;
+	}
+
 	public PatrolNode getPatrolTarget()
 	{
 		return patrolStart;
@@ -25,7 +31,12 @@ public class PatrollingEnemy : Controller
 
 	public PatrolNode nextPatrolNode()
 	{
-		return patrolStart = patrolStart.getNext();
+		if (patrolStart != null)
+		{
+			prevNode = patrolStart;
+			return patrolStart = patrolStart.getNext ();
+		}
+		return null;
 	}
 
 	public float getTurnSpeed()
@@ -36,11 +47,16 @@ public class PatrollingEnemy : Controller
 	public override void OnDrawGizmos ()
 	{
 		Vector3 navPos;
-		if (currentPosition (out navPos))
+		if (getMap() != null)
 		{
 			Color c = getMap ().graphColor;
 			Gizmos.color = new Color (1.0f - c.r, 1.0f - c.g, 1.0f - c.b);
-			Gizmos.DrawLine (transform.position, navPos);
+
+			if(getPatrolTarget() != null)
+				Gizmos.DrawLine (transform.position, getPatrolTarget().transform.position);
+
+			if(getPrevNode() != null)
+				Gizmos.DrawLine (transform.position, getPrevNode ().transform.position);
 		}
 	}
 	#endregion

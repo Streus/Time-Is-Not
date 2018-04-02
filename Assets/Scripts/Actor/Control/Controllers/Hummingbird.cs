@@ -186,6 +186,8 @@ public class Hummingbird : PatrollingEnemy
 
 	public override void OnDrawGizmos()
 	{
+		base.OnDrawGizmos ();
+
 		Gizmos.color = getState().color;
 
 		Vector3 fwd = transform.up;

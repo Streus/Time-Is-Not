@@ -14,6 +14,8 @@ public class HBPatrol : Action
 	{
 		PatrollingEnemy patroller = State.cast<PatrollingEnemy> (c);
 		PatrolNode n = patroller.getPatrolTarget ();
+		if (n == null)
+			n = patroller.getPrevNode ();
 
 		Vector3 navPos;
 		if (c.getMap () != null)
@@ -55,7 +57,7 @@ public class HBPatrol : Action
 			if (Vector2.Distance (patroller.transform.position, n.transform.position) < patrolTolerance)
 			{
 				patroller.nextPatrolNode ();
-				if (c.getMap () != null)
+				if (c.getMap () != null && patroller.getPatrolTarget() != null)
 				{
 					c.setPath (patroller.getPatrolTarget ().transform.position);
 
