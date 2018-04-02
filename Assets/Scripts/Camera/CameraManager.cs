@@ -239,6 +239,8 @@ public class CameraManager : MonoBehaviour
 			}
 			else
 			{
+				updateZoomPan(true);
+
 				if (cameraZoomZoneCollider == null || !cameraZoomZoneCollider.collisionActive)
 				{
 					if (useZoneZoomOutSpeed)
@@ -249,7 +251,7 @@ public class CameraManager : MonoBehaviour
 					{
 						zoomTo(regularSize, zoomInLerpSpeed);
 					}
-					updateZoomPan(true);
+					//updateZoomPan(true);
 				}
 			}
 		}
