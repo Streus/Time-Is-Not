@@ -22,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     //Sets the preset in the main menu
     private void Awake()
     {
-        currentPreset = SaveManager.controlPreset;
+        //currentPreset = SaveManager.controlPreset;
         UpdatePresetImage();
     }
 
@@ -92,7 +92,7 @@ public class UIManager : Singleton<UIManager>
     //Saves the current preset to the SaveManager
     public void SavePreset()
     {
-        SaveManager.controlPreset = currentPreset;
+        //SaveManager.controlPreset = currentPreset;
         SaveManager.Save();
     }
 

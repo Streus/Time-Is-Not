@@ -19,6 +19,13 @@ public class UpdateMasterVolumeUI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        masterVolumeText.text = "Master Volume: " + (int)(((UIManager.inst.GetMasterVolume() - -80) / (0 - -80)) * 100);
+        if (masterVolumeText != null)
+        {
+            masterVolumeText.text = "Master Volume: " + (int)(((UIManager.inst.GetMasterVolume() - -80) / (0 - -80)) * 100);
+        }
+        else
+        {
+            //Debug.Log("No masterText available");
+        }
     }
 }

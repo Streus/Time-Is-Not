@@ -19,6 +19,13 @@ public class UpdateAmbientVolumeUI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        ambientVolumeText.text = "Ambient Volume: " + (int)(((UIManager.inst.GetAmbientVolume() - -80) / (0 - -80)) * 100);
+        if (ambientVolumeText != null)
+        {
+            ambientVolumeText.text = "Ambient Volume: " + (int)(((UIManager.inst.GetAmbientVolume() - -80) / (0 - -80)) * 100);
+        }
+        else
+        {
+            //Debug.Log("No ambientText available");
+        }
     }
 }

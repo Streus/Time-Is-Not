@@ -19,6 +19,13 @@ public class UpdateSFXVolumeUI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        sfxVolumeText.text = "SFX Volume: " + (int)(((UIManager.inst.GetSFXVolume() - -80) / (0 - -80)) * 100);
+        if (sfxVolumeText != null)
+        {
+            sfxVolumeText.text = "SFX Volume: " + (int)(((UIManager.inst.GetSFXVolume() - -80) / (0 - -80)) * 100);
+        }
+        else
+        {
+            //Debug.Log("No sfxText available");
+        }
     }
 }
