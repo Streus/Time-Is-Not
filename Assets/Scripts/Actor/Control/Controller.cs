@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 [RequireComponent(typeof(Entity))]
 [RequireComponent(typeof(Animator))]
@@ -85,8 +86,12 @@ public class Controller : MonoBehaviour, ISavable
 			return;
 		}
 
+		Profiler.BeginSample ("Calculating path");
+
 		if (!map.findPath (transform.position, target, out path))
 			Debug.LogError ("Could not find path to " + target.ToString () + ".");
+		
+		Profiler.EndSample ();
 	}
 
 	public void discardPath()
