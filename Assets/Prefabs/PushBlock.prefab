@@ -74,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1413051843421496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -72, y: 12.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996341434254758}
@@ -152,18 +152,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.36, y: 0.25}
-      - {x: 0.36, y: 0.18}
-      - {x: 0.41, y: 0.18}
-      - {x: 0.41, y: -0.18}
-      - {x: 0.36, y: -0.18}
-      - {x: 0.36, y: -0.25}
-      - {x: -0.36, y: -0.25}
-      - {x: -0.36, y: -0.18}
-      - {x: -0.41, y: -0.18}
-      - {x: -0.41, y: 0.18}
-      - {x: -0.36, y: 0.18}
-      - {x: -0.36, y: 0.25}
+    - - {x: 0.3, y: 0.25}
+      - {x: 0.3, y: 0.15}
+      - {x: 0.41, y: 0.15}
+      - {x: 0.41, y: -0.15}
+      - {x: 0.3, y: -0.15}
+      - {x: 0.3, y: -0.25}
+      - {x: -0.3, y: -0.25}
+      - {x: -0.3, y: -0.15}
+      - {x: -0.41, y: -0.15}
+      - {x: -0.41, y: 0.15}
+      - {x: -0.3, y: 0.15}
+      - {x: -0.3, y: 0.25}
 --- !u!61 &61043286521424992
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -387,7 +387,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -436415966
+  randomSeed: 1300723192
   InitialModule:
     serializedVersion: 3
     enabled: 1
