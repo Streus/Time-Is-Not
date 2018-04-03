@@ -908,6 +908,21 @@ Prefab:
       propertyPath: map
       value: 
       objectReference: {fileID: 260871739}
+    - target: {fileID: 114619298949479476, guid: 42a391895c42da749adcc083d1f19b65,
+        type: 2}
+      propertyPath: sitDurationMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114619298949479476, guid: 42a391895c42da749adcc083d1f19b65,
+        type: 2}
+      propertyPath: standDurationMax
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114619298949479476, guid: 42a391895c42da749adcc083d1f19b65,
+        type: 2}
+      propertyPath: returnTimerMax
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42a391895c42da749adcc083d1f19b65, type: 2}
   m_IsPrefabParent: 0
@@ -55556,7 +55571,7 @@ Prefab:
     - target: {fileID: 114491189694549730, guid: 63a90592f1f3c2c46919deab6a245c94,
         type: 2}
       propertyPath: gizmoNodes
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114491189694549730, guid: 63a90592f1f3c2c46919deab6a245c94,
         type: 2}

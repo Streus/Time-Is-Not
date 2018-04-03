@@ -12,6 +12,7 @@ public class HCSitting : Fork
 		if (hc.GetComponent<PushBlock> ()._beingPushed)
 		{
 			hc.setWasPushed (true);
+			hc.resetSitDuration ();
 			return false;
 		}
 		else

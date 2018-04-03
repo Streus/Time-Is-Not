@@ -13,7 +13,6 @@ public class HCResetReturnTimer : Action
         
         if (hc.getWasPushed())
         {
-            
             hc.setReturnTimerOnStand();
             if (source != null)
             {
