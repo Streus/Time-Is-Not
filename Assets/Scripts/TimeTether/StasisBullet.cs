@@ -13,31 +13,38 @@ public class StasisBullet : MonoBehaviour
 	private float tolerance = 0.1f;
 
 	private Vector3 startPos;
+	private Vector3 dir;
 	private float travelDist;
 
 	public static StasisBullet create(Vector3 position, Quaternion direction, Vector3 targetPos)
 	{
 		GameObject pref = Resources.Load<GameObject> ("Prefabs/StasisBullet");
-		GameObject inst = Instantiate<GameObject> (pref, position, direction);
+		GameObject inst = Instantiate<GameObject> (pref, position, Quaternion.identity);
+		inst.transform.GetChild (0).rotation = Quaternion.Euler(0f, 0f, direction.eulerAngles.z - 180f);
 		StasisBullet sb = inst.GetComponent<StasisBullet> ();
 		sb.travelDist = Vector2.Distance(targetPos, sb.transform.position);
 		sb.startPos = sb.transform.position;
+		sb.dir = (direction * Vector3.up).normalized;
 		return sb;
 	}
 
 	public void Awake()
 	{
-		GetComponent<Rigidbody2D> ().AddForce (transform.up * speed, ForceMode2D.Impulse);
         AudioLibrary.PlayStasisShootSound();
 		LevelStateManager.inst.stateLoaded += cleanUp;
 	}
 
 	public void Update()
 	{
-		GetComponent<Rigidbody2D> ().simulated = !GameManager.isPaused ();
-
+		if (GameManager.CheckPause ((int)PauseType.GAME))
+			return;
+		
 		if (Vector3.Distance (transform.position, startPos) > travelDist)
 			OnTriggerEnter2D (null);
+		else
+		{
+			transform.Translate (dir * speed * Time.deltaTime);
+		}
 	}
 
 	private void cleanUp(bool success)
