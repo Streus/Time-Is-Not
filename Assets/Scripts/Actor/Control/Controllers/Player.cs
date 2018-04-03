@@ -126,6 +126,15 @@ public class Player : Controller
 		anim.SetTrigger ("ActivateTimeTether");
 	}
 
+	public bool inPlaceTetherAnim()
+	{
+		if (anim.GetCurrentAnimatorStateInfo(1).IsName("Animation_MargauxPlaceTetherAnchor"))
+		{
+			return true; 
+		}
+		return false; 
+	}
+
 	public void setReappearAnim()
 	{
 		anim.SetTrigger ("Reappear");
