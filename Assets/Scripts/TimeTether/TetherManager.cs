@@ -23,6 +23,9 @@ public class TetherManager : Singleton<TetherManager>
     public RectTransform curTimeArrow;
     public RectTransform[] tetherPoints;
 
+	[SerializeField] ParticleSystem[] tetherUICreateParticles; 
+	[SerializeField] ParticleSystem[] tetherUIRemoveParticles;
+
     // A normalized value between 0 and 1 that tells the arrow how close it should be to its target position
     float arrowMoveProgress;
 
@@ -655,6 +658,11 @@ public class TetherManager : Singleton<TetherManager>
             AudioLibrary.PlayTetherPlacementSound();
             // Timeline arrow
             SetArrowTarget(LevelStateManager.curState, false, true);
+
+			if (LevelStateManager.curState < tetherUICreateParticles.Length && tetherUICreateParticles[LevelStateManager.curState] != null)
+			{
+				tetherUICreateParticles[LevelStateManager.curState].Play(); 
+			}
         }
         else
         {
@@ -756,6 +764,11 @@ public class TetherManager : Singleton<TetherManager>
 				timeTetherIndicators[index].StartDestroy(); 
 				//Destroy(timeTetherIndicators[index].gameObject);
 				timeTetherIndicators.RemoveAt(index); 
+
+				if (index < tetherUIRemoveParticles.Length && tetherUIRemoveParticles[index] != null)
+				{
+					tetherUIRemoveParticles[index].Play(); 
+				}
 			}
 		}
 		// Option 2: Remove every indicator from the index and after
@@ -768,6 +781,11 @@ public class TetherManager : Singleton<TetherManager>
 					timeTetherIndicators[i].StartDestroy(); 
 					//Destroy(timeTetherIndicators[i].gameObject);
 					timeTetherIndicators.RemoveAt(i); 
+				}
+
+				if (i < tetherUIRemoveParticles.Length && tetherUIRemoveParticles[i] != null)
+				{
+					tetherUIRemoveParticles[i].Play(); 
 				}
 			}
 		}
