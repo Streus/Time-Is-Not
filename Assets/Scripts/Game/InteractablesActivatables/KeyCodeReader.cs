@@ -22,14 +22,6 @@ public class KeyCodeReader : Interactable, ISavable
 	[SerializeField]
 	private Sprite[] codeSprites; 
 
-	[Tooltip("Button prompt sprite")]
-	[SerializeField]
-	private GameObject _buttonPrompt;
-
-	[Tooltip("Negative button prompt sprite.")]
-	[SerializeField]
-	private GameObject _negativePrompt;
-
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
@@ -55,10 +47,6 @@ public class KeyCodeReader : Interactable, ISavable
         {
             source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
         }
-        if (_buttonPrompt != null)
-			_buttonPrompt.SetActive (false);
-		if (_negativePrompt != null)
-			_negativePrompt.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -96,17 +84,6 @@ public class KeyCodeReader : Interactable, ISavable
 				if (isTriggered)
 					return;
 				_playerInRange = true;
-				//show button prompts
-				if(isEnabled() && GameManager.HasCode(_codeName))
-				{
-					_buttonPrompt.SetActive (true);
-					_negativePrompt.SetActive (false);
-				}
-				else
-				{
-					_negativePrompt.SetActive (true);
-					_buttonPrompt.SetActive (false);
-				}
 			}
 		}
 	}
@@ -119,9 +96,6 @@ public class KeyCodeReader : Interactable, ISavable
 			if (entityHit.getFaction () == Entity.Faction.player) 
 			{
 				_playerInRange = false;
-				//hide button prompts
-				_buttonPrompt.SetActive (false);
-				_negativePrompt.SetActive (false);
 			}
 		}
 	}
@@ -134,8 +108,6 @@ public class KeyCodeReader : Interactable, ISavable
 		if(_playerInRange && !isTriggered && GameManager.HasCode(_codeName) && isEnabled())
 		{
 			onInteract ();
-			_buttonPrompt.SetActive (false);
-			_negativePrompt.SetActive (false);
 			isTriggered = true;
             if (source != null)
             {
