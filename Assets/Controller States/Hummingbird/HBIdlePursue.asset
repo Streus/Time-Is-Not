@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca4619b2484de944ba9b7a580db1deb, type: 3}
-  m_Name: HBIdle
+  m_Name: HBIdlePursue
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 0, a: 1}
-  enterAction: {fileID: 0}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  enterAction: {fileID: 11400000, guid: c6174af2fd8ee9343ae7abde759d77a6, type: 2}
   actions:
-  - {fileID: 11400000, guid: 2f814967f1fa1a747bb834d18d62ea28, type: 2}
+  - {fileID: 11400000, guid: 5c43aef1d1842084a9a60e8379b0e711, type: 2}
   exitAction: {fileID: 0}
   paths:
-  - name: See Player
-    success: {fileID: 11400000, guid: bcdcd3f1a44bc164892b319d7ca6252f, type: 2}
-    failure: {fileID: 0}
+  - name: Loose Player
+    success: {fileID: 0}
+    failure: {fileID: 11400000, guid: c9a72cdca121c584da31e54ab9c97a7c, type: 2}
     decision: {fileID: 11400000, guid: a82489a219996df4db5bc1da58fd9c2d, type: 2}

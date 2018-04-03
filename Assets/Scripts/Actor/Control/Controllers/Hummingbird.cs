@@ -32,6 +32,7 @@ public class Hummingbird : PatrollingEnemy
 	private Transform pursuitTarget;
 
 	private Animator hummingAnim;
+
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -55,6 +56,8 @@ public class Hummingbird : PatrollingEnemy
 		Transform spriteChild = transform.Find ("Sprite");
 		if(spriteChild != null)
 			hummingAnim = spriteChild.GetComponent<Animator> ();
+
+		resetReorientTimer ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 	}
@@ -164,6 +167,7 @@ public class Hummingbird : PatrollingEnemy
 	{
 		pursuitTarget = t;
 	}
+
 	#endregion
 
 	#region ISAVABLE_METHODS

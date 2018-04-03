@@ -15,9 +15,26 @@ public class PatrollingEnemy : Controller
 	[SerializeField]
 	[Range(1f, 360f)]
 	protected float turnSpeed = 90f;
+
+	private Vector3 origin;
+
+	[Tooltip("How long this entity will face in one direction while idle")]
+	[SerializeField]
+	private float reorientTimerMax = float.PositiveInfinity;
+	private float reorientTimer;
+
+	[Tooltip("How far this entity will rotate when reorienting")]
+	[SerializeField]
+	private float reorientAngle = 45f;
 	#endregion
 
 	#region INSTANCE_METHODS
+	public override void Awake()
+	{
+		base.Awake ();
+
+		origin = transform.position;
+	}
 
 	public PatrolNode getPrevNode()
 	{
@@ -44,6 +61,26 @@ public class PatrollingEnemy : Controller
 		return turnSpeed;
 	}
 
+	public Vector3 getOrigin()
+	{
+		return origin;
+	}
+
+	public bool updateReorientTimer(float delta)
+	{
+		return (reorientTimer -= delta) <= 0f;
+	}
+
+	public void resetReorientTimer()
+	{
+		reorientTimer = reorientTimerMax;
+	}
+
+	public float getReorientAngle()
+	{
+		return reorientAngle;
+	}
+
 	public override void OnDrawGizmos ()
 	{
 		Vector3 navPos;
@@ -57,6 +94,10 @@ public class PatrollingEnemy : Controller
 
 			if(getPrevNode() != null)
 				Gizmos.DrawLine (transform.position, getPrevNode ().transform.position);
+
+			Gizmos.color = Color.white;
+			if (origin != default(Vector3))
+				Gizmos.DrawLine (transform.position, origin);
 		}
 	}
 	#endregion

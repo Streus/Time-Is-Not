@@ -14,8 +14,10 @@ public class HBPatrol : Action
 	{
 		PatrollingEnemy patroller = State.cast<PatrollingEnemy> (c);
 		PatrolNode n = patroller.getPatrolTarget ();
+
+		//can't do anything without a patrol target
 		if (n == null)
-			n = patroller.getPrevNode ();
+			return;
 
 		Vector3 navPos;
 		if (c.getMap () != null)
@@ -28,7 +30,6 @@ public class HBPatrol : Action
 				Vector3 trash;
 				c.nextPosition (out trash);
 			}
-			c.currentPosition (out navPos);
 		}
 		else
 			navPos = n.transform.position;
