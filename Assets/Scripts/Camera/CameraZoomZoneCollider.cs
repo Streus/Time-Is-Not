@@ -12,7 +12,7 @@ public class CameraZoomZoneCollider : MonoBehaviour
 		}
 	}
 
-	float m_targetCameraSize;
+	[SerializeField] float m_targetCameraSize;
 	public float targetCameraSize
 	{
 		get{
@@ -20,8 +20,10 @@ public class CameraZoomZoneCollider : MonoBehaviour
 		}
 	}
 
+	[SerializeField] Bounds colBounds; 
+
 	// Internal collision
-	[SerializeField] List<CameraZoomZone> collidingZones; 
+	//[SerializeField] List<CameraZoomZone> collidingZones; 
 
 	/*
 	void FixedUpdate()
@@ -41,12 +43,37 @@ public class CameraZoomZoneCollider : MonoBehaviour
 
 	void Update()
 	{
+		/*
 		if (collidingZones.Count == 0)
 		{
 			m_collisionActive = false; 
 		}
+		*/ 
+
+		// Change to overlap box
+
+		CheckZoneOverlap(); 
 	}
 
+	void CheckZoneOverlap()
+	{
+		Collider2D[] cols = Physics2D.OverlapBoxAll((Vector2)(transform.position + colBounds.center), (Vector2)colBounds.size, 0); 
+
+		for (int i = 0; i < cols.Length; i++)
+		{
+			if (cols[i].GetComponent<CameraZoomZone>())
+			{
+				// Note: this picks the first targetCameraSize it finds. Multiple camera zones with different sizes may produce unexpected behavior
+				m_targetCameraSize = cols[i].GetComponent<CameraZoomZone>().targetCameraSize;
+				m_collisionActive = true; 
+				return; 
+			}
+		}
+
+		m_collisionActive = false; 
+	}
+
+	/*
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.GetComponent<CameraZoomZone>() != null)
@@ -73,5 +100,13 @@ public class CameraZoomZoneCollider : MonoBehaviour
 				collidingZones.Remove(zone); 
 			}
 		}
+	}
+	*/ 
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = new Color (0, 0.5f, 0.5f, 0.5f);
+		Gizmos.DrawCube(transform.position + colBounds.center, colBounds.size); 
+		//Gizmos.DrawCube(transform.position, new Vector3 (1, 1, 1)); 
 	}
 }
