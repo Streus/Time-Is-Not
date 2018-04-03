@@ -54,12 +54,16 @@ public class TransitionBuddy
 		SaveManager.level = SceneManager.GetActiveScene ().name;
 		SaveManager.Save ();
 
+		//start cutscene pause
+		if(GameManager.inst != null)
+			GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+
 		//start fade effect
 		transitionEffect = ScreenShaderTransition.getInstance("LevelChangeTransition");
 		if (transitionEffect != null)
 		{
 			transitionEffect.SetFadeIn ();
-			transitionEffect.fadeInDone += finishSceneSetup;
+			transitionEffect.fadeInDone += startPlayerCutscene;
 		}
 		else
 		{
@@ -70,13 +74,23 @@ public class TransitionBuddy
 		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
 	}
 
-	private void finishSceneSetup()
+	private void startPlayerCutscene()
 	{
 		if (transitionEffect != null)
 		{
 			transitionEffect.fadeInDone -= finishSceneSetup;
 			transitionEffect = null;
 		}
+
+		//listen to player tetherAnchorEnded event
+		Player p = GameManager.GetPlayer().GetComponent<Player>();
+		p.tetherAnchorEnded += finishSceneSetup;
+		p.setPlaceAnchorAnim ();
+	}
+
+	private void finishSceneSetup()
+	{
+		GameManager.GetPlayer ().GetComponent<Player> ().tetherAnchorEnded -= finishSceneSetup;
 
 		//start up header display
 		if (LevelNameHeader.getMain () != null)

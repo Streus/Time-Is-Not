@@ -6,7 +6,7 @@ public class Player : Controller
 {
 	#region STATIC_VARS
 
-	public const int PAUSEMASK_MOVE = ~0;
+	public const int PAUSEMASK_MOVE = ~0x0;
 	#endregion
 
     #region INSTANCE_VARS
@@ -54,6 +54,9 @@ public class Player : Controller
 	private Vector3 TESTPOSITION;
 	private Vector3 TESTSIZE;
 
+	public delegate void AnimEvent ();
+	public event AnimEvent tetherAnchorEnded;
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -61,14 +64,12 @@ public class Player : Controller
     public void Start()
     {
 		shadow = transform.Find ("Margaux Shadow");
-//        sprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
 		sprite = gameObject.GetComponent <SpriteRenderer> ();
         getSelf().addAbility(Ability.get("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
         getSelf().getAbility(1).resetCooldown();
 
-//		anim = transform.GetChild (0).GetComponent <Animator>();
 		anim = gameObject.GetComponent <Animator>();
     }
 
@@ -78,13 +79,22 @@ public class Player : Controller
         // (a) If the camera is not zoomed out 
 		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
 		{
+			Debug.Log ("Player Updating"); //DEBUG
 			base.Update ();
 		}
 		else
 		{
 			anim.SetBool ("isMoving", false);
 		}
-        //CheckForGround();
+
+		//wait for anchor anim to finish
+		if (GameManager.CheckPause ((int)PauseType.CUTSCENE))
+		{
+			anim.SetBool ("isMoving", false);
+			if (!inPlaceTetherAnim ())
+				endAnchorAnim ();
+		}
+
         sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
 		SpriteRenderer shadowRend = shadow.GetComponent<SpriteRenderer> ();
 		if(shadowRend != null)
@@ -119,6 +129,15 @@ public class Player : Controller
 	public void setPlaceAnchorAnim()
 	{
 		anim.SetTrigger ("PlaceAnchor");
+		if(GameManager.inst != null)
+			GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+	}
+
+	private void endAnchorAnim()
+	{
+		GameManager.inst.ExitPauseState ();
+		if (tetherAnchorEnded != null)
+			tetherAnchorEnded ();
 	}
 
 	public void setActivateTTAnim()
