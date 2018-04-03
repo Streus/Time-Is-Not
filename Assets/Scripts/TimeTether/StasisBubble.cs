@@ -64,7 +64,7 @@ public class StasisBubble : MonoBehaviour
 	void Update () 
 	{
 		// Test
-		Debug.Log("CursorIsOverATetherPoint: " + TetherManager.CursorIsOverATetherPoint() + "; CursorIsOverAStasisBubble: " + LevelStateManager.CursorIsOverAStasisBubble()); 
+		//Debug.Log("CursorIsOverATetherPoint: " + TetherManager.CursorIsOverATetherPoint() + "; CursorIsOverAStasisBubble: " + LevelStateManager.CursorIsOverAStasisBubble()); 
 		
 
 		if (useBubbleAliveTimer && !GameManager.isPaused())
