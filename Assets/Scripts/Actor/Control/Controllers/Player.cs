@@ -312,17 +312,22 @@ public class Player : Controller
 			anim.SetBool ("isMoving", false);
 
 		//if there are no walls and there is a pit, incriment the pit timer
-		if (seesPit && hitCount <= 0) {
+		if (seesPit && hitCount <= 0) 
+		{
+			anim.SetBool ("Stumbling", true);
 			physbody.velocity -= (physbody.velocity * pitSpeedAdjustment);
 			pitTimer += Time.deltaTime;
 		}
-		else
+		else 
+		{
+			anim.SetBool ("Stumbling", false);
 			pitTimer = 0;
+		}
 
 		//if the pit timer fills, kill the player
 		if (pitTimer >= pitFallDelay || (seesPit && movementVector == Vector2.zero) || (movementVector != Vector2.zero && !CheckForGround())) 
 		{
-			//TODO: play falling animation
+			anim.SetTrigger ("Fall");
 			getSelf ().onDeath ();
 		}
     }
