@@ -214,9 +214,9 @@ public class GameManager : Singleton<GameManager> , ISavable
             SaveManager.saveManager.level = levelName;
             SaveManager.Save();
         }*/
-        string levelName = SceneManager.GetActiveScene().name;
+        /*string levelName = SceneManager.GetActiveScene().name;
         SaveManager.level = levelName;
-        SaveManager.Save();
+        SaveManager.Save();*/
 
 		controlManager.setAsPrimary ();
     }

@@ -37,7 +37,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public int cp; //for testing
+   /* public int cp; //for testing
 
     static int m_controlPreset;
 
@@ -51,7 +51,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             m_controlPreset = value;
         }
-    }
+    }*/
 
     void Awake()
     {
@@ -69,7 +69,7 @@ public class SaveManager : Singleton<SaveManager>
 
     private void Update() //for testing
     {
-        cp = controlPreset;
+        //cp = controlPreset;
         l = level;
     }
 
@@ -103,7 +103,7 @@ public class SaveManager : Singleton<SaveManager>
             VariablesToSave savedData = new VariablesToSave();
 
             savedData.m_level = SaveManager.m_level;
-            savedData.m_controlPreset = SaveManager.m_controlPreset;
+            //savedData.m_controlPreset = SaveManager.m_controlPreset;
             
 
             binaryFormatter.Serialize(fileStream, savedData);
@@ -141,7 +141,7 @@ public class SaveManager : Singleton<SaveManager>
                 fileStream.Close();
 
                 SaveManager.m_level = savedData.m_level;
-                SaveManager.m_controlPreset = savedData.m_controlPreset;
+                //SaveManager.m_controlPreset = savedData.m_controlPreset;
             }
         }
 
@@ -199,7 +199,7 @@ public class SaveManager : Singleton<SaveManager>
     public class VariablesToSave
     {
         public string m_level;
-        public int m_controlPreset;
+        //public int m_controlPreset;
     }
 
 }
