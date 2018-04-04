@@ -10,6 +10,9 @@ public class PlayerTrigger : Interactable, ISavable
 	[SerializeField]
 	private bool _resetsOnLoad = false;
 
+	[SerializeField]
+	private bool _reusable = false;
+
 	private Vector2 _upperBound;
 	private Vector2 _lowerBound;
 
@@ -18,6 +21,9 @@ public class PlayerTrigger : Interactable, ISavable
 	[Tooltip("List of activatables to affect.")]
 	[SerializeField]
 	private GameObject[] _activatables;
+
+
+	private bool _playerInBounds = false;
 
 	// Use this for initialization
 	void Start () 
@@ -30,10 +36,10 @@ public class PlayerTrigger : Interactable, ISavable
 	{
 		_upperBound = new Vector2 (transform.position.x + (_range.x/2), transform.position.y + (_range.y/2));
 		_lowerBound = new Vector2 (transform.position.x - (_range.x/2), transform.position.y - (_range.y/2));
-		if(CheckForPlayer())
-		{
+		if (CheckForPlayer ()) {
 			onInteract ();
-		}
+		} else
+			_playerInBounds = false;
 	}
 
 	bool CheckForPlayer()
@@ -45,10 +51,12 @@ public class PlayerTrigger : Interactable, ISavable
 
 	public override void onInteract ()
 	{
-		if (!isEnabled())
+		if ((_reusable && _playerInBounds)|| !isEnabled())
 			return;
+		_playerInBounds = true;
 		ToggleSecurityDoors ();
-		disable ();
+		if(!_reusable)
+			disable ();
 		if (_activatables == null || _activatables.Length == 0)
 			return;
 		foreach(GameObject activatable in _activatables)
