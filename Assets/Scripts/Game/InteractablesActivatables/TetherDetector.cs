@@ -13,10 +13,19 @@ public class TetherDetector : Interactable
 	[SerializeField]
 	private GameObject[] _activatables;
 
+	private SpriteRenderer _rend;
+
+	[SerializeField]
+	private Sprite _activeSprite;
+	[SerializeField]
+	private Sprite _inactiveSprite;
+
 	// Use this for initialization
 	void Start () 
 	{
-		
+		_rend = gameObject.GetComponent<SpriteRenderer> ();
+		if (_rend != null)
+			_rend.sprite = _inactiveSprite;
 	}
 
 	// Update is called once per frame
@@ -45,6 +54,8 @@ public class TetherDetector : Interactable
 	{
 		if (!isEnabled())
 			return;
+		if (_rend != null)
+			_rend.sprite = _activeSprite;
 		ToggleSecurityDoors ();
 		disable ();
 		if (_activatables == null || _activatables.Length == 0)
