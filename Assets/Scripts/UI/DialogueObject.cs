@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueObject 
 {
 	[SerializeField]
+	[TextArea(15,20)]
 	private string _dialogue;
 
 	[SerializeField]
