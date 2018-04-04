@@ -144,7 +144,6 @@ public class TetherManager : Singleton<TetherManager>
 
 				// Order flipped so the tether point exists for the screenshot
 				// Test!
-				GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
 				CreatePoint();
             }
         }
@@ -654,6 +653,8 @@ public class TetherManager : Singleton<TetherManager>
             //Debug.Log("Create tether point");
 			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
             LevelStateManager.createTetherPoint();
+
+			GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
             
             AudioLibrary.PlayTetherPlacementSound();
             // Timeline arrow
