@@ -21,7 +21,6 @@ public class TempPlayerScript : MonoBehaviour {
 		_animationController = GetComponent<Animator> ();
 	}
 
-	//FIXME use proper bindings from PlayerControlManager
 	void Update () 
 	{
 		if (GameManager.inst != null && GameManager.CheckPause (Player.PAUSEMASK_MOVE))

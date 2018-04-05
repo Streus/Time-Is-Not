@@ -82,7 +82,6 @@ public class Player : Controller
         // (a) If the camera is not zoomed out 
 		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
 		{
-			Debug.Log ("Player Updating");
 			base.Update ();
 		}
 		else
@@ -93,13 +92,11 @@ public class Player : Controller
 		//wait for anchor anim to finish
 		if (GameManager.CheckPause ((int)PauseType.CUTSCENE))
 		{
-			Debug.Log (miscDelay); //DEBUG
 			anim.SetBool ("isMoving", false);
 			miscDelay -= Time.deltaTime;
 			if (!inPlaceTetherAnim () && miscDelay <= 0f)
 			{
 				endAnchorAnim ();
-				Debug.Log ("Done"); //DEBUG
 			}
 		}
 
