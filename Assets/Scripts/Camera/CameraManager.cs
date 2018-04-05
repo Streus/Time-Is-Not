@@ -174,7 +174,7 @@ public class CameraManager : MonoBehaviour
 			{
 				tarPos += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
 				transform.position = Vector3.Lerp (transform.position, tarPos, Time.deltaTime * smoothSpeed);
-				fitToBounds (transform);
+				fitToBounds (transform, cam);
 			}
 		}
 
@@ -268,16 +268,16 @@ public class CameraManager : MonoBehaviour
 			Vector2 dtt = target.position - transform.position;
 			if (dtt.magnitude > followRadius)
 				transform.position += (Vector3)(dtt.normalized * (dtt.magnitude - followRadius));
-			fitToBounds (transform);
+			fitToBounds (transform, cam);
 		}
 
-		fitToBounds(cam.transform); 
+		fitToBounds(cam.transform, cam); 
 	}
 
-	void updateCamWidthHeight()
+	void updateCamWidthHeight(Camera camToFit)
 	{
-		cHeight = cam.orthographicSize * 2;
-		cWidth = cHeight * cam.aspect;
+		cHeight = camToFit.orthographicSize * 2;
+		cWidth = cHeight * camToFit.aspect;
 	}
 
 	// sideIndex values:
@@ -319,7 +319,7 @@ public class CameraManager : MonoBehaviour
 		}
 
 		//camera dimensions
-		updateCamWidthHeight(); 
+		updateCamWidthHeight(cam); 
 
 		//sides of the camera view
 		float cMinX = getCamSidePos(0, cam.transform);
@@ -353,7 +353,7 @@ public class CameraManager : MonoBehaviour
 			atBottomBound = false; 
 	}
 
-	private void fitToBounds(Transform t)
+	public void fitToBounds(Transform t, Camera camToFit)
 	{
 		// Update calculated bounds
 		min = b_min + b_origin; 
@@ -364,7 +364,7 @@ public class CameraManager : MonoBehaviour
 			return;
 
 		//camera dimensions
-		updateCamWidthHeight(); 
+		updateCamWidthHeight(camToFit); 
 
 		//sides of the camera view
 		float cMinX = getCamSidePos(0, t);
