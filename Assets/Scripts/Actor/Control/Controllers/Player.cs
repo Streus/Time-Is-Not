@@ -54,6 +54,9 @@ public class Player : Controller
 	private Vector3 TESTPOSITION;
 	private Vector3 TESTSIZE;
 
+	//for delaying some checks
+	private float miscDelay;
+
 	public delegate void AnimEvent ();
 	public event AnimEvent tetherAnchorEnded;
 
@@ -79,7 +82,7 @@ public class Player : Controller
         // (a) If the camera is not zoomed out 
 		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
 		{
-			Debug.Log ("Player Updating"); //DEBUG
+			Debug.Log ("Player Updating");
 			base.Update ();
 		}
 		else
@@ -90,9 +93,14 @@ public class Player : Controller
 		//wait for anchor anim to finish
 		if (GameManager.CheckPause ((int)PauseType.CUTSCENE))
 		{
+			Debug.Log (miscDelay); //DEBUG
 			anim.SetBool ("isMoving", false);
-			if (!inPlaceTetherAnim ())
+			miscDelay -= Time.deltaTime;
+			if (!inPlaceTetherAnim () && miscDelay <= 0f)
+			{
 				endAnchorAnim ();
+				Debug.Log ("Done"); //DEBUG
+			}
 		}
 
         sprite.sortingOrder = SpriteOrderer.inst.OrderMe(transform);
@@ -128,9 +136,10 @@ public class Player : Controller
 
 	public void setPlaceAnchorAnim()
 	{
+		GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+		anim.SetBool ("isMoving", false);
 		anim.SetTrigger ("PlaceAnchor");
-		if(GameManager.inst != null)
-			GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+		miscDelay = 0.1f;
 	}
 
 	private void endAnchorAnim()

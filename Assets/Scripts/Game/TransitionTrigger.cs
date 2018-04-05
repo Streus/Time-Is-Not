@@ -38,6 +38,10 @@ public class TransitionTrigger : MonoBehaviour
 
 		//FIXME temporary solution to waiting for tethers to be destroyed
 		StartCoroutine (temp_delay ());
+
+		//this file contains all my sins
+		GameManager.GetPlayer ().GetComponent<Player> ().enabled = false;
+		GameManager.GetPlayer ().GetComponent<Animator> ().SetBool ("isMoving", false);
 //		activated = true;
 	}
 		
