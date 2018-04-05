@@ -24,7 +24,7 @@ public class TestDashEffect : MonoBehaviour
 	void Start () 
 	{
 		_player = gameObject.GetComponent<Player> ();
-		_spriteSource = transform.GetChild (0).GetComponent<SpriteRenderer> ();
+		_spriteSource = GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
