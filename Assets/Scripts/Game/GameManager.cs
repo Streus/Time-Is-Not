@@ -208,15 +208,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 			playerAnimator = playerObj.GetComponent<Animator>(); 
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
-        /*if (SaveManager.saveManager != null)
-        {
-            string levelName = SceneManager.GetActiveScene().name;
-            SaveManager.saveManager.level = levelName;
-            SaveManager.Save();
-        }*/
-        /*string levelName = SceneManager.GetActiveScene().name;
-        SaveManager.level = levelName;
-        SaveManager.Save();*/
+        
+		//make sure there's a TransitionBuddy
+		TransitionBuddy.getInstance ();
 
 		controlManager.setAsPrimary ();
     }

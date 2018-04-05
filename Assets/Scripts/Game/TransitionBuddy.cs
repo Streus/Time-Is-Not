@@ -23,6 +23,7 @@ public class TransitionBuddy
 			instance = new TransitionBuddy ();
 		return instance;
 	}
+
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -50,6 +51,8 @@ public class TransitionBuddy
 	//Called when a new scene starts, after awake
 	private void beginNewScene (Scene prev, Scene curr)
 	{
+		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
+
 		//save
 		SaveManager.level = SceneManager.GetActiveScene ().name;
 		if(SaveManager.level != "Main Menu")
@@ -71,8 +74,6 @@ public class TransitionBuddy
 			Debug.LogWarning ("Fade In not set up!");
 			finishSceneSetup ();
 		}
-
-		Debug.Log ("[TransitionBuddy] We're in a brand new scene. Shiny!"); //DEBUG TB
 	}
 
 	private void startPlayerCutscene()
