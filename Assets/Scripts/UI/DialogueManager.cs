@@ -62,7 +62,7 @@ public class DialogueManager : Singleton<DialogueManager>
 				//((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;
-			if(_activeDialogues[i].Timer <=0)
+			if(_activeDialogues[i].Timer <=0 || PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
 			{
 				DialogueObject nextDialogue = null; 
 				if(_activeDialogues[i].Next != null)

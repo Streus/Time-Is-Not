@@ -39,16 +39,6 @@ public class PushBlock : MonoBehaviour, ISavable
 	[SerializeField]
 	private bool _canMove = true;
 
-	[Header("Controls (TEMPORARY)")]
-	[SerializeField]
-	private KeyCode _upKey = KeyCode.W;
-	[SerializeField]
-	private KeyCode _rightKey = KeyCode.D;
-	[SerializeField]
-	private KeyCode _downKey = KeyCode.S;
-	[SerializeField]
-	private KeyCode _leftKey = KeyCode.A;
-
     AudioSource source;
 
     AudioClip pushBlockSound;
@@ -138,19 +128,19 @@ public class PushBlock : MonoBehaviour, ISavable
 			switch(_moveDirection)
 			{
 			case Direction.Up:
-				if (Input.GetKey (_upKey))
+				if (PlayerControlManager.GetKey(ControlInput.UP))
 					move (_moveDirection);
                     break;
 			case Direction.Right:
-				if (Input.GetKey (_rightKey))
+				if (PlayerControlManager.GetKey(ControlInput.RIGHT))
 					move (_moveDirection);
 				break;
 			case Direction.Down:
-				if (Input.GetKey (_downKey))
+				if (PlayerControlManager.GetKey(ControlInput.DOWN))
 					move (_moveDirection);
 				break;
 			case Direction.Left:
-				if (Input.GetKey (_leftKey))
+				if (PlayerControlManager.GetKey(ControlInput.LEFT))
 					move (_moveDirection);
 				break;
 			}
@@ -163,19 +153,19 @@ public class PushBlock : MonoBehaviour, ISavable
 			switch(_moveDirection)
 			{
 			case Direction.Up:
-				if (!Input.GetKey (_upKey))
+				if (!PlayerControlManager.GetKey(ControlInput.UP))
 					stop();
 				break;
 			case Direction.Right:
-				if (!Input.GetKey (_rightKey))
+				if (!PlayerControlManager.GetKey(ControlInput.RIGHT))
 					stop();
 				break;
 			case Direction.Down:
-				if (!Input.GetKey (_downKey))
+				if (!PlayerControlManager.GetKey(ControlInput.DOWN))
 					stop();
 				break;
 			case Direction.Left:
-				if (!Input.GetKey (_leftKey))
+				if (!PlayerControlManager.GetKey(ControlInput.LEFT))
 					stop();
 				break;
 			}
