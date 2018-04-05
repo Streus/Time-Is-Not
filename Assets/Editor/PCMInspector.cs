@@ -9,6 +9,7 @@ public class PCMInspector : Editor
 
 	public void OnEnable()
 	{
+		#if FALSE
 		pcm = (PlayerControlManager)target;
 		try
 		{
@@ -18,10 +19,12 @@ public class PCMInspector : Editor
 		{
 			Debug.LogError (nre.Message + "\nCould not make serialized object of " + pcm.name);
 		}
+		#endif
 	}
 
 	public override void OnInspectorGUI ()
 	{
+		#if FALSE
 		tar.Update ();
 
 		if (pcm.isPrimary ())
@@ -68,5 +71,6 @@ public class PCMInspector : Editor
 			EditorUtility.SetDirty (pcm);
 			Undo.RecordObject (pcm, "Edited " + name);
 		}
+		#endif
 	}
 }

@@ -94,7 +94,7 @@ public class StasisBubble : MonoBehaviour
 		// Temporary: You can right click to remove a stasis bubble
 		if (canRightClickDestroy && !TetherManager.CursorIsOverATetherPoint())
 		{
-			if (MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
+			if (MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.REMOVAL))
 			{
 				RemoveBubble();
 			}
