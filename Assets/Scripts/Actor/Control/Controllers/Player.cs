@@ -250,43 +250,28 @@ public class Player : Controller
         if (PlayerControlManager.GetKey(ControlInput.UP)) // UP
         {
             movementVector += Vector2.up;
-			anim.SetInteger ("Direction", 2);
-//            if(!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-//            {
-//                AudioLibrary.PlayerWalking();
-//				anim.SetInteger ("Direction", 2);
-//            } 
         }
         if (PlayerControlManager.GetKey(ControlInput.LEFT)) // LEFT
         {
             movementVector += Vector2.left;
-			anim.SetInteger ("Direction", 3);
-//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-//            {
-//                AudioLibrary.PlayerWalking();
-//				anim.SetInteger ("Direction", 3);
-//            }
         }
 		if (PlayerControlManager.GetKey(ControlInput.DOWN)) // DOWN
         {
             movementVector += Vector2.down;
-			anim.SetInteger ("Direction", 4);
-//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-//            {
-//                AudioLibrary.PlayerWalking();
-//				anim.SetInteger ("Direction", 4);
-//            }
         }
         if (PlayerControlManager.GetKey(ControlInput.RIGHT)) // RIGHT
         {
             movementVector += Vector2.right;
-			anim.SetInteger ("Direction", 1);
-//            if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.playerWalking))
-//            {
-//                AudioLibrary.PlayerWalking();
-//				anim.SetInteger ("Direction", 1);
-//            }
         }
+
+		//update animator on movement direction, if we're moving
+		if(movementVector != Vector2.zero)
+		{
+			float zRot = Vector2.SignedAngle (Vector2.right, movementVector);
+			zRot += zRot < 0f ? 360f : 0f;
+			int quadrant = (int)((zRot / 360f) * 4f);
+			anim.SetInteger ("Direction", quadrant + 1);
+		}
 
         movementVector = movementVector.normalized * getSelf().getMovespeed() * Time.deltaTime;
 		physbody.velocity += movementVector;
@@ -311,11 +296,6 @@ public class Player : Controller
 		pitFilter.useTriggers = true;
 		platformFilter.SetLayerMask(1 << LayerMask.NameToLayer("SkyEnts"));
 		platformFilter.useTriggers = true;
-
-		//pitCount = GetComponent<Collider2D>().Cast(movementVector, pitFilter, pitsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
-
-
-		//platformCount = GetComponent<Collider2D>().Cast(movementVector, platformFilter, platformsFound, getSelf().getMovespeed() * Time.deltaTime * 1.2f);
 
 		Vector2 colSize = gameObject.GetComponent<BoxCollider2D> ().size;
 		Vector2 moveVect = new Vector2(movementVector.normalized.x * colSize.x * 0.5f, movementVector.normalized.y * colSize.y);
