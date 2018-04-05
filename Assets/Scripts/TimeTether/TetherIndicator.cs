@@ -143,7 +143,7 @@ public class TetherIndicator : MonoBehaviour
 		 * Input (right click) Tether point removal
 		 */ 
 		//if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS) && !LevelStateManager.CursorIsOverAStasisBubble())
-		if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
+		if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.REMOVAL))
 		{
 			TetherManager.inst.RemoveTetherPoint(tetherIndex); 
 		}

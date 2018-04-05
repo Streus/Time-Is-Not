@@ -15,7 +15,8 @@ public enum ControlInput
 	DASH,
 	FIRE_STASIS,
 	ZOOM_OUT,
-	PAUSE_MENU
+	PAUSE_MENU,
+	REMOVAL
 };
 
 [CreateAssetMenu(menuName = "Controls/Player Control Manager")]
@@ -59,8 +60,15 @@ public class PlayerControlManager : ScriptableObject
 			Debug.Log ("This is the primary PCM.");
 	}
 
+	public void Reset()
+	{
+		Awake();
+	}
+
 	public void Awake()
 	{
+		Debug.Log("ci length: " + ciLength); 
+
 		if (primary == null)
 		{
 			setAsPrimary ();
@@ -87,6 +95,7 @@ public class PlayerControlManager : ScriptableObject
 		bindings [8] = KeyCode.Mouse1;
 		bindings [9] = KeyCode.Q;
 		bindings [10] = KeyCode.Escape;
+		bindings [11] = KeyCode.R;
 
 		setNames = new string[setCount];
 		setNames [0] = "DEFAULT";
