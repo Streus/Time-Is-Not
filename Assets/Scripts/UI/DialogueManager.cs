@@ -10,6 +10,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	private List<DialogueObject> _activeDialogues;
 
+	private int _dialogueStackLevel = 0;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -38,6 +40,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
 		GameObject obj = Instantiate (_dialogueBoxPrefab, screenPoint, Quaternion.identity);
 		obj.GetComponentInChildren<Text> ().text = dia.Dialogue;
+		obj.GetComponent<Canvas> ().sortingOrder = _dialogueStackLevel;
+		_dialogueStackLevel++;
 		dia.UIObject = obj;
 		_activeDialogues.Add (dia);
 

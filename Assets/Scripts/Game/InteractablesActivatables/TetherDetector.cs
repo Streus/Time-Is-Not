@@ -13,6 +13,12 @@ public class TetherDetector : Interactable
 	[SerializeField]
 	private GameObject[] _activatables;
 
+
+	[SerializeField]
+	private bool _reusable = false;
+
+	private bool _tetherInRange = false;
+
 	private SpriteRenderer _rend;
 
 	[SerializeField]
@@ -31,10 +37,10 @@ public class TetherDetector : Interactable
 	// Update is called once per frame
 	void Update () 
 	{
-		if(CheckForTether())
-		{
+		if (CheckForTether ()) {
 			onInteract ();
-		}
+		} else
+			_tetherInRange = false;
 	}
 
 	bool CheckForTether()
@@ -52,12 +58,14 @@ public class TetherDetector : Interactable
 
 	public override void onInteract ()
 	{
-		if (!isEnabled())
+		if ((_reusable && _tetherInRange)|| !isEnabled())
 			return;
 		if (_rend != null)
 			_rend.sprite = _activeSprite;
+		_tetherInRange = true;
 		ToggleSecurityDoors ();
-		disable ();
+		if(!_reusable)
+			disable ();
 		if (_activatables == null || _activatables.Length == 0)
 			return;
 		foreach(GameObject activatable in _activatables)
