@@ -52,7 +52,8 @@ public class TransitionBuddy
 	{
 		//save
 		SaveManager.level = SceneManager.GetActiveScene ().name;
-		SaveManager.Save ();
+		if(SaveManager.level != "Main Menu")
+			SaveManager.Save ();
 
 		//start cutscene pause
 		if(GameManager.inst != null)
