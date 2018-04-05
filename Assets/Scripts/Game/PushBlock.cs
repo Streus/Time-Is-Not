@@ -26,6 +26,9 @@ public class PushBlock : MonoBehaviour, ISavable
 	//move speed
 	private float _moveSpeed = 2; 
 
+	[SerializeField]
+	private float _playerCheckRange = 0.2f;
+
 	private Dictionary<Direction, bool> canMoveInDirection;
 
 	[Tooltip("Push speed Multiplier.")]
@@ -88,6 +91,7 @@ public class PushBlock : MonoBehaviour, ISavable
 				stop ();
 			return;
 		}
+		BoxCheck ();
 		getInput ();
 
 		if(_beingPushed)
@@ -181,28 +185,18 @@ public class PushBlock : MonoBehaviour, ISavable
 
 	void OnDrawGizmos()
 	{
-	/*	if (_col == null)
+		if (_col == null)
 			_col = gameObject.GetComponent<BoxCollider2D> ();
-		Vector2 moveDir = Vector2.zero;
-		switch(_moveDirection)
-		{
-		case Direction.Up:
-			moveDir = Vector2.up * _col.size.y;
-			break;
-		case Direction.Right:
-			moveDir = Vector2.right * _col.size.x;
-			break;
-		case Direction.Down:
-			moveDir = Vector2.down * _col.size.y;
-			break;
-		case Direction.Left:
-			moveDir = Vector2.left * _col.size.x;
-			break;
-		}
+		Gizmos.DrawCube((Vector2)transform.position + _col.offset + ((Vector2)transform.up * _col.size.y / 2) + ((Vector2)transform.up * _playerCheckRange / 2),new Vector2(_col.size.x / 1.25f, _playerCheckRange));
 
-		moveDir *= 0.1f;
-		Gizmos.DrawCube ((Vector2)transform.position + moveDir + _col.offset, _col.size);
-		*/
+		//right check
+		Gizmos.DrawCube((Vector2)transform.position + _col.offset + ((Vector2)transform.right * _col.size.x / 2) + ((Vector2)transform.right * _playerCheckRange / 2),new Vector2(_playerCheckRange, _col.size.y / 1.25f));
+
+		//bottom check
+		Gizmos.DrawCube((Vector2)transform.position + _col.offset + ((Vector2)transform.up * _col.size.y / -2) + ((Vector2)transform.up * _playerCheckRange / -2),new Vector2(_col.size.x / 1.25f, _playerCheckRange));
+
+		//left check
+		Gizmos.DrawCube((Vector2)transform.position + _col.offset + ((Vector2)transform.right * _col.size.x / -2) + ((Vector2)transform.right * _playerCheckRange / -2),new Vector2(_playerCheckRange, _col.size.y / 1.25f));
 
 	}
 
@@ -239,7 +233,10 @@ public class PushBlock : MonoBehaviour, ISavable
 		return seesArea;
 
 	}
-
+	/*
+	 * THIS IS FOR THE OLD MOVEMENT
+	 * WE ARE CHANING IT TO BE BOXCHECK BASED
+	 * UNCOMMENT THIS AND COMMENT THE CASTCHECK METHOD TO REVERT TO OLD MOVEMENT
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.gameObject.GetComponent<Entity> () != null) 
@@ -287,6 +284,74 @@ public class PushBlock : MonoBehaviour, ISavable
 				_moveDirection = Direction.None;
 			}
 		}
+	}
+	*/
+
+	void BoxCheck()
+	{
+		_moveSpeed = 0;
+		_moveDirection = Direction.None;
+		bool seesup = false;
+		bool seesright = false;
+		bool seesdown = false;
+		bool seesleft = false;
+		//top check
+		Collider2D[] colsTop = Physics2D.OverlapBoxAll((Vector2)transform.position + _col.offset + ((Vector2)transform.up * _col.size.y / 2) + ((Vector2)transform.up * _playerCheckRange / 2),new Vector2(_col.size.x / 1.25f, _playerCheckRange), 0);
+		for(int i = 0; i < colsTop.Length; i++)
+		{
+			if (colsTop [i].CompareTag ("Player")) 
+			{
+				if (_player == null)
+					_player = colsTop [i].GetComponent<Player> ();
+				_moveSpeed = (3 * _speedMult);
+				Debug.Log ("Sees Player");
+				seesup = true;
+				_moveDirection = Direction.Down;
+			}
+		}
+		//right check
+		Collider2D[] colsRight = Physics2D.OverlapBoxAll((Vector2)transform.position + _col.offset + ((Vector2)transform.right * _col.size.x / 2) + ((Vector2)transform.right * _playerCheckRange / 2),new Vector2(_playerCheckRange, _col.size.y / 1.25f), 0);
+		for(int i = 0; i < colsRight.Length; i++)
+		{
+			if (colsRight [i].CompareTag ("Player")) 
+			{
+				if (_player == null)
+					_player = colsRight [i].GetComponent<Player> ();
+				_moveSpeed = (3 * _speedMult);
+				Debug.Log ("Sees Player");
+				seesright = true;
+				_moveDirection = Direction.Left;
+			}
+		}
+		//bottom check
+		Collider2D[] colsBottom = Physics2D.OverlapBoxAll((Vector2)transform.position + _col.offset + ((Vector2)transform.up * _col.size.y / -2) + ((Vector2)transform.up * _playerCheckRange / -2),new Vector2(_col.size.x / 1.25f, _playerCheckRange), 0);
+		for(int i = 0; i < colsBottom.Length; i++)
+		{
+			if (colsBottom [i].CompareTag ("Player")) 
+			{
+				if (_player == null)
+					_player = colsBottom [i].GetComponent<Player> ();
+				_moveSpeed = (3 * _speedMult);
+				Debug.Log ("Sees Player");
+				seesdown = true;
+				_moveDirection = Direction.Up;
+			}
+		}
+		//left check
+		Collider2D[] colsLeft = Physics2D.OverlapBoxAll((Vector2)transform.position + _col.offset + ((Vector2)transform.right * _col.size.x / -2) + ((Vector2)transform.right * _playerCheckRange / -2),new Vector2(_playerCheckRange, _col.size.y / 1.25f), 0);
+		for(int i = 0; i < colsLeft.Length; i++)
+		{
+			if (colsLeft [i].CompareTag ("Player")) 
+			{
+				if (_player == null)
+					_player = colsLeft [i].GetComponent<Player> ();
+				_moveSpeed = (3 * _speedMult);
+				Debug.Log ("Sees Player");
+				seesleft = true;
+				_moveDirection = Direction.Right;
+			}
+		}
+		_playerInRange = (seesup || seesleft || seesright || seesdown);
 	}
 
 	/// <summary>

@@ -160,6 +160,7 @@ public class Laser : Interactable, IActivatable, ISavable
 
 		while(colsToIgnore.Contains(hit.collider) || hit.collider.isTrigger)
 		{
+			// || hit.collider.isTrigger
 			//ray.point + [the direction your casting] * some small offset.
 			hit = Physics2D.Raycast (hit.point +  ((Vector2)transform.up * 0.1f), transform.up, _distance, _layersToHit);
 		}
