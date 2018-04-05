@@ -127,12 +127,12 @@ public class GameManager : Singleton<GameManager> , ISavable
 	}
 
 	// Actions
-	public event StateToggled pauseToggled; 
-	public event StateToggled pauseLockedToggled; 
+	public event PauseStateToggled pauseTypeToggled; 
+	//public event StateToggled pauseLockedToggled; 
 	public event CodesUpdated codesUpdated; 
 
 	// Delegates
-	public delegate void StateToggled(bool state); 
+	public delegate void PauseStateToggled(PauseType type); 
 	public delegate void CodesUpdated (); 
 
 	// Reference variables
@@ -318,7 +318,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 		// Pause states have two levels
 		// The lower level pause states are CUTSCENE, TETHER_TRANSITION, and ZOOM
 		// The top level pause state is a full GAME pause, which can be accessed independently or on top of a lower level
-		// If entering a top level pause through a lower level, when exiting the state machine must pass back down through the lower level
+		// If entering a top level pause through a lower level, when exiting the state machine must pass back down through the lower level 
 
 		// Check for redunancy
 		if (pauseType == newPauseType)
@@ -343,6 +343,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 		if (pauseType == PauseType.NONE)
 		{
 			m_pauseType = newPauseType; 
+			if (pauseTypeToggled != null)
+			{
+				pauseTypeToggled(m_pauseType); 
+			}
 			return true; 
 		}
 		// If the current pause type is one of the lower level states (below full game pause), elevate to game paused and save the previous pause state
@@ -352,7 +356,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 			// Back up the current pause type so it can be restored when unpausing
 			prevPauseType = pauseType; 
 
-			m_pauseType = newPauseType; 
+			m_pauseType = newPauseType;
+			if (pauseTypeToggled != null)
+			{
+				pauseTypeToggled(m_pauseType); 
+			}
 			return true; 
 		}
 
@@ -375,6 +383,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 		else if (IsLowerPauseType(pauseType))
 		{
 			m_pauseType = PauseType.NONE; 
+			if (pauseTypeToggled != null)
+			{
+				pauseTypeToggled(m_pauseType); 
+			}
 			return true; 
 		}
 		// When exiting a top level game pause, check whether to return to NONE or a backup pause state
@@ -397,6 +409,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 			// Reset the backup pause state
 			prevPauseType = PauseType.NONE; 
 
+			if (pauseTypeToggled != null)
+			{
+				pauseTypeToggled(m_pauseType); 
+			}
 			return true; 
 		}
 		return false; 
@@ -407,6 +423,17 @@ public class GameManager : Singleton<GameManager> , ISavable
 		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.ZOOM; 
 
 		//if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
+		if (CheckPause(check))
+		{
+			return true; 
+		}
+		return false; 
+	}
+
+	public bool IsWorldPauseType(PauseType testType)
+	{
+		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.GAME; 
+	
 		if (CheckPause(check))
 		{
 			return true; 
