@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c6fcbe3d7fe2b8249b994626c29fda31
-timeCreated: 1522771995
+timeCreated: 1522883098
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,7 @@ TextureImporter:
     21300008: Vertical_RemoteDoor_4
     21300010: Vertical_RemoteDoor_5
     21300012: Vertical_RemoteDoor_6
+    21300014: Vertical_RemoteDoor_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -86,11 +87,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -100,11 +101,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -114,11 +115,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -128,11 +129,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,11 +143,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -156,11 +157,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 320
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,11 +171,25 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 192
+        y: 0
         width: 64
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_RemoteDoor_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
