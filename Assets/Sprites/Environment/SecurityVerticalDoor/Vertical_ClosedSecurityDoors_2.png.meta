@@ -1,17 +1,33 @@
 fileFormatVersion: 2
-guid: 70dcb6e8e7a57b345a4afdb6858f4e9d
-timeCreated: 1522765116
+guid: 927774e8e328984449aadf738daa5e5d
+timeCreated: 1522883024
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Vertical_KeyCodeDoor_New_0
-    21300002: Vertical_KeyCodeDoor_New_1
-    21300004: Vertical_KeyCodeDoor_New_2
-    21300006: Vertical_KeyCodeDoor_New_3
-    21300008: Vertical_KeyCodeDoor_New_4
-    21300010: Vertical_KeyCodeDoor_New_5
-    21300012: Vertical_KeyCodeDoor_New_6
-    21300014: Vertical_KeyCodeDoor_New_7
+    21300000: Vertical_ClosedSecurityDoors_New_0
+    21300002: Vertical_ClosedSecurityDoors_New_1
+    21300004: Vertical_ClosedSecurityDoors_New_2
+    21300006: Vertical_ClosedSecurityDoors_New_3
+    21300008: Vertical_ClosedSecurityDoors_New_4
+    21300010: Vertical_ClosedSecurityDoors_New_5
+    21300012: Vertical_ClosedSecurityDoors_New_6
+    21300014: Vertical_ClosedSecurityDoors_New_7
+    21300016: Vertical_ClosedSecurityDoors_New_8
+    21300018: Vertical_ClosedSecurityDoors_New_9
+    21300020: Vertical_ClosedSecurityDoors_New_10
+    21300022: Vertical_ClosedSecurityDoors_New_11
+    21300024: Vertical_ClosedSecurityDoors_2_0
+    21300026: Vertical_ClosedSecurityDoors_2_1
+    21300028: Vertical_ClosedSecurityDoors_2_2
+    21300030: Vertical_ClosedSecurityDoors_2_3
+    21300032: Vertical_ClosedSecurityDoors_2_4
+    21300034: Vertical_ClosedSecurityDoors_2_5
+    21300036: Vertical_ClosedSecurityDoors_2_6
+    21300038: Vertical_ClosedSecurityDoors_2_7
+    21300040: Vertical_ClosedSecurityDoors_2_8
+    21300042: Vertical_ClosedSecurityDoors_2_9
+    21300044: Vertical_ClosedSecurityDoors_2_10
+    21300046: Vertical_ClosedSecurityDoors_2_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -83,113 +99,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_0
+      name: Vertical_ClosedSecurityDoors_2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 256
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_1
+      name: Vertical_ClosedSecurityDoors_2_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_ClosedSecurityDoors_2_2
       rect:
         serializedVersion: 2
         x: 128
         y: 256
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_2
+      name: Vertical_ClosedSecurityDoors_2_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_ClosedSecurityDoors_2_4
       rect:
         serializedVersion: 2
         x: 256
         y: 256
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_3
+      name: Vertical_ClosedSecurityDoors_2_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_ClosedSecurityDoors_2_6
       rect:
         serializedVersion: 2
         x: 384
         y: 256
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_4
+      name: Vertical_ClosedSecurityDoors_2_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 256
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_ClosedSecurityDoors_2_8
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_5
+      name: Vertical_ClosedSecurityDoors_2_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Vertical_ClosedSecurityDoors_2_10
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_6
+      name: Vertical_ClosedSecurityDoors_2_11
       rect:
         serializedVersion: 2
-        x: 256
+        x: 192
         y: 0
         width: 64
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Vertical_KeyCodeDoor_New_7
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
