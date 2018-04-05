@@ -30,6 +30,12 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	{
 		screenCam.enabled = false; 
 	}
+
+	// Temporary
+	void Update()
+	{
+		//CameraManager.instance.fitToBounds(inst.screenCam.transform, inst.screenCam); 
+	}
 		
 
 	public static void createScreenshot(int stateNum)
@@ -49,6 +55,8 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 		}
 
 		// Realign the screenshot camera to use bounds correctly
+		//CameraManager.instance.fitToBounds(inst.screenCam.transform); 
+		CameraManager.instance.fitToBounds(inst.screenCam.transform, inst.screenCam); 
 
 		// Take the screenshot
 		inst.screenCam.Render();
