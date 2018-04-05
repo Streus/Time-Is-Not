@@ -397,6 +397,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 			}
 			else
 			{
+				Debug.Log("prevPauseType of " + prevPauseType + " is not a lower pause type"); 
 				m_pauseType = PauseType.NONE; 
 			}
 
@@ -415,9 +416,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 	public bool IsLowerPauseType(PauseType testType)
 	{
 		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.ZOOM; 
+		//Debug.Log(System.Convert.ToString(check, 2).PadLeft(32, '0')); //DEBUG
+		//Debug.Log(System.Convert.ToString((int)testType, 2).PadLeft(32, '0')); //DEBUG
 
 		//if (testType == PauseType.CUTSCENE || testType == PauseType.TETHER_MENU || testType == PauseType.TETHER_TRANSITION || testType == PauseType.ZOOM)
-		if (CheckPause(check))
+		if (((int)testType & check) != 0)
 		{
 			return true; 
 		}
@@ -428,7 +431,7 @@ public class GameManager : Singleton<GameManager> , ISavable
 	{
 		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.GAME; 
 	
-		if (CheckPause(check))
+		if (((int)testType & check) != 0)
 		{
 			return true; 
 		}
