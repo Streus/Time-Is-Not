@@ -158,7 +158,7 @@ public class Laser : Interactable, IActivatable, ISavable
 		
 		RaycastHit2D hit = Physics2D.Raycast (transform.position + (Vector3.up * laserHeight), transform.up, _distance, _layersToHit);
 
-		while(colsToIgnore.Contains(hit.collider))
+		while(colsToIgnore.Contains(hit.collider) || hit.collider.isTrigger)
 		{
 			//ray.point + [the direction your casting] * some small offset.
 			hit = Physics2D.Raycast (hit.point +  ((Vector2)transform.up * 0.1f), transform.up, _distance, _layersToHit);
