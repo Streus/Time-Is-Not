@@ -33,6 +33,8 @@ public class TransitionTrigger : MonoBehaviour
 	// Trigger end of level clean-up
 	public void OnTriggerEnter2D(Collider2D col)
 	{
+		if (!col.gameObject.CompareTag ("Player"))
+			return;
 		GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
 		TetherManager.inst.EndLevelRemoveAllTetherPoints ();
 
