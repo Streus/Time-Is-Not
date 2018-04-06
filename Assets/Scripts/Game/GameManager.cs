@@ -205,7 +205,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 		{
 			playerObj.GetComponent<Entity> ().died += killPlayer;
 			playerScript = playerObj.GetComponent<Player>(); 
-			playerAnimator = playerObj.GetComponent<Animator>(); 
+			playerAnimator = playerObj.GetComponent<Animator>();
+
+			Controller.setPlayer (playerObj.GetComponent<Controller> ());
 		}
 		codeEnumNames = System.Enum.GetNames (typeof(CodeName));
         

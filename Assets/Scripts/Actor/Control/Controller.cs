@@ -8,6 +8,15 @@ using UnityEngine.Profiling;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Controller : MonoBehaviour, ISavable
 {
+	#region STATIC_VARS
+
+	// The player controller
+	private static Controller player;
+
+	// Controllers further than this distance from the player will not run updates
+	private const float AI_CULL_DISTANCE = 30f;
+	#endregion
+
 	#region INSTANCE_VARS
 
 	[Tooltip("The current state this controller is using in its state machine.")]
@@ -23,6 +32,14 @@ public class Controller : MonoBehaviour, ISavable
 	protected Rigidbody2D physbody;
 
 	private Stack<Vector3> path;
+	#endregion
+
+	#region STATIC_METHODS
+
+	public static void setPlayer(Controller c)
+	{
+		player = c;
+	}
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -41,6 +58,10 @@ public class Controller : MonoBehaviour, ISavable
 		
 	public virtual void Update()
 	{
+		//cull update if not the player and further than AI_CULL_DISTANCE from the player
+		if (player != null && player != this && Vector2.Distance (transform.position, player.transform.position) > AI_CULL_DISTANCE)
+			return;
+
 		if (state != null && (GameManager.inst == null || !GameManager.isPaused()))
 			state.update (this);
 	}
