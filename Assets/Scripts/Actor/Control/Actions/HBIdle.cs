@@ -5,7 +5,7 @@ public class HBIdle : Action
 {
 	public float turnTolerance = 0.1f;
 
-	public float originDistTolerance = 0.01f;
+	public float originDistTolerance = 0.1f;
 
 	public override void perform (Controller c)
 	{
@@ -17,6 +17,8 @@ public class HBIdle : Action
 			Vector3 navPos;
 			if (c.getMap () != null)
 			{
+//				if (Vector2.Distance (pe.transform.position, pe.getOrigin ()) < pe.getMap ().cellDimension)
+//					navPos = pe.getOrigin ();
 				if (!c.currentPosition (out navPos))
 				{
 					c.setPath (pe.getOrigin());
@@ -47,15 +49,10 @@ public class HBIdle : Action
 		//reorienting idle behavior
 		else
 		{
-			//TODO HB idle reorient behavior
-			#if FALSE
-			if (pe.updateReorientTimer (Time.deltaTime))
+			if (Quaternion.Angle (pe.transform.rotation, pe.getStartRotation ()) > turnTolerance)
 			{
-				pe.transform.rotation += Quaternion.Euler (0f, 0f, pe.getReorientAngle () * Time.deltaTime);
-				if(
+				pe.facePoint (pe.getStartRotation () * Vector2.up, pe.getTurnSpeed ());
 			}
-			#endif
-			pe.transform.Rotate(0f, 0f, pe.getTurnSpeed () * Time.deltaTime);
 		}
 	}
 }

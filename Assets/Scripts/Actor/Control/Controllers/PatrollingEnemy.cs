@@ -17,15 +17,8 @@ public class PatrollingEnemy : Controller
 	protected float turnSpeed = 90f;
 
 	private Vector3 origin;
+	private Quaternion startRot;
 
-	[Tooltip("How long this entity will face in one direction while idle")]
-	[SerializeField]
-	private float reorientTimerMax = float.PositiveInfinity;
-	private float reorientTimer;
-
-	[Tooltip("How far this entity will rotate when reorienting")]
-	[SerializeField]
-	private float reorientAngle = 45f;
 	#endregion
 
 	#region INSTANCE_METHODS
@@ -34,6 +27,7 @@ public class PatrollingEnemy : Controller
 		base.Awake ();
 
 		origin = transform.position;
+		startRot = transform.rotation;
 	}
 
 	public override void Update()
@@ -71,19 +65,9 @@ public class PatrollingEnemy : Controller
 		return origin;
 	}
 
-	public bool updateReorientTimer(float delta)
+	public Quaternion getStartRotation()
 	{
-		return (reorientTimer -= delta) <= 0f;
-	}
-
-	public void resetReorientTimer()
-	{
-		reorientTimer = reorientTimerMax;
-	}
-
-	public float getReorientAngle()
-	{
-		return reorientAngle;
+		return startRot;
 	}
 
 	public override void OnDrawGizmos ()

@@ -57,8 +57,6 @@ public class Hummingbird : PatrollingEnemy
 		if(spriteChild != null)
 			hummingAnim = spriteChild.GetComponent<Animator> ();
 
-		resetReorientTimer ();
-
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 	}
 
