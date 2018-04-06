@@ -22,6 +22,8 @@ public class GulperEel : PatrollingEnemy
         if (gulperAnim == null)
             return;
 
+		gulperAnim.enabled = !GameManager.CheckPause ((int)PauseType.GAME | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION);
+
         //TODO gulper eel movement animations
         if (transform.eulerAngles.z > 315 || transform.eulerAngles.z < 45)
 		{

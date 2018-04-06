@@ -56,6 +56,13 @@ public class HermitCrab : Controller
 		base.Awake ();
     }
 
+	public override void Update ()
+	{
+		base.Update ();
+
+		animationController.enabled = !GameManager.CheckPause ((int)PauseType.GAME | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION);
+	}
+
 	public void OnDestroy()
 	{
 		GetComponent<RegisteredObject> ().allowResetChanged -= onStasised;

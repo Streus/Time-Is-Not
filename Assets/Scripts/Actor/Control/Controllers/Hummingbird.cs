@@ -84,6 +84,9 @@ public class Hummingbird : PatrollingEnemy
 
 		if (hummingAnim == null)
 			return;
+
+		hummingAnim.enabled = !GameManager.CheckPause ((int)PauseType.GAME | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION);
+			
 		//calculate sprite direction
 //		anim = transform.GetChild(1).GetComponent<Animator>();
 //		Debug.Log (anim.gameObject.name);

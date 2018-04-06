@@ -36,6 +36,11 @@ public class PatrollingEnemy : Controller
 		origin = transform.position;
 	}
 
+	public override void Update()
+	{
+		base.Update ();
+	}
+
 	public PatrolNode getPrevNode()
 	{
 		return prevNode;
