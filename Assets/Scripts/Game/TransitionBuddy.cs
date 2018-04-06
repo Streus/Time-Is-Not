@@ -59,8 +59,10 @@ public class TransitionBuddy
 			SaveManager.Save ();
 
 		//start cutscene pause
-		if(GameManager.inst != null)
+		if (GameManager.inst != null)
 			GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+		else
+			Debug.LogWarning ("No GameManager! Could not pause for transition in.");
 
 		//start fade effect
 		transitionEffect = ScreenShaderTransition.getInstance("LevelChangeTransition");
@@ -95,8 +97,12 @@ public class TransitionBuddy
 		GameManager.GetPlayer ().GetComponent<Player> ().tetherAnchorEnded -= finishSceneSetup;
 
 		//start up header display
-		if (LevelNameHeader.getMain () != null)
-			LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.APPEAR);
+		LevelNameHeader lnh = LevelNameHeader.getMain();
+		if (lnh != null)
+		{
+			if (SceneSetup.inst == null || SceneSetup.inst.useLevelHeader)
+				LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.APPEAR);
+		}
 		else
 			Debug.LogWarning ("No main LevelNameHeader!");
 

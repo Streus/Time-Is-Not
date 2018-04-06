@@ -192,6 +192,10 @@ public class GameManager : Singleton<GameManager> , ISavable
 	// MonoBehaviors
 	public void Awake()
 	{
+		//this voodoo makes sure the singleton instance is set
+		//wish it didn't need to be done this way, but oh well
+		inst.enabled = inst.enabled;
+
 		if (SceneSetup.inst != null)
 		{
 			canUseStasis = SceneSetup.inst.canUseStasis; 
