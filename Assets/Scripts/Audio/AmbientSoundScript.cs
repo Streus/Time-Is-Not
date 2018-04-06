@@ -6,16 +6,29 @@ public class AmbientSoundScript : MonoBehaviour
 {
     private AudioSource source;
     [SerializeField] private AudioClip ambientSound;
+    private float time;
+    private float timer = 0;
+    private bool played;
 
 	// Use this for initialization
 	void Start ()
     {
         source = this.gameObject.GetComponent<AudioSource>();
-        if (ambientSound != null)
+        time = Random.Range(0, 2);
+        played = false;
+    }
+    private void Update()
+    {
+        if (!played)
         {
-            source.clip = ambientSound;
-            source.Play();
+            timer += Time.deltaTime;
+
+            if (ambientSound != null && timer >= time)
+            {
+                source.clip = ambientSound;
+                source.Play();
+                played = true;
+            }
         }
     }
-	
 }
