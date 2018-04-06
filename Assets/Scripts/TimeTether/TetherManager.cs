@@ -899,7 +899,7 @@ public class TetherManager : Singleton<TetherManager>
     /// </summary>
     public static bool ZoomOutAllowed()
     {
-        if (inst.tetherUIState == TetherUIState.GAMEPLAY)
+		if (inst.tetherUIState == TetherUIState.GAMEPLAY && !GameManager.GetPlayerScript().inPlaceTetherAnim())
         {
             return true;
         }

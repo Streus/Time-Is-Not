@@ -478,6 +478,11 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return inst.playerAnimator; 
 	}
 
+	public static Player GetPlayerScript()
+	{
+		return inst.playerScript; 
+	}
+
 	public static int getPlayerMoveMask()
 	{
 		return inst.playerScript.moveMask.value; 
