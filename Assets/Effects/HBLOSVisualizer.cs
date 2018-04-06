@@ -36,6 +36,10 @@ public class HBLOSVisualizer : MonoBehaviour
 
 	public void LateUpdate()
 	{
+		//don't do these calculations if we're too far from the player
+		if (!hummingbird.inCullingRange ())
+			return;
+
 		//build list of points
 		int casts = Mathf.RoundToInt (hummingbird.getFOV () * resolution);
 		float dAngle = hummingbird.getFOV () / casts;

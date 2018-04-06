@@ -37,6 +37,10 @@ public class HCNullFieldVisualizer : MonoBehaviour
 
 	public void LateUpdate()
 	{
+		//don't do any of this if we're too far from the player
+		if (!crab.inCullingRange ())
+			return;
+
 		//build list of points
 		int casts = Mathf.RoundToInt (FIELD_FOV * resolution);
 		float dAngle = FIELD_FOV / casts;

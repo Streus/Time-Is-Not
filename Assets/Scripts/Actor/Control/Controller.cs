@@ -55,11 +55,18 @@ public class Controller : MonoBehaviour, ISavable
 		if (state != null)
 			state.enter (this);
 	}
+
+	public bool inCullingRange()
+	{
+		if (player == null)
+			return true;
+		return player == this || Vector2.Distance (transform.position, player.transform.position) <= AI_CULL_DISTANCE;
+	}
 		
 	public virtual void Update()
 	{
 		//cull update if not the player and further than AI_CULL_DISTANCE from the player
-		if (player != null && player != this && Vector2.Distance (transform.position, player.transform.position) > AI_CULL_DISTANCE)
+		if (!inCullingRange())
 			return;
 
 		if (state != null && (GameManager.inst == null || !GameManager.isPaused()))
