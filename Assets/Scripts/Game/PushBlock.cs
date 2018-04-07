@@ -92,18 +92,22 @@ public class PushBlock : MonoBehaviour, ISavable
 			case Direction.Up:
 				transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.up * _moveSpeed * Time.deltaTime);
+				_player.GetComponent<Animator> ().SetInteger ("Direction", 2);
                     break;
 			case Direction.Right:
 				transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.right * _moveSpeed * Time.deltaTime);
+				_player.GetComponent<Animator> ().SetInteger ("Direction", 1);
 				break;
 			case Direction.Down:
 				transform.Translate (Vector2.down * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.down * _moveSpeed * Time.deltaTime);
+				_player.GetComponent<Animator> ().SetInteger ("Direction", 4);
 				break;
 			case Direction.Left:
 				transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
 				_player.transform.Translate (Vector2.left * _moveSpeed * Time.deltaTime);
+				_player.GetComponent<Animator> ().SetInteger ("Direction", 3);
 				break;
 			}
 		}
