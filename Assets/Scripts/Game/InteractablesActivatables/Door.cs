@@ -51,6 +51,9 @@ public class Door : Interactable, IActivatable, ISavable
     AudioClip openMetalDoor;
     AudioClip closeMetalDoor;
 
+	[SerializeField]
+	private bool ignoresTimeTether = false;
+
     // Use this for initialization
     void Start () 
 	{
@@ -269,6 +272,9 @@ public class Door : Interactable, IActivatable, ISavable
 	public void loadData(SeedBase s)
 	{
 		Seed seed = (Seed)s;
+
+		if (ignoresTimeTether)
+			return;
 
 		if (seed.isOpen) {
 			Open ();
