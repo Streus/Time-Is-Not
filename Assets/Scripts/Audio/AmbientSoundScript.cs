@@ -9,12 +9,20 @@ public class AmbientSoundScript : MonoBehaviour
     private float time;
     private float timer = 0;
     private bool played;
+    public bool background;
 
 	// Use this for initialization
 	void Start ()
     {
         source = this.gameObject.GetComponent<AudioSource>();
-        time = Random.Range(0, 2);
+        if (background)
+        {
+            time = 0;
+        }
+        else
+        {
+            time = Random.Range(0, 2);
+        }
         played = false;
     }
     private void Update()
