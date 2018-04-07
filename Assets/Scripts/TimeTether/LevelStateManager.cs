@@ -88,6 +88,10 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 	private static List<StasisBubble> stasisBubbles; 
 
+	[Header("Stasis UI Particles")] 
+	[SerializeField] ParticleSystem[] stasisUICreateParticles; 
+	[SerializeField] ParticleSystem[] stasisUIRemoveParticles;
+
 	void Awake()
 	{
 		stasisBubbles = new List<StasisBubble> (); 
@@ -422,6 +426,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			return false; 
 		}
 
+		if (inst.stasisUICreateParticles != null)
+			inst.stasisUICreateParticles[inst.m_numStasis].Play(); 
+
 		// Increment numStasis
 		inst.m_numStasis += 1;
 
@@ -475,9 +482,12 @@ public class LevelStateManager : Singleton<LevelStateManager>
 
 			return false; 
 		}
-
+			
 		// Decrement numStasis
-		inst.m_numStasis -= 1; 
+		inst.m_numStasis -= 1;
+
+		if (inst.stasisUIRemoveParticles != null)
+			inst.stasisUIRemoveParticles[inst.m_numStasis].Play(); 
 
 		// Remove the bubble from the LevelStateManager's List
 		stasisBubbles.Remove(bubble); 
