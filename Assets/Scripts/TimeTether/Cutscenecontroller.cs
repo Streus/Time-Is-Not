@@ -19,6 +19,10 @@ public class Cutscenecontroller : MonoBehaviour
 
 	private Vector3 position;
 
+	private float scaleSpeed;
+
+	private float moveSpeed;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -30,6 +34,12 @@ public class Cutscenecontroller : MonoBehaviour
 	void Update () 
 	{
 		timer -= Time.deltaTime;
+		if(timer != Mathf.Infinity)
+		{
+			slides[currentScene].Object.transform.localScale = Vector3.MoveTowards (slides[currentScene].Object.transform.localScale, scale, scaleSpeed);
+			slides[currentScene].Object.transform.position = Vector3.MoveTowards (slides[currentScene].Object.transform.position, position, moveSpeed);
+
+		}
 		if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) || timer <= 0)
 		{
 			currentScene++;
@@ -50,7 +60,10 @@ public class Cutscenecontroller : MonoBehaviour
 		}
 		slides [scene].Object.SetActive (true);
 		timer = slides [scene].Time;
-		scale = new Vector3 (1, 1, 1);
+		scale = slides [scene].Object.transform.localScale;
+		position = slides [scene].Object.transform.position;
+		scaleSpeed = Vector3.Distance(scale, slides[scene].EndScale) / timer * Time.deltaTime; 
+		moveSpeed = Vector3.Distance(position, slides[scene].EndPosition) / timer * Time.deltaTime; 
 	}
 
 	public bool ChangeScene()
