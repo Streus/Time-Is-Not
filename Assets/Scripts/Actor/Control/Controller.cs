@@ -14,7 +14,7 @@ public class Controller : MonoBehaviour, ISavable
 	private static Controller player;
 
 	// Controllers further than this distance from the player will not run updates
-	private const float AI_CULL_DISTANCE = 30f;
+	private const float AI_CULL_DISTANCE = float.PositiveInfinity;
 	#endregion
 
 	#region INSTANCE_VARS
