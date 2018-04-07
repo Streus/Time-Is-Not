@@ -13,14 +13,19 @@ public class Cutscenecontroller : MonoBehaviour
 	[SerializeField]
 	private CutsceneObject[] slides;
 
+	[SerializeField]
 	private float timer;
 
+	[SerializeField]
 	private Vector3 scale;
 
+	[SerializeField]
 	private Vector3 position;
 
+	[SerializeField]
 	private float scaleSpeed;
 
+	[SerializeField]
 	private float moveSpeed;
 
 	// Use this for initialization
@@ -34,12 +39,9 @@ public class Cutscenecontroller : MonoBehaviour
 	void Update () 
 	{
 		timer -= Time.deltaTime;
-		if(timer != Mathf.Infinity)
-		{
-			slides[currentScene].Object.transform.localScale = Vector3.MoveTowards (slides[currentScene].Object.transform.localScale, scale, scaleSpeed);
-			slides[currentScene].Object.transform.position = Vector3.MoveTowards (slides[currentScene].Object.transform.position, position, moveSpeed);
+		slides[currentScene].Object.transform.localScale = Vector3.MoveTowards (slides[currentScene].Object.transform.localScale, scale, scaleSpeed);
+		slides[currentScene].Object.transform.position = Vector3.MoveTowards (slides[currentScene].Object.transform.position, position, moveSpeed);
 
-		}
 		if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) || timer <= 0)
 		{
 			currentScene++;
@@ -60,10 +62,10 @@ public class Cutscenecontroller : MonoBehaviour
 		}
 		slides [scene].Object.SetActive (true);
 		timer = slides [scene].Time;
-		scale = slides [scene].Object.transform.localScale;
-		position = slides [scene].Object.transform.position;
-		scaleSpeed = Vector3.Distance(scale, slides[scene].EndScale) / timer * Time.deltaTime; 
-		moveSpeed = Vector3.Distance(position, slides[scene].EndPosition) / timer * Time.deltaTime; 
+		scale = slides [scene].EndScale;
+		position = slides [scene].EndPosition;
+		scaleSpeed = Vector3.Distance(scale, slides[currentScene].Object.transform.localScale) / timer * Time.deltaTime; 
+		moveSpeed = Vector3.Distance (position, slides [currentScene].Object.transform.position) / timer * Time.deltaTime;	; 
 	}
 
 	public bool ChangeScene()
