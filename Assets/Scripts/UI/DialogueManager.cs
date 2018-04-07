@@ -44,6 +44,20 @@ public class DialogueManager : Singleton<DialogueManager>
 		_dialogueStackLevel++;
 		dia.UIObject = obj;
 		_activeDialogues.Add (dia);
+		Vector2 spawnPoint;
+		if(dia.FollowTarget != null) 
+		{
+			Vector3 location = dia.FollowTarget.transform.position;
+			spawnPoint = new Vector3 (location.x, location.y + 1.5f, location.z);
+		}
+		else
+			spawnPoint = dia.Location;
+		((RectTransform)dia.UIObject.transform).position = spawnPoint;
+
+		if (dia.FollowTarget != null)
+			obj.transform.SetParent (dia.FollowTarget.transform);
+		else
+			obj.transform.SetParent (Camera.main.transform);
 
 	}
 
@@ -58,7 +72,7 @@ public class DialogueManager : Singleton<DialogueManager>
 			{
 				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
 				Vector2 screenPoint = new Vector3(loc.x, loc.y + 1.5f, loc.z);
-				((RectTransform)_activeDialogues [i].UIObject.transform).position = screenPoint;
+				//((RectTransform)_activeDialogues [i].UIObject.transform).position = screenPoint;
 				//((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;

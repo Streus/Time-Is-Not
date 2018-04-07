@@ -11,7 +11,13 @@ public class Cutscenecontroller : MonoBehaviour
 	private string _levelToLoad;
 
 	[SerializeField]
-	private GameObject[] slides;
+	private CutsceneObject[] slides;
+
+	private float timer;
+
+	private Vector3 scale;
+
+	private Vector3 position;
 
 	// Use this for initialization
 	void Awake () 
@@ -23,7 +29,8 @@ public class Cutscenecontroller : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+		timer -= Time.deltaTime;
+		if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) || timer <= 0)
 		{
 			currentScene++;
 			MakeSceneActive (currentScene);
@@ -39,9 +46,11 @@ public class Cutscenecontroller : MonoBehaviour
 		}
 		for(int i = 0; i < slides.Length; i++)
 		{
-			slides [i].SetActive (false);
+			slides [i].Object.SetActive (false);
 		}
-		slides [scene].SetActive (true);
+		slides [scene].Object.SetActive (true);
+		timer = slides [scene].Time;
+		scale = new Vector3 (1, 1, 1);
 	}
 
 	public bool ChangeScene()
