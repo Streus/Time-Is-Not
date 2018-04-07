@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 58460371001610144}
   - component: {fileID: 114475180308228700}
   - component: {fileID: 82576123329707262}
-  - component: {fileID: 95795359905218620}
   m_Layer: 13
   m_Name: StasisBubble
   m_TagString: StasisField
@@ -280,23 +279,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95795359905218620
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1161877851094914}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d5975798bff4f14faf8f93cfd29cc29, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114475180308228700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,8 +324,6 @@ MonoBehaviour:
   map: {fileID: 0}
   patrolStart: {fileID: 0}
   turnSpeed: 90
-  reorientTimerMax: Infinity
-  reorientAngle: 45
 --- !u!114 &114976473884200456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,7 +368,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2440
-  m_Sprite: {fileID: 21300000, guid: ead5da28fea1c6744898d8862fff3d04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bec2a59e46924005991d59d61e1da92, type: 3}
   m_Color: {r: 0.334, g: 1, b: 1, a: 0.903}
   m_FlipX: 0
   m_FlipY: 0
