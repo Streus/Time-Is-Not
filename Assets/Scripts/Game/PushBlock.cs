@@ -47,6 +47,11 @@ public class PushBlock : MonoBehaviour, ISavable
 
     [SerializeField] bool isHermitCrab;
 
+	[SerializeField]
+	float postStasisDelay = 0.25f;
+
+	private float _stasisTimer;
+
 	private BoxCollider2D _col;
 	// Use this for initialization
 	void Start ()
@@ -65,6 +70,7 @@ public class PushBlock : MonoBehaviour, ISavable
                 source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
             }
         }
+		_stasisTimer = 0;
 	}
 
 	public void OnDestroy()
@@ -83,6 +89,12 @@ public class PushBlock : MonoBehaviour, ISavable
 		}
 		BoxCheck ();
 		getInput ();
+
+		//timer to control delay after stasis
+		if (_stasisTimer > 0)
+			_stasisTimer -= Time.deltaTime;
+		else
+			_stasisTimer = 0;
 
 		if(_beingPushed)
 		{
@@ -126,7 +138,7 @@ public class PushBlock : MonoBehaviour, ISavable
 	/// </summary>
 	void getInput()
 	{
-		if(!_beingPushed && _playerInRange && !GameManager.isPaused())
+		if(!_beingPushed && _playerInRange && !GameManager.isPaused() && _stasisTimer == 0)
 		{
 			//Move in direction if key is pressed
 			switch(_moveDirection)
@@ -151,7 +163,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		}
 		if(_beingPushed)
 		{
-			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis || CheckPath())
+			if (!_playerInRange || !_canMove || GameManager.isPaused () || inStasis || CheckPath() || _stasisTimer > 0)
 				stop ();
 			//stop moving when key is released
 			switch(_moveDirection)
@@ -447,10 +459,15 @@ public class PushBlock : MonoBehaviour, ISavable
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if (sprite == null)
 			return;
-		if (inStasis)
+		if (inStasis) 
+		{
 			sprite.color = Color.yellow;
-		else
+		}
+		else 
+		{
 			sprite.color = Color.white;
+			_stasisTimer = postStasisDelay;
+		}
 	}
 
 	public bool InStasis()
