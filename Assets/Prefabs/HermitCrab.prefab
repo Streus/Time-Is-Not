@@ -194,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.67, y: 0.32}
+  m_Size: {x: 0.67, y: 0.51}
   m_EdgeRadius: 0
 --- !u!82 &82159185656867828
 AudioSource:
@@ -442,10 +442,6 @@ MonoBehaviour:
   _playerCheckRange: 0.2
   _speedMult: 1
   _canMove: 1
-  _upKey: 119
-  _rightKey: 100
-  _downKey: 115
-  _leftKey: 97
   isInArea: 0
   isHermitCrab: 1
 --- !u!114 &114649047679009878
@@ -543,8 +539,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 257601029
-  m_SortingLayer: 4
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 2055
   m_Sprite: {fileID: 21300000, guid: c829b7ecb6e9f4a4f8ff98ef71385de5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
