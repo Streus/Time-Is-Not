@@ -56,6 +56,7 @@ public class Player : Controller
 
 	//for delaying some checks
 	private float miscDelay;
+	private bool placingTether = true;
 
 	public delegate void AnimEvent ();
 	public event AnimEvent tetherAnchorEnded;
@@ -80,7 +81,7 @@ public class Player : Controller
     {
         // Conditions for stopping the Player from updating
         // (a) If the camera is not zoomed out 
-		if (GameManager.inst != null && !GameManager.CheckPause (PAUSEMASK_MOVE))
+		if (!GameManager.CheckPause (PAUSEMASK_MOVE) && !placingTether)
 		{
 			base.Update ();
 		}
@@ -90,8 +91,9 @@ public class Player : Controller
 		}
 
 		//wait for anchor anim to finish
-		if (GameManager.CheckPause ((int)PauseType.CUTSCENE))
+		if (placingTether)
 		{
+			Debug.Log ("Placing tether");
 			anim.SetBool ("isMoving", false);
 			miscDelay -= Time.deltaTime;
 			if (!inPlaceTetherAnim () && miscDelay <= 0f)
@@ -133,7 +135,7 @@ public class Player : Controller
 
 	public void setPlaceAnchorAnim()
 	{
-		GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+		placingTether = true;
 		anim.SetBool ("isMoving", false);
 		anim.SetTrigger ("PlaceAnchor");
 		miscDelay = 0.1f;
@@ -141,7 +143,7 @@ public class Player : Controller
 
 	private void endAnchorAnim()
 	{
-		GameManager.inst.ExitPauseState ();
+		placingTether = false;
 		if (tetherAnchorEnded != null)
 			tetherAnchorEnded ();
 	}

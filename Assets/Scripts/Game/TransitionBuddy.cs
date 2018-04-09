@@ -95,6 +95,7 @@ public class TransitionBuddy
 	private void finishSceneSetup()
 	{
 		GameManager.GetPlayer ().GetComponent<Player> ().tetherAnchorEnded -= finishSceneSetup;
+		GameManager.inst.ExitPauseState ();
 
 		//start up header display
 		LevelNameHeader lnh = LevelNameHeader.getMain();
