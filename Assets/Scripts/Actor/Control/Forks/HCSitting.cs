@@ -16,6 +16,6 @@ public class HCSitting : Fork
 			return false;
 		}
 		else
-			return hc.updateSitDuration (Time.deltaTime);
+			return hc.updateSitDuration (Time.deltaTime) && hc.getStands();
 	}
 }

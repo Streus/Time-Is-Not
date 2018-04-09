@@ -20,6 +20,6 @@ public class HCAtHome : Fork
 			c.transform.position = hc.getHome ();
 			return true;
 		}
-		return false;
+		return !hc.checkSitDuration();
 	}
 }

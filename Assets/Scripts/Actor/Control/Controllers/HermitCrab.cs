@@ -14,6 +14,9 @@ public class HermitCrab : Controller
 	[SerializeField]
 	private float sitDurationMax = 5f;
 	private float sitDuration;
+	[Tooltip("Set this to true to make the HC sit infinitely, unless pushed from home")]
+	[SerializeField]
+	private bool stands = false;
 
 	[Tooltip("How long this crab will remain standing")]
 	[SerializeField]
@@ -91,6 +94,10 @@ public class HermitCrab : Controller
 	{
 		return (sitDuration += delta) >= sitDurationMax * sitMod;
 	}
+	public bool checkSitDuration()
+	{
+		return sitDuration >= sitDurationMax * sitMod;
+	}
 	public void resetSitDuration()
 	{
 		sitDuration = 0f;
@@ -100,6 +107,11 @@ public class HermitCrab : Controller
 		animationController.SetInteger ("Direction", 0);
 		animationController.SetBool ("Hide", true);
 		transform.GetChild(0).GetComponent<HCNullFieldVisualizer>().enabled = false;
+	}
+
+	public bool getStands()
+	{
+		return stands;
 	}
 
 	public bool updateStandDuration(float delta)
