@@ -429,6 +429,9 @@ public class LevelStateManager : Singleton<LevelStateManager>
 		if (inst.stasisUICreateParticles != null)
 			inst.stasisUICreateParticles[inst.m_numStasis].Play(); 
 
+		// Set the bubble's index property
+		bubble.stasisIndex = inst.m_numStasis; 
+
 		// Increment numStasis
 		inst.m_numStasis += 1;
 
@@ -481,6 +484,26 @@ public class LevelStateManager : Singleton<LevelStateManager>
 			}
 
 			return false; 
+		}
+
+		// Update stasis bubble indexes for bubbles after the one being removed
+		bool foundBubble = false; 
+		for (int i = 0; i < stasisBubbles.Count; i++)
+		{
+			if (stasisBubbles[i] == null)
+			{
+				continue; 
+			}
+			if (stasisBubbles[i] == bubble)
+			{
+				foundBubble = true; 
+				continue; 
+			}
+
+			if (foundBubble)
+			{
+				stasisBubbles[i].stasisIndex--; 
+			}
 		}
 			
 		// Decrement numStasis

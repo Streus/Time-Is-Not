@@ -11,14 +11,14 @@ public class PlayerDefaultControl : Action
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 0));
 
-		bool inSBBounds = LevelStateManager.StasisBubbleAtPos (mousePos);
+		//bool inSBBounds = LevelStateManager.StasisBubbleAtPos (mousePos);
 
 		// Use Stasis Placement ablility
 		if (PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS))
 		{
 			if (GameManager.inst.canUseStasis &&
-			    !inSBBounds &&
-			    !TetherManager.CursorIsOverATetherPoint () &&
+			    //!inSBBounds &&
+			    //!TetherManager.CursorIsOverATetherPoint () &&
 			    CursorManager.CursorInGameplayState ())
 			{
 				p.setStasisShootAnim ();

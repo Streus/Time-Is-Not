@@ -10,6 +10,12 @@ public class StasisBubble : MonoBehaviour
 	[Tooltip("If true, right clicking within the bubble collider bounds will destroy it.")]
 	public bool canRightClickDestroy;
 
+	// If this is a player stasis bubble, this index determines the order of the bubble, from 0 - 2. 
+	// If -1, this is not a player stasis bubble
+	public int stasisIndex = -1; 
+
+	bool mouseIsOver; 
+
 	[Header("Variables Affected by Timer")]
 	[Tooltip("How long the bubble lasts")]
 	public float bubbleAliveTime; 
@@ -91,6 +97,11 @@ public class StasisBubble : MonoBehaviour
 			}
 		}
 
+		if (canRightClickDestroy)
+		{
+			UpdateMouseIsOver(); 
+		}
+
 		// Temporary: You can right click to remove a stasis bubble
 		if (canRightClickDestroy && !TetherManager.CursorIsOverATetherPoint())
 		{
@@ -136,13 +147,39 @@ public class StasisBubble : MonoBehaviour
 	/// </summary>
 	public bool MouseIsOver()
 	{
+		return mouseIsOver; 
+	}
+
+	void UpdateMouseIsOver()
+	{
+		mouseIsOver = false; 
+
 		Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 
 		if (bubbleCollider.bounds.Contains(mouseWorldPos))
 		{
-			return true; 
+			// Check for a stasis bubble overlapping another stasis bubble
+			Collider2D[] hits = Physics2D.OverlapCircleAll(bubbleCollider.bounds.center, bubbleCollider.bounds.extents.x); 
+
+			for (int i = 0; i < hits.Length; i++)
+			{
+				if (hits[i].GetComponent<StasisBubble>() != null)
+				{
+					StasisBubble curBubble = hits[i].GetComponent<StasisBubble>(); 
+					if (curBubble.canRightClickDestroy)
+					{
+						// TODO- if this stasis bubble is below the hit stasis bubble, return false
+						if (this.stasisIndex < curBubble.stasisIndex && curBubble.mouseIsOver)
+						{
+							return; 
+						}
+					}
+				}
+			}
+
+			mouseIsOver = true; 
 		}
 
-		return false; 
+		return; 
 	}
 }
