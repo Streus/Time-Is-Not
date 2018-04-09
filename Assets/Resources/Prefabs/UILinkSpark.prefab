@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212134835853136966}
   - component: {fileID: 114535999422744454}
   m_Layer: 0
-  m_Name: SparkExample
+  m_Name: UILinkSpark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 0}
   _moveSpeed: 5
+  hideOnZoom: 0
 --- !u!212 &212134835853136966
 SpriteRenderer:
   m_ObjectHideFlags: 1
