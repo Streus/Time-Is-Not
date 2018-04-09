@@ -10,6 +10,11 @@ public class LineFollower : MonoBehaviour
 	[SerializeField]
 	private float _moveSpeed = 1;
 
+	[SerializeField]
+	bool hideOnZoom; 
+
+	SpriteRenderer rend; 
+
 	private int _curPath = 1;
 
 	private float _curProgress = 0;
@@ -22,7 +27,9 @@ public class LineFollower : MonoBehaviour
 		int _curPath = 1;
 
 		float _curProgress = 0;
-		_curLength = Vector3.Distance (_lineRenderer.GetPosition (_curPath), _lineRenderer.GetPosition (_curPath - 1));
+		//_curLength = Vector3.Distance (_lineRenderer.GetPosition (_curPath), _lineRenderer.GetPosition (_curPath - 1));
+
+		rend = GetComponent<SpriteRenderer>(); 
 	}
 	
 	// Update is called once per frame
@@ -41,12 +48,28 @@ public class LineFollower : MonoBehaviour
 			_curLength = Vector3.Distance (_lineRenderer.GetPosition (_curPath), _lineRenderer.GetPosition (_curPath - 1));
 		}
 		transform.position = _lineRenderer.GetPosition (_curPath - 1) + (_lineRenderer.GetPosition (_curPath) - _lineRenderer.GetPosition (_curPath - 1)) * _curProgress;
+
+		if (hideOnZoom)
+		{
+			if (GameManager.CameraIsZoomedOut())
+			{
+				rend.enabled = true; 
+			}
+			else
+			{
+				rend.enabled = false; 
+			}
+		}
 	}
 
 	public LineRenderer Renderer
 	{
 		get{return _lineRenderer;}
-		set{_lineRenderer = value;}
+		set
+		{
+			_lineRenderer = value;
+			_curLength = Vector3.Distance (_lineRenderer.GetPosition (_curPath), _lineRenderer.GetPosition (_curPath - 1));
+		}
 	}
 
 	public float MoveSpeed
