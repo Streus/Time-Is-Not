@@ -53,6 +53,8 @@ public class PushBlock : MonoBehaviour, ISavable
 	private float _stasisTimer;
 
 	private BoxCollider2D _col;
+
+	public GameObject _stasisEffect;
 	// Use this for initialization
 	void Start ()
 	{
@@ -459,15 +461,9 @@ public class PushBlock : MonoBehaviour, ISavable
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if (sprite == null)
 			return;
-		if (inStasis) 
-		{
-			sprite.color = Color.yellow;
-		}
-		else 
-		{
-			sprite.color = Color.white;
+		if (!inStasis)
 			_stasisTimer = postStasisDelay;
-		}
+		_stasisEffect.SetActive (inStasis);
 	}
 
 	public bool InStasis()

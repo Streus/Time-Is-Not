@@ -52,6 +52,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 
 	public Vector2 _movementVector;
 
+	public GameObject _stasisEffect;
+
 
 	// Use this for initialization
 	void Start () 
@@ -342,10 +344,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if (sprite == null)
 			return;
-		if(inStasis)
-			sprite.color = Color.yellow;
-		else
-			sprite.color = Color.white;
+		_stasisEffect.SetActive (inStasis);
 	}
 
 	/// <summary>
