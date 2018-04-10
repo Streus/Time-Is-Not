@@ -34,6 +34,16 @@ public class HBLOSVisualizer : MonoBehaviour
 		GetComponent<MeshRenderer> ().sortingOrder = 1000;
 	}
 
+	public void OnBecameVisible()
+	{
+		enabled = true;
+	}
+
+	public void OnBecameInvisible()
+	{
+		enabled = false;
+	}
+
 	public void LateUpdate()
 	{
 		//don't do these calculations if we're too far from the player
