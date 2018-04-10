@@ -465,6 +465,13 @@ public class PushBlock : MonoBehaviour, ISavable
 			_stasisTimer = postStasisDelay;
 		if(_stasisEffect != null)
 			_stasisEffect.SetActive (inStasis);
+		else
+		{
+			if (inStasis) 
+				sprite.color = Color.yellow;
+			else
+				sprite.color = Color.white;
+		}
 	}
 
 	public bool InStasis()

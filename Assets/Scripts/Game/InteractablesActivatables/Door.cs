@@ -309,6 +309,13 @@ public class Door : Interactable, IActivatable, ISavable
 		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
 		if(_stasisEffect != null)
 			_stasisEffect.SetActive (inStasis);
+		else
+		{
+			if (inStasis) 
+				gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+			else
+				gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+		}
 	}
 
 	/// <summary>

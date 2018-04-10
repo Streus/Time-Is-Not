@@ -125,6 +125,13 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 			return;
 		if(_stasisEffect != null)
 			_stasisEffect.SetActive (inStasis);
+		else
+		{
+			if (inStasis) 
+				sprite.color = Color.yellow;
+			else
+				sprite.color = Color.white;
+		}
 	}
 
 	/// <summary>
