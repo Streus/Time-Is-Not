@@ -200,10 +200,19 @@ public class CameraManager : MonoBehaviour
 			{
 				if (cameraZoomZoneCollider.collisionActive)
 				{
-					zoomTo(cameraZoomZoneCollider.targetCameraSize, zoneZoomOutLerpSpeed);
-					useZoneZoomOutSpeed = true; 
+					if (cam.orthographicSize <= cameraZoomZoneCollider.targetCameraSize)
+					{
+						zoomTo(cameraZoomZoneCollider.targetCameraSize, zoneZoomOutLerpSpeed);
+						useZoneZoomOutSpeed = true; 
+					}
+					else
+					{
+						zoomTo(cameraZoomZoneCollider.targetCameraSize, zoomInLerpSpeed);
+						useZoneZoomOutSpeed = true; 
+					}
 				}
 			}
+				
 
 			// Toggle zoom state key inputs
 			if (m_zoomState == false)
@@ -586,7 +595,7 @@ public class CameraManager : MonoBehaviour
 		if (success)
 		{
 			useZoneZoomOutSpeed = false;
-			zoomTo(regularSize, 1); 
+			zoomTo(regularSize, 0); 
 		}
 	}
 
