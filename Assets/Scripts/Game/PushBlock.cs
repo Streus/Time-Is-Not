@@ -463,7 +463,8 @@ public class PushBlock : MonoBehaviour, ISavable
 			return;
 		if (!inStasis)
 			_stasisTimer = postStasisDelay;
-		_stasisEffect.SetActive (inStasis);
+		if(_stasisEffect != null)
+			_stasisEffect.SetActive (inStasis);
 	}
 
 	public bool InStasis()

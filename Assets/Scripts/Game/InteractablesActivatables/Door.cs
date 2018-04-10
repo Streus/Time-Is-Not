@@ -307,7 +307,8 @@ public class Door : Interactable, IActivatable, ISavable
 		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
 		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
-		_stasisEffect.SetActive (inStasis);
+		if(_stasisEffect != null)
+			_stasisEffect.SetActive (inStasis);
 	}
 
 	/// <summary>
