@@ -54,6 +54,8 @@ public class Door : Interactable, IActivatable, ISavable
 	[SerializeField]
 	private bool ignoresTimeTether = false;
 
+	public GameObject _stasisEffect;
+
     // Use this for initialization
     void Start () 
 	{
@@ -305,13 +307,8 @@ public class Door : Interactable, IActivatable, ISavable
 		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
 		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
-		for(int i = 0; i < renderers.Length; i++) 
-		{
-			if (inStasis)
-				renderers[i].color = Color.yellow;
-			else
-				renderers[i].color = Color.white;
-		}
+		if(_stasisEffect != null)
+			_stasisEffect.SetActive (inStasis);
 	}
 
 	/// <summary>

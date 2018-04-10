@@ -22,6 +22,8 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 	//is the object's default state inverted?
 	private bool isInverted = false;
 
+	public GameObject _stasisEffect;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -121,10 +123,8 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if (sprite == null)
 			return;
-		if(inStasis)
-			sprite.color = Color.yellow;
-		else
-			sprite.color = Color.white;
+		if(_stasisEffect != null)
+			_stasisEffect.SetActive (inStasis);
 	}
 
 	/// <summary>
