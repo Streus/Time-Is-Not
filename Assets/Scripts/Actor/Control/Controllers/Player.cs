@@ -93,7 +93,6 @@ public class Player : Controller
 		//wait for anchor anim to finish
 		if (placingTether)
 		{
-			Debug.Log ("Placing tether");
 			anim.SetBool ("isMoving", false);
 			miscDelay -= Time.deltaTime;
 			if (!inPlaceTetherAnim () && miscDelay <= 0f)
