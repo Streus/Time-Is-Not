@@ -58,9 +58,12 @@ public class Controller : MonoBehaviour, ISavable
 
 	public bool inCullingRange()
 	{
+		return true;
+		#if FALSE
 		if (player == null)
 			return true;
 		return player == this || Vector2.Distance (transform.position, player.transform.position) <= AI_CULL_DISTANCE;
+		#endif
 	}
 		
 	public virtual void Update()
