@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 95460291646615420}
   - component: {fileID: 61118685063787304}
   - component: {fileID: 82887865478367180}
+  - component: {fileID: 114201135062776536}
   m_Layer: 14
   m_Name: KeycodeDoor_Horizontal
   m_TagString: Untagged
@@ -463,6 +464,18 @@ MonoBehaviour:
   _playerLayers:
     serializedVersion: 2
     m_Bits: 65792
+  ignoresTimeTether: 0
+--- !u!114 &114201135062776536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1412771782611874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114404698892150768
 MonoBehaviour:
   m_ObjectHideFlags: 1
