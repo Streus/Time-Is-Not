@@ -16,6 +16,8 @@ public class StasisBullet : MonoBehaviour
 	private Vector3 dir;
 	private float travelDist;
 
+	private bool hit = false;
+
 	public static StasisBullet create(Vector3 position, Quaternion direction, Vector3 targetPos)
 	{
 		GameObject pref = Resources.Load<GameObject> ("Prefabs/StasisBullet");
@@ -52,16 +54,17 @@ public class StasisBullet : MonoBehaviour
 		if (success)
 		{
 			LevelStateManager.inst.stateLoaded -= cleanUp;
-			GetComponent<Collider> ().enabled = false;
 			Destroy (gameObject);
 		}
 	}
 
 	public void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col != null && col.isTrigger)
+		if (!hit && col != null && col.isTrigger)
 			return;
-		
+
+		hit = true;
+
 		StasisBubble newStasis = Instantiate<GameObject>(stasisBubblePref, transform.position, transform.rotation).GetComponent<StasisBubble>(); 
 		LevelStateManager.addStasisBubble(newStasis);
 		cleanUp (true);
