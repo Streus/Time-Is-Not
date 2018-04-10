@@ -42,7 +42,7 @@ public class StasisBullet : MonoBehaviour
 			return;
 		
 		if (Vector3.Distance (transform.position, startPos) > travelDist)
-			OnTriggerEnter2D (null);
+			doHit ();
 		else
 		{
 			transform.Translate (dir * speed * Time.deltaTime);
@@ -51,6 +51,8 @@ public class StasisBullet : MonoBehaviour
 
 	private void cleanUp(bool success)
 	{
+		hit = true;
+
 		if (success)
 		{
 			LevelStateManager.inst.stateLoaded -= cleanUp;
@@ -58,15 +60,18 @@ public class StasisBullet : MonoBehaviour
 		}
 	}
 
-	public void OnTriggerEnter2D(Collider2D col)
+	private void doHit()
 	{
-		if (!hit && col != null && col.isTrigger)
-			return;
-
-		hit = true;
-
 		StasisBubble newStasis = Instantiate<GameObject>(stasisBubblePref, transform.position, transform.rotation).GetComponent<StasisBubble>(); 
 		LevelStateManager.addStasisBubble(newStasis);
 		cleanUp (true);
+	}
+
+	public void OnTriggerEnter2D(Collider2D col)
+	{
+		if (hit || (col != null && col.isTrigger))
+			return;
+
+		doHit ();
 	}
 }
