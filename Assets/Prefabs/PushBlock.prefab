@@ -272,12 +272,10 @@ MonoBehaviour:
   _playerCheckRange: 0.2
   _speedMult: 1
   _canMove: 1
-  _upKey: 119
-  _rightKey: 100
-  _downKey: 115
-  _leftKey: 97
   isInArea: 0
   isHermitCrab: 0
+  postStasisDelay: 0.25
+  _stasisEffect: {fileID: 1743553585959938}
 --- !u!114 &114682438403642510
 MonoBehaviour:
   m_ObjectHideFlags: 1

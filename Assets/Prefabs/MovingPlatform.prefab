@@ -215,6 +215,7 @@ MonoBehaviour:
   _reverseMovement: 0
   _waitTimer: 0
   _movementVector: {x: 0, y: 0}
+  _stasisEffect: {fileID: 1779018941575774}
 --- !u!212 &212041513708419982
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -287,7 +288,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2054670677
-  m_SortingLayer: -2
+  m_SortingLayer: -5
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c62795021e7e08240afd57d93f9b2507, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

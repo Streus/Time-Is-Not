@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPath: 
-  stasisable: 1
+  stasisable: 0
   allowReset: 1
 --- !u!114 &114634201641142172
 MonoBehaviour:
@@ -282,6 +282,8 @@ MonoBehaviour:
   _playerLayers:
     serializedVersion: 2
     m_Bits: 65792
+  ignoresTimeTether: 0
+  _stasisEffect: {fileID: 0}
 --- !u!212 &212577428503370660
 SpriteRenderer:
   m_ObjectHideFlags: 1
