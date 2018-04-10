@@ -52,6 +52,7 @@ public class StasisBullet : MonoBehaviour
 		if (success)
 		{
 			LevelStateManager.inst.stateLoaded -= cleanUp;
+			GetComponent<Collider> ().enabled = false;
 			Destroy (gameObject);
 		}
 	}
