@@ -233,9 +233,10 @@ public class Laser : Interactable, IActivatable, ISavable
 		switch(_type)
 		{
 		case LaserType.Trigger:
-			onInteract ();
-                source.Stop();
-                AudioLibrary.PlayLaserSecurityCollisionSound();
+			onInteract();
+			source.Stop();
+			AudioLibrary.PlayLaserSecurityCollisionSound();
+			AlertFlash.inst.PlayAlertFlash(); 
 			break;
 		case LaserType.Death:
 			entity.onDeath ();
