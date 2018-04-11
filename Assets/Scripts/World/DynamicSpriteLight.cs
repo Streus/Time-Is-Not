@@ -92,7 +92,7 @@ public class DynamicSpriteLight : MonoBehaviour
 				flicker_theta += Mathf.PI * 2; 
 
 			flicker_amount = Mathf.PerlinNoise(random, Mathf.Sin(flicker_theta)) * ScaleIntensity(flicker_intensity);
-			Debug.Log("flicker_amount: " + flicker_amount); 
+			//Debug.Log("flicker_amount: " + flicker_amount); 
 			finalAlpha -= flicker_amount; 
 		}
 
@@ -109,7 +109,7 @@ public class DynamicSpriteLight : MonoBehaviour
 				pulse_theta += Mathf.PI * 2;
 
 			pulse_amount = ((Mathf.Sin(pulse_theta) / 2) + 0.5f) * ScaleIntensity(pulse_intensity); 
-			Debug.Log("pulse pulse_amount: " + pulse_amount); 
+			//Debug.Log("pulse pulse_amount: " + pulse_amount); 
 			finalAlpha -= pulse_amount; 
 		}
 

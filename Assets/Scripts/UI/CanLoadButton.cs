@@ -22,14 +22,24 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
 	bool beingRemoved; 
 	public Color beingRemovedColor; 
+	Color startColor; 
 
 	[SerializeField] Button removeButton; 
 	public bool hideRemoveButton; 
+
+	// Animation effect
+	public bool usePulseEffect; 
+	public float pulse_intensity; 
+	public float pulse_scrollSpeed; 
+	float pulse_theta; 
+	float pulse_amount; 
 
 	void Start()
 	{
 		button = GetComponent<Button>(); 
 		image = GetComponent<Image>(); 
+
+		startColor = image.color; 
 
 		if (hideRemoveButton && removeButton != null)
 			removeButton.gameObject.SetActive(false); 
@@ -54,6 +64,27 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 			if (removeButton != null)
 				removeButton.gameObject.SetActive(false); 
         }
+
+		// Pulse effect
+		if (usePulseEffect)
+		{
+			pulse_theta += Time.deltaTime * pulse_scrollSpeed; 
+			if (pulse_theta > Mathf.PI * 2)
+				pulse_theta -= Mathf.PI * 2;
+			else if (pulse_theta < -Mathf.PI * 2)
+				pulse_theta += Mathf.PI * 2;
+		}
+
+		if (usePulseEffect && button.interactable && !beingRemoved)
+		{
+			pulse_amount = ((Mathf.Sin(pulse_theta) / 2) + 0.5f) * pulse_intensity; 
+			//transform.localScale = new Vector3 (1 - pulse_amount, 1 - pulse_amount, 1 - pulse_amount);
+			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1 - pulse_amount, 1 - pulse_amount, 1 - pulse_amount), 20 * Time.deltaTime); 
+		}
+		else
+		{
+			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), 20 * Time.deltaTime); 
+		}
 	}
 
 	//Do this when the cursor enters the rect area of this selectable UI object.
@@ -107,7 +138,7 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		}
 		else
 		{
-			image.color = Color.white; 
+			image.color = startColor; 
 		}
 
 		if (nextButton != null)
