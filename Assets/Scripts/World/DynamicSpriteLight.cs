@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class DynamicSpriteLight : MonoBehaviour 
 {
 	SpriteRenderer rend; 
+	Image img; 
 	[Range(0, 1)] float alphaCeiling; 
 
 	float random;
@@ -45,8 +47,22 @@ public class DynamicSpriteLight : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		rend = GetComponent<SpriteRenderer>(); 
-		alphaCeiling = rend.color.a; 
+		if (GetComponent<SpriteRenderer>() != null)
+		{
+			rend = GetComponent<SpriteRenderer>(); 
+			alphaCeiling = rend.color.a; 
+		}
+		else if (GetComponent<Image>() != null)
+		{
+			img = GetComponent<Image>(); 
+			alphaCeiling = img.color.a; 
+		}
+		else
+		{
+			alphaCeiling = 0;  
+		}
+
+
 		random = Random.Range(0.0f, 65535.0f);
 		SetOnOff_CurIndex(onOff_curIndex); 
 	}
@@ -114,7 +130,10 @@ public class DynamicSpriteLight : MonoBehaviour
 			finalAlpha *= onOff_finalMultiplier; 
 		}
 
-		rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, finalAlpha); 
+		if (rend != null)
+			rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, finalAlpha); 
+		if (img != null)
+			img.color = new Color(img.color.r, img.color.g, img.color.b, finalAlpha); 
 
 	}
 

@@ -102,6 +102,14 @@ public class TetherManager : Singleton<TetherManager>
     CanvasGroup tetherHUDGroup;
     [SerializeField] float tetherHUDFadeInSpeed;
     [SerializeField] float tetherHUDFadeOutSpeed;
+	[SerializeField] Animator tetherMenuAnimator; 
+
+	[Header("Tether Menu Timeline Zooming")]
+	[SerializeField] RectTransform timelineObject; 
+	[SerializeField] Vector3 timelineStartRectPos; 
+	[SerializeField] Vector3 timelineEndRectPos; 
+	[SerializeField] float timelineLerpInSpeed = 1; 
+	[SerializeField] float timelineLerpOutSpeed = 1; 
 
 	// TODO change this to false at the start of the scene and reenable once the player gets control after Amelia finishes her first placing animation
 	bool tetherHUDVisible = true; 
@@ -333,6 +341,12 @@ public class TetherManager : Singleton<TetherManager>
 
         tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 1, tetherMenuFadeInSpeed * Time.deltaTime);
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, fadeImageMaxAlpha, fadeImageFadeInSpeed * Time.deltaTime));
+
+		tetherMenuAnimator.SetBool("Enabled", true); 
+
+		timelineObject.transform.localScale = Vector3.Lerp(timelineObject.transform.localScale, new Vector3(1, 1, 1), timelineLerpInSpeed * Time.deltaTime); 
+		timelineObject.anchoredPosition = Vector3.Lerp(timelineObject.anchoredPosition, timelineEndRectPos, timelineLerpInSpeed * Time.deltaTime); 
+
         /*if (playTMenuOpen)
         {
             AudioLibrary.PlayTetherMenuOpen();
@@ -358,6 +372,12 @@ public class TetherManager : Singleton<TetherManager>
 
         tetherMenuGroup.alpha = Mathf.Lerp(tetherMenuGroup.alpha, 0, tetherMenuFadeOutSpeed * Time.deltaTime);
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, Mathf.Lerp(fadeImage.color.a, 0, fadeImageFadeOutSpeed * Time.deltaTime));
+
+		tetherMenuAnimator.SetBool("Enabled", false); 
+
+		timelineObject.transform.localScale = Vector3.Lerp(timelineObject.transform.localScale, new Vector3(0, 0, 1), timelineLerpOutSpeed * Time.deltaTime);
+		timelineObject.anchoredPosition = Vector3.Lerp(timelineObject.anchoredPosition, timelineStartRectPos, timelineLerpOutSpeed * Time.deltaTime); 
+
         /*if (!playTMenuOpen)
         {
             AudioLibrary.PlayTetherMenuClose();
