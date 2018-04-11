@@ -61,6 +61,10 @@ public class Player : Controller
 	public delegate void AnimEvent ();
 	public event AnimEvent tetherAnchorEnded;
 
+	// Dash delegates/events
+	public delegate void DashEvent(); 
+	public event DashEvent dashStarted;  
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -238,6 +242,11 @@ public class Player : Controller
     public void enterDashState()
     {
         setState(dashState);
+
+		if (dashStarted != null)
+		{
+			dashStarted(); 
+		}
     }
 
 	/// <summary>

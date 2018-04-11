@@ -24,6 +24,26 @@ public class DashUIPanel : Singleton<DashUIPanel>
 
     bool charged = true;
 
+	[Header("Dash UI Particles")]
+	[SerializeField] ParticleSystem dashParticlesOut; 
+	[SerializeField] ParticleSystem dashParticlesIn; 
+
+	void OnEnable()
+	{
+		if (GameManager.GetPlayerScript() != null)
+		{
+			GameManager.GetPlayerScript().dashStarted += OnDashStarted; 
+		}
+	}
+
+	void OnDisable()
+	{
+		if (GameManager.GetPlayerScript() != null)
+		{
+			GameManager.GetPlayerScript().dashStarted -= OnDashStarted; 
+		}
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -38,6 +58,8 @@ public class DashUIPanel : Singleton<DashUIPanel>
 		if (GameManager.dashIsCharged())
 		{
 			dashImg.color = Color.Lerp(dashImg.color, Color.white, colorLerpSpeed * Time.deltaTime);
+
+			// Executes when the dash has finished charging
             if (!charged)
             {
                 if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.dashRecharge))
@@ -45,6 +67,8 @@ public class DashUIPanel : Singleton<DashUIPanel>
                     AudioLibrary.PlayDashRechargeSound();
                 }
                 charged = true;
+
+				dashParticlesIn.Play(); 
             }
         }
 		// If charging
@@ -91,5 +115,10 @@ public class DashUIPanel : Singleton<DashUIPanel>
 		{
 			dashPanel.SetActive(false); 
 		}
+	}
+
+	void OnDashStarted()
+	{
+		dashParticlesOut.Play(); 
 	}
 }
