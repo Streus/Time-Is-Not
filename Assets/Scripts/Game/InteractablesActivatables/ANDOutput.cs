@@ -56,18 +56,6 @@ public class ANDOutput : Interactable, ISavable
 		}
 	}
 
-	void OnLoad(bool success)
-	{
-		if(success)
-			onInteract();
-	}
-
-	void OnDestroy()
-	{
-		if(LevelStateManager.inst != null)
-			LevelStateManager.inst.stateLoaded -= OnLoad;
-	}
-
 	//****Savable Object Functions****
 
 	/// <summary>
@@ -94,10 +82,7 @@ public class ANDOutput : Interactable, ISavable
 
 		Seed seed = (Seed)s;
 
-		if(seed.state)
-		{
-			onInteract ();
-		}
+		_state = seed.state;
 	}
 
 	/// <summary>
