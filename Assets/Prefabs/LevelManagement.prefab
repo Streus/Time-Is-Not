@@ -772,6 +772,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224736769058943222}
+  - component: {fileID: 223075189924921016}
   m_Layer: 5
   m_Name: Arrows
   m_TagString: Untagged
@@ -9624,8 +9625,8 @@ MonoBehaviour:
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 12
   panSpeed: 10
-  atLeftBound: 1
-  atRightBound: 1
+  atLeftBound: 0
+  atRightBound: 0
   atTopBound: 0
   atBottomBound: 1
 --- !u!114 &114998644300738530
@@ -56986,6 +56987,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1646682755946012}
+--- !u!223 &223075189924921016
+Canvas:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258856069424516}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 69395787
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!223 &223131333902363682
 Canvas:
   m_ObjectHideFlags: 1
