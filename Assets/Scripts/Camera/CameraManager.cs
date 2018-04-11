@@ -218,7 +218,7 @@ public class CameraManager : MonoBehaviour
 			if (m_zoomState == false)
 			{
 				// These conditions determine whether zooming out is allowed
-				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing() && !PauseMenuManager.pauseMenuActive)
+				if (PlayerControlManager.GetKeyDown(ControlInput.ZOOM_OUT) && TetherManager.ZoomOutAllowed() && !GameManager.isPlayerDashing() && !PauseMenuManager.pauseMenuActive && !GameManager.inst.IsWorldPauseType(GameManager.inst.pauseType))
 				{
 					m_zoomState = true; 
 					GameManager.inst.EnterPauseState(PauseType.ZOOM);
