@@ -77,6 +77,7 @@ public class Player : Controller
         getSelf().addAbility(Ability.get("Place Stasis"));
         getSelf().addAbility(Ability.get("Dash"));
         getSelf().died += deathReset;
+		getSelf ().getAbility (0).resetCooldown ();
         getSelf().getAbility(1).resetCooldown();
 
 		anim = gameObject.GetComponent <Animator>();
