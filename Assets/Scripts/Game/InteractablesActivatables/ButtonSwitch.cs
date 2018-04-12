@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonSwitch : Interactable 
+public class ButtonSwitch : Interactable, ISavable
 {
 	/*[Tooltip("Time before the button triggers again (if 0 or infinity, will have no timer.")]
 	[SerializeField]*/
@@ -169,7 +169,12 @@ public class ButtonSwitch : Interactable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		SeedBase seed = new SeedBase ();
+		Seed seed = new Seed ();
+
+		seed.canBePressed = isEnabled ();
+
+		_sprite = gameObject.GetComponent<SpriteRenderer> ();
+		seed.isPressed = (_sprite.sprite == _pressedSprite);
 
 		return seed;
 	}
@@ -180,6 +185,28 @@ public class ButtonSwitch : Interactable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
-		_playerInRange = false;
+		Seed seed = (Seed)s;
+
+		if(seed.isPressed)
+			_sprite.sprite = _pressedSprite;
+		else
+			_sprite.sprite = _unpressedSprite;
+
+		if (seed.canBePressed)
+			enable ();
+		else
+			disable ();
+
+	}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the door open?
+		public bool isPressed;
+
+		public bool canBePressed;
 	}
 }
