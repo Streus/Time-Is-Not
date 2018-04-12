@@ -16,7 +16,7 @@ public class SpriteOrderer : Singleton<SpriteOrderer>
 			if (sprites[i].gameObject.GetComponent<Collider2D> () != null)
 				offset = sprites[i].gameObject.GetComponent<Collider2D> ().offset.y;
 			
-			sprites [i].sortingOrder = (int)Mathf.Round ((sprites [i].transform.position.y + offset) * 100) * -1;
+			sprites [i].sortingOrder = (int)Mathf.Round ((sprites [i].transform.position.y) * 100) * -1;
 		}
 	}
 
@@ -27,7 +27,7 @@ public class SpriteOrderer : Singleton<SpriteOrderer>
 		if (trans.GetComponent<Collider2D> () != null)
 			offset = trans.GetComponent<Collider2D> ().offset.y;
 
-		int layer = -1 * (int)Mathf.Round ((trans.position.y + offset) * 100);
+		int layer = -1 * (int)Mathf.Round ((trans.position.y) * 100);
 			
 		return layer;
 	}
