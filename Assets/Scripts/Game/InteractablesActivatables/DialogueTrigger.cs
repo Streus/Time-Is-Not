@@ -35,7 +35,7 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		if (dialogueChain.Length == 0)
+		if (dialogueChain.Length == 0 || !state)
 			return false;
 		DialogueManager.inst.CreateBox (dialogueChain [0]);
 		return true;

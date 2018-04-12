@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114695788928519496}
   - component: {fileID: 114279525301553446}
   - component: {fileID: 82729999965033896}
+  - component: {fileID: 114076536492789070}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -198,6 +199,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114076536492789070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792056952596328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979e73e72f7ea4d6fac8a095ebaf3c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: -0.5
 --- !u!114 &114279525301553446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,7 +288,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b37e43819007b49809f2bafbb5ae0009, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -299,7 +312,7 @@ LineRenderer:
   - {x: 11.483885, y: -7.587001, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.04
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -314,8 +327,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.986207, g: 1, b: 0, a: 1}
-      key1: {r: 0.9607844, g: 1, b: 0, a: 1}
+      key0: {r: 0.986207, g: 1, b: 0, a: 0.5647059}
+      key1: {r: 0.9607844, g: 1, b: 0, a: 0.7058824}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -338,13 +351,13 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0

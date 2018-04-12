@@ -37,10 +37,29 @@ public class TetherDetector : Interactable, ISavable
 	// Update is called once per frame
 	void Update () 
 	{
-		if (CheckForTether ()) {
+		if (CheckForTether ()) 
+		{
 			onInteract ();
-		} else
-			_tetherInRange = false;
+		} 
+		else 
+		{
+			if(_tetherInRange) 
+			{
+				if (_rend != null)
+					_rend.sprite = _inactiveSprite;
+
+				foreach(GameObject activatable in _activatables)
+				{
+					if (activatable != null && _reusable) 
+					{
+						if (activatable.GetComponent<IActivatable> () != null)
+							activatable.GetComponent<IActivatable> ().onActivate (false);
+					}
+				}
+
+				_tetherInRange = false;
+			}
+		}
 	}
 
 	bool CheckForTether()
@@ -73,7 +92,7 @@ public class TetherDetector : Interactable, ISavable
 			if (activatable != null) 
 			{
 				if (activatable.GetComponent<IActivatable> () != null)
-					activatable.GetComponent<IActivatable> ().onActivate ();
+					activatable.GetComponent<IActivatable> ().onActivate (true);
 			}
 		}
 	}
