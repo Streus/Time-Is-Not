@@ -471,7 +471,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224139826383560898}
   - component: {fileID: 225379602404323048}
-  - component: {fileID: 114421385094936512}
   m_Layer: 5
   m_Name: TetherPopUpMenu
   m_TagString: Untagged
@@ -3281,7 +3280,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57, y: -12.4, z: 0}
+  m_LocalPosition: {x: -0.56999993, y: 1.5900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3383,8 +3382,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.9, y: -37.6, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.76, y: -20.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -6698,17 +6697,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disabled: 0
   affectedObject: {fileID: 1013494518387460}
---- !u!114 &114421385094936512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1159266075499562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97512eb28f4234e5b9df1d4750b95c79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114423961294315062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9836,7 +9824,7 @@ MonoBehaviour:
   atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 0
+  atBottomBound: 1
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
