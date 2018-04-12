@@ -3210,7 +3210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.018, y: -30.942, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4672950904335858}
@@ -3263,7 +3263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5900002, z: 0}
+  m_LocalPosition: {x: 5.0179996, y: -30.942005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3366,7 +3366,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.76, y: -20.59, z: 0}
+  m_LocalPosition: {x: -2.53, y: -5.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -7820,7 +7820,6 @@ MonoBehaviour:
     type: 3}
   codePickup: {fileID: 8300000, guid: 06bca8c69146a5c40b1ef46b5ba6dce6, type: 3}
   normalSwitch: {fileID: 8300000, guid: 41b2d0f8020cd524e8c0716292195df6, type: 3}
-  playerWalking: {fileID: 8300000, guid: 822531acb26940344b42057c34cd5234, type: 3}
   stasisHum: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
   pushBlockMoving: {fileID: 8300000, guid: a0a2b552fb24d0c42987a3565de77a65, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: ac963cd518e064a4bad74d24480f4e61, type: 3}
@@ -7833,10 +7832,9 @@ MonoBehaviour:
   laserSecurityHum: {fileID: 8300000, guid: 8a72095601d66cb4b9610061b20dd9e7, type: 3}
   laserDeathHum: {fileID: 8300000, guid: ea75b5a6a7f218e49a5bb0ce7e6aa333, type: 3}
   floatingPlatform: {fileID: 8300000, guid: 980d10fbb223d5541b75a85ebe67e640, type: 3}
-  hermitCrabDown: {fileID: 8300000, guid: d00f0b23fc235a448a7773c43b755935, type: 3}
+  hermitCrabDown: {fileID: 8300000, guid: a487e6421b47a7a4f9ee6edfa2bb7ffc, type: 3}
   hermitCrabStand: {fileID: 8300000, guid: deb53b6f3288a2d4d9817d8e4d71038b, type: 3}
-  hermitCrabMoving: {fileID: 8300000, guid: 50d4c78da9d16c644a960af8cd0ec440, type: 3}
-  hermitCrabIdleNoise: {fileID: 8300000, guid: 2d04de58a5a91514d9e6ed0af9e295b9, type: 3}
+  hermitCrabMoving: {fileID: 8300000, guid: aa7e9e853f407ab42bc82ff370cdd11a, type: 3}
   gulperEelMoving: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
   hummingBirdMoving: {fileID: 8300000, guid: bf01adced4c71e34c964aaa23d7f1dec, type: 3}
   hummingBirdSpotting: {fileID: 8300000, guid: 9ce9bf5cdc260f34491bf9690a7404c4, type: 3}
@@ -9791,7 +9789,7 @@ MonoBehaviour:
   atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 1
+  atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
