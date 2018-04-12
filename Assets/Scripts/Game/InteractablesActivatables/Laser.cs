@@ -80,12 +80,10 @@ public class Laser : Interactable, IActivatable, ISavable
             if (_type == LaserType.Trigger)
             {
                 source.clip = laserSecurityHum;
-                source.Play();
             }
             else
             {
                 source.clip = laserDeathHum;
-                source.Play();
             }
         }
 	}
@@ -121,6 +119,17 @@ public class Laser : Interactable, IActivatable, ISavable
         if(!GameManager.isPlayerDead())
         {
             playSound = true;
+        }
+
+        if(source.isPlaying && !isEnabled())
+        {
+            //stop sound
+            source.Stop();
+        }
+        else if(!source.isPlaying && isEnabled())
+        {
+            //start sound
+            source.Play();
         }
 	}
 
@@ -234,13 +243,13 @@ public class Laser : Interactable, IActivatable, ISavable
 		{
 		case LaserType.Trigger:
 			onInteract();
-			source.Stop();
+			//source.Stop();
 			AudioLibrary.PlayLaserSecurityCollisionSound();
 			AlertFlash.inst.PlayAlertFlash(); 
 			break;
 		case LaserType.Death:
 			entity.onDeath ();
-                source.Stop();
+                //source.Stop();
                 if (playSound)
                 {
                     AudioLibrary.PlayLaserDeathCollisionSound();
