@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4002317590964490}
   - component: {fileID: 212174393355968044}
   - component: {fileID: 61171401481766268}
+  - component: {fileID: 95482018287608464}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -66,6 +67,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.40659904, y: 0.3919754}
   m_EdgeRadius: 0
+--- !u!95 &95482018287608464
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706297930547498}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8c342e303a334a129ca6a92dcbcb009, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212174393355968044
 SpriteRenderer:
   m_ObjectHideFlags: 1

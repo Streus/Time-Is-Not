@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4727951804821720}
   - component: {fileID: 212300952117311744}
+  - component: {fileID: 95476677025781302}
   m_Layer: 0
   m_Name: Bromelia
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95476677025781302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646996215347874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7c4f9313df3974bb482a8888f7967a45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212300952117311744
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -70,7 +88,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1396162845
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: caf3d355f723ae54aa2e67e76f587b61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

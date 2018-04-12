@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046393033164458}
   - component: {fileID: 212110089979760666}
+  - component: {fileID: 95073008183235368}
   m_Layer: 0
   m_Name: WallDecor_6
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95073008183235368
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1251588318198154}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a997fb38cd8b24872b070c8b1d535a75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212110089979760666
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -70,9 +88,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1396162845
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300134, guid: 8f638dc57e804c54685d58a028ad9bd7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50fb807707d1642c3b89db6a51844d7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

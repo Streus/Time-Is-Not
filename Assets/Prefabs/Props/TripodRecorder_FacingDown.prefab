@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4198598363355534}
   - component: {fileID: 212149022789923326}
   - component: {fileID: 61313554293600330}
+  - component: {fileID: 95006303433334840}
   m_Layer: 0
   m_Name: TripodRecorder_FacingDown
   m_TagString: Untagged
@@ -66,6 +67,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7384381, y: 0.38219357}
   m_EdgeRadius: 0
+--- !u!95 &95006303433334840
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473693678841490}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32dfb3e003cf54234853487531281bb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212149022789923326
 SpriteRenderer:
   m_ObjectHideFlags: 1
