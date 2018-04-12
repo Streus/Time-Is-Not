@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4171044782632968}
   - component: {fileID: 212487275854860584}
+  - component: {fileID: 95892186163982182}
   m_Layer: 0
   m_Name: LabAparatus_5_red
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95892186163982182
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133237786888726}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02975bc2c7b0e484cb5e129405d4773e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212487275854860584
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -70,7 +88,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1396162845
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300010, guid: f565d0dfea6c28f41bc2eab8a627157f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

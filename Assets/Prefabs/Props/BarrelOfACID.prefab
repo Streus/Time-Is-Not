@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4138529966124724}
   - component: {fileID: 212689968501583182}
   - component: {fileID: 61655943039710102}
+  - component: {fileID: 95676108437686386}
   m_Layer: 0
   m_Name: BarrelOfACID
   m_TagString: Untagged
@@ -66,6 +67,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44695902, y: 0.5530987}
   m_EdgeRadius: 0
+--- !u!95 &95676108437686386
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676486062797210}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21777da8d83c84d01b29fe2ed6555c10, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212689968501583182
 SpriteRenderer:
   m_ObjectHideFlags: 1
