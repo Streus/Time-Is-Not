@@ -154,6 +154,11 @@ public class StasisBubble : MonoBehaviour
 	{
 		mouseIsOver = false; 
 
+		if (GameManager.isPaused())
+		{
+			return; 
+		}
+
 		Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 
 		if (bubbleCollider.bounds.Contains(mouseWorldPos))

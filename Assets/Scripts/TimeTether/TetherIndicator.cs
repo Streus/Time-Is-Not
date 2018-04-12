@@ -206,6 +206,11 @@ public class TetherIndicator : MonoBehaviour
 	/// </summary>
 	public bool MouseIsOver()
 	{
+		if (GameManager.isPaused())
+		{
+			return false; 
+		}
+
 		Vector2 mouseWorldPos = (Vector2)Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 
 		if (clickCollider != null && clickCollider.bounds.Contains(mouseWorldPos) && tetherIndex != 0)
