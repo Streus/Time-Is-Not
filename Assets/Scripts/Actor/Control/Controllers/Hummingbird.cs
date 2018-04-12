@@ -80,6 +80,20 @@ public class Hummingbird : PatrollingEnemy
 	{
 		base.Update();
 
+		Collider2D col = Physics2D.CircleCast (
+			                transform.position,
+			                GetComponent<CircleCollider2D> ().radius,
+			                Vector2.zero,
+			                0f,
+							1 << LayerMask.NameToLayer ("GroundEnts")).collider;
+		if (col != null)
+		{
+			//kill the player on contact
+			Entity player = col.GetComponent<Entity> ();
+			if (player != null && player.GetComponent<Player> () != null)
+				player.onDeath ();
+		}
+
 		if (hummingAnim == null)
 			return;
 
