@@ -3210,7 +3210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.018, y: -30.942, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4672950904335858}
@@ -3263,7 +3263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.0179996, y: -30.942005, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3366,7 +3366,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.53, y: -5.48, z: 0}
+  m_LocalPosition: {x: -0.76, y: -20.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -8872,9 +8872,9 @@ MonoBehaviour:
   headerState: 0
   levelNameText: {fileID: 114761437161147164}
   levelHeaderGroup: {fileID: 0}
-  fadeInSpeed: 5
-  fadeOutSpeed: 5
-  waitToAppearLength: 1
+  fadeInSpeed: 3
+  fadeOutSpeed: 3
+  waitToAppearLength: 0.8
   stayVisibleLength: 2
 --- !u!114 &114862478035385722
 MonoBehaviour:
@@ -9791,7 +9791,7 @@ MonoBehaviour:
   atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 0
+  atBottomBound: 1
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -320,6 +320,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 		// The top level pause state is a full GAME pause, which can be accessed independently or on top of a lower level
 		// If entering a top level pause through a lower level, when exiting the state machine must pass back down through the lower level 
 
+		Debug.Log("Enter pause state called: " + newPauseType); 
+
 		// Check for redunancy
 		if (pauseType == newPauseType)
 		{
@@ -372,6 +374,8 @@ public class GameManager : Singleton<GameManager> , ISavable
 	/// </summary>
 	public bool ExitPauseState()
 	{
+		Debug.Log("Try exit pause state"); 
+
 		// Throw a warning if trying to exit while not even paused
 		if (pauseType == PauseType.NONE)
 		{

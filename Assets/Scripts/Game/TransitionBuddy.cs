@@ -102,7 +102,7 @@ public class TransitionBuddy
 		if (lnh != null)
 		{
 			if (SceneSetup.inst == null || SceneSetup.inst.useLevelHeader)
-				LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.APPEAR);
+				LevelNameHeader.getMain ().SetHeaderState (LevelNameHeader.HeaderState.WAIT_TO_APPEAR);
 		}
 		else
 			Debug.LogWarning ("No main LevelNameHeader!");
