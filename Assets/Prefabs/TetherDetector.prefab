@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4114417293367220}
   - component: {fileID: 212230450039654888}
   - component: {fileID: 114598589831379938}
+  - component: {fileID: 114787362949769358}
   m_Layer: 0
   m_Name: TetherDetector
   m_TagString: Untagged
@@ -60,6 +61,20 @@ MonoBehaviour:
   _reusable: 0
   _activeSprite: {fileID: 21300000, guid: 65ae0f1a4e1244553a7cd033008fa655, type: 3}
   _inactiveSprite: {fileID: 21300000, guid: b5154482478ff47c3aaa061fb50f3d42, type: 3}
+--- !u!114 &114787362949769358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856896257373848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 0
+  allowReset: 1
 --- !u!212 &212230450039654888
 SpriteRenderer:
   m_ObjectHideFlags: 1

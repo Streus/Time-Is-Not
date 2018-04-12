@@ -130,4 +130,5 @@ public class TetherDetector : Interactable, ISavable
 	{
 		_tetherInRange = false;
 	}
+
 }

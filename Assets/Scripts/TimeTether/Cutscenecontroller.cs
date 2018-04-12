@@ -42,7 +42,7 @@ public class Cutscenecontroller : MonoBehaviour
 		slides[currentScene].Object.transform.localScale = Vector3.MoveTowards (slides[currentScene].Object.transform.localScale, scale, scaleSpeed);
 		slides[currentScene].Object.transform.position = Vector3.MoveTowards (slides[currentScene].Object.transform.position, position, moveSpeed);
 
-		if(Input.GetKeyDown(KeyCode.E) || timer <= 0)
+		if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0) || timer <= 0)
 		{
 			currentScene++;
 			MakeSceneActive (currentScene);
