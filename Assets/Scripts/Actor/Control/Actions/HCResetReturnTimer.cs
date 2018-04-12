@@ -19,6 +19,7 @@ public class HCResetReturnTimer : Action
                 source.clip = AudioLibrary.inst.hermitCrabMoving;
                 source.loop = true;
                 source.Play();
+                Debug.Log("Walk sound");
             }
         }
         else

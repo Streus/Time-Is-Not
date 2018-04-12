@@ -13,8 +13,10 @@ public class HCResetStandDur : Action
         source = c.GetComponent<AudioSource>();
         if (source != null)
         {
-            source.Stop();
-            source.PlayOneShot(AudioLibrary.inst.hermitCrabDown);
+            source.clip = AudioLibrary.inst.hermitCrabDown;
+            source.loop = false;
+            source.Play();
+            Debug.Log("Sit down sound");
         }
 		hc.GetComponent<PushBlock> ().disableMovement ();
 		hc.resetStandDuration ();
