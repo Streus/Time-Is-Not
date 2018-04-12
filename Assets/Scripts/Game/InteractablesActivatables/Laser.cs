@@ -121,15 +121,18 @@ public class Laser : Interactable, IActivatable, ISavable
             playSound = true;
         }
 
-        if(source.isPlaying && !isEnabled())
+        if (Application.isPlaying)
         {
-            //stop sound
-            source.Stop();
-        }
-        else if(!source.isPlaying && isEnabled())
-        {
-            //start sound
-            source.Play();
+            if (source.isPlaying && !isEnabled())
+            {
+                //stop sound
+                source.Stop();
+            }
+            else if (!source.isPlaying && isEnabled())
+            {
+                //start sound
+                source.Play();
+            }
         }
 	}
 
