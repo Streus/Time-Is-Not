@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284175542353818}
   - component: {fileID: 212532910461291968}
+  - component: {fileID: 95302591714739616}
   m_Layer: 0
   m_Name: BrokenScreens
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95302591714739616
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127346080994910}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 316dc3586599b46b99735a6ffa6deb1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212532910461291968
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -70,7 +88,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1396162845
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84b492692f583d24fa35684cb29473e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

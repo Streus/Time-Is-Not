@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4459641327109118}
   - component: {fileID: 212371606843012030}
   - component: {fileID: 61362308772276998}
+  - component: {fileID: 95803643313416826}
   m_Layer: 0
   m_Name: Furnace
   m_TagString: Untagged
@@ -66,6 +67,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.3799243}
   m_EdgeRadius: 0
+--- !u!95 &95803643313416826
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061947902320982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e532dc219dcf47d08574318fe7c17de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212371606843012030
 SpriteRenderer:
   m_ObjectHideFlags: 1
