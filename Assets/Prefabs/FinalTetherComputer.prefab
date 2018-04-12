@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 212720220012946664}
   - component: {fileID: 61753158636282542}
   - component: {fileID: 114606408096039788}
+  - component: {fileID: 95668428229932564}
   m_Layer: 15
   m_Name: FinalTetherComputer
   m_TagString: Untagged
@@ -181,7 +182,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482752799026604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.879235, y: -18.309078, z: 0}
+  m_LocalPosition: {x: -23.812405, y: 10.720947, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4134561577258092}
@@ -217,6 +218,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8286424, y: 0.8732147}
   m_EdgeRadius: 0
+--- !u!95 &95668428229932564
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1482752799026604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8a9f26c934b1644c7b20b2b45cd4e311, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114239979798902354
 MonoBehaviour:
   m_ObjectHideFlags: 1
