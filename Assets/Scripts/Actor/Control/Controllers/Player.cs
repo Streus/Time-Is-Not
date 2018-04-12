@@ -57,6 +57,7 @@ public class Player : Controller
 	//for delaying some checks
 	private float miscDelay;
 	private bool placingTether = true;
+	private bool shootingSB = false;
 
 	public delegate void AnimEvent ();
 	public event AnimEvent tetherAnchorEnded;
@@ -102,6 +103,16 @@ public class Player : Controller
 			if (!inPlaceTetherAnim () && miscDelay <= 0f)
 			{
 				endAnchorAnim ();
+			}
+		}
+
+		if (shootingSB)
+		{
+			anim.SetBool ("isMoving", false);
+			miscDelay -= Time.deltaTime;
+			if (!inShootingAnim () && miscDelay <= 0f)
+			{
+				shootingSB = false;
 			}
 		}
 
@@ -158,11 +169,12 @@ public class Player : Controller
 
 	public bool inPlaceTetherAnim()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(1).IsName("Animation_MargauxPlaceTetherAnchor"))
-		{
-			return true; 
-		}
-		return false; 
+		return anim.GetCurrentAnimatorStateInfo (1).IsName ("Animation_MargauxPlaceTetherAnchor"); 
+	}
+
+	public bool inShootingAnim()
+	{
+		return anim.GetCurrentAnimatorStateInfo (1).IsName ("Animation_Margaux_StasisBubble");
 	}
 
 	public void setReappearAnim()
@@ -178,6 +190,9 @@ public class Player : Controller
 	public void setStasisShootAnim()
 	{
 		anim.SetTrigger ("StasisBubble");
+		anim.SetBool ("isMoving", false);
+		placingTether = true;
+		miscDelay = 0.3f;
 	}
 
 	public void setDashingAnim(bool val)
