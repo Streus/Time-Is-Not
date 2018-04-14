@@ -69,31 +69,17 @@ public class TetherIndicator : MonoBehaviour
 
 		screenshotArrow.enabled = false;
 		screenshotTetherRend.enabled = false;
+
+		CheckAttachParent(); 
 	}
 		
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		// Overlap circle all 
-		// Check to see if any colliders are a moving platform (layer or tag or script)
-		// Save a transform ref to the moving platform
-		// Vector2 offset
-		// Update position of point every frame to be moving platform position + offset
-		Collider2D[] hits = Physics2D.OverlapCircleAll(platformAttachPoint.transform.position, moveOverlapRadius); 
+		Collider2D[] hits;
 
-		if (moveParent == null)
-		{
-			for (int i = 0; i < hits.Length; i++)
-			{
-				if (hits[i].CompareTag("MovingPlatform"))
-				{
-					moveParent = hits[i].transform; 
-					offsetFromMoveParent = transform.position - moveParent.transform.position; 
-				}
-			}
-		}
-		else
+		if (moveParent != null)
 		{
 			transform.position = moveParent.position + offsetFromMoveParent; 
 		}
@@ -172,6 +158,28 @@ public class TetherIndicator : MonoBehaviour
 			}
 		}
 
+	}
+
+	void CheckAttachParent()
+	{
+		// Overlap circle all 
+		// Check to see if any colliders are a moving platform (layer or tag or script)
+		// Save a transform ref to the moving platform
+		// Vector2 offset
+		// Update position of point every frame to be moving platform position + offset
+		Collider2D[] hits = Physics2D.OverlapCircleAll(platformAttachPoint.transform.position, moveOverlapRadius); 
+
+		if (moveParent == null)
+		{
+			for (int i = 0; i < hits.Length; i++)
+			{
+				if (hits[i].CompareTag("MovingPlatform"))
+				{
+					moveParent = hits[i].transform; 
+					offsetFromMoveParent = transform.position - moveParent.transform.position; 
+				}
+			}
+		}
 	}
 
 	public void UpdateTetherSprite()
