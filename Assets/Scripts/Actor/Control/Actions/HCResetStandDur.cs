@@ -13,9 +13,9 @@ public class HCResetStandDur : Action
         source = c.GetComponent<AudioSource>();
         if (source != null)
         {
-            source.clip = AudioLibrary.inst.hermitCrabDown;
+            source.Stop();
             source.loop = false;
-            source.Play();
+            source.PlayOneShot(AudioLibrary.inst.hermitCrabStand, 1);
             Debug.Log("Sit down sound");
         }
 		hc.GetComponent<PushBlock> ().disableMovement ();
