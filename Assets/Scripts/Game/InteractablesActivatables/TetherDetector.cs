@@ -117,7 +117,9 @@ public class TetherDetector : Interactable, ISavable
 	/// <returns>The seed.</returns>
 	public SeedBase saveData()
 	{
-		SeedBase seed = new SeedBase ();
+		Seed seed = new Seed ();
+
+		seed.isActive = isEnabled();
 
 		return seed;
 	}
@@ -128,7 +130,25 @@ public class TetherDetector : Interactable, ISavable
 	/// <returns>The seed.</returns>
 	public void loadData(SeedBase s)
 	{
+		if (s == null)
+			return;
+
+		Seed seed = (Seed)s;
+
 		_tetherInRange = false;
+		if (seed.isActive)
+			enable ();
+		else
+			disable ();
+		}
+
+	/// <summary>
+	/// The seed contains all required savable information for the object.
+	/// </summary>
+	public class Seed : SeedBase
+	{
+		//is the plate pressed?
+		public bool isActive;
 	}
 
 }

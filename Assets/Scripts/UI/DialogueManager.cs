@@ -12,6 +12,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	private int _dialogueStackLevel = 0;
 
+	private bool pausePlayer = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -63,6 +65,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	void UpdateTimers()
 	{
+		if (GameManager.CheckPause((int)PauseType.GAME))
+			return;
 		bool playerFrozen = false;
 		if (_activeDialogues.Count == 0)
 			return;
@@ -91,7 +95,15 @@ public class DialogueManager : Singleton<DialogueManager>
 				return;
 			}
 		}
-		GameManager.inst.PlayerReading = playerFrozen;
+		if(pausePlayer != playerFrozen)
+		{
+			pausePlayer = playerFrozen;
+			if (pausePlayer)
+				GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
+			else
+				GameManager.inst.ExitPauseState ();
+		}
+		
 	}
 
 	public void DeleteAllDialogueBoxes()
