@@ -40,6 +40,8 @@ public class StasisBubble : MonoBehaviour
 
     AudioSource source;
 
+    AudioClip stasisForming;
+
     AudioClip stasisHum;
 
 	// Use this for initialization
@@ -57,11 +59,13 @@ public class StasisBubble : MonoBehaviour
 
         source = this.GetComponent<AudioSource>();
         stasisHum = AudioLibrary.inst.stasisHum;
-        
+        stasisForming = AudioLibrary.inst.stasisForming;
+
         if (source != null)
         {
             source.outputAudioMixerGroup = UIManager.inst.mixer.FindMatchingGroups("SFX")[0];
-            source.clip = stasisHum;
+            source.clip = stasisForming;
+            source.loop = false;
             source.Play();
         }
 	}
@@ -110,6 +114,13 @@ public class StasisBubble : MonoBehaviour
 				RemoveBubble();
 			}
 		}
+
+        if(source != null && !source.isPlaying)
+        {
+            source.loop = true;
+            source.clip = stasisHum;
+            source.Play();
+        }
 	}
 
 	/// <summary>

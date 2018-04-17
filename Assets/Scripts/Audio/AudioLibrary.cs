@@ -49,6 +49,13 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherError, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
+    public AudioClip tetherRemoval;
+
+    public static void PlayTetherRemovalSound()
+    {
+        GlobalAudio.PlaySound(inst.tetherRemoval, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+    }
+
     public AudioClip stasisShoot; // -- done : Location - StasisBullet script
 
     public static void PlayStasisShootSound()
@@ -135,6 +142,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
      
     public AudioClip stasisHum; // -- done : Location - StasisBubble script
+    public AudioClip stasisForming;
+    public AudioClip stasisRemoval;
 
     #endregion
 
