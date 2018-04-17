@@ -9,10 +9,10 @@ public class CutsceneObject
 	private GameObject _obj;
 
 	[SerializeField]
-	private Vector2 _endPosition = new Vector2();
+	private Vector3 _endPosition = new Vector3();
 
 	[SerializeField]
-	private Vector2 _endScale = new Vector2(1,1);
+	private Vector3 _endScale = new Vector3(1,1, 1);
 
 	[SerializeField]
 	private float _time = Mathf.Infinity;
@@ -20,8 +20,8 @@ public class CutsceneObject
 	public CutsceneObject()
 	{
 		_obj = null;
-		_endPosition = new Vector2 ();
-		_endScale = new Vector2 (1,1);
+		_endPosition = new Vector3 ();
+		_endScale = new Vector3 (1,1, 1);
 		_time = Mathf.Infinity;
 	}
 
