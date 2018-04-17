@@ -46,7 +46,6 @@ public class TransitionTrigger : MonoBehaviour
 		p.enabled = false;
 		p.setDashingAnim (false);
 		GameManager.GetPlayer ().GetComponent<Animator> ().SetBool ("isMoving", false);
-//		activated = true;
 	}
 		
 	#region DON'T LOOK PLS THANKS
