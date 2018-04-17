@@ -185,6 +185,8 @@ public class AudioLibrary : Singleton<AudioLibrary>
     //public AudioClip hermitCrabIdleNoise; // -- waiting
     public AudioClip gulperEelMoving; // -- Location : same as stasis
     public AudioClip hummingBirdMoving; // -- Location : DiscardPath script
+    public AudioClip hummingBirdFlapUp;
+    public AudioClip hummingBirdFlapDown;
     public AudioClip hummingBirdSpotting; // -- Location : HBEnterPursue script
     public AudioClip hummingBirdAttacking; // -- Location : HBPursue script
     #endregion

@@ -8,28 +8,14 @@ public class TetherMenuSounds : MonoBehaviour
 	public void PlayTetherMenuInSound()
 	{
 		Debug.Log("Play tether menu in sound");
-        if (GlobalAudio.ClipIsPlaying(AudioLibrary.inst.tetherMenuClose))
-        {
-            //GlobalAudio.StopPlayingClip(AudioLibrary.inst.tetherMenuClose);
-            AudioLibrary.PlayTetherMenuOpen();
-        }
-        else
-        {
-            AudioLibrary.PlayTetherMenuOpen();
-        }
-	}
+        AudioLibrary.PlayTetherMenuOpen();
+        //GlobalAudio.StopPlayingClip(AudioLibrary.inst.tetherMenuClose);
+    }
 
 	public void PlayTetherMenuOutSound()
 	{
 		Debug.Log("Play tether menu out sound");
-        if (GlobalAudio.ClipIsPlaying(AudioLibrary.inst.tetherMenuOpen))
-        {
-            //GlobalAudio.StopPlayingClip(AudioLibrary.inst.tetherMenuOpen);
-            AudioLibrary.PlayTetherMenuClose();
-        }
-        else
-        {
-            AudioLibrary.PlayTetherMenuClose();
-        }
+        AudioLibrary.PlayTetherMenuClose();
+        //GlobalAudio.StopPlayingClip(AudioLibrary.inst.tetherMenuOpen);
     }
 }
