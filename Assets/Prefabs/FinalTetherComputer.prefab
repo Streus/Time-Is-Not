@@ -52,7 +52,6 @@ GameObject:
   - component: {fileID: 4880989175589578}
   - component: {fileID: 212720220012946664}
   - component: {fileID: 61753158636282542}
-  - component: {fileID: 114606408096039788}
   - component: {fileID: 95668428229932564}
   m_Layer: 15
   m_Name: FinalTetherComputer
@@ -182,7 +181,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482752799026604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.812405, y: 10.720947, z: 0}
+  m_LocalPosition: {x: 2.46, y: -18.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4134561577258092}
@@ -252,28 +251,10 @@ MonoBehaviour:
   _offset: {x: 0, y: 0.045}
   _activatables:
   - {fileID: 1716033478470600}
-  _reusable: 0
+  - {fileID: 0}
+  _reusable: 1
   _activeSprite: {fileID: 21300000, guid: 65ae0f1a4e1244553a7cd033008fa655, type: 3}
   _inactiveSprite: {fileID: 21300000, guid: b5154482478ff47c3aaa061fb50f3d42, type: 3}
---- !u!114 &114606408096039788
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1482752799026604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d38f258541c84d96a3af184c531f68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enabled: 1
-  _triggersSecurityDoors: 0
-  _range: {x: 1.96, y: 1.7}
-  _offset: {x: 0, y: 0}
-  _activatables: []
-  _reusable: 0
-  _activeSprite: {fileID: 21300000, guid: 4c7a71fc1717b43d4a2f037ac8b6a816, type: 3}
-  _inactiveSprite: {fileID: 21300000, guid: 4c7a71fc1717b43d4a2f037ac8b6a816, type: 3}
 --- !u!114 &114709686598195540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,14 +267,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueChain:
-  - _dialogue: afsldjfl;aj;dl
+  - _dialogue: Use WASD to move around.
     _location: {x: 0, y: 0}
     _followTarget: {fileID: 1144572510454534}
-    _boxLifetime: 2
-  - _dialogue: sdjfklkal;sdjfkl;a
-    _location: {x: 0, y: 0}
-    _followTarget: {fileID: 1144572510454534}
-    _boxLifetime: 2
+    _boxLifetime: 6
 --- !u!212 &212417902960516260
 SpriteRenderer:
   m_ObjectHideFlags: 1
