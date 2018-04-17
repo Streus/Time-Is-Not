@@ -21,7 +21,7 @@ public class UpdateMasterVolumeUI : MonoBehaviour
     {
         if (masterVolumeText != null)
         {
-            masterVolumeText.text = "Master Volume: " + (int)(((UIManager.inst.GetMasterVolume() - -80) / (0 - -80)) * 100);
+            masterVolumeText.text = "Master Volume: " + (int)(((UIManager.inst.GetMasterVolume() - -50) / (0 - -50)) * 100);
         }
         else
         {

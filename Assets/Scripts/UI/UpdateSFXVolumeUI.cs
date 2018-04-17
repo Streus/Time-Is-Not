@@ -21,7 +21,7 @@ public class UpdateSFXVolumeUI : MonoBehaviour
     {
         if (sfxVolumeText != null)
         {
-            sfxVolumeText.text = "SFX Volume: " + (int)(((UIManager.inst.GetSFXVolume() - -80) / (0 - -80)) * 100);
+            sfxVolumeText.text = "SFX Volume: " + (int)(((UIManager.inst.GetSFXVolume() - -50) / (0 - -50)) * 100);
         }
         else
         {

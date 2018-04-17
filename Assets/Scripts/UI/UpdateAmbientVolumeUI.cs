@@ -21,7 +21,7 @@ public class UpdateAmbientVolumeUI : MonoBehaviour
     {
         if (ambientVolumeText != null)
         {
-            ambientVolumeText.text = "Ambient Volume: " + (int)(((UIManager.inst.GetAmbientVolume() - -80) / (0 - -80)) * 100);
+            ambientVolumeText.text = "Ambient Volume: " + (int)(((UIManager.inst.GetAmbientVolume() - -50) / (0 - -50)) * 100);
         }
         else
         {
