@@ -42,7 +42,9 @@ public class TransitionTrigger : MonoBehaviour
 		StartCoroutine (temp_delay ());
 
 		//this file contains all my sins
-		GameManager.GetPlayer ().GetComponent<Player> ().enabled = false;
+		Player p = GameManager.GetPlayer ().GetComponent<Player> ();
+		p.enabled = false;
+		p.setDashingAnim (false);
 		GameManager.GetPlayer ().GetComponent<Animator> ().SetBool ("isMoving", false);
 //		activated = true;
 	}
