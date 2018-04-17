@@ -14,6 +14,7 @@ public class HermitCrab : Controller
 	[SerializeField]
 	private float sitDurationMax = 5f;
 	private float sitDuration;
+
 	[Tooltip("Set this to true to make the HC sit infinitely, unless pushed from home")]
 	[SerializeField]
 	private bool stands = false;
@@ -27,6 +28,7 @@ public class HermitCrab : Controller
 	[SerializeField]
 	private float returnTimerMax = 5f;
 	private float returnTimer;
+
 	[Tooltip("What the return timer will be set to if the HC was pushed when sitting.")]
 	[SerializeField]
 	private float returnTimerOnStand = 3f;
