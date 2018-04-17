@@ -30,9 +30,16 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherMenuOpen, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
-#endregion
+    public AudioClip tetherMenuClose;
 
-#region Mechanic Sounds
+    public static void PlayTetherMenuClose()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuClose, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+    }
+
+    #endregion
+
+    #region Mechanic Sounds
     // Mechanics //
 
     public AudioClip tetherPlacement; // -- done : Location - TetherManager script

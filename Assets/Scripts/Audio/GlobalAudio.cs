@@ -86,6 +86,17 @@ public class GlobalAudio : Singleton<GlobalAudio>
 		return false; 
 	}
 
+    public static void StopPlayingClip(AudioClip clip)
+    {
+        for (int i = 0; i < inst.sfxAudioSources.Count; i++)
+        {
+            if (inst.sfxAudioSources[i].clip == clip && inst.sfxAudioSources[i].isPlaying)
+            {
+                inst.sfxAudioSources[1].Stop();
+            }
+        }
+    }
+
 	/*
 	 * Helper methods
 	 */
