@@ -90,6 +90,14 @@ public class GameManager : Singleton<GameManager> , ISavable
 	}
 
 
+	private bool playerReading;
+
+	public bool PlayerReading
+	{
+		get{return playerReading;}
+		set{playerReading = value;}
+	}
+
 	// Ability setup
 	// These variables can be edited in the Inspector via SceneSettings
 	[HideInInspector] public bool canUseStasis; 
