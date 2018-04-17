@@ -107,6 +107,7 @@ public class Player : Controller
 			}
 		}
 
+		//wait for shooting anim
 		if (shootingSB)
 		{
 			anim.SetBool ("isMoving", false);
@@ -137,7 +138,8 @@ public class Player : Controller
 		//go to default state
         setState(playerDefault);
 
-		//unpause dash cooldown
+		//unpause stasis shot and dash cooldowns
+		getSelf().getAbility(0).active = true;
         getSelf().getAbility(1).active = true;
 
 		//stop animations
@@ -243,6 +245,7 @@ public class Player : Controller
         prePushState = getState();
         setState(pushState);
 
+		anim.SetBool ("Dash", false);
 		anim.SetBool ("isMoving", true);
 		anim.SetBool ("isPushing", true);
     }
