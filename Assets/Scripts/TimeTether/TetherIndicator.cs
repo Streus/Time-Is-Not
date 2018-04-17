@@ -46,7 +46,9 @@ public class TetherIndicator : MonoBehaviour
 	[SerializeField] Sprite screenshotGoldTether; 
 	[SerializeField] Sprite screenshotSilverTether; 
 
-	[SerializeField] ParticleSystem zoomParticles; 
+	[SerializeField] ParticleSystem zoomParticles;
+
+    AudioSource source;
 
 	void OnEnable()
 	{
@@ -70,7 +72,9 @@ public class TetherIndicator : MonoBehaviour
 		screenshotArrow.enabled = false;
 		screenshotTetherRend.enabled = false;
 
-		CheckAttachParent(); 
+		CheckAttachParent();
+
+        source = this.GetComponent<AudioSource>();
 	}
 		
 	
@@ -233,6 +237,11 @@ public class TetherIndicator : MonoBehaviour
 	{
 		//goldSprite.GetComponent<Animator>().
 		spriteAnimator.SetTrigger("TetherAnchorStop"); 
+        if(source != null)
+        {
+            source.clip = AudioLibrary.inst.tetherRemoval;
+            source.Play();
+        }
 	}
 
 	void OnScreenshot(bool startShot)
