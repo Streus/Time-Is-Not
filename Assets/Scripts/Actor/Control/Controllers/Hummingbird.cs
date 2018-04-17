@@ -33,8 +33,6 @@ public class Hummingbird : PatrollingEnemy
 
 	private Animator hummingAnim;
 
-    AudioSource source;
-
     #endregion
 
     #region INSTANCE_METHODS
@@ -61,7 +59,7 @@ public class Hummingbird : PatrollingEnemy
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
 
-        source = this.GetComponent<AudioSource>();
+        
 
     }
 
@@ -136,23 +134,7 @@ public class Hummingbird : PatrollingEnemy
 //			GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
-    public void PlayHummingBirdFlapUpSoud()
-    {
-        if (source != null)
-        {
-            source.clip = AudioLibrary.inst.hummingBirdFlapUp;
-            source.Play();
-        }
-    }
 
-    public void PlayHummingBirdFlapDownSoud()
-    {
-        if (source != null)
-        {
-            source.clip = AudioLibrary.inst.hummingBirdFlapDown;
-            source.Play();
-        }
-    }
 
     #region GETTERS_SETTERS
 
