@@ -54,7 +54,9 @@ public class Door : Interactable, IActivatable, ISavable
 	[SerializeField]
 	private bool ignoresTimeTether = false;
 
-	public GameObject _stasisEffect;
+	public GameObject _stasisEffectClosed;
+
+	public GameObject _stasisEffectOpen;
 
     // Use this for initialization
     void Start () 
@@ -307,8 +309,16 @@ public class Door : Interactable, IActivatable, ISavable
 		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
 		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
-		if(_stasisEffect != null)
-			_stasisEffect.SetActive (inStasis);
+		if(_stasisEffectClosed != null) 
+		{
+			if(!_isOpen)
+				_stasisEffectClosed.SetActive (inStasis);
+		}
+		if(_stasisEffectClosed != null) 
+		{
+			if(!_isOpen)
+				_stasisEffectOpen.SetActive (inStasis);
+		}
 		else
 		{
 			if (inStasis) 

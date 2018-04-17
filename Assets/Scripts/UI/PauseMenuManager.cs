@@ -91,6 +91,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
 		m_pauseMenuActive = true; 
 		pauseCanvasGroup.blocksRaycasts = true; 
+		pauseCanvasGroup.interactable = true; 
 		//GameManager.setPause(true); 
 		//GameManager.setPauseLock(true); 
 		GameManager.inst.EnterPauseState(PauseType.GAME); 
@@ -107,6 +108,7 @@ public class PauseMenuManager : Singleton<PauseMenuManager>
 
 		m_pauseMenuActive = false; 
 		pauseCanvasGroup.blocksRaycasts = false; 
+		pauseCanvasGroup.interactable = false; 
 		//GameManager.setPause(false); 
 		//GameManager.setPauseLock(false); 
 		GameManager.inst.ExitPauseState(); 

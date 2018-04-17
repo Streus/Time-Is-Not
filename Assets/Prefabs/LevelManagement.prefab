@@ -3210,7 +3210,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1062996858393866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.39, y: -44.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4672950904335858}
@@ -3263,7 +3263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.39, y: -44.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3352,7 +3352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672024216453400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.754063, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4178026959403124}
@@ -3365,8 +3365,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -36.433, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.7, y: -216.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -7824,7 +7824,7 @@ MonoBehaviour:
   codePickup: {fileID: 8300000, guid: 06bca8c69146a5c40b1ef46b5ba6dce6, type: 3}
   normalSwitch: {fileID: 8300000, guid: 41b2d0f8020cd524e8c0716292195df6, type: 3}
   stasisHum: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
-  stasisForming: {fileID: 0}
+  stasisForming: {fileID: 8300000, guid: 50936c1f70b163843b257311a98c04a9, type: 3}
   stasisRemoval: {fileID: 8300000, guid: 68258b5a7e796834497109bedc620c6c, type: 3}
   pushBlockMoving: {fileID: 8300000, guid: a0a2b552fb24d0c42987a3565de77a65, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: ac963cd518e064a4bad74d24480f4e61, type: 3}
@@ -7837,7 +7837,7 @@ MonoBehaviour:
   laserSecurityHum: {fileID: 8300000, guid: 8a72095601d66cb4b9610061b20dd9e7, type: 3}
   laserDeathHum: {fileID: 8300000, guid: ea75b5a6a7f218e49a5bb0ce7e6aa333, type: 3}
   floatingPlatform: {fileID: 8300000, guid: 980d10fbb223d5541b75a85ebe67e640, type: 3}
-  hermitCrabDown: {fileID: 8300000, guid: a487e6421b47a7a4f9ee6edfa2bb7ffc, type: 3}
+  hermitCrabDown: {fileID: 8300000, guid: 80b4c36a930b8af4cbece31e04c122be, type: 3}
   hermitCrabStand: {fileID: 8300000, guid: deb53b6f3288a2d4d9817d8e4d71038b, type: 3}
   hermitCrabMoving: {fileID: 8300000, guid: aa7e9e853f407ab42bc82ff370cdd11a, type: 3}
   gulperEelMoving: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
