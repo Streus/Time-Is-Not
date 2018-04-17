@@ -130,7 +130,7 @@ public class StasisBubble : MonoBehaviour
 	{
 		if (!LevelStateManager.removeStasisBubble(this))
 		{
-			DestroyBubble(); 
+            DestroyBubble(); 
 		}
 	}
 
@@ -139,8 +139,9 @@ public class StasisBubble : MonoBehaviour
 	/// </summary>
 	public void DestroyBubble()
 	{
-		Instantiate (bubblePopEffect, transform.position, Quaternion.identity);
-		Destroy(gameObject); 
+        Instantiate(bubblePopEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
 	}
 
 	public bool ColliderContainsPos(Vector3 pos)

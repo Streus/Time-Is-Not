@@ -23,6 +23,13 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherMenuHover, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
+    public AudioClip tetherMenuOpen;
+
+    public static void PlayTetherMenuOpen()
+    {
+        GlobalAudio.PlaySound(inst.tetherMenuOpen, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+    }
+
 #endregion
 
 #region Mechanic Sounds
