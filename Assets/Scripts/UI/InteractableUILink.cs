@@ -20,11 +20,11 @@ public class InteractableUILink : MonoBehaviour
 	[Tooltip("Optional color override specific to this interactable UI link, used instead of the default Color in ZoomOutUI. Only used if its alpha is > 0")] 
 	public Color overrideColor; 
 
-	[SerializeField] GameObject lineFollowerPrefab; 
-	public float followerSpawnRate; 
-	float spawnTimer; 
+	//[SerializeField] GameObject lineFollowerPrefab; 
+	//public float followerSpawnRate; 
+	//float spawnTimer; 
 
-	[SerializeField] List<LineFollower> followers; 
+	//[SerializeField] List<LineFollower> followers; 
 
 	// Use this for initialization
 	void Start () 
@@ -33,10 +33,12 @@ public class InteractableUILink : MonoBehaviour
 
 		if (lineRenderer == null)
 		{
-			lineRenderer = GameObject.Instantiate(lineRendPrefab, transform).GetComponent<LineRenderer>(); 
+			lineRenderer = GameObject.Instantiate(lineRendPrefab, transform).GetComponent<LineRenderer>();
 		}
 
-		spawnTimer = followerSpawnRate; 
+
+
+		//spawnTimer = followerSpawnRate; 
 	}
 
 	// Update is called once per frame
@@ -75,7 +77,7 @@ public class InteractableUILink : MonoBehaviour
 		lineRenderer.endColor = lineRenderer.startColor; 
 
 		// Spawn follow objects
-		if (followerSpawnRate != 0)
+		/*if (followerSpawnRate != 0)
 		{
 			spawnTimer -= Time.deltaTime; 
 			if (spawnTimer <= 0)
@@ -89,7 +91,7 @@ public class InteractableUILink : MonoBehaviour
 				followers.Add(newFollower); 
 				newFollower.Renderer = lineRenderer; 
 			}
-		}
+		}*/
 	}
 
 	void OnDrawGizmos()
