@@ -3263,7 +3263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.390001, y: -42.2, z: 0}
+  m_LocalPosition: {x: 12.39, y: -44.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3365,8 +3365,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.4, y: -3.8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.5, y: -36.433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -7806,16 +7806,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tetherSelect: {fileID: 8300000, guid: 88797a48a7a82614d94f46a79940a0ed, type: 3}
   tetherMenuHover: {fileID: 8300000, guid: a8fafae2b5fbaf742a8e93898e9ae75c, type: 3}
-  tetherMenuOpen: {fileID: 0}
-  tetherMenuClose: {fileID: 0}
+  tetherMenuOpen: {fileID: 8300000, guid: 76a0852e1f83a2340831e7d8aa7954bc, type: 3}
+  tetherMenuClose: {fileID: 8300000, guid: 9eeda319976bea345bc3c685dd9fc105, type: 3}
   tetherPlacement: {fileID: 8300000, guid: 3ccd380cac1aa214082066bf470a086e, type: 3}
   tetherRewind: {fileID: 8300000, guid: c9033b33fa53a8f48aea7ad3c42a7961, type: 3}
   tetherError: {fileID: 8300000, guid: 53e88b6a462236a408e788839364cef3, type: 3}
-  tetherRemoval: {fileID: 0}
+  tetherRemoval: {fileID: 8300000, guid: 7d0954aa18705364aa0850150110f660, type: 3}
   stasisShoot: {fileID: 8300000, guid: eee669093c017dc4c8570f364d2f9dee, type: 3}
   stasisError: {fileID: 8300000, guid: ce8efd3c68114854fb6c49bea5670227, type: 3}
   dashForward: {fileID: 8300000, guid: 95472c157a457f844b19535fed0648ec, type: 3}
-  dashError: {fileID: 8300000, guid: d12f18e694a9b3b4eba8636fe8d8c2fa, type: 3}
+  dashError: {fileID: 8300000, guid: ccec3fff786d4744ca61c06bbb8050bd, type: 3}
   dashRecharge: {fileID: 8300000, guid: 7558916a870d4c54ca459ac463a76320, type: 3}
   laserSecurityCollisiion: {fileID: 8300000, guid: adb22674cb4ada44bb5b056f2f2180e9,
     type: 3}
@@ -7825,7 +7825,7 @@ MonoBehaviour:
   normalSwitch: {fileID: 8300000, guid: 41b2d0f8020cd524e8c0716292195df6, type: 3}
   stasisHum: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
   stasisForming: {fileID: 0}
-  stasisRemoval: {fileID: 0}
+  stasisRemoval: {fileID: 8300000, guid: 68258b5a7e796834497109bedc620c6c, type: 3}
   pushBlockMoving: {fileID: 8300000, guid: a0a2b552fb24d0c42987a3565de77a65, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: ac963cd518e064a4bad74d24480f4e61, type: 3}
   pressurePlateOff: {fileID: 8300000, guid: 2a5eb051cf258a7409dbe44bc49c490e, type: 3}
@@ -9794,7 +9794,7 @@ MonoBehaviour:
   atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 1
+  atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
