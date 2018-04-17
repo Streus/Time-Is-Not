@@ -33,11 +33,13 @@ public class Hummingbird : PatrollingEnemy
 
 	private Animator hummingAnim;
 
-	#endregion
+    AudioSource source;
 
-	#region INSTANCE_METHODS
+    #endregion
 
-	public override void Awake()
+    #region INSTANCE_METHODS
+
+    public override void Awake()
 	{
 		//NOTE: use protected anim and physbody from Controller
 
@@ -58,7 +60,10 @@ public class Hummingbird : PatrollingEnemy
 			hummingAnim = spriteChild.GetComponent<Animator> ();
 
 		GetComponent<RegisteredObject> ().allowResetChanged += onStasised;
-	}
+
+        source = this.GetComponent<AudioSource>();
+
+    }
 
 	public void OnDestroy()
 	{
@@ -131,9 +136,27 @@ public class Hummingbird : PatrollingEnemy
 //			GetComponent<SpriteRenderer>().sortingOrder = SpriteOrderer.inst.OrderMe (transform);
 	}
 
-	#region GETTERS_SETTERS
+    public void PlayHummingBirdFlapUpSoud()
+    {
+        if (source != null)
+        {
+            source.clip = AudioLibrary.inst.hummingBirdFlapUp;
+            source.Play();
+        }
+    }
 
-	public float getSightRange()
+    public void PlayHummingBirdFlapDownSoud()
+    {
+        if (source != null)
+        {
+            source.clip = AudioLibrary.inst.hummingBirdFlapDown;
+            source.Play();
+        }
+    }
+
+    #region GETTERS_SETTERS
+
+    public float getSightRange()
 	{
 		return sightRange;
 	}
