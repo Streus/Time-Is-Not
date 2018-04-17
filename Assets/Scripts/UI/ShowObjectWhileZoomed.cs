@@ -20,7 +20,7 @@ public class ShowObjectWhileZoomed : MonoBehaviour
 	{
 		if(GameManager.CameraIsZoomedOut() && !zoomHelper)
 		{
-			rend.sortingLayerName = "UI";
+			rend.sortingLayerName = "ScreenFade";
 			zoomHelper = true;
 		}
 		if(!GameManager.CameraIsZoomedOut() && zoomHelper)

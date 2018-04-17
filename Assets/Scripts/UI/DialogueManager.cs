@@ -65,7 +65,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	void UpdateTimers()
 	{
-		if (GameManager.CheckPause((int)PauseType.GAME))
+		if (GameManager.CheckPause((int)PauseType.GAME) || GameManager.CheckPause((int)PauseType.TETHER_MENU))
 			return;
 		bool playerFrozen = false;
 		if (_activeDialogues.Count == 0)

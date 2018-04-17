@@ -28,6 +28,7 @@ public class ZoomoutFadeControl : MonoBehaviour
 		}
 		if(GameManager.CameraIsZoomedOut() || screenFadeOverride)
 		{
+			gameObject.GetComponent<SpriteRenderer> ().sortingOrder = -1000;
 			if(rend.color.a < screenFadePercent)
 			{
 				rend.color = new Color (rend.color.r, rend.color.g, rend.color.b, rend.color.a + (fadeRate * Time.deltaTime));
