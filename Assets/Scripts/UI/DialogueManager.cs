@@ -63,11 +63,14 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	void UpdateTimers()
 	{
+		bool playerFrozen = false;
 		if (_activeDialogues.Count == 0)
 			return;
 		foreach(DialogueObject dialogue in _activeDialogues)
 		{
 			int i = _activeDialogues.IndexOf (dialogue);
+			if (dialogue.FreezePlayer)
+				playerFrozen = true;
 			if (dialogue.FollowTarget != null)
 			{
 				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
@@ -88,6 +91,7 @@ public class DialogueManager : Singleton<DialogueManager>
 				return;
 			}
 		}
+		GameManager.inst.PlayerReading = playerFrozen;
 	}
 
 	public void DeleteAllDialogueBoxes()

@@ -7,10 +7,14 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 	[SerializeField]
 	private DialogueObject[] dialogueChain;
 
+	[SerializeField]
+	private bool freezesPlayer;
+
 	void Start()
 	{
 		for(int i = 0; i < dialogueChain.Length; i++)
 		{
+			dialogueChain [i].FreezePlayer = freezesPlayer;
 			dialogueChain [i].Timer = dialogueChain[i].Lifetime;
 		}
 		for(int i = 0; i < dialogueChain.Length -1; i++)

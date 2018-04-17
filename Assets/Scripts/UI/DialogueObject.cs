@@ -18,6 +18,8 @@ public class DialogueObject
 
 	private float _timer;
 
+	private bool freezePlayer;
+
 	[SerializeField]
 	private GameObject _followTarget;
 
@@ -77,6 +79,12 @@ public class DialogueObject
 	{
 		get{return _uiObject;}
 		set{_uiObject = value;}
+	}
+
+	public bool FreezePlayer
+	{
+		get{return freezePlayer;}
+		set{freezePlayer = value;}
 	}
 
 	public GameObject FollowTarget
