@@ -471,7 +471,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224139826383560898}
   - component: {fileID: 225379602404323048}
-  - component: {fileID: 114415074766013634}
   m_Layer: 5
   m_Name: TetherPopUpMenu
   m_TagString: Untagged
@@ -755,6 +754,7 @@ GameObject:
   - component: {fileID: 224097512861739554}
   - component: {fileID: 222265147583848728}
   - component: {fileID: 114607792790346952}
+  - component: {fileID: 114236383069332534}
   - component: {fileID: 95630556058562072}
   m_Layer: 5
   m_Name: MenuBody
@@ -3263,7 +3263,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376965525652404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0000038146973, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4433063589993816}
@@ -3352,7 +3352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1672024216453400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000009536743, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4178026959403124}
@@ -3365,8 +3365,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -36.433, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 97.8, y: 229.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -5857,6 +5857,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114236383069332534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1240924347007548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a72748ca4734d2c9fb9e085b2eabf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114236705040913968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6680,17 +6691,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disabled: 0
   affectedObject: {fileID: 1013494518387460}
---- !u!114 &114415074766013634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1159266075499562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114423961294315062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7806,9 +7806,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tetherSelect: {fileID: 8300000, guid: 88797a48a7a82614d94f46a79940a0ed, type: 3}
   tetherMenuHover: {fileID: 8300000, guid: a8fafae2b5fbaf742a8e93898e9ae75c, type: 3}
+  tetherMenuOpen: {fileID: 0}
   tetherPlacement: {fileID: 8300000, guid: 3ccd380cac1aa214082066bf470a086e, type: 3}
   tetherRewind: {fileID: 8300000, guid: c9033b33fa53a8f48aea7ad3c42a7961, type: 3}
   tetherError: {fileID: 8300000, guid: 53e88b6a462236a408e788839364cef3, type: 3}
+  tetherRemoval: {fileID: 0}
   stasisShoot: {fileID: 8300000, guid: eee669093c017dc4c8570f364d2f9dee, type: 3}
   stasisError: {fileID: 8300000, guid: ce8efd3c68114854fb6c49bea5670227, type: 3}
   dashForward: {fileID: 8300000, guid: 95472c157a457f844b19535fed0648ec, type: 3}
@@ -7821,6 +7823,8 @@ MonoBehaviour:
   codePickup: {fileID: 8300000, guid: 06bca8c69146a5c40b1ef46b5ba6dce6, type: 3}
   normalSwitch: {fileID: 8300000, guid: 41b2d0f8020cd524e8c0716292195df6, type: 3}
   stasisHum: {fileID: 8300000, guid: d2934e2e8c8ae884cb61642eb6f5e008, type: 3}
+  stasisForming: {fileID: 0}
+  stasisRemoval: {fileID: 0}
   pushBlockMoving: {fileID: 8300000, guid: a0a2b552fb24d0c42987a3565de77a65, type: 3}
   pressurePlateOn: {fileID: 8300000, guid: ac963cd518e064a4bad74d24480f4e61, type: 3}
   pressurePlateOff: {fileID: 8300000, guid: 2a5eb051cf258a7409dbe44bc49c490e, type: 3}
