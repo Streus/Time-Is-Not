@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894165538567920}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.52, y: -0.87, z: 0}
+  m_LocalPosition: {x: 0.52, y: -0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4092193291099056}
@@ -344,7 +344,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65792
   ignoresTimeTether: 0
-  _stasisEffect: {fileID: 1894165538567920}
+  _stasisEffectClosed: {fileID: 0}
+  _stasisEffectOpen: {fileID: 0}
 --- !u!212 &212269276388778426
 SpriteRenderer:
   m_ObjectHideFlags: 1
