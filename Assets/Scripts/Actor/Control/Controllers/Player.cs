@@ -370,6 +370,7 @@ public class Player : Controller
 		//if the pit timer fills, kill the player
 		if (pitTimer >= pitFallDelay || (seesPit && movementVector == Vector2.zero) || (movementVector != Vector2.zero && !CheckForGround())) 
 		{
+			transform.position = transform.position + (Vector3)(moveVect * 3);
 			anim.SetTrigger ("Fall");
 			getSelf ().onDeath ();
 		}

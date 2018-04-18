@@ -28,6 +28,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
 	public void CreateBox(DialogueObject dialogue)
 	{
+		Debug.Log ("freeze player? " + dialogue.FreezePlayer);
 		DialogueObject dia = new DialogueObject (dialogue);
 
 		Vector2 screenPoint;
@@ -68,8 +69,6 @@ public class DialogueManager : Singleton<DialogueManager>
 		if (GameManager.CheckPause((int)PauseType.GAME) || GameManager.CheckPause((int)PauseType.TETHER_MENU))
 			return;
 		bool playerFrozen = false;
-		if (_activeDialogues.Count == 0)
-			return;
 		foreach(DialogueObject dialogue in _activeDialogues)
 		{
 			int i = _activeDialogues.IndexOf (dialogue);
@@ -95,13 +94,18 @@ public class DialogueManager : Singleton<DialogueManager>
 				return;
 			}
 		}
-		if(pausePlayer != playerFrozen)
+		Debug.Log ("stored: " + pausePlayer + " temp: " + playerFrozen);
+		if(pausePlayer != playerFrozen || _activeDialogues.Count == 0)
 		{
 			pausePlayer = playerFrozen;
-			if (pausePlayer)
+			if (pausePlayer) {
+				Debug.Log ("Pausing Player...");
 				GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
-			else
+			}
+			else {
+				Debug.Log ("Unpausing Player...");
 				GameManager.inst.ExitPauseState ();
+			}
 		}
 		
 	}

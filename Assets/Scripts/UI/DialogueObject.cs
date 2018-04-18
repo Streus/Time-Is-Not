@@ -18,7 +18,7 @@ public class DialogueObject
 
 	private float _timer;
 
-	private bool freezePlayer;
+	private bool _freezePlayer;
 
 	[SerializeField]
 	private GameObject _followTarget;
@@ -55,6 +55,7 @@ public class DialogueObject
 		_timer = original.Timer;
 		_boxLifetime = original.Lifetime;
 		_followTarget = original.FollowTarget;
+		_freezePlayer = original.FreezePlayer;
 	}
 
 	public string Dialogue
@@ -83,8 +84,8 @@ public class DialogueObject
 
 	public bool FreezePlayer
 	{
-		get{return freezePlayer;}
-		set{freezePlayer = value;}
+		get{return _freezePlayer;}
+		set{_freezePlayer = value;}
 	}
 
 	public GameObject FollowTarget
