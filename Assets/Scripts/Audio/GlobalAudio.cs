@@ -92,7 +92,7 @@ public class GlobalAudio : Singleton<GlobalAudio>
         {
             if (inst.sfxAudioSources[i].clip == clip && inst.sfxAudioSources[i].isPlaying)
             {
-                inst.sfxAudioSources[1].Stop();
+                inst.sfxAudioSources[i].Stop();
             }
         }
     }

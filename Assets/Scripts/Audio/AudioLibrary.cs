@@ -27,14 +27,14 @@ public class AudioLibrary : Singleton<AudioLibrary>
 
     public static void PlayTetherMenuOpen()
     {
-        GlobalAudio.PlaySound(inst.tetherMenuOpen, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+        GlobalAudio.PlaySound(inst.tetherMenuOpen, 0.75f, 0.75f,UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     public AudioClip tetherMenuClose;
 
     public static void PlayTetherMenuClose()
     {
-        GlobalAudio.PlaySound(inst.tetherMenuClose, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+        GlobalAudio.PlaySound(inst.tetherMenuClose, 0.75f, 0.75f, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
     #endregion
