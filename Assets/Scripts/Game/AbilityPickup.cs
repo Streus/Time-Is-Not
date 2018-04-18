@@ -66,6 +66,6 @@ public class AbilityPickup : MonoBehaviour
 	{
 		Debug.Log("Stasis ability collected");
 		GameManager.inst.canUseStasis = true; 
-		StasisUIPanel.inst.UpdateStasisPanelActive(); 
+		StasisUIPanel.inst.UpdateStasisPanelActive(true); 
 	}
 }

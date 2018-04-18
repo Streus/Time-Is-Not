@@ -18,7 +18,14 @@ public class StasisUI : MonoBehaviour
 
 	void Update()
 	{
-		numStasis(stasisUiNum);
+		if (StasisUIPanel.inst.transitionState != 0 && StasisUIPanel.inst.transitionState <= stasisUiNum + 1)
+		{
+			image.sprite = offSprite;
+		}
+		else
+		{
+			numStasis(stasisUiNum);
+		}
 	}
 	private void numStasis(int stasisUiNum)
 	{
