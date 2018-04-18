@@ -95,20 +95,22 @@ public class LevelStateManager : Singleton<LevelStateManager>
 	void Awake()
 	{
 		stasisBubbles = new List<StasisBubble> (); 
-	}
 
-	void Start()
-	{
+		m_curState = -1; 
+
 		stateSeeds = new List<Dictionary<string, SeedCollection>> (); 
 
 		for (int i = 0; i < m_maxNumStates; i++)
 		{
 			stateSeeds.Add(new Dictionary<string, SeedCollection> ());
 		}
+	}
 
+	void Start()
+	{
 		// Save default state seeds
-		m_curState = -1; 
-		addState(); 
+		//m_curState = -1; 
+		//addState(); 
 	}
 
 	void Update()

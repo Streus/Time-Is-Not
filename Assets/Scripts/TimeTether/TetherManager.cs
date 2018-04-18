@@ -127,7 +127,8 @@ public class TetherManager : Singleton<TetherManager>
         //timeTetherIndicators = new GameObject[LevelStateManager.maxNumStates];
 		timeTetherIndicators = new List<TetherIndicator>();
 
-        CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0);
+        //CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0);
+		CreatePoint(); 
 
         arrowLerpBetween = true;
         tetherMenuGroup.alpha = 0;
