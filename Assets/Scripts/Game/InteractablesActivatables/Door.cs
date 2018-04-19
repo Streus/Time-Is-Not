@@ -309,22 +309,20 @@ public class Door : Interactable, IActivatable, ISavable
 		Debug.Log ("Stasis set to " + turnOn);
 		inStasis = turnOn;
 		SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer> ();
-		if(_stasisEffectClosed != null) 
+
+		if(inStasis)
 		{
-			if(!_isOpen)
-				_stasisEffectClosed.SetActive (inStasis);
-		}
-		if(_stasisEffectClosed != null) 
-		{
-			if(!_isOpen)
-				_stasisEffectOpen.SetActive (inStasis);
+			_stasisEffectOpen.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+			_stasisEffectClosed.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+			if(_isOpen)
+				_stasisEffectOpen.SetActive (true);
+			else
+				_stasisEffectClosed.SetActive (true);
 		}
 		else
 		{
-			if (inStasis) 
-				gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
-			else
-				gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+			_stasisEffectClosed.SetActive (false);
+			_stasisEffectOpen.SetActive (false);
 		}
 	}
 

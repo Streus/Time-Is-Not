@@ -463,8 +463,11 @@ public class PushBlock : MonoBehaviour, ISavable
 			return;
 		if (!inStasis)
 			_stasisTimer = postStasisDelay;
-		if(_stasisEffect != null)
+		if(_stasisEffect != null) 
+		{
 			_stasisEffect.SetActive (inStasis);
+			_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+		}
 		else
 		{
 			if (inStasis) 

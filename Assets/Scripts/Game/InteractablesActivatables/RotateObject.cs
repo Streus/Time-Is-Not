@@ -123,8 +123,11 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
 		if (sprite == null)
 			return;
-		if(_stasisEffect != null)
+		if(_stasisEffect != null) 
+		{
 			_stasisEffect.SetActive (inStasis);
+			_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+		}
 		else
 		{
 			if (inStasis) 
