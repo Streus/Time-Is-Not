@@ -64755,6 +64755,10 @@ Prefab:
       propertyPath: freezesPlayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1950121426371028, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc36530cc563e46f4928d27f47519d5f, type: 2}
   m_IsPrefabParent: 0
@@ -84087,7 +84091,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4880989175589578, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
       propertyPath: m_LocalPosition.x
@@ -84124,12 +84128,12 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: Use WASD to move around.
+      value: 'PRESS E to close the dialogue box. '
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[1]._dialogue
-      value: sdjfklkal;sdjfkl;a
+      value: Use WASD to move around.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -84139,7 +84143,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[1]._boxLifetime
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -84159,6 +84163,11 @@ Prefab:
         type: 2}
       propertyPath: m_SortingOrder
       value: 4580
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: freezesPlayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -95258,7 +95267,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1340696473676498, guid: 7505b52f86e714631a0cc9701c40831c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7505b52f86e714631a0cc9701c40831c, type: 2}
