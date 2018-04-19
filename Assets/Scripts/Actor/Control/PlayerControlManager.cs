@@ -94,7 +94,7 @@ public class PlayerControlManager : ScriptableObject
 		bindings [7] = KeyCode.Mouse0;
 		bindings [8] = KeyCode.Mouse1;
 		bindings [9] = KeyCode.Q;
-		bindings [10] = KeyCode.Escape;
+		bindings [10] = KeyCode.P;
 		bindings [11] = KeyCode.R;
 
 		setNames = new string[setCount];

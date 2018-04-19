@@ -8,6 +8,14 @@ public class TransitionTrigger : MonoBehaviour
 	[Tooltip("The scene to which the game should transition.")]
 	private string nextScene = "";
 
+	[SerializeField]
+	[Tooltip ("The time to wait between cleanup and starting the fade out.")]
+	private float initDelayTime = 1.5f;
+
+	[SerializeField]
+	[Tooltip ("The time to wait before transitoning after all cleanup and fade out is done.")]
+	private float finalDelayTime = 0.5f;
+
 	private bool activated = false;
 
 	private ScreenShaderTransition sst;
@@ -23,10 +31,10 @@ public class TransitionTrigger : MonoBehaviour
 			sst = ScreenShaderTransition.getInstance("LevelChangeTransition");
 			if (sst != null)
 			{
-				sst.SetFadeOut ();
-				sst.fadeOutDone += performTransition;
-				activated = false;
+				StartCoroutine (initDelay ());
 			}
+			else
+				Debug.LogWarning ("No Screen Shader Transition set up!");
 		}
 	}
 
@@ -55,9 +63,17 @@ public class TransitionTrigger : MonoBehaviour
 		activated = true;
 	}
 
-	private IEnumerator endDelay ()
+	private IEnumerator initDelay()
 	{
-		yield return new WaitForSecondsRealtime (1.5f);
+		activated = false;
+		yield return new WaitForSecondsRealtime (initDelayTime);
+		sst.SetFadeOut ();
+		sst.fadeOutDone += performTransition;
+	}
+
+	private IEnumerator endDelay()
+	{
+		yield return new WaitForSecondsRealtime (finalDelayTime);
 		TransitionBuddy.getInstance ().endCurrentScene (nextScene);
 	}
 	#endregion
