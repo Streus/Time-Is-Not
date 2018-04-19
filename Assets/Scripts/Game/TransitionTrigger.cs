@@ -54,12 +54,18 @@ public class TransitionTrigger : MonoBehaviour
 		yield return new WaitForSecondsRealtime (1f);
 		activated = true;
 	}
+
+	private IEnumerator endDelay ()
+	{
+		yield return new WaitForSecondsRealtime (1.5f);
+		TransitionBuddy.getInstance ().endCurrentScene (nextScene);
+	}
 	#endregion
 
 	// Move to the next level
 	private void performTransition()
 	{
 		sst.fadeOutDone -= performTransition;
-		TransitionBuddy.getInstance().endCurrentScene(nextScene);
+		StartCoroutine (endDelay ());
 	}
 }
