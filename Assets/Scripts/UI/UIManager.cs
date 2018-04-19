@@ -111,6 +111,11 @@ public class UIManager : Singleton<UIManager>
         mainMixer.SetFloat("sfxVolume", sfxVolumeLevel);
     }
 
+    public void SetMusicVolume(float sfxVolumeLevel)
+    {
+        mainMixer.SetFloat("musicVolume", sfxVolumeLevel);
+    }
+
     public void SetAmbientVolume(float ambientVolumeLevel)
     {
         mainMixer.SetFloat("ambientVolume", ambientVolumeLevel);
@@ -136,6 +141,21 @@ public class UIManager : Singleton<UIManager>
         float value;
 
         bool result = mainMixer.GetFloat("sfxVolume", out value);
+        if (result)
+        {
+            return value;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    public float GetMusicVolume()
+    {
+        float value;
+
+        bool result = mainMixer.GetFloat("musicVolume", out value);
         if (result)
         {
             return value;
