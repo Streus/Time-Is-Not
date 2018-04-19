@@ -30,6 +30,10 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 	public float transitionSpeed = 1; 
 	float transitionProgress; 
 
+	// The first timer that plays before the lights begin playing in succession
+	public float startLightWaitLength; 
+	float startLightWaitTimer; 
+	// The time in between lights playing in succession
 	public float lightWaitLength;
 	float lightWaitTimer; 
 
@@ -69,7 +73,9 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 				transitionProgress = 1; 
 				m_transitionState = 2; 
 				//waitForRotationTimer = waitForRotationLength; 
-				lightWaitTimer = lightWaitLength; 
+				startLightWaitTimer = startLightWaitLength; 
+				lightWaitTimer = 0; 
+				AudioLibrary.PlayPressurePlateOn(); 
 			}
 
 			if (transitionProgress > 0.8f && !stasisFitParticles.isPlaying)
@@ -83,11 +89,18 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 		}
 		else if (m_transitionState >= 2)
 		{
+			if (startLightWaitTimer > 0)
+			{
+				startLightWaitTimer -= Time.deltaTime; 
+				return; 
+			}
+
 			lightWaitTimer -= Time.deltaTime; 
 
 			if (lightWaitTimer <= 0)
 			{
 				stasisLightParticles[m_transitionState - 2].Play(); 
+				AudioLibrary.PlayStasisBubbleRemove();  
 				m_transitionState++; 
 
 				if (m_transitionState - 2 < stasisLightParticles.Length)

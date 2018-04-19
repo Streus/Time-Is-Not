@@ -136,6 +136,22 @@ public class AudioLibrary : Singleton<AudioLibrary>
     {
         GlobalAudio.PlaySound(inst.normalSwitch, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
+
+	public static void PlayStasisBubbleForming()
+	{
+		GlobalAudio.PlaySound(inst.stasisForming, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+	}
+
+	public static void PlayStasisBubbleRemove()
+	{
+		GlobalAudio.PlaySound(inst.stasisRemoval, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+	}
+
+	public static void PlayPressurePlateOn()
+	{
+		GlobalAudio.PlaySound(inst.pressurePlateOn, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+	}
+
     #endregion
 
     #region Character Sounds
