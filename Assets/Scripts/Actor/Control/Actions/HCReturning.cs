@@ -71,7 +71,7 @@ public class HCReturning : Action
 			}
 
 			//if near the next point in the path, look ahead
-			if (c.getMap () != null && dist < c.getMap ().cellDimension / 1.5f)
+			if (c.getMap () != null && dist < c.getMap ().cellDimension / 1.7f)
 				c.nextPosition (out navPos);
 		}
 	}
