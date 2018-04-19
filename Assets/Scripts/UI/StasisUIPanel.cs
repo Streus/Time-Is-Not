@@ -23,6 +23,8 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 	}
 
 	[Header("Transition settings")]
+	public float initialWaitLength; 
+	float initialWaitTimer; 
 	public Vector2 transitionStartPos;
 	public Vector2 transitionEndPos; 
 	public Vector3 transitionStartScale;
@@ -56,7 +58,7 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 	// Use this for initialization
 	void Start () 
 	{
-		UpdateStasisPanelActive(false); 
+		UpdateStasisPanelActive(GameManager.inst.canUseStasis, false); 
 		panelRT = stasisPanel.GetComponent<RectTransform>(); 
 		stasisCanvasGroup = stasisPanel.GetComponent<CanvasGroup>(); 
 	}
@@ -64,8 +66,17 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 	// Update is called once per frame
 	void Update () 
 	{
+		// Wait for lerp in
+		if (m_transitionState == -1)
+		{
+			initialWaitTimer -= Time.deltaTime;
+			if (initialWaitTimer <= 0)
+			{
+				m_transitionState = 1; 
+			}
+		}
 		// Lerp in
-		if (m_transitionState == 1)
+		else if (m_transitionState == 1)
 		{
 			transitionProgress += transitionSpeed * Time.deltaTime; 
 			if (transitionProgress >= 1)
@@ -110,6 +121,7 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 				else
 				{
 					m_transitionState = 0; 
+					GameManager.inst.canUseStasis = true; 
 				}
 			}
 		}
@@ -164,9 +176,9 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 		*/ 
 	}
 
-	public void UpdateStasisPanelActive(bool useTransition)
+	public void UpdateStasisPanelActive(bool setToActive, bool useTransition)
 	{
-		if (GameManager.inst.canUseStasis)
+		if (setToActive)
 		{
 			stasisPanel.SetActive(true); 
 
@@ -181,7 +193,9 @@ public class StasisUIPanel : Singleton<StasisUIPanel>
 
 	void StartTransition()
 	{
-		m_transitionState = 1; 
+		m_transitionState = -1; 
+		initialWaitTimer = initialWaitLength; 
+
 		panelRT.anchoredPosition = transitionStartPos; 
 		panelRT.localScale = transitionStartScale; 
 		stasisCanvasGroup.alpha = 0; 

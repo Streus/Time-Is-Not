@@ -15,6 +15,8 @@ public class AbilityPickup : MonoBehaviour
 	// TODO
 	// Consider triggering a cutscene after picking up the ability
 
+	public GameObject pickupParticlesPrefab; 
+
 	void Start () 
 	{
 		// Warnings for designers to avoid placing a pickup in the scene when the player already has the ability
@@ -65,8 +67,9 @@ public class AbilityPickup : MonoBehaviour
 	void OnStasisCollected()
 	{
 		Debug.Log("Stasis ability collected");
-		GameManager.inst.canUseStasis = true; 
-		StasisUIPanel.inst.UpdateStasisPanelActive(true);
+		//GameManager.inst.canUseStasis = true; 
+		StasisUIPanel.inst.UpdateStasisPanelActive(true, true);
         AudioLibrary.PlayCodePickupSound();
+		GameObject.Instantiate(pickupParticlesPrefab, transform.position, Quaternion.identity); 
 	}
 }
