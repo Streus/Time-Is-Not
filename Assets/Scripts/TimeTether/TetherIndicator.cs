@@ -20,6 +20,9 @@ public class TetherIndicator : MonoBehaviour
 	public float removeRadius = 1; 
 	bool playerInRemoveRadius; 
 
+	// Used to prevent mutliple removal calls
+	bool beingRemoved; 
+
 	[Tooltip("If true, using an input (right click) removes a tether point")] 
 	public bool allowKeyRemoval; 
 	public Collider2D clickCollider; 
@@ -118,9 +121,10 @@ public class TetherIndicator : MonoBehaviour
 
 			// Test for remove action
 			// TODO- might want to have this be a hold action
-			if (PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
+			if (PlayerControlManager.GetKeyDown(ControlInput.INTERACT) && !beingRemoved)
 			{
 				TetherManager.inst.RemoveTetherPoint(tetherIndex); 
+				beingRemoved = true; 
 			}
 		}
 		else
@@ -133,9 +137,10 @@ public class TetherIndicator : MonoBehaviour
 		 * Input (right click) Tether point removal
 		 */ 
 		//if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.FIRE_STASIS) && !LevelStateManager.CursorIsOverAStasisBubble())
-		if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.REMOVAL))
+		if (allowKeyRemoval && tetherIndex != 0 && MouseIsOver() && PlayerControlManager.GetKeyDown(ControlInput.REMOVAL) && !beingRemoved)
 		{
-			TetherManager.inst.RemoveTetherPoint(tetherIndex); 
+			TetherManager.inst.RemoveTetherPoint(tetherIndex);
+			beingRemoved = true; 
 		}
 
 		// Check for Destroy
