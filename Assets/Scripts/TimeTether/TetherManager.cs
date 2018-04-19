@@ -87,15 +87,6 @@ public class TetherManager : Singleton<TetherManager>
     [SerializeField] float fadeImageFadeInSpeed;
     [SerializeField] float fadeImageFadeOutSpeed;
 
-    // UI screenshot
-    [Header("Screenshot settings")]
-    public RawImage screenshot;
-    [HideInInspector] public bool isHoveringOverButton;
-    int hoverButton;
-    bool revealScreenshot;
-    public float screenshotFadeInSpeed = 1;
-    public float screenshotFadeOutSpeed = 1;
-
     // Fade out left corner UI when zooming out
     [Header("Corner HUD fading")]
     [SerializeField]
@@ -148,7 +139,6 @@ public class TetherManager : Singleton<TetherManager>
 		tetherMenuGroup.alpha = 0;
 		fadeImage.gameObject.SetActive(true);
 		fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
-		screenshot.gameObject.SetActive(true);
 	}
 
     void Update()
@@ -303,7 +293,7 @@ public class TetherManager : Singleton<TetherManager>
 		 */
 
         UpdateTimeArrowPos();
-        UpdateScreenshotState();
+		ScreenshotManager.inst.UpdateScreenshotState();
 
 		if (tetherUIState == TetherUIState.TETHER_MENU)
 		{
@@ -886,48 +876,7 @@ public class TetherManager : Singleton<TetherManager>
 		}
 	}
 
-    // UI Screenshot stuff
-
-    public static void OnPointerEnter(int state)
-    {
-        inst.isHoveringOverButton = true;
-        inst.hoverButton = state;
-        inst.screenshot.texture = ScreenshotManager.getScreenshot(state);
-        inst.RevealScreenshot();
-    }
-
-    public static void OnPointerExit()
-    {
-        inst.isHoveringOverButton = false;
-        inst.hoverButton = -1;
-        inst.HideScreenshot();
-    }
-
-    void RevealScreenshot()
-    {
-        //screenshot.color = new Color (1, 1, 1, 1); 
-        revealScreenshot = true;
-    }
-
-    void HideScreenshot()
-    {
-        //screenshot.color = new Color (1, 1, 1, 0); 
-        revealScreenshot = false;
-    }
-
-    void UpdateScreenshotState()
-    {
-        // Screenshot fade in
-        if (revealScreenshot)
-        {
-            screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 1, screenshotFadeInSpeed * Time.deltaTime));
-        }
-        // Screenshot fade out
-        else
-        {
-            screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
-        }
-    }
+    
 
     /// <summary>
     /// The camera calls this function to check that zoom out is allowed. This will return false if the TetherManager is currently in the menu or an animation

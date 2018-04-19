@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class ScreenshotManager : Singleton<ScreenshotManager> 
 {
@@ -18,6 +19,15 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	// Delegates
 	public delegate void ScreenshotEvent(bool startShot);
 
+	// UI screenshot
+	[Header("Screenshot settings")]
+	public RawImage screenshot;
+	[HideInInspector] public bool isHoveringOverButton;
+	int hoverButton;
+	bool revealScreenshot;
+	public float screenshotFadeInSpeed = 1;
+	public float screenshotFadeOutSpeed = 1;
+
 	void Awake()
 	{
 		for (int i = 0; i < LevelStateManager.maxNumStates; i++)
@@ -29,6 +39,7 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	void Start()
 	{
 		screenCam.enabled = false; 
+		screenshot.gameObject.SetActive(true);
 	}
 
 	// Temporary
@@ -98,5 +109,49 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 
 		inst.screenshots.RemoveAt(index);
 		inst.screenshots.Add(new RenderTexture (inst.shotWidth, inst.shotHeight, inst.shotDepth)); 
+	}
+
+	// UI code
+	public void RevealScreenshot(int state)
+	{
+		//screenshot.color = new Color (1, 1, 1, 1); 
+		revealScreenshot = true;
+	}
+
+	public void HideScreenshot()
+	{
+		//screenshot.color = new Color (1, 1, 1, 0); 
+		revealScreenshot = false;
+	}
+
+	public void UpdateScreenshotState()
+	{
+		// Screenshot fade in
+		if (revealScreenshot)
+		{
+			screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 1, screenshotFadeInSpeed * Time.deltaTime));
+		}
+		// Screenshot fade out
+		else
+		{
+			screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
+		}
+	}
+
+	// UI Screenshot pointer stuff
+
+	public static void OnPointerEnter(int state)
+	{
+		inst.isHoveringOverButton = true;
+		inst.hoverButton = state;
+		inst.screenshot.texture = ScreenshotManager.getScreenshot(state);
+		ScreenshotManager.inst.RevealScreenshot(state);
+	}
+
+	public static void OnPointerExit()
+	{
+		inst.isHoveringOverButton = false;
+		inst.hoverButton = -1;
+		ScreenshotManager.inst.HideScreenshot();
 	}
 }

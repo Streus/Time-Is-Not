@@ -93,7 +93,7 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (button.interactable)
 		{
 			//Debug.Log("Mouse is over button for state " + state);
-			TetherManager.OnPointerEnter(state);
+			ScreenshotManager.OnPointerEnter(state);
             if (!hover)
             {
                 //if (!GlobalAudio.ClipIsPlaying(AudioLibrary.inst.tetherMenuHover))
@@ -113,7 +113,7 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (button.interactable)
 		{
 			//Debug.Log("Mouse is no longer over button for state " + state);
-			TetherManager.OnPointerExit();
+			ScreenshotManager.OnPointerExit();
             hover = false;
 
 			StartBeingRemovedSequence(false); 
