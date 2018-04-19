@@ -5,7 +5,10 @@ using UnityEngine;
 public class PressurePlate : Interactable
 {
 	[SerializeField]
-	private float _checkRadius = 0.3f;
+	private Vector2 _checkSize = new Vector2(0.3f, 0.3f);
+
+	[SerializeField]
+	private Vector2 _offset = new Vector2(0,0);
 
 	[Tooltip("List of activatables to affect.")]
 	[SerializeField]
@@ -101,7 +104,7 @@ public class PressurePlate : Interactable
 	//Draw lines to all linked activatables
 	void OnDrawGizmos()
 	{
-		Gizmos.DrawWireSphere (transform.position, _checkRadius);
+		Gizmos.DrawWireCube(transform.position + (Vector3)_offset, (Vector3)_checkSize);
 		Gizmos.color = Color.blue;
 		for(int i = 0; i < _activatables.Length; i++)
 		{
@@ -124,7 +127,8 @@ public class PressurePlate : Interactable
 	bool CircleCheck()
 	{
 		bool state = false;
-		Collider2D[] colsHit = Physics2D.OverlapCircleAll (transform.position, transform.localScale.x * _checkRadius);
+		//Collider2D[] colsHit = Physics2D.OverlapCircleAll (transform.position, transform.localScale.x * _checkRadius);
+		Collider2D[] colsHit = Physics2D.OverlapBoxAll ((Vector2)transform.position + _offset, _checkSize, 0f);
 		foreach(Collider2D col in colsHit)
 		{
             if (col.gameObject.GetComponent<Player>() != null)
