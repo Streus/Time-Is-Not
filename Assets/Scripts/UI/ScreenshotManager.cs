@@ -21,12 +21,13 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 
 	// UI screenshot
 	[Header("Screenshot settings")]
-	public RawImage screenshot;
+	public RawImage[] screenshotImages;
 	[HideInInspector] public bool isHoveringOverButton;
 	int hoverButton;
 	bool revealScreenshot;
 	public float screenshotFadeInSpeed = 1;
 	public float screenshotFadeOutSpeed = 1;
+	int curScreenshotIndex; 
 
 	void Awake()
 	{
@@ -39,13 +40,19 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	void Start()
 	{
 		screenCam.enabled = false; 
-		screenshot.gameObject.SetActive(true);
+		//screenshot.gameObject.SetActive(true);
+
+		for (int i = 0; i < screenshotImages.Length; i++)
+		{
+			screenshotImages[i].gameObject.SetActive(true); 
+		}
 	}
 
 	// Temporary
 	void Update()
 	{
 		//CameraManager.instance.fitToBounds(inst.screenCam.transform, inst.screenCam); 
+		UpdateScreenshotState(); 
 	}
 		
 
@@ -116,6 +123,7 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	{
 		//screenshot.color = new Color (1, 1, 1, 1); 
 		revealScreenshot = true;
+		curScreenshotIndex = state; 
 	}
 
 	public void HideScreenshot()
@@ -126,15 +134,18 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 
 	public void UpdateScreenshotState()
 	{
-		// Screenshot fade in
-		if (revealScreenshot)
+		for (int i = 0; i < screenshotImages.Length; i++)
 		{
-			screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 1, screenshotFadeInSpeed * Time.deltaTime));
-		}
-		// Screenshot fade out
-		else
-		{
-			screenshot.color = new Color(1, 1, 1, Mathf.Lerp(screenshot.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
+			// Screenshot fade in
+			if (revealScreenshot && i == curScreenshotIndex)
+			{
+				screenshotImages[i].color = new Color(1, 1, 1, Mathf.Lerp(screenshotImages[i].color.a, 1, screenshotFadeInSpeed * Time.deltaTime));
+			}
+			// Screenshot fade out
+			else
+			{
+				screenshotImages[i].color = new Color(1, 1, 1, Mathf.Lerp(screenshotImages[i].color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
+			}
 		}
 	}
 
@@ -144,14 +155,18 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	{
 		inst.isHoveringOverButton = true;
 		inst.hoverButton = state;
-		inst.screenshot.texture = ScreenshotManager.getScreenshot(state);
-		ScreenshotManager.inst.RevealScreenshot(state);
+		//inst.screenshot.texture = ScreenshotManager.getScreenshot(state);
+
+		inst.curScreenshotIndex = state;
+		inst.screenshotImages[state].texture = getScreenshot(state); 
+
+		inst.RevealScreenshot(state);
 	}
 
 	public static void OnPointerExit()
 	{
 		inst.isHoveringOverButton = false;
 		inst.hoverButton = -1;
-		ScreenshotManager.inst.HideScreenshot();
+		inst.HideScreenshot();
 	}
 }
