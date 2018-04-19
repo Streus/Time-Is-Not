@@ -9832,6 +9832,10 @@ MonoBehaviour:
   shotWidth: 512
   shotHeight: 512
   shotDepth: 10
+  screenshot: {fileID: 114341112097192794}
+  isHoveringOverButton: 0
+  screenshotFadeInSpeed: 25
+  screenshotFadeOutSpeed: 25
 --- !u!114 &114943343035333598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9881,10 +9885,6 @@ MonoBehaviour:
   fadeImageMaxAlpha: 0.3
   fadeImageFadeInSpeed: 20
   fadeImageFadeOutSpeed: 20
-  screenshot: {fileID: 114341112097192794}
-  isHoveringOverButton: 0
-  screenshotFadeInSpeed: 25
-  screenshotFadeOutSpeed: 25
   tetherHUDGroup: {fileID: 225231836410247248}
   tetherHUDFadeInSpeed: 10
   tetherHUDFadeOutSpeed: 10
