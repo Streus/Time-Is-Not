@@ -89,7 +89,9 @@ public class TransitionBuddy
 		//listen to player tetherAnchorEnded event
 		Player p = GameManager.GetPlayer().GetComponent<Player>();
 		p.tetherAnchorEnded += finishSceneSetup;
-		p.setPlaceAnchorAnim ();
+		//p.setPlaceAnchorAnim ();
+		//TetherManager.inst.CreatePoint(); 
+		TetherManager.inst.ManualStart(); 
 	}
 
 	private void finishSceneSetup()

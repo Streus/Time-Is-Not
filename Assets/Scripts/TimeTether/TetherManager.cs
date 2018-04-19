@@ -128,6 +128,7 @@ public class TetherManager : Singleton<TetherManager>
 		timeTetherIndicators = new List<TetherIndicator>();
 
         //CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, 0);
+		/*
 		CreatePoint(); 
 
         arrowLerpBetween = true;
@@ -135,7 +136,20 @@ public class TetherManager : Singleton<TetherManager>
         fadeImage.gameObject.SetActive(true);
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
         screenshot.gameObject.SetActive(true);
+        */ 
     }
+
+	public void ManualStart()
+	{
+		Debug.Log("ManualStart"); 
+		CreatePoint(); 
+
+		arrowLerpBetween = true;
+		tetherMenuGroup.alpha = 0;
+		fadeImage.gameObject.SetActive(true);
+		fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+		screenshot.gameObject.SetActive(true);
+	}
 
     void Update()
     {
@@ -675,7 +689,7 @@ public class TetherManager : Singleton<TetherManager>
 			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
             LevelStateManager.createTetherPoint();
 
-			GameManager.GetPlayer().GetComponent<Player>().setPlaceAnchorAnim();
+			GameManager.GetPlayerScript().setPlaceAnchorAnim(); 
             
             AudioLibrary.PlayTetherPlacementSound();
             // Timeline arrow
