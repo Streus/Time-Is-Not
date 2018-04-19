@@ -33,6 +33,8 @@ public class Hummingbird : PatrollingEnemy
 
 	private Animator hummingAnim;
 
+	public GameObject _stasisEffect;
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -70,10 +72,15 @@ public class Hummingbird : PatrollingEnemy
 
 	private void onStasised(bool val)
 	{
+		if(_stasisEffect != null) 
+		{
+			_stasisEffect.SetActive (val);
+		}
 		if (val)
 		{
 			savedSpeed = getSelf ().getMovespeed ();
 			getSelf ().setMovespeed (slowedSpeed);
+
 		}
 		else
 			getSelf ().setMovespeed (savedSpeed);
@@ -128,6 +135,11 @@ public class Hummingbird : PatrollingEnemy
 		//TODO: check if hummingbird is moving
 		hummingAnim.SetBool("isMoving", false);
 		//TODO: check if hummingbird is attacking
+
+		if(_stasisEffect != null) 
+		{
+			_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = transform.Find ("Sprite").GetComponent<SpriteRenderer> ().sortingOrder + 1;
+		}
 
 		//FIXME no SpriteRenderer on Hummingbird
 //		if(SpriteOrderer.inst != null)
