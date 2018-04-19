@@ -66,6 +66,7 @@ public class AbilityPickup : MonoBehaviour
 	{
 		Debug.Log("Stasis ability collected");
 		GameManager.inst.canUseStasis = true; 
-		StasisUIPanel.inst.UpdateStasisPanelActive(true); 
+		StasisUIPanel.inst.UpdateStasisPanelActive(true);
+        AudioLibrary.PlayCodePickupSound();
 	}
 }
