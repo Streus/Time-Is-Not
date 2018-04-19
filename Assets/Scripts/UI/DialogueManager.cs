@@ -93,14 +93,14 @@ public class DialogueManager : Singleton<DialogueManager>
 				return;
 			}
 		}
-		if(pausePlayer != playerFrozen || _activeDialogues.Count == 0)
+		if(pausePlayer != playerFrozen)
 		{
 			pausePlayer = playerFrozen;
 			if (pausePlayer) {
 				GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
 			}
 			else {
-				GameManager.inst.ExitPauseState ();
+				GameManager.inst.ExitPauseState (PauseType.CUTSCENE);
 			}
 		}
 		if(!GameManager.CheckPause ((int)PauseType.CUTSCENE) && pausePlayer)
