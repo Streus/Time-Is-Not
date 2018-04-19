@@ -83,13 +83,14 @@ public class DialogueManager : Singleton<DialogueManager>
 			_activeDialogues [i].Timer -= Time.deltaTime;
 			if(_activeDialogues[i].Timer <=0 || PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
 			{
-				DialogueObject nextDialogue = null; 
-				if(_activeDialogues[i].Next != null)
-					nextDialogue = new DialogueObject(_activeDialogues [i].Next);
+				
+				if (_activeDialogues[i].Next != null) 
+				{
+					CreateBox (_activeDialogues[i].Next);
+					_activeDialogues [i].Next.FreezePlayer = false;
+				}
 				Destroy (_activeDialogues [i].UIObject);
 				_activeDialogues.RemoveAt (i);
-				if (nextDialogue != null)
-					CreateBox (nextDialogue);
 				return;
 			}
 		}

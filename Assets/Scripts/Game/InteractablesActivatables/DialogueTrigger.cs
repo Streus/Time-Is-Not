@@ -42,6 +42,7 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 		if (dialogueChain.Length == 0 || !state)
 			return false;
 		DialogueManager.inst.CreateBox (dialogueChain [0]);
+		dialogueChain [0].FreezePlayer = false;
 		return true;
 	}
 }
