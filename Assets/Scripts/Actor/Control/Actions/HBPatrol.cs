@@ -8,7 +8,7 @@ public class HBPatrol : Action
 	[Tooltip("How close the patroller will get to facing the next patrol point before moving to it")]
 	public float turnTolerance = 0.1f;
 
-	public float moveTolerance = 0.1f;
+	public float moveTolerance = 0.05f;
 
 	public override void perform (Controller c)
 	{
@@ -22,7 +22,11 @@ public class HBPatrol : Action
 		Vector3 navPos;
 		if (c.getMap () != null)
 		{
-			if (!c.currentPosition (out navPos))
+			if (Vector2.Distance (patroller.transform.position, n.transform.position) <= c.getMap().cellDimension)
+			{
+				navPos = n.transform.position;
+			}
+			else if (!c.currentPosition (out navPos))
 			{
 				c.setPath (n.transform.position);
 
@@ -52,10 +56,10 @@ public class HBPatrol : Action
 			if (c.getMap() != null && dist < c.getMap ().cellDimension / 2f)
 				c.nextPosition (out navPos);
 
-			float patrolTolerance = c.getMap () != null ? c.getMap ().cellDimension : moveTolerance;
+//			float patrolTolerance = c.getMap () != null ? c.getMap ().cellDimension : moveTolerance;
 
 			//if near the target patrol node, look to the next one
-			if (Vector2.Distance (patroller.transform.position, n.transform.position) < patrolTolerance)
+			if (Vector2.Distance (patroller.transform.position, n.transform.position) < moveTolerance)
 			{
 				patroller.nextPatrolNode ();
 				if (c.getMap () != null && patroller.getPatrolTarget() != null)
