@@ -431,6 +431,15 @@ public class GameManager : Singleton<GameManager> , ISavable
 		return false; 
 	}
 
+	public bool ExitPauseState(PauseType exitType)
+	{
+		if (pauseType != exitType)
+		{
+			return false; 
+		}
+		return ExitPauseState(); 
+	}
+
 	public bool IsLowerPauseType(PauseType testType)
 	{
 		int check = (int)PauseType.CUTSCENE | (int)PauseType.TETHER_MENU | (int)PauseType.TETHER_TRANSITION | (int)PauseType.ZOOM; 
