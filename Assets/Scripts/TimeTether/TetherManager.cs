@@ -293,7 +293,7 @@ public class TetherManager : Singleton<TetherManager>
 		 */
 
         UpdateTimeArrowPos();
-		ScreenshotManager.inst.UpdateScreenshotState();
+		//ScreenshotManager.inst.UpdateScreenshotState();
 
 		if (tetherUIState == TetherUIState.TETHER_MENU)
 		{
