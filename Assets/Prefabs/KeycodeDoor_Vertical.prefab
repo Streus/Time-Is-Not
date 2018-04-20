@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4470327167471448}
   - component: {fileID: 212789554755639006}
   - component: {fileID: 61279919092353216}
+  - component: {fileID: 114741511064676568}
   m_Layer: 0
   m_Name: Vertical_BottomPillarDoor
   m_TagString: Untagged
@@ -37,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4950005272650804}
   - component: {fileID: 212139368403279550}
+  - component: {fileID: 114459361043662976}
   m_Layer: 0
   m_Name: Vertical_SymbolPanel
   m_TagString: Untagged
@@ -53,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709703466271554}
   - component: {fileID: 212233667141854152}
+  - component: {fileID: 114376810858021790}
   m_Layer: 0
   m_Name: StasisAura_VerticalDoor_OPEN
   m_TagString: Untagged
@@ -96,6 +99,7 @@ GameObject:
   - component: {fileID: 82124677143465638}
   - component: {fileID: 114424294943642094}
   - component: {fileID: 114926659542454556}
+  - component: {fileID: 114870840152569752}
   m_Layer: 0
   m_Name: Keycode_Reader
   m_TagString: Untagged
@@ -112,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4373712751127348}
   - component: {fileID: 212862478517601682}
+  - component: {fileID: 114491976516541564}
   m_Layer: 0
   m_Name: StasisAura_VerticalDoor
   m_TagString: Untagged
@@ -129,6 +134,7 @@ GameObject:
   - component: {fileID: 4860102957074632}
   - component: {fileID: 212942057934435690}
   - component: {fileID: 61603896610020478}
+  - component: {fileID: 114377511036648780}
   m_Layer: 0
   m_Name: Vertical_TopPillarDoor
   m_TagString: Untagged
@@ -584,6 +590,28 @@ MonoBehaviour:
   ignoresTimeTether: 0
   _stasisEffectClosed: {fileID: 1854422694676000}
   _stasisEffectOpen: {fileID: 1253577401722970}
+--- !u!114 &114376810858021790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253577401722970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114377511036648780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863044744447816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114424294943642094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,6 +626,50 @@ MonoBehaviour:
   prefabPath: 
   stasisable: 0
   allowReset: 1
+--- !u!114 &114459361043662976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201821513813144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114491976516541564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1854422694676000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114741511064676568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1077343254030072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114870840152569752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1749665577942978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114926659542454556
 MonoBehaviour:
   m_ObjectHideFlags: 1

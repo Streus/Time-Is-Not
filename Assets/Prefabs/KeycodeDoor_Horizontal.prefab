@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4458301994084926}
   - component: {fileID: 212881580032460830}
+  - component: {fileID: 114591198120813520}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor
   m_TagString: Untagged
@@ -53,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4484053350557860}
   - component: {fileID: 212501374401935004}
+  - component: {fileID: 114705885957496204}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor_OPEN
   m_TagString: Untagged
@@ -112,6 +114,7 @@ GameObject:
   - component: {fileID: 82828991637219334}
   - component: {fileID: 114404698892150768}
   - component: {fileID: 114128119527658636}
+  - component: {fileID: 114770806423635514}
   m_Layer: 0
   m_Name: Keycode_Reader
   m_TagString: Untagged
@@ -564,6 +567,39 @@ MonoBehaviour:
   prefabPath: 
   stasisable: 0
   allowReset: 1
+--- !u!114 &114591198120813520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1099855400275508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114705885957496204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253991535564876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114770806423635514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799240401563898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114983190393727920
 MonoBehaviour:
   m_ObjectHideFlags: 1

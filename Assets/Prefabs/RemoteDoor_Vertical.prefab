@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95173910608116606}
   - component: {fileID: 82180391897043598}
   - component: {fileID: 61891277196971176}
+  - component: {fileID: 114785174432461338}
   m_Layer: 14
   m_Name: RemoteDoor_Vertical
   m_TagString: Untagged
@@ -41,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4666946728284544}
   - component: {fileID: 212564471284763346}
+  - component: {fileID: 114127303838544740}
   m_Layer: 0
   m_Name: StasisAura_VerticalDoor
   m_TagString: Untagged
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 4494760861091084}
   - component: {fileID: 212370374452070206}
   - component: {fileID: 61577048189443440}
+  - component: {fileID: 114635355722559102}
   m_Layer: 0
   m_Name: Vertical_BottomPillarDoor
   m_TagString: Untagged
@@ -74,6 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4726757561019004}
   - component: {fileID: 212857175145113486}
+  - component: {fileID: 114485658925633394}
   m_Layer: 0
   m_Name: StasisAura_VerticalDoor_OPEN
   m_TagString: Untagged
@@ -91,6 +95,7 @@ GameObject:
   - component: {fileID: 4600293178372366}
   - component: {fileID: 212774501883195372}
   - component: {fileID: 61556780526165514}
+  - component: {fileID: 114480157360976614}
   m_Layer: 0
   m_Name: Vertical_TopPillarDoor
   m_TagString: Untagged
@@ -339,6 +344,39 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114127303838544740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135899324764102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114480157360976614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646265664667786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114485658925633394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1615905069061740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114532381877218506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,6 +391,28 @@ MonoBehaviour:
   prefabPath: 
   stasisable: 1
   allowReset: 1
+--- !u!114 &114635355722559102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560709847638002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114785174432461338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113096533566288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114831950649300484
 MonoBehaviour:
   m_ObjectHideFlags: 1

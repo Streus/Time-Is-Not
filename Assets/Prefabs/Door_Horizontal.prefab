@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280831928694132}
   - component: {fileID: 212272195514362950}
+  - component: {fileID: 114132812160931276}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor
   m_TagString: Untagged
@@ -58,6 +59,7 @@ GameObject:
   - component: {fileID: 95562949408284728}
   - component: {fileID: 61402759292639848}
   - component: {fileID: 82500353500245962}
+  - component: {fileID: 114429790172743562}
   m_Layer: 14
   m_Name: Door_Horizontal
   m_TagString: Untagged
@@ -74,6 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673371921457000}
   - component: {fileID: 212219556486196428}
+  - component: {fileID: 114275402632334692}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor_OPEN
   m_TagString: Untagged
@@ -308,6 +311,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114132812160931276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1246888198046054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114275402632334692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876195749234752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114337004987857290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +356,17 @@ MonoBehaviour:
   ignoresTimeTether: 0
   _stasisEffectClosed: {fileID: 1246888198046054}
   _stasisEffectOpen: {fileID: 1876195749234752}
+--- !u!114 &114429790172743562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477889535415596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114675933642167024
 MonoBehaviour:
   m_ObjectHideFlags: 1

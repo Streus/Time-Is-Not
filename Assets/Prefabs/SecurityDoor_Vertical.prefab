@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 82315169233059366}
   - component: {fileID: 61415979230268872}
   - component: {fileID: 114559385771199938}
+  - component: {fileID: 114844394141897470}
   m_Layer: 14
   m_Name: SecurityDoor_Vertical
   m_TagString: Untagged
@@ -74,6 +75,7 @@ GameObject:
   - component: {fileID: 4886578434475672}
   - component: {fileID: 212438626200624886}
   - component: {fileID: 61650535283153700}
+  - component: {fileID: 114506076054596844}
   m_Layer: 14
   m_Name: BottomPillar
   m_TagString: Untagged
@@ -91,6 +93,7 @@ GameObject:
   - component: {fileID: 4360520998479280}
   - component: {fileID: 212627912731244692}
   - component: {fileID: 61152344299281222}
+  - component: {fileID: 114549059465820054}
   m_Layer: 14
   m_Name: TopPillar
   m_TagString: Untagged
@@ -339,6 +342,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114506076054596844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654552524681468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114549059465820054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904194578535592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114559385771199938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,6 +378,17 @@ MonoBehaviour:
   prefabPath: 
   stasisable: 0
   allowReset: 1
+--- !u!114 &114844394141897470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385020771106270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114873090888215232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,6 +409,9 @@ MonoBehaviour:
   _playerLayers:
     serializedVersion: 2
     m_Bits: 65792
+  ignoresTimeTether: 0
+  _stasisEffectClosed: {fileID: 0}
+  _stasisEffectOpen: {fileID: 0}
 --- !u!212 &212045533864067870
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -403,7 +442,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 784860609
-  m_SortingLayer: -3
+  m_SortingLayer: -6
   m_SortingOrder: 174
   m_Sprite: {fileID: 21300000, guid: 763d1ec3ecb894b83aeb608817d82fbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4557177934067172}
   - component: {fileID: 212517485699779618}
+  - component: {fileID: 114922203999442556}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor_OPEN
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4415280655650324}
   - component: {fileID: 212299564553069276}
+  - component: {fileID: 114868528279898190}
   m_Layer: 0
   m_Name: StasisAura_HorizontalDoor
   m_TagString: Untagged
@@ -57,6 +59,7 @@ GameObject:
   - component: {fileID: 95025994114024090}
   - component: {fileID: 61271402847131064}
   - component: {fileID: 82064059642505814}
+  - component: {fileID: 114453307676667352}
   m_Layer: 14
   m_Name: RemoteDoor_Horizontal
   m_TagString: Untagged
@@ -345,6 +348,39 @@ MonoBehaviour:
   ignoresTimeTether: 0
   _stasisEffectClosed: {fileID: 1439662966840608}
   _stasisEffectOpen: {fileID: 1300796982764920}
+--- !u!114 &114453307676667352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799147817625590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114868528279898190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439662966840608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114922203999442556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300796982764920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c268d5643f4fd3be93f43bc4073f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212070105628985548
 SpriteRenderer:
   m_ObjectHideFlags: 1
