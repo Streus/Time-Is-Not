@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505333945404102}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.279999, y: 12.029999, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878317791643952}
@@ -64,7 +64,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1645295704252346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.19, y: 22.73, z: -41.55}
+  m_LocalPosition: {x: 43.703, y: -50.358, z: -41.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4524945416209140}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueChain:
-  - _dialogue: "\u201CFaster, platform, faster!!\u201D\n"
+  - _dialogue: '"What a mess, I need to fix this before my dads get home."'
     _location: {x: 0, y: 0}
     _followTarget: {fileID: 0}
     _boxLifetime: 5
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enabled: 1
   _triggersSecurityDoors: 0
-  _range: {x: 15.53, y: 3}
+  _range: {x: 2.01, y: 1.01}
   _resetsOnLoad: 0
   _reusable: 0
   _activatables:
