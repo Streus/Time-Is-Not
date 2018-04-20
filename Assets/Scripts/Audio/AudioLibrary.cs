@@ -37,6 +37,20 @@ public class AudioLibrary : Singleton<AudioLibrary>
         GlobalAudio.PlaySound(inst.tetherMenuClose, 0.75f, 0.75f, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
     }
 
+    public AudioClip AlarmShort;
+
+    public static void PlayAlarmShort()
+    {
+        GlobalAudio.PlaySound(inst.AlarmShort, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+    }
+
+    public AudioClip AlarmLong;
+
+    public static void PlayAlarmLong()
+    {
+        GlobalAudio.PlaySound(inst.AlarmLong, UIManager.inst.mixer.FindMatchingGroups("SFX")[0]);
+    }
+
     #endregion
 
     #region Mechanic Sounds
