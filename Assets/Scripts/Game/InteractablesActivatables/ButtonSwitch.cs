@@ -42,6 +42,10 @@ public class ButtonSwitch : Interactable, ISavable
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
+	[SerializeField]
+	[Tooltip("If true, this button will play an alert flash when it's pressed.")]
+	bool alertFlashOnInteract; 
+
 
 	// Use this for initialization
 	void Start () 
@@ -143,6 +147,10 @@ public class ButtonSwitch : Interactable, ISavable
 	{
 		ToggleSecurityDoors ();
         AudioLibrary.PlayNormalSwitchSound();
+		if (alertFlashOnInteract)
+		{
+			AlertFlash.inst.PlayAlertFlash(); 
+		}
 		if (_activatables.Length == 0)
 			return;
 		foreach(GameObject activatable in _activatables)
