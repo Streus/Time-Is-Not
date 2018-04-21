@@ -372,6 +372,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		_beingPushed = true;
         if (source != null && !isHermitCrab)
         {
+            source.loop = true;
             source.clip = pushBlockSound;
             source.Play();
         }
@@ -389,6 +390,7 @@ public class PushBlock : MonoBehaviour, ISavable
 		_beingPushed = false;
         if (source != null && !isHermitCrab)
         {
+            source.loop = false;
             source.Stop();
         }
 		//TODO: put player out of push mode and move on its own;
