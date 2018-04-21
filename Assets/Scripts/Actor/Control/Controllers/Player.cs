@@ -183,6 +183,8 @@ public class Player : Controller
 	public void setReappearAnim()
 	{
 		anim.SetTrigger ("Reappear");
+		anim.SetTrigger ("StopFalling");
+		anim.SetBool ("Stumbling", false);
 	}
 
 	public void setDashAngle(float angle)
@@ -524,5 +526,7 @@ public class Player : Controller
 	public void PlayReappearAnimation ()
 	{
 		anim.SetTrigger ("Reappear");
+		anim.SetTrigger ("StopFalling");
+		anim.SetBool ("Stumbling", false);
 	}
 }
