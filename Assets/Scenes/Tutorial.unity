@@ -4266,7 +4266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1693711610402464, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
@@ -8454,9 +8454,8 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: You can also pick up time tethers while zoomed out. PRESS Q, pan over
-        to where there's a time tether, hover over it with the mouse, and PRESS R
-        to pick it up.
+      value: Don't be afraid to place down a time tether whenever you want, you never
+        know when you might want to tether back.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -8480,7 +8479,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._boxLifetime
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -30768,7 +30767,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._boxLifetime
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -36059,8 +36058,8 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[1]._dialogue
-      value: HOLD LEFT SHIFT to bring up the time tether menu. Click on a diamond
-        to return to that moment in time.
+      value: You can pick a time tether up again after placing it by hovering over
+        the one you want to pick up, and PRESSING R.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -36070,7 +36069,12 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[1]._boxLifetime
-      value: 7
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._boxLifetime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -40769,6 +40773,10 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 423
       objectReference: {fileID: 0}
+    - target: {fileID: 1113096533566288, guid: 510e11079d2184235b09906fc722504a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 510e11079d2184235b09906fc722504a, type: 2}
   m_IsPrefabParent: 0
@@ -42239,11 +42247,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4440925750911726, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.51
+      value: 5.46
       objectReference: {fileID: 0}
     - target: {fileID: 4440925750911726, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -47
+      value: -46.99
       objectReference: {fileID: 0}
     - target: {fileID: 4440925750911726, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_LocalPosition.z
@@ -42267,7 +42275,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4440925750911726, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114341280222162284, guid: 7653195774fee4b97af15a525bc1b140,
         type: 2}
@@ -42393,6 +42401,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7653195774fee4b97af15a525bc1b140, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &695142352 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1062996858393866, guid: 7653195774fee4b97af15a525bc1b140,
+    type: 2}
+  m_PrefabInternal: {fileID: 695142351}
 --- !u!1 &695363152
 GameObject:
   m_ObjectHideFlags: 0
@@ -49032,7 +49045,7 @@ Transform:
   m_LocalScale: {x: 0.36245048, y: 0.36245036, z: 0.36245036}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833999607
 GameObject:
@@ -54463,6 +54476,68 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &948938200
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -41.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878317791643952, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114965959153386252, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
+        type: 2}
+      propertyPath: _range.x
+      value: 3.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 114258292494069294, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._dialogue
+      value: So many buttons...I wonder which one opens the door.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114258292494069294, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._boxLifetime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114258292494069294, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._followTarget
+      value: 
+      objectReference: {fileID: 695142352}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2ad9234a601e44d41a0ef1df4fd81e48, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &951937805
 GameObject:
   m_ObjectHideFlags: 0
@@ -58633,7 +58708,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1693711610402464, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
@@ -62921,7 +62996,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._boxLifetime
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -62936,7 +63011,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[1]._boxLifetime
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -68842,6 +68917,11 @@ Prefab:
         type: 2}
       propertyPath: m_SortingOrder
       value: 2125
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._boxLifetime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -76199,6 +76279,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1205737184}
     m_Modifications:
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4880989175589578, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.4499998
@@ -76261,9 +76346,36 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 1673
       objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[1]._dialogue
+      value: You can also pick up time tethers while zoomed out. PRESS Q, pan over
+        to where there's a time tether, hover over it with the mouse, and PRESS R
+        to pick it up.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[1]._followTarget
+      value: 
+      objectReference: {fileID: 1366460151}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[1]._boxLifetime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._boxLifetime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1366460151 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1144572510454534, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1366460150}
 --- !u!1 &1366553014
 GameObject:
   m_ObjectHideFlags: 0
@@ -84026,6 +84138,10 @@ Prefab:
       propertyPath: dialogueChain.Array.data[1]._boxLifetime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1482752799026604, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
   m_IsPrefabParent: 0
@@ -85960,7 +86076,7 @@ Transform:
   - {fileID: 896702132}
   - {fileID: 1716941591}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1547625891
 GameObject:
@@ -95160,6 +95276,56 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1001 &1704608378
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 8.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 11.250791
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764175663327714, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 6.26977
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d7eaaeaa02a0d4e8b8167834ea01dcf1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1704735677
 GameObject:
   m_ObjectHideFlags: 0
@@ -97456,7 +97622,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4013829999147108, guid: 66f7f0742eea24ba7961dc9c1e349af4, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 212836585926005702, guid: 66f7f0742eea24ba7961dc9c1e349af4,
         type: 2}
@@ -106102,7 +106268,7 @@ Transform:
   - {fileID: 1555603246}
   - {fileID: 873671899}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1906540181
 GameObject:
@@ -108323,9 +108489,9 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: You can also pick up time tethers while zoomed out. PRESS Q, pan over
-        to where there's a time tether, hover over it with the mouse, and PRESS R
-        to pick it up.
+      value: 'Be mindful of when you pick up a time tether. If you pick them up too
+        often, you may find youself in a situation with no tethers to go back to other
+        than the original. '
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -108349,7 +108515,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._boxLifetime
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -110041,6 +110207,11 @@ Prefab:
       propertyPath: _activatables.Array.data[2]
       value: 
       objectReference: {fileID: 984911469}
+    - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
+        type: 2}
+      propertyPath: dialogueChain.Array.data[0]._boxLifetime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
   m_IsPrefabParent: 0
@@ -111664,7 +111835,7 @@ Transform:
   - {fileID: 1205737184}
   - {fileID: 1256804750}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987930672
 GameObject:
@@ -112039,7 +112210,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._boxLifetime
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20edfa967f81940e19b2c0b2e6e74cd2, type: 2}
@@ -115607,7 +115778,7 @@ Transform:
   - {fileID: 87332442}
   - {fileID: 1618341298}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054934851
 GameObject:
