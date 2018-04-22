@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 1347527944639368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4766558678910416}
   m_RootOrder: 2
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1543882536638360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5913701, y: -20.102554, z: 0}
+  m_LocalPosition: {x: 40.31, y: -45.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4994458084174172}
@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 1368119846340950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4766558678910416}
   m_RootOrder: 1
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHomingSpeed: 0
-  maxHomingSpeed: 35
-  increaseHomingSpeedRate: 35
+  maxHomingSpeed: 20
+  increaseHomingSpeedRate: 20
   maxLoadDist: 8
 --- !u!198 &198200034372179398
 ParticleSystem:
@@ -208,7 +208,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1108181078
+  randomSeed: 2029270164
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6732,7 +6732,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 164726100
+  randomSeed: -1941822256
   InitialModule:
     serializedVersion: 3
     enabled: 1
