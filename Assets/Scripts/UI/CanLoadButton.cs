@@ -34,6 +34,8 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	float pulse_theta; 
 	float pulse_amount; 
 
+	public DynamicSpriteLight dynamicSpriteLight; 
+
 	void Start()
 	{
 		button = GetComponent<Button>(); 
@@ -85,6 +87,23 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		{
 			transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), 20 * Time.deltaTime); 
 		}
+
+		if (dynamicSpriteLight != null && !beingRemoved)
+		{
+			dynamicSpriteLight.gameObject.transform.localScale = transform.localScale; 
+			dynamicSpriteLight.isActive = button.interactable;
+
+			if (hover)
+			{
+				dynamicSpriteLight.flicker_enabled = false; 
+				dynamicSpriteLight.pulse_enabled = true; 
+			}
+			else
+			{
+				dynamicSpriteLight.flicker_enabled = true; 
+				dynamicSpriteLight.pulse_enabled = false; 
+			}
+		}
 	}
 
 	//Do this when the cursor enters the rect area of this selectable UI object.
@@ -135,6 +154,9 @@ public class CanLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		if (isBeingRemoved && button.interactable)
 		{
 			image.color = beingRemovedColor;
+
+			if (dynamicSpriteLight != null)
+				dynamicSpriteLight.isActive = false; 
 		}
 		else
 		{

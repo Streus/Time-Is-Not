@@ -11,6 +11,14 @@ public class DynamicSpriteLight : MonoBehaviour
 
 	float random;
 
+	[Header("Light active properties")]
+	public bool isActive = true; 
+	[Tooltip("If true, the activeMultiplier will fade from 0 to 1; if false, it will automatically be set to 1 if isActive == true")]
+	public bool isActiveFadeOnStart; 
+	float isActive_multiplier; 
+	public float isActive_fadeInSpeed = 20;
+	public float isActive_fadeOutSpeed = 20; 
+
 	[Header("Flicker Effect")] 
 	public bool flicker_enabled; 
 	public float flicker_intensity = 0.1f; 
@@ -62,6 +70,15 @@ public class DynamicSpriteLight : MonoBehaviour
 			alphaCeiling = 0;  
 		}
 
+		if (isActive && isActiveFadeOnStart)
+		{
+			isActive_multiplier = 1; 
+		}
+		else
+		{
+			isActive_multiplier = 0;
+		}
+
 
 		random = Random.Range(0.0f, 65535.0f);
 		SetOnOff_CurIndex(onOff_curIndex); 
@@ -78,6 +95,7 @@ public class DynamicSpriteLight : MonoBehaviour
 		*/ 
 
 		float finalAlpha = alphaCeiling; 
+
 
 		/*
 		 * Flicker effect
@@ -129,6 +147,23 @@ public class DynamicSpriteLight : MonoBehaviour
 			onOff_finalMultiplier = Mathf.Lerp(onOff_finalMultiplier, onOff_states[onOff_curIndex].alphaMultiplier, onOff_states[onOff_curIndex].transitionLerpSpeed * Time.deltaTime); 
 			finalAlpha *= onOff_finalMultiplier; 
 		}
+
+		/*
+		 * Is active multiplier effect
+		 */ 
+		if (isActive)
+		{
+			//isActive_multiplier = 1; 
+			isActive_multiplier = Mathf.Lerp(isActive_multiplier, 1, isActive_fadeInSpeed * Time.deltaTime); 
+		}
+		else
+		{
+			//isActive_multiplier = 0; 
+			isActive_multiplier = Mathf.Lerp(isActive_multiplier, 0, isActive_fadeOutSpeed * Time.deltaTime);
+		}
+		finalAlpha *= isActive_multiplier;
+	
+
 
 		if (rend != null)
 			rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, finalAlpha); 
