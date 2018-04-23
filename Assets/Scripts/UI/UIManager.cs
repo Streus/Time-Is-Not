@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] GameObject[] presets;
-    static int currentPreset;
+    //static int currentPreset;
 
     [SerializeField] AudioMixer mainMixer;
 
@@ -19,12 +19,12 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    //Sets the preset in the main menu
+  /*  //Sets the preset in the main menu
     private void Awake()
     {
         //currentPreset = SaveManager.controlPreset;
         UpdatePresetImage();
-    }
+    }*/
 
     //Loads the saved data and loads the scene and presets 
     public void LoadGame()
@@ -53,7 +53,7 @@ public class UIManager : Singleton<UIManager>
     }
 
     //Increments/Decrements the current preset
-    public void ChangePreset(bool rightButton)
+  /*  public void ChangePreset(bool rightButton)
     {
         if(rightButton)
         {
@@ -94,7 +94,7 @@ public class UIManager : Singleton<UIManager>
     {
         //SaveManager.controlPreset = currentPreset;
         SaveManager.Save();
-    }
+    }*/
 
     public void OpenScene(string scene)
     {
