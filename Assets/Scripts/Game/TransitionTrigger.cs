@@ -17,7 +17,7 @@ public class TransitionTrigger : MonoBehaviour
 	private float finalDelayTime = 0.5f;
 
 	[SerializeField]
-	[Tooltip ("")]
+	[Tooltip ("Start animation on this pad when cleanup is done.")]
 	private TeleporterPad pad;
 
 	private bool activated = false;
