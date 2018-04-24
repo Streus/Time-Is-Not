@@ -6,9 +6,6 @@ using UnityEngine.Audio;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] GameObject[] presets;
-    //static int currentPreset;
-
     [SerializeField] AudioMixer mainMixer;
 
     public AudioMixer mixer
@@ -38,6 +35,18 @@ public class UIManager : Singleton<UIManager>
     {
         SaveManager.NewGame();
         SceneManager.LoadScene(SaveManager.level);
+    }
+
+    public void OpenNewGame(GameObject newGameWarning)
+    {
+        if(SaveManager.HasData())
+        {
+            newGameWarning.SetActive(true);
+        }
+        else
+        {
+            NewGame();
+        }
     }
 
     //Activates the assigned panel/ gameobject
