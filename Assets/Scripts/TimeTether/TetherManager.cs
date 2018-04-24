@@ -676,7 +676,7 @@ public class TetherManager : Singleton<TetherManager>
         if (LevelStateManager.canCreateTetherPoint())
         {
             //Debug.Log("Create tether point");
-			CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
+			//CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState + 1);
             LevelStateManager.createTetherPoint();
 
 			GameManager.GetPlayerScript().setPlaceAnchorAnim(); 
@@ -754,6 +754,11 @@ public class TetherManager : Singleton<TetherManager>
         RemoveTimeTetherIndicator(state + 1, true);
         LevelStateManager.loadTetherPoint(state);
     }
+
+	public void OnCreateTetherAnimEvent()
+	{
+		CreateTimeTetherIndicator(GameManager.GetPlayer().transform.position, LevelStateManager.curState);
+	}
 
     void CreateTimeTetherIndicator(Vector3 pos, int state)
     {
