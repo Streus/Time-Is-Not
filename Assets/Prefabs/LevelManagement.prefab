@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 223131333902363682}
   - component: {fileID: 114581595660789750}
   - component: {fileID: 114059634415534702}
-  - component: {fileID: 114251429038456954}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -2823,6 +2822,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1752969927678352
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4283956519596794}
+  - component: {fileID: 114587157976892018}
+  - component: {fileID: 114472183146892308}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1761871493499236
 GameObject:
   m_ObjectHideFlags: 1
@@ -3566,6 +3582,19 @@ Transform:
   m_Father: {fileID: 224174660356755614}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4283956519596794
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752969927678352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4377446230844758}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4289625378314248
 Transform:
   m_ObjectHideFlags: 1
@@ -3626,6 +3655,7 @@ Transform:
   - {fileID: 4551524339818372}
   - {fileID: 4681090716871230}
   - {fileID: 4078977252165568}
+  - {fileID: 4283956519596794}
   m_Father: {fileID: 4440925750911726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3702,7 +3732,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1227927949874580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.98, y: -13.84, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4377446230844758}
@@ -6579,19 +6609,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114251429038456954
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1013494518387460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bac975c2c1604ba6bc90eec90742f67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogueBoxPrefab: {fileID: 1323067950435502, guid: 5b82fed662da44ae49b20a687af1f06b,
-    type: 2}
 --- !u!114 &114251760214911200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7586,6 +7603,19 @@ MonoBehaviour:
   pulse_intensity: 0.09
   pulse_scrollSpeed: 4
   dynamicSpriteLight: {fileID: 114722272629499392}
+--- !u!114 &114472183146892308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752969927678352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bac975c2c1604ba6bc90eec90742f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueBoxPrefab: {fileID: 1323067950435502, guid: 5b82fed662da44ae49b20a687af1f06b,
+    type: 2}
 --- !u!114 &114483103595289596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8056,6 +8086,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114587157976892018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752969927678352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b517b618df4446d981f6597ab847c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPath: 
+  stasisable: 1
+  allowReset: 1
 --- !u!114 &114593223493512492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9392,10 +9436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b436e6ebc46bc45ab5e238536da818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presets:
-  - {fileID: 1560416448104130}
-  - {fileID: 1504081610624206}
-  - {fileID: 1219592066178990}
   mainMixer: {fileID: 24100000, guid: 6288e46c33a6d944d96960a357218f8e, type: 2}
 --- !u!114 &114741163003086344
 MonoBehaviour:
@@ -10832,10 +10872,10 @@ MonoBehaviour:
   vertScrollPercDivisor: 12
   horizScrollPercDivisor: 12
   panSpeed: 10
-  atLeftBound: 1
+  atLeftBound: 0
   atRightBound: 0
   atTopBound: 0
-  atBottomBound: 1
+  atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
