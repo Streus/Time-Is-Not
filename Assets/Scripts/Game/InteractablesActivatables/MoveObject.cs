@@ -342,8 +342,7 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		inStasis = turnOn;
 
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
-		if (sprite == null)
-			return;
+		
 		if(_stasisEffect != null) 
 		{
 			_stasisEffect.SetActive (inStasis);
