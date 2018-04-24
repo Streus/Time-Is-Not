@@ -55,7 +55,7 @@ public class SaveManager : Singleton<SaveManager>
 
     void Awake()
     {
-        saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+        saveLocation = string.Format("{0}/AlmostTimeSavedData.dat", Application.persistentDataPath);
 
         if (File.Exists(saveLocation))
         {
@@ -82,7 +82,7 @@ public class SaveManager : Singleton<SaveManager>
 
         if (saveLocation == null)
         {
-            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+            saveLocation = string.Format("{0}/AlmostTimeSavedData.dat", Application.persistentDataPath);
         }
 
         try
@@ -127,7 +127,7 @@ public class SaveManager : Singleton<SaveManager>
 
         if (saveLocation == null)
         {
-            saveLocation = string.Format("{0}/SavedData.dat", Application.persistentDataPath);
+            saveLocation = string.Format("{0}/AlmostTimeSavedData.dat", Application.persistentDataPath);
         }
 
         try
