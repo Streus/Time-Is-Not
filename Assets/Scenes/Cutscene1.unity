@@ -227,8 +227,8 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CMy parents left yesterday on a vacation - and, for the first time
-        ever, they put me in charge of our lab!"
+      value: '"My parents left yesterday on a vacation - and, for the first time ever,
+        they put me in charge of our lab!"'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -243,7 +243,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -275,6 +275,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -479,8 +489,8 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CAnyway\u2026 even though I\u2019m sixteen, there are still parts
-        of the lab I\u2019ve yet to explore. "
+      value: '"Anyway... even though I''m sixteen, there are still parts of the lab
+        I''ve yet to explore."'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -495,7 +505,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -531,6 +541,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -664,7 +684,9 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CAnd when I tried it on, it fit PERFECTLY! I had to try it out\u2026\u201D\n"
+      value: '"And when I tried it on, it fit PERFECTLY! I had to try it out..."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -679,7 +701,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.3
+      value: 50.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -726,6 +748,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -930,7 +962,7 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CHi! My name is Margaux.\u201D"
+      value: '"Hi! My name is Margaux."'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -945,7 +977,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -977,6 +1009,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1178,8 +1220,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "I grew up in a huge laboratory surrounded by amazing technology, and
-        I\u2019ve been curious about everything since I was small.\u201D\n"
+      value: '"I grew up in a huge laboratory surrounded by amazing technology, and
+        I''ve been curious about everything since I was small."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -1194,7 +1238,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1226,6 +1270,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1597,8 +1651,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CWhile I was looking around, I found the most amazing invention
-        hidden away deep in the lab\u2026\u201D\n"
+      value: '"While I was looking around, I found the most amazing invention hidden
+        away deep in the lab..."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -1613,7 +1669,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1655,6 +1711,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1788,8 +1854,7 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CI\u2019m the daughter of two brilliant scientists, Sanjay and
-        Archie! "
+      value: '"I''m the daughter of two brilliant scientists, Sanjay and Archie!"'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -1804,7 +1869,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1836,6 +1901,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1969,9 +2044,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CIt was a time travel device, capable of sending me back in time!
-        Called a \u201Ctime tether,\u201D I could only imagine what I could accomplish
-        with it.\u201D\n"
+      value: '"It was a time travel device, capable of sending me back in time! Called
+        a "time tether," I could only imagine what I could accomplish with it."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -1986,7 +2062,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -2028,6 +2104,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -2161,8 +2247,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "It\u2019s a lot of responsibility, especially with those special instructions
-        they gave me about the main power generator\u2026 what were those again?\u201D\n"
+      value: '"It''s a lot of responsibility, especially with those special instructions
+        they gave me about the main power generator... what were those again?"
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -2177,7 +2265,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -2213,6 +2301,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -2497,8 +2595,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "And now that my dads are out of the house\u2026 I have free rein of
-        the place!\u201D\n"
+      value: '"And now that my dads are out of the house... I have free rein of the
+        place!"
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -2513,7 +2613,7 @@ Prefab:
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: 48.3
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -2549,6 +2649,16 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MinSize
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}

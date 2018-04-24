@@ -219,8 +219,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "After all, I\u2019d saved the lab thanks to science! They even said
-        that if I promised to be a little more responsible... \n"
+      value: '"After all, I''d saved the lab thanks to science! They even said that
+        if I promised to be a little more responsible..."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -260,6 +262,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -385,7 +397,7 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: My PIZZA.
+      value: '"...my PIZZA!!"'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -430,7 +442,7 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_FontData.m_FontSize
-      value: 64
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
@@ -440,6 +452,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -704,8 +721,8 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "I stopped the generator from exploding, saved the lab from disaster,
-        and now the time tether was stronger than ever\u2026 all thanks to me!\u201D"
+      value: '"I stopped the generator from exploding, saved the lab from disaster,
+        and now the time tether was stronger than ever... all thanks to me!"'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -734,7 +751,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224871455726206956, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -745,6 +762,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1077,8 +1104,8 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "I could take over the time tether project and make it my own. Seems
-        like it\u2019s almost time for another adventure.\u201D"
+      value: '"...I could take over the time tether project and make it my own!! Seems
+        like it''s almost time for another adventure."'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1118,6 +1145,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1243,8 +1280,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CDelicious cheese\u2026 delicious pepperoni\u2026 and after I told
-        them the whole story, my dads were only a little mad. \n"
+      value: '"Delicious cheese... delicious pepperoni... and after I told them the
+        whole story, my dads were only a little mad."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1284,6 +1323,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1409,8 +1458,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CBut none of that could compare to my greatest reward...the ringing
-        of the doorbell. It was\u2026 \n"
+      value: '"But none of that could compare to my greatest reward... the ringing
+        of the doorbell. It was..."
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1450,6 +1501,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
@@ -1570,8 +1631,10 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: "\u201CAfter everything I\u2019d been through, my adventure had been
-        a complete success!\n"
+      value: '"After everything I''d been through, my adventure had been a complete
+        success!"
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 114859453644003712, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
@@ -1592,6 +1655,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 79.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac16cc6728f3a4d2cbbc743b6c219e72, type: 2}
