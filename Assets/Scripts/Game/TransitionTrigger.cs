@@ -16,6 +16,10 @@ public class TransitionTrigger : MonoBehaviour
 	[Tooltip ("The time to wait before transitoning after all cleanup and fade out is done.")]
 	private float finalDelayTime = 0.5f;
 
+	[SerializeField]
+	[Tooltip ("")]
+	private TeleporterPad pad;
+
 	private bool activated = false;
 
 	private ScreenShaderTransition sst;
@@ -66,6 +70,7 @@ public class TransitionTrigger : MonoBehaviour
 	private IEnumerator initDelay()
 	{
 		activated = false;
+		pad.OnStartTeleport ();
 		yield return new WaitForSecondsRealtime (initDelayTime);
 		sst.SetFadeOut ();
 		sst.fadeOutDone += performTransition;
