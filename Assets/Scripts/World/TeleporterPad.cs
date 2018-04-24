@@ -9,6 +9,7 @@ public class TeleporterPad : MonoBehaviour
 
 	public void OnStartTeleport()
 	{
+		Debug.Log("Start teleport"); 
 		teleportParticles.Play(); 
 	}
 }
