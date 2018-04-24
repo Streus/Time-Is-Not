@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManager : Singleton<DialogueManager> 
+public class DialogueManager : Singleton<DialogueManager>, ISavable
 {
 	[SerializeField]
 	private GameObject _dialogueBoxPrefab;
@@ -120,5 +120,25 @@ public class DialogueManager : Singleton<DialogueManager>
 			Destroy (_activeDialogues [i].UIObject);
 		}
 		_activeDialogues.Clear ();
+	}
+
+	/// <summary>
+	/// Saves the data into a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public SeedBase saveData()
+	{
+		SeedBase seed = new SeedBase ();
+
+		return seed;
+	}
+
+	/// <summary>
+	/// Loads the data from a seed.
+	/// </summary>
+	/// <returns>The seed.</returns>
+	public void loadData(SeedBase s)
+	{
+		DeleteAllDialogueBoxes ();
 	}
 }
