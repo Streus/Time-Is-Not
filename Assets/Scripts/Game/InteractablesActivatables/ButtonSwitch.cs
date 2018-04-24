@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonSwitch : Interactable, ISavable
+public class ButtonSwitch : Interactable, ISavable, IActivatable
 {
 	/*[Tooltip("Time before the button triggers again (if 0 or infinity, will have no timer.")]
 	[SerializeField]*/
@@ -42,6 +42,8 @@ public class ButtonSwitch : Interactable, ISavable
 	//is the player close enough to use the button?
 	private bool _playerInRange = false;
 
+	private bool isInverted;
+
 	[SerializeField]
 	[Tooltip("If true, this button will play an alert flash when it's pressed.")]
 	bool alertFlashOnInteract; 
@@ -54,6 +56,7 @@ public class ButtonSwitch : Interactable, ISavable
 		_timer = 0;
 		_sprite = gameObject.GetComponent<SpriteRenderer> ();
 		//TODO: get input button from input module
+		isInverted = !isEnabled();
 	}
 	
 	// Update is called once per frame
@@ -167,6 +170,45 @@ public class ButtonSwitch : Interactable, ISavable
 	{
 		yield return new WaitForSeconds (seconds);
 		_sprite.sprite = _unpressedSprite;
+	}
+
+	/// <summary>
+	/// Toggle the object's state.
+	/// </summary>
+	public bool onActivate()
+	{
+		if(isEnabled())
+		{
+			disable ();
+		}
+		else
+		{
+			enable ();
+		}
+		return isEnabled();
+	}
+
+	/// <summary>
+	/// Set the object's state.
+	/// </summary>
+	public bool onActivate (bool state)
+	{
+		//if the door is inverted, a true state closes the door
+		if(isInverted)
+		{
+			if (state)
+				enable();
+			else
+				disable();
+		}
+		else
+		{
+			if (state)
+				disable();
+			else
+				enable();
+		}
+		return isEnabled();
 	}
 
 	//****Savable Object Functions****
