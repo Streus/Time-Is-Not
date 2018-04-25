@@ -21,7 +21,7 @@ public class AmbientSoundScript : MonoBehaviour
         }
         else
         {
-            time = Random.Range(0, 2);
+            time = Random.Range(0.0f, 2.0f);
         }
         played = false;
     }
@@ -30,13 +30,18 @@ public class AmbientSoundScript : MonoBehaviour
         if (!played)
         {
             timer += Time.deltaTime;
-
             if (ambientSound != null && timer >= time)
             {
                 source.clip = ambientSound;
                 source.Play();
                 played = true;
+                Debug.Log("Played " + source.clip.name);
             }
+        }
+
+        if(source.isPlaying)
+        {
+            Debug.Log("Playing " + source.clip.name);
         }
     }
 }
