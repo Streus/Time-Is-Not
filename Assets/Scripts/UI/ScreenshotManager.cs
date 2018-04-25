@@ -33,6 +33,9 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	public Image screenshotBase; 
 	float screenshotBaseMaxAlpha; 
 
+	public Image[] screenshotLines;
+	public Color screenshotLineColor; 
+
 	void Awake()
 	{
 		for (int i = 0; i < LevelStateManager.maxNumStates; i++)
@@ -54,6 +57,11 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 		screenshotBaseMaxAlpha = screenshotBase.color.a; 
 		screenshotBase.gameObject.SetActive(true); 
 		screenshotBase.color = new Color (1, 1, 1, 0); 
+
+		for (int i = 0; i < screenshotLines.Length; i++)
+		{
+			screenshotLines[i].gameObject.SetActive(true); 
+		}
 	}
 
 	// Temporary
@@ -156,6 +164,7 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 			}
 		}
 
+		// Update screenshot base
 		if (revealScreenshot)
 		{
 			screenshotBase.color = new Color(1, 1, 1, Mathf.Lerp(screenshotBase.color.a, screenshotBaseMaxAlpha, screenshotFadeInSpeed * Time.deltaTime)); 
@@ -163,6 +172,22 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 		else
 		{
 			screenshotBase.color = new Color(1, 1, 1, Mathf.Lerp(screenshotBase.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime)); 
+		}
+
+		// Update screenshot lines
+		for (int i = 0; i < screenshotLines.Length; i++)
+		{
+			// Screenshot line fade in
+			if (revealScreenshot && i == curScreenshotIndex)
+			{
+				//screenshotLines[i].color = Color.Lerp(screenshotImages[i].color, screenshotLineColor, screenshotFadeInSpeed * Time.deltaTime); 
+				screenshotLines[i].color = new Color(screenshotLineColor.r, screenshotLineColor.g, screenshotLineColor.b, Mathf.Lerp(screenshotLines[i].color.a, screenshotLineColor.a, screenshotFadeInSpeed * Time.deltaTime));
+			}
+			else
+			{
+				//screenshotLines[i].color = Color.Lerp(screenshotImages[i].color, new Color(screenshotLineColor.r, screenshotLineColor.g, screenshotLineColor.b, 0), screenshotFadeOutSpeed * Time.deltaTime); 
+				screenshotLines[i].color = new Color(screenshotLineColor.r, screenshotLineColor.g, screenshotLineColor.b, Mathf.Lerp(screenshotLines[i].color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
+			}
 		}
 	}
 
