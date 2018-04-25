@@ -70,7 +70,10 @@ public class TransitionTrigger : MonoBehaviour
 	private IEnumerator initDelay()
 	{
 		activated = false;
-		pad.OnStartTeleport ();
+		if (pad != null)
+		{
+			pad.OnStartTeleport();
+		}
 		yield return new WaitForSecondsRealtime (initDelayTime);
 		sst.SetFadeOut ();
 		sst.fadeOutDone += performTransition;
