@@ -29,6 +29,10 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 	public float screenshotFadeOutSpeed = 1;
 	int curScreenshotIndex; 
 
+	// Other UI Elements
+	public Image screenshotBase; 
+	float screenshotBaseMaxAlpha; 
+
 	void Awake()
 	{
 		for (int i = 0; i < LevelStateManager.maxNumStates; i++)
@@ -46,6 +50,10 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 		{
 			screenshotImages[i].gameObject.SetActive(true); 
 		}
+
+		screenshotBaseMaxAlpha = screenshotBase.color.a; 
+		screenshotBase.gameObject.SetActive(true); 
+		screenshotBase.color = new Color (1, 1, 1, 0); 
 	}
 
 	// Temporary
@@ -146,6 +154,15 @@ public class ScreenshotManager : Singleton<ScreenshotManager>
 			{
 				screenshotImages[i].color = new Color(1, 1, 1, Mathf.Lerp(screenshotImages[i].color.a, 0, screenshotFadeOutSpeed * Time.deltaTime));
 			}
+		}
+
+		if (revealScreenshot)
+		{
+			screenshotBase.color = new Color(1, 1, 1, Mathf.Lerp(screenshotBase.color.a, screenshotBaseMaxAlpha, screenshotFadeInSpeed * Time.deltaTime)); 
+		}
+		else
+		{
+			screenshotBase.color = new Color(1, 1, 1, Mathf.Lerp(screenshotBase.color.a, 0, screenshotFadeOutSpeed * Time.deltaTime)); 
 		}
 	}
 
