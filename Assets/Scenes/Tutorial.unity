@@ -8313,8 +8313,8 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: Don't be afraid to place down a time tether whenever you want, you never
-        know when you might want to tether back.
+      value: Don't be afraid to place a time tether whenever you want - you never
+        know when you might want to go back in time.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -30120,8 +30120,8 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: 'LEFT CLICK to dash to where your mouse is. Dashing let''s you move over
-        pits in the floor. '
+      value: LEFT CLICK to dash to where your mouse is. Dashing allows you to move
+        over pits in the floor.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -39969,7 +39969,7 @@ Prefab:
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: PRESS SPACE to place a time tether. Place Time Tethers on the pads in
+      value: PRESS SPACE to place a time tether. Place time tethers on the pads in
         front of computers to activate them.
       objectReference: {fileID: 0}
     - target: {fileID: 114998368347909200, guid: cc36530cc563e46f4928d27f47519d5f,
@@ -47718,6 +47718,7 @@ MonoBehaviour:
   nextScene: Cutscene2
   initDelayTime: 1.5
   finalDelayTime: 0.5
+  pad: {fileID: 0}
 --- !u!61 &828963420
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -52928,7 +52929,7 @@ Prefab:
     - target: {fileID: 114258292494069294, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: So many buttons...I wonder which one opens the door.
+      value: '"So many buttons... I wonder which one opens the door?"'
       objectReference: {fileID: 0}
     - target: {fileID: 114258292494069294, guid: 2ad9234a601e44d41a0ef1df4fd81e48,
         type: 2}
@@ -55974,8 +55975,8 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: 'Sometimes you may need to use the time tether to return to the beginning
-        of the level, to progress even further.  '
+      value: 'Sometimes, you may need to use the time tether to return to the beginning
+        of the level to progress even further.  '
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -56910,7 +56911,7 @@ Prefab:
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
       value: Computers will often be used throughout the laboratory to indicate places
-        where you may want to place a tether down to avoid losing progress.
+        where you may want to place a time tether down to avoid losing progress.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
@@ -67612,8 +67613,7 @@ Prefab:
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
       propertyPath: dialogueChain.Array.data[0]._dialogue
-      value: PRESS R with your mouse over a time tether to pick that time tether up
-        again.
+      value: PRESS R with your mouse over a time tether to pick it up again.
       objectReference: {fileID: 0}
     - target: {fileID: 114709686598195540, guid: 20edfa967f81940e19b2c0b2e6e74cd2,
         type: 2}
