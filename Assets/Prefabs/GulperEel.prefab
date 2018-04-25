@@ -292,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useBubbleAliveTimer: 0
   canRightClickDestroy: 0
+  stasisIndex: -1
   bubbleAliveTime: 10
   shrinkWithTimer: 0
   fadeWithTimer: 0
@@ -365,8 +366,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1299254789
+  m_SortingLayer: -1
   m_SortingOrder: 2440
   m_Sprite: {fileID: 21300000, guid: 6bec2a59e46924005991d59d61e1da92, type: 3}
   m_Color: {r: 0.334, g: 1, b: 1, a: 0.903}
@@ -408,7 +409,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 257601029
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 2440
   m_Sprite: {fileID: 21300000, guid: 694add4a7c928864bbd57e76e31caa8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
