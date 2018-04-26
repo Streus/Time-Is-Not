@@ -7105,7 +7105,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4c0ab732fcdb84b3f8276b3e1bf83a5f, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -7717,7 +7717,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4c0ab732fcdb84b3f8276b3e1bf83a5f, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -8310,7 +8310,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300002, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 032da07f97db744aeae048caac289e9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8390,7 +8390,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4c0ab732fcdb84b3f8276b3e1bf83a5f, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -9490,10 +9490,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: b9c3ed6e35c594038835db12637e7aae,
+    m_HighlightedSprite: {fileID: 21300002, guid: 032da07f97db744aeae048caac289e9f,
       type: 3}
-    m_PressedSprite: {fileID: 21300004, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
-    m_DisabledSprite: {fileID: 21300006, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
+    m_PressedSprite: {fileID: 21300004, guid: 032da07f97db744aeae048caac289e9f, type: 3}
+    m_DisabledSprite: {fileID: 21300006, guid: 032da07f97db744aeae048caac289e9f, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -9745,7 +9745,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4c0ab732fcdb84b3f8276b3e1bf83a5f, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -10019,7 +10019,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300002, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 032da07f97db744aeae048caac289e9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -10866,10 +10866,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: b9c3ed6e35c594038835db12637e7aae,
+    m_HighlightedSprite: {fileID: 21300002, guid: 032da07f97db744aeae048caac289e9f,
       type: 3}
-    m_PressedSprite: {fileID: 21300004, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
-    m_DisabledSprite: {fileID: 21300006, guid: b9c3ed6e35c594038835db12637e7aae, type: 3}
+    m_PressedSprite: {fileID: 21300004, guid: 032da07f97db744aeae048caac289e9f, type: 3}
+    m_DisabledSprite: {fileID: 21300006, guid: 032da07f97db744aeae048caac289e9f, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -11100,9 +11100,9 @@ MonoBehaviour:
   horizScrollPercDivisor: 12
   panSpeed: 10
   atLeftBound: 0
-  atRightBound: 1
+  atRightBound: 0
   atTopBound: 0
-  atBottomBound: 1
+  atBottomBound: 0
 --- !u!114 &114998644300738530
 MonoBehaviour:
   m_ObjectHideFlags: 1
