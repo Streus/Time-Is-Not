@@ -83,7 +83,6 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			_activeDialogues [i].Timer -= Time.deltaTime;
 			if(_activeDialogues[i].Timer <=0 || PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
 			{
-				
 				if (_activeDialogues[i].Next != null) 
 				{
 					CreateBox (_activeDialogues[i].Next);

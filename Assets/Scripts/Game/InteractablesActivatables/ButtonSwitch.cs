@@ -179,6 +179,7 @@ public class ButtonSwitch : Interactable, ISavable, IActivatable
 	{
 		if(isEnabled())
 		{
+			_sprite.sprite = _pressedSprite;
 			disable ();
 		}
 		else
@@ -198,13 +199,17 @@ public class ButtonSwitch : Interactable, ISavable, IActivatable
 		{
 			if (state)
 				enable();
-			else
-				disable();
+			else {
+				_sprite.sprite = _pressedSprite;
+				disable ();
+			}
 		}
 		else
 		{
-			if (state)
-				disable();
+			if (state) {
+				_sprite.sprite = _pressedSprite;
+				disable ();
+			}
 			else
 				enable();
 		}
