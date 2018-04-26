@@ -219,7 +219,7 @@ Prefab:
     - target: {fileID: 114468832906272244, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
         type: 2}
       propertyPath: m_Text
-      value: '"After all, I''d saved the lab thanks to science! They even said that
+      value: '"After all, I had saved the lab thanks to science! They even said that
         if I promised to be a little more responsible..."
 
 '
@@ -542,6 +542,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &592312772 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1317603176627526, guid: ac16cc6728f3a4d2cbbc743b6c219e72,
+    type: 2}
+  m_PrefabInternal: {fileID: 1565197965}
 --- !u!1 &985862439
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +914,10 @@ MonoBehaviour:
     _endScale: {x: 1, y: 1, z: 1}
     _time: Infinity
   - _obj: {fileID: 1008888654}
+    _endPosition: {x: 0, y: 0, z: 0}
+    _endScale: {x: 1, y: 1, z: 1}
+    _time: Infinity
+  - _obj: {fileID: 592312772}
     _endPosition: {x: 0, y: 0, z: 0}
     _endScale: {x: 1, y: 1, z: 1}
     _time: Infinity
