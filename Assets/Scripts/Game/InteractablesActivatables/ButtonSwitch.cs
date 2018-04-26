@@ -128,7 +128,7 @@ public class ButtonSwitch : Interactable, ISavable, IActivatable
 	void getInput()
 	{
 		//if(_playerInRange && Input.GetKeyDown(_interactKey) && !GameManager.isPaused() && !GameManager.CameraIsZoomedOut())
-		if (_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.inst.pauseType == PauseType.NONE && isEnabled())
+		if (_playerInRange && Input.GetKeyDown(_interactKey) && GameManager.inst.pauseType == PauseType.NONE && isEnabled() && DialogueManager.inst.ActiveDialogues.Count == 0)
 		{
 			onInteract ();
 			if(!_reusable)

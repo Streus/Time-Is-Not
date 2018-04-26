@@ -121,6 +121,11 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 		_activeDialogues.Clear ();
 	}
 
+	public List<DialogueObject> ActiveDialogues
+	{
+		get{return _activeDialogues;}
+	}
+
 	/// <summary>
 	/// Saves the data into a seed.
 	/// </summary>

@@ -135,7 +135,19 @@ public class TetherDetector : Interactable, ISavable
 
 		Seed seed = (Seed)s;
 
-		_tetherInRange = false;
+		bool check = false;
+
+		Collider2D[] colsHit = Physics2D.OverlapBoxAll (transform.position + (Vector3)_offset, _range, 0);
+		for(int i = 0; i < colsHit.Length; i++)
+		{
+			if(colsHit[i].GetComponentInParent<TetherIndicator>() != null)
+			{
+				check = true;
+			}
+		}
+
+		_tetherInRange = check;
+
 		if (seed.isActive)
 			enable ();
 		else
