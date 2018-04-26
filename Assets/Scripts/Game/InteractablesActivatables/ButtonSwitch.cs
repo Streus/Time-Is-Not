@@ -133,6 +133,8 @@ public class ButtonSwitch : Interactable, ISavable, IActivatable
 			onInteract ();
 			if(!_reusable)
 			{
+				_negativePrompt.SetActive (true);
+				_buttonPrompt.SetActive (false);
 				disable ();
 				return;
 			}
@@ -163,7 +165,7 @@ public class ButtonSwitch : Interactable, ISavable, IActivatable
 		}
 		_sprite.sprite = _pressedSprite;
 		if(_reusable)
-			StartCoroutine (spriteTimer (0.4f));
+			StartCoroutine (spriteTimer (0.4f));\
 	}
 
 	IEnumerator spriteTimer(float seconds)
