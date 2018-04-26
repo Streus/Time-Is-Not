@@ -10,6 +10,8 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 	[SerializeField]
 	private bool freezesPlayer;
 
+	int id;
+
 	void Start()
 	{
 		for(int i = 0; i < dialogueChain.Length; i++)
@@ -30,7 +32,7 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 	{
 		if (dialogueChain.Length == 0)
 			return false;
-		DialogueManager.inst.CreateBox (dialogueChain [0]);
+		id = DialogueManager.inst.CreateBox (dialogueChain [0]);
 		return true;
 	}
 
@@ -39,9 +41,14 @@ public class DialogueTrigger : MonoBehaviour, IActivatable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		if (dialogueChain.Length == 0 || !state)
+		if (dialogueChain.Length == 0)
 			return false;
-		DialogueManager.inst.CreateBox (dialogueChain [0]);
+		if (!state)
+		{
+			DialogueManager.inst.RemoveMyDialogue (id);
+			return true;
+		}
+		id = DialogueManager.inst.CreateBox (dialogueChain [0]);
 		dialogueChain [0].FreezePlayer = false;
 		return true;
 	}

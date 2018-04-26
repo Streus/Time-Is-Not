@@ -14,6 +14,8 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 
 	private bool pausePlayer = false;
 
+	private int _nextID = 0;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,11 +28,15 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 		UpdateTimers ();
 	}
 
-	public void CreateBox(DialogueObject dialogue)
+	public int CreateBox(DialogueObject dialogue)
 	{
 		DialogueObject dia = new DialogueObject (dialogue);
 
 		Vector2 screenPoint;
+
+		int id = _nextID;
+
+		dia.ID = id;
 
 		if (dia.FollowTarget != null) 
 		{
@@ -60,6 +66,8 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			obj.transform.SetParent (dia.FollowTarget.transform);
 		else
 			obj.transform.SetParent (Camera.main.transform);
+		_nextID++;
+		return id;
 
 	}
 
@@ -85,6 +93,7 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			{
 				if (_activeDialogues[i].Next != null) 
 				{
+					_activeDialogues [i].Next.ID = _activeDialogues [i].ID;
 					CreateBox (_activeDialogues[i].Next);
 					_activeDialogues [i].Next.FreezePlayer = false;
 				}
@@ -119,6 +128,25 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			Destroy (_activeDialogues [i].UIObject);
 		}
 		_activeDialogues.Clear ();
+	}
+
+	public void RemoveMyDialogue(int id)
+	{
+		//bool foundBox = true;
+		Debug.Log("Removing shit");
+		for (int i = 0; i < _activeDialogues.Count; i++) 
+		{
+			Debug.Log (_activeDialogues [i].ID);
+			if (_activeDialogues [i].ID == id) 
+			{
+				Destroy (_activeDialogues [i].UIObject);
+				_activeDialogues.RemoveAt (i);
+				//foundBox = true;
+				break;
+			}
+		}
+		/*if (foundBox)
+			RemoveMyDialogue (origin);*/
 	}
 
 	public List<DialogueObject> ActiveDialogues

@@ -26,6 +26,9 @@ public class DialogueObject
 	[SerializeField]
 	private float _boxLifetime;
 
+	private int _id;
+
+
 	public DialogueObject(string dialogue, Vector2 location, float lifeTime, DialogueObject next)
 	{
 		_dialogue = dialogue;
@@ -56,6 +59,7 @@ public class DialogueObject
 		_boxLifetime = original.Lifetime;
 		_followTarget = original.FollowTarget;
 		_freezePlayer = original.FreezePlayer;
+		_id = original.ID;
 	}
 
 	public string Dialogue
@@ -116,5 +120,11 @@ public class DialogueObject
 			else
 				_boxLifetime = value;
 		}
+	}
+
+	public int ID
+	{
+		get{return _id;}
+		set{_id = value;}
 	}
 }
