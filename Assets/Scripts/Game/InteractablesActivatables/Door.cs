@@ -138,6 +138,11 @@ public class Door : Interactable, IActivatable, ISavable
 		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 
+	public bool isOpen()
+	{
+		return _isOpen;
+	}
+
 	public override void onInteract ()
 	{
 		if (_type != DoorTypes.Manual)

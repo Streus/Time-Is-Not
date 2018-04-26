@@ -48,9 +48,20 @@ public class HBPatrol : Action
 				moveDist = dist;
 
 			//move
-			c.transform.Translate (
-				(navPos - c.transform.position).normalized *
-				moveDist, Space.World);
+			Vector2 dir = navPos - c.transform.position;
+			RaycastHit2D hit = Physics2D.Raycast (c.transform.position, dir, moveDist * 20, ~0);
+			Door d = null;
+			if (hit.collider != null)
+			{
+				d = hit.collider.GetComponent<Door> ();
+				if (d == null || d.isOpen ())
+				{
+					c.transform.Translate (
+					dir.normalized *
+					moveDist, Space.World);
+				}
+			}
+
 		
 			//if near the next point in the path, look ahead
 			if (c.getMap() != null && dist < c.getMap ().cellDimension / 2f)
