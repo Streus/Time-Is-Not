@@ -146,7 +146,7 @@ public class TetherDetector : Interactable, ISavable
 			}
 		}
 
-		_tetherInRange = check;
+		_tetherInRange = false;
 
 		if (seed.isActive)
 			enable ();

@@ -284,7 +284,6 @@ public class Door : Interactable, IActivatable, ISavable
 
 		if (ignoresTimeTether)
 			return;
-
 		if (seed.isOpen) {
 			Open ();
 		}
