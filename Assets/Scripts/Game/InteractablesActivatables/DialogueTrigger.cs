@@ -17,7 +17,11 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 	[SerializeField]
 	private float distance = 20f;
 
+	public float curDist;
+
 	float ignoreTimer = 0;
+
+	bool distHelper;
 
 	void Start()
 	{
@@ -42,8 +46,11 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 			if(player != null)
 			{
 				float dist = Vector3.Distance (player.transform.position, transform.position);
-				if (dist > distance)
+				curDist = dist;
+				if (dist > distance && distHelper) {
 					onActivate (false);
+					distHelper = false;
+				}
 			}
 		}
 	}
@@ -56,6 +63,8 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 		//if (dialogueChain.Length == 0)
 		if (dialogueChain.Length == 0 || ignoreTimer > 0)
 			return false;
+
+		distHelper = true;
 
 		id = DialogueManager.inst.CreateBox (dialogueChain [0]);
 		return true;
@@ -71,9 +80,11 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 			return false;
 		if (!state)
 		{
+			distHelper = false;
 			DialogueManager.inst.RemoveMyDialogue (id);
 			return true;
 		}
+		distHelper = true;
 		id = DialogueManager.inst.CreateBox (dialogueChain [0]);
 		dialogueChain [0].FreezePlayer = false;
 		return true;
