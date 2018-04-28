@@ -12,6 +12,11 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 
 	int id;
 
+	[SerializeField]
+	private bool clearsViaDistance = false;
+	[SerializeField]
+	private float distance = 20f;
+
 	float ignoreTimer = 0;
 
 	void Start()
@@ -31,6 +36,16 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 	{
 		if (ignoreTimer > 0)
 			ignoreTimer -= Time.deltaTime;
+		if(clearsViaDistance)
+		{
+			Player player = GameObject.FindObjectOfType<Player> ();
+			if(player != null)
+			{
+				float dist = Vector3.Distance (player.transform.position, transform.position);
+				if (dist > distance)
+					onActivate (false);
+			}
+		}
 	}
 
 	/// <summary>
@@ -38,7 +53,6 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 	/// </summary>
 	public bool onActivate()
 	{
-		
 		//if (dialogueChain.Length == 0)
 		if (dialogueChain.Length == 0 || ignoreTimer > 0)
 			return false;
@@ -52,7 +66,6 @@ public class DialogueTrigger : MonoBehaviour, IActivatable, ISavable
 	/// </summary>
 	public bool onActivate (bool state)
 	{
-		
 		//if (dialogueChain.Length == 0)
 		if (dialogueChain.Length == 0 || ignoreTimer > 0)
 			return false;
