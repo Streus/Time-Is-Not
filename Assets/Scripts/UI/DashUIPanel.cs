@@ -47,7 +47,7 @@ public class DashUIPanel : Singleton<DashUIPanel>
 	// Use this for initialization
 	void Start () 
 	{
-		UpdateDashPanelActive(); 
+		//UpdateDashPanelActive(); 
 	}
 
 	// Update is called once per frame
