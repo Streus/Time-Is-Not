@@ -84,7 +84,7 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			if (dialogue.FollowTarget != null)
 			{
 				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
-				Vector2 screenPoint = new Vector3(loc.x, loc.y + 1.5f, loc.z);
+				Vector2 screenPoint = new Vector3(loc.x, loc.y + 1.5f, 0);
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;
 			if(_activeDialogues[i].Timer <=0 || PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
