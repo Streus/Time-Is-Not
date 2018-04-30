@@ -102,10 +102,10 @@ public class Player : Controller
 		if(dialoguePauseHelper != DialogueManager.inst.PausedPlayer)
 		{
 			dialoguePauseHelper = DialogueManager.inst.PausedPlayer;
-			if (dialoguePauseHelper)
+			/*if (dialoguePauseHelper)
 				anim.speed = 0;
 			else
-				anim.speed = 1;
+				anim.speed = 1;*/
 		}
 
 		//wait for anchor anim to finish
