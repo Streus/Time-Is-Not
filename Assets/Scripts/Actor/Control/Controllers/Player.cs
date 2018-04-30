@@ -66,6 +66,9 @@ public class Player : Controller
 	public delegate void DashEvent(); 
 	public event DashEvent dashStarted;  
 
+	//bool to pause the animator when dialogue is shown
+	private bool dialoguePauseHelper = false;
+
     #endregion
 
     #region INSTANCE_METHODS
@@ -94,6 +97,15 @@ public class Player : Controller
 		else
 		{
 			anim.SetBool ("isMoving", false);
+		}
+
+		if(dialoguePauseHelper != DialogueManager.inst.PausedPlayer)
+		{
+			dialoguePauseHelper = DialogueManager.inst.PausedPlayer;
+			if (dialoguePauseHelper)
+				anim.speed = 0;
+			else
+				anim.speed = 1;
 		}
 
 		//wait for anchor anim to finish

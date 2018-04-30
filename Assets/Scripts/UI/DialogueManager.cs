@@ -85,8 +85,6 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 			{
 				Vector3 loc = _activeDialogues [i].FollowTarget.transform.position;
 				Vector2 screenPoint = new Vector3(loc.x, loc.y + 1.5f, loc.z);
-				//((RectTransform)_activeDialogues [i].UIObject.transform).position = screenPoint;
-				//((RectTransform)_activeDialogues [i].UIObject.transform).anchoredPosition = screenPoint - ((RectTransform)transform).sizeDelta / 2f;
 			}
 			_activeDialogues [i].Timer -= Time.deltaTime;
 			if(_activeDialogues[i].Timer <=0 || PlayerControlManager.GetKeyDown(ControlInput.INTERACT))
@@ -105,20 +103,28 @@ public class DialogueManager : Singleton<DialogueManager>, ISavable
 		if(pausePlayer != playerFrozen)
 		{
 			pausePlayer = playerFrozen;
-			if (pausePlayer) {
+			if (pausePlayer) 
+			{
 				GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
 			}
-			else {
+			else 
+			{
 				GameManager.inst.ExitPauseState (PauseType.CUTSCENE);
 			}
 		}
 		if(!GameManager.CheckPause ((int)PauseType.CUTSCENE) && pausePlayer)
 		{
-			if (pausePlayer) {
+			if (pausePlayer) 
+			{
 				GameManager.inst.EnterPauseState (PauseType.CUTSCENE);
 			}
 		}
 		
+	}
+
+	public bool PausedPlayer
+	{
+		get{return pausePlayer;}
 	}
 
 	public void DeleteAllDialogueBoxes()
