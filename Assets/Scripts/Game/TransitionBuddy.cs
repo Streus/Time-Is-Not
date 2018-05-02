@@ -89,15 +89,17 @@ public class TransitionBuddy
 		//listen to player tetherAnchorEnded event
 		Player p = GameManager.GetPlayer().GetComponent<Player>();
 		p.tetherAnchorEnded += finishSceneSetup;
-		//p.setPlaceAnchorAnim ();
-		//TetherManager.inst.CreatePoint(); 
 		TetherManager.inst.ManualStart(); 
 	}
 
 	private void finishSceneSetup()
 	{
-		GameManager.GetPlayer ().GetComponent<Player> ().tetherAnchorEnded -= finishSceneSetup;
-		GameManager.inst.ExitPauseState ();
+		Player p = GameManager.GetPlayer ().GetComponent<Player> ();
+		if (p != null)
+		{
+			p.tetherAnchorEnded -= finishSceneSetup;
+			GameManager.inst.ExitPauseState ();
+		}
 
 		//start up header display
 		LevelNameHeader lnh = LevelNameHeader.getMain();
