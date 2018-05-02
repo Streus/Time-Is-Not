@@ -62,12 +62,14 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		if (!Application.isPlaying)
 			return;
 		isInverted = !_active;
-		GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+		if (GetComponent<RegisteredObject> () != null)
+			GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 	}
 
 	public void OnDestroy()
 	{
-		GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
+		if (GetComponent<RegisteredObject> () != null)
+			GetComponent<RegisteredObject> ().allowResetChanged -= ToggleStasis;
 	}
 	
 	// Update is called once per frame
