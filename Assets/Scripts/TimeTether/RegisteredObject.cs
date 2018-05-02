@@ -113,7 +113,7 @@ public class RegisteredObject : MonoBehaviour
 		#if UNITY_EDITOR
 		if (!isQuitting && Application.isPlaying && prefabPath == "")
 		{
-			Debug.LogError("The RegisteredObject " + gameObject.name + " is being destroyed but does not have a prefab path. " +
+			Debug.LogWarning("The RegisteredObject " + gameObject.name + " is being destroyed but does not have a prefab path. " +
 				"You shouldn't destroy RegisteredObjects that were directly placed in the Editor and not through a spawner"); 
 		}
 		#endif
