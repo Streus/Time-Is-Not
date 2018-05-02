@@ -94,7 +94,8 @@ public class TransitionBuddy
 
 	private void finishSceneSetup()
 	{
-		Player p = GameManager.GetPlayer ().GetComponent<Player> ();
+		//Player p = GameManager.GetPlayer ().GetComponent<Player> ();
+		Player p = GameManager.GetPlayerScript(); 
 		if (p != null)
 		{
 			p.tetherAnchorEnded -= finishSceneSetup;

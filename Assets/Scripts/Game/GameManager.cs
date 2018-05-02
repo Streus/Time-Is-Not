@@ -507,7 +507,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public static Player GetPlayerScript()
 	{
-		return inst.playerScript; 
+		if (inst != null)
+			return inst.playerScript; 
+		return null; 
 	}
 
 	public static int getPlayerMoveMask()
