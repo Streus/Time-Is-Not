@@ -495,7 +495,9 @@ public class GameManager : Singleton<GameManager> , ISavable
 
 	public static GameObject GetPlayer()
 	{
-		return inst.playerObj; 
+		if (inst != null)
+			return inst.playerObj; 
+		return null; 
 	}
 
 	public static Animator GetPlayerAnimator()
