@@ -341,6 +341,8 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
 	private void ToggleStasis(bool turnOn)
 	{
+		Debug.Log ("Movement Toggling Statsis: " + turnOn);
+
 		inStasis = turnOn;
 
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
@@ -348,10 +350,15 @@ public class MoveObject : MonoBehaviour, IActivatable, ISavable
 		if(_stasisEffect != null) 
 		{
 			_stasisEffect.SetActive (inStasis);
-			_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+			if (gameObject.GetComponent<SpriteRenderer> () != null)
+				_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponent<SpriteRenderer> ().sortingOrder + 1;
+			else if(gameObject.GetComponentInChildren<SpriteRenderer> () != null)
+				_stasisEffect.GetComponent<SpriteRenderer> ().sortingOrder = gameObject.GetComponentInChildren<SpriteRenderer> ().sortingOrder + 1;
 		}
 		else
 		{
+			if (sprite == null)
+				return;
 			if (inStasis) 
 				sprite.color = Color.yellow;
 			else

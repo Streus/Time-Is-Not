@@ -30,8 +30,8 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 		if (!Application.isPlaying)
 			return;
 		isInverted = !_active;
-		if (GetComponent<RegisteredObject> () != null)
-			GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
+		if (gameObject.GetComponent<RegisteredObject> () != null)
+			gameObject.GetComponent<RegisteredObject> ().allowResetChanged += ToggleStasis;
 	}
 	
 	// Update is called once per frame
@@ -120,11 +120,12 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 	/// <param name="turnOn">If set to <c>true</c> turn on.</param>
 	private void ToggleStasis(bool turnOn)
 	{
+		Debug.Log ("Rotation Toggling Statsis: " + turnOn);
+
 		inStasis = turnOn;
 
 		SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer> ();
-		if (sprite == null)
-			return;
+
 		if(_stasisEffect != null) 
 		{
 			_stasisEffect.SetActive (inStasis);
@@ -132,6 +133,8 @@ public class RotateObject : MonoBehaviour, IActivatable, ISavable
 		}
 		else
 		{
+			if (sprite == null)
+				return;
 			if (inStasis) 
 				sprite.color = Color.yellow;
 			else
